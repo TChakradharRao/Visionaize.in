@@ -1,0 +1,398 @@
+{
+  "Primary menu": [
+    {
+      "id": 21,
+      "title": "V-Suite Platform",
+      "url": "#",
+      "parent": 0,
+      "order": 1,
+      "target": ""
+    },
+    {
+      "id": 18116,
+      "title": "V-Plant",
+      "url": "#",
+      "parent": 0,
+      "order": 2,
+      "target": ""
+    },
+    {
+      "id": 18757,
+      "title": "V-Plant-Explorer",
+      "url": "#",
+      "parent": 0,
+      "order": 3,
+      "target": ""
+    },
+    {
+      "id": 18758,
+      "title": "V-Plant Pro",
+      "url": "#",
+      "parent": 0,
+      "order": 4,
+      "target": ""
+    },
+    {
+      "id": 18759,
+      "title": "V-Plant 360",
+      "url": "#",
+      "parent": 0,
+      "order": 5,
+      "target": ""
+    },
+    {
+      "id": 18113,
+      "title": "V-Smart DocX",
+      "url": "#",
+      "parent": 0,
+      "order": 6,
+      "target": ""
+    },
+    {
+      "id": 19654,
+      "title": "VIZI <img src=\"https://visionaize.com/wp-content/uploads/2025/08/Visionaize_logo_without_text-bg.png\" alt=\"logo\" style=\"height: 20px; vertical-align: middle;display: inline-block;\" />  CoPilot",
+      "url": "#",
+      "parent": 0,
+      "order": 7,
+      "target": ""
+    },
+    {
+      "id": 14666,
+      "title": "",
+      "url": "#",
+      "parent": 0,
+      "order": 8,
+      "target": ""
+    },
+    {
+      "id": 24707,
+      "title": "Microsoft Fabric",
+      "url": "#",
+      "parent": 0,
+      "order": 9,
+      "target": ""
+    },
+    {
+      "id": 1235,
+      "title": "Solutions",
+      "url": "/solutions",
+      "parent": 0,
+      "order": 10,
+      "target": ""
+    },
+    {
+      "id": 16072,
+      "title": "Decarbonization",
+      "url": "#",
+      "parent": 0,
+      "order": 11,
+      "target": ""
+    },
+    {
+      "id": 6112,
+      "title": "Virtual & Augmented Reality",
+      "url": "/virtual-reality-and-augmented-reality",
+      "parent": 1235,
+      "order": 12,
+      "target": ""
+    },
+    {
+      "id": 5707,
+      "title": "Maintain & Sustain",
+      "url": "/maintain-and-sustain",
+      "parent": 1235,
+      "order": 13,
+      "target": ""
+    },
+    {
+      "id": 12100,
+      "title": "Mesh Maker",
+      "url": "/mesh-modeling",
+      "parent": 1235,
+      "order": 14,
+      "target": ""
+    },
+    {
+      "id": 13114,
+      "title": "Inspection Optimizer",
+      "url": "/inspection-optimizer",
+      "parent": 1235,
+      "order": 15,
+      "target": ""
+    },
+    {
+      "id": 30,
+      "title": "Company",
+      "url": "/company",
+      "parent": 0,
+      "order": 16,
+      "target": ""
+    },
+    {
+      "id": 8657,
+      "title": "Meet the team",
+      "url": "https://visionaize.com/company/#all-pages-in-down",
+      "parent": 30,
+      "order": 17,
+      "target": ""
+    },
+    {
+      "id": 19746,
+      "title": "Office Locations",
+      "url": "#",
+      "parent": 0,
+      "order": 18,
+      "target": ""
+    },
+    {
+      "id": 19754,
+      "title": "Contact Us",
+      "url": "#",
+      "parent": 0,
+      "order": 19,
+      "target": ""
+    },
+    {
+      "id": 4955,
+      "title": "Insights",
+      "url": "https://visionaize.com/insights/insights-digital-twin-resource-center/",
+      "parent": 0,
+      "order": 20,
+      "target": ""
+    },
+    {
+      "id": 21335,
+      "title": "Digital Twin Resource Center",
+      "url": "#",
+      "parent": 0,
+      "order": 21,
+      "target": ""
+    },
+    {
+      "id": 2511,
+      "title": "Visionaize Blog",
+      "url": "/blog",
+      "parent": 4955,
+      "order": 22,
+      "target": ""
+    },
+    {
+      "id": 4956,
+      "title": "Digital Twin FAQ",
+      "url": "/digital-twin-faq",
+      "parent": 4955,
+      "order": 23,
+      "target": ""
+    },
+    {
+      "id": 18262,
+      "title": "Reinventing Turnarounds in The Metaverse",
+      "url": "#",
+      "parent": 0,
+      "order": 24,
+      "target": ""
+    },
+    {
+      "id": 4957,
+      "title": "The Industrial Metaverse",
+      "url": "https://visionaize.com/theindustrialmetaverse/",
+      "parent": 4955,
+      "order": 25,
+      "target": ""
+    },
+    {
+      "id": 24936,
+      "title": "AI in Pharmaceutical Manufacturing",
+      "url": "#",
+      "parent": 0,
+      "order": 26,
+      "target": ""
+    },
+    {
+      "id": 1992,
+      "title": "Talk to an expert",
+      "url": "/contact",
+      "parent": 0,
+      "order": 27,
+      "target": ""
+    },
+    {
+      "id": 9456,
+      "title": "<i class=\"fa fa-user\" aria-hidden=\"true\"></i>",
+      "url": "/profile",
+      "parent": 0,
+      "order": 28,
+      "target": ""
+    },
+    {
+      "id": 9792,
+      "title": "Logout",
+      "url": "#",
+      "parent": 9456,
+      "order": 29,
+      "target": ""
+    }
+  ],
+  "Secondary menu": [
+    {
+      "id": 25,
+      "title": "Facebook",
+      "url": "https://www.facebook.com/wordpress",
+      "parent": 0,
+      "order": 0,
+      "target": ""
+    },
+    {
+      "id": 26,
+      "title": "Twitter",
+      "url": "https://twitter.com/wordpress",
+      "parent": 0,
+      "order": 1,
+      "target": ""
+    },
+    {
+      "id": 27,
+      "title": "Instagram",
+      "url": "https://www.instagram.com/explore/tags/wordcamp/",
+      "parent": 0,
+      "order": 2,
+      "target": ""
+    },
+    {
+      "id": 28,
+      "title": "Email",
+      "url": "mailto:wordpress@example.com",
+      "parent": 0,
+      "order": 3,
+      "target": ""
+    }
+  ],
+  "Footer menu 1": [
+    {
+      "id": 399,
+      "title": "The Industrial Metaverse",
+      "url": "/theindustrialmetaverse",
+      "parent": 0,
+      "order": 1,
+      "target": ""
+    },
+    {
+      "id": 14715,
+      "title": "Reinventing Turnarounds in The Metaverse",
+      "url": "#",
+      "parent": 0,
+      "order": 2,
+      "target": ""
+    },
+    {
+      "id": 401,
+      "title": "Blog",
+      "url": "/blog/",
+      "parent": 0,
+      "order": 3,
+      "target": ""
+    },
+    {
+      "id": 19742,
+      "title": "",
+      "url": "#",
+      "parent": 0,
+      "order": 4,
+      "target": ""
+    },
+    {
+      "id": 402,
+      "title": "Contact Sales",
+      "url": "/contact/",
+      "parent": 0,
+      "order": 5,
+      "target": ""
+    }
+  ],
+  "footer menu 2": [
+    {
+      "id": 404,
+      "title": "About Visionaize",
+      "url": "/company/",
+      "parent": 0,
+      "order": 1,
+      "target": ""
+    },
+    {
+      "id": 405,
+      "title": "Meet The Team",
+      "url": "/company/#all-pages-in-down",
+      "parent": 0,
+      "order": 2,
+      "target": ""
+    },
+    {
+      "id": 406,
+      "title": "Privacy Policy",
+      "url": "/privacy-policy/",
+      "parent": 0,
+      "order": 3,
+      "target": ""
+    }
+  ],
+  "footer menu 3": [
+    {
+      "id": 18269,
+      "title": "V-Plant",
+      "url": "#",
+      "parent": 0,
+      "order": 1,
+      "target": ""
+    },
+    {
+      "id": 14714,
+      "title": "",
+      "url": "#",
+      "parent": 0,
+      "order": 2,
+      "target": ""
+    },
+    {
+      "id": 5041,
+      "title": "Intelligent Demand Forecast",
+      "url": "/intelligent-demand-forecast",
+      "parent": 0,
+      "order": 3,
+      "target": ""
+    },
+    {
+      "id": 5399,
+      "title": "Utilities Control Center",
+      "url": "/utilities-control-center",
+      "parent": 0,
+      "order": 4,
+      "target": ""
+    },
+    {
+      "id": 409,
+      "title": "Solutions",
+      "url": "/solutions/",
+      "parent": 0,
+      "order": 5,
+      "target": ""
+    },
+    {
+      "id": 22188,
+      "title": "",
+      "url": "#",
+      "parent": 0,
+      "order": 6,
+      "target": ""
+    }
+  ],
+  "TestMenu": [
+    {
+      "id": 15659,
+      "title": "Solutions",
+      "url": "#",
+      "parent": 0,
+      "order": 1,
+      "target": ""
+    }
+  ]
+}
