@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TheindustrialmetaverseRouteImport } from './routes/theindustrialmetaverse'
+import { Route as RequestADemoRouteImport } from './routes/request-a-demo'
 import { Route as ReInventingTurnaroundsInTheMetaverseRouteImport } from './routes/re-inventing-turnarounds-in-the-metaverse'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as DigitalTwinFaqRouteImport } from './routes/digital-twin-faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompanyRouteImport } from './routes/company'
@@ -43,12 +45,22 @@ const TheindustrialmetaverseRoute = TheindustrialmetaverseRouteImport.update({
   path: '/theindustrialmetaverse',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RequestADemoRoute = RequestADemoRouteImport.update({
+  id: '/request-a-demo',
+  path: '/request-a-demo',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReInventingTurnaroundsInTheMetaverseRoute =
   ReInventingTurnaroundsInTheMetaverseRouteImport.update({
     id: '/re-inventing-turnarounds-in-the-metaverse',
     path: '/re-inventing-turnarounds-in-the-metaverse',
     getParentRoute: () => rootRouteImport,
   } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DigitalTwinFaqRoute = DigitalTwinFaqRouteImport.update({
   id: '/digital-twin-faq',
   path: '/digital-twin-faq',
@@ -201,7 +213,9 @@ export interface FileRoutesByFullPath {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
+  '/request-a-demo': typeof RequestADemoRoute
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
@@ -231,7 +245,9 @@ export interface FileRoutesByTo {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
+  '/request-a-demo': typeof RequestADemoRoute
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
@@ -262,7 +278,9 @@ export interface FileRoutesById {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
+  '/request-a-demo': typeof RequestADemoRoute
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
@@ -294,7 +312,9 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
+    | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
+    | '/request-a-demo'
     | '/theindustrialmetaverse'
     | '/blog/$slug'
     | '/industries/digital-twin-for-cement'
@@ -324,7 +344,9 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
+    | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
+    | '/request-a-demo'
     | '/theindustrialmetaverse'
     | '/blog/$slug'
     | '/industries/digital-twin-for-cement'
@@ -354,7 +376,9 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
+    | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
+    | '/request-a-demo'
     | '/theindustrialmetaverse'
     | '/blog/$slug'
     | '/industries/digital-twin-for-cement'
@@ -385,7 +409,9 @@ export interface RootRouteChildren {
   CompanyRoute: typeof CompanyRoute
   ContactRoute: typeof ContactRoute
   DigitalTwinFaqRoute: typeof DigitalTwinFaqRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ReInventingTurnaroundsInTheMetaverseRoute: typeof ReInventingTurnaroundsInTheMetaverseRoute
+  RequestADemoRoute: typeof RequestADemoRoute
   TheindustrialmetaverseRoute: typeof TheindustrialmetaverseRoute
   BlogSlugRoute: typeof BlogSlugRoute
   IndustriesDigitalTwinForCementRoute: typeof IndustriesDigitalTwinForCementRoute
@@ -417,11 +443,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TheindustrialmetaverseRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/request-a-demo': {
+      id: '/request-a-demo'
+      path: '/request-a-demo'
+      fullPath: '/request-a-demo'
+      preLoaderRoute: typeof RequestADemoRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/re-inventing-turnarounds-in-the-metaverse': {
       id: '/re-inventing-turnarounds-in-the-metaverse'
       path: '/re-inventing-turnarounds-in-the-metaverse'
       fullPath: '/re-inventing-turnarounds-in-the-metaverse'
       preLoaderRoute: typeof ReInventingTurnaroundsInTheMetaverseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/digital-twin-faq': {
@@ -617,8 +657,10 @@ const rootRouteChildren: RootRouteChildren = {
   CompanyRoute: CompanyRoute,
   ContactRoute: ContactRoute,
   DigitalTwinFaqRoute: DigitalTwinFaqRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ReInventingTurnaroundsInTheMetaverseRoute:
     ReInventingTurnaroundsInTheMetaverseRoute,
+  RequestADemoRoute: RequestADemoRoute,
   TheindustrialmetaverseRoute: TheindustrialmetaverseRoute,
   BlogSlugRoute: BlogSlugRoute,
   IndustriesDigitalTwinForCementRoute: IndustriesDigitalTwinForCementRoute,

@@ -113,150 +113,168 @@ function VSmartDocXPage() {
       <Header />
       <main className="bg-white text-brand-ink">
       {/* HERO */}
-      <section className="relative overflow-hidden">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-28">
-          <div>
-            <h1 className="font-display text-[44px] leading-[1.1] font-semibold lg:text-[56px]">
-              <span className="bg-gradient-to-r from-[#8DC73F] to-[#21B8B0] bg-clip-text text-transparent">
-                Get thousands of person hours back, by digitizing your P&amp;IDs
-              </span>
-            </h1>
-            <p className="mt-8 max-w-xl text-lg text-brand-ink/80">
-              Convert static P&amp;ID documents into AI-powered tools that
-              speed up understanding of how the pieces and parts of the plant
-              work together.
-            </p>
-            <p className="mt-5 max-w-xl text-lg text-brand-ink/80">
-              V-Smart DocX completely transforms how Operations and Maintenance
-              teams work with P&amp;IDs, creating massive time efficiencies.
-              Connect with us to see how V-Smart DocX makes Asset Performance
-              Management more efficient.
-            </p>
-            <div className="mt-10">
-              <Link
-                to="/contact"
-                className="inline-flex items-center rounded-full bg-gradient-to-r from-[#8DC73F] via-[#21B8B0] to-[#1F88C8] px-8 py-4 text-base font-semibold text-white shadow-lg shadow-black/10 transition hover:opacity-95"
-              >
-                Connect with a product expert
-              </Link>
-            </div>
-          </div>
-          <div className="relative">
-            <img
-              src={HERO_IMG}
-              alt="V-Smart DocX P&ID digitized in a laptop"
-              className="w-full"
-              loading="eager"
-            />
-          </div>
-        </div>
-      </section>
+  <section className="relative overflow-hidden bg-white">
+  <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pb-20 pt-8 lg:grid-cols-2 lg:pb-28 lg:pt-10">
+    <div>
+      <h1 className="text-[42px] font-medium leading-[1.25] tracking-tight lg:text-[40px]">
+        <span className="bg-gradient-to-r from-[#8DC73F] to-[#21B8B0] bg-clip-text text-transparent">
+          Get thousands of person hours back, by digitizing your P&amp;IDs
+        </span>
+      </h1>
+
+      <p className="mt-8 max-w-xl text-lg leading-relaxed text-brand-ink/80">
+        Convert static P&amp;ID documents into AI-powered tools that speed up
+        understanding of how the pieces and parts of the plant work together.
+      </p>
+
+      <p className="mt-5 max-w-xl text-lg leading-relaxed text-brand-ink/80">
+        V-Smart DocX completely transforms how Operations and Maintenance
+        teams work with P&amp;IDs, creating massive time efficiencies. Connect
+        with us to see how V-Smart DocX makes Asset Performance Management
+        more efficient.
+      </p>
+
+      <div className="mt-10">
+        <Link
+          to="/contact"
+          className="inline-flex items-center rounded-full px-8 py-4 text-base font-semibold text-white shadow-md"
+          style={{
+            background:
+              "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
+          }}
+        >
+          Connect with a product expert
+        </Link>
+      </div>
+    </div>
+
+    <div className="relative">
+      <img
+        src={HERO_IMG}
+        alt="V-Smart DocX P&ID digitized in a laptop"
+        width={1400}
+        height={700}
+        className="w-full h-auto"
+        loading="eager"
+      />
+    </div>
+  </div>
+</section>
 
       {/* KEY CAPABILITIES */}
-      <section className="bg-[#DDEEF7] py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <h2 className="text-center font-display text-[44px] font-semibold text-brand-navy lg:text-[56px]">
-            Key Capabilities
-          </h2>
-          <div className="mt-14 grid gap-7 sm:grid-cols-2 lg:grid-cols-3">
-            {CAPABILITIES.map((c) => (
-              <article
-                key={c.title}
-                className="rounded-2xl bg-white p-8 shadow-[0_2px_8px_rgba(0,0,0,0.04)]"
+     <section className="bg-[#DDEEF7] py-24">
+  <div className="mx-auto max-w-7xl px-6">
+    <h2 className="text-center text-[40px] font-semibold text-brand-navy lg:text-[40px]">
+      Key Capabilities
+    </h2>
+    <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {CAPABILITIES.map((c) => (
+        <article
+          key={c.title}
+          className="rounded-md bg-[#EAF4FB] p-7"
+        >
+          <h3 className="text-lg font-bold leading-snug text-brand-navy">
+            {c.title}
+          </h3>
+          <ul className="mt-5 space-y-3 border-l-4 pl-5" style={{
+            borderImage: "linear-gradient(180deg, #8DC73F 0%, #2E8DC5 100%) 1",
+          }}>
+            {c.bullets.map((b) => (
+              <li
+                key={b}
+                className="list-disc text-[18px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60"
+                style={{ marginLeft: "1rem" }}
               >
-                <h3 className="font-display text-xl font-semibold text-brand-navy">
-                  {c.title}
-                </h3>
-                <ul className="mt-6 space-y-3 border-l-4 border-[#8DC73F] pl-5">
-                  {c.bullets.map((b) => (
-                    <li
-                      key={b}
-                      className="list-disc text-[15px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60"
-                      style={{ marginLeft: "1rem" }}
-                    >
-                      {b}
-                    </li>
-                  ))}
-                </ul>
-              </article>
+                {b}
+              </li>
             ))}
-          </div>
-        </div>
-      </section>
+          </ul>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* FLEXIBLE USE CASES */}
-      <section className="py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <h2 className="text-center font-display text-[44px] font-semibold text-brand-navy lg:text-[56px]">
-            Flexible Use Cases
-          </h2>
+<section className="py-24">
+  <div className="mx-auto max-w-7xl px-6">
+    <h2 className="text-center font-display text-[44px] font-semibold text-brand-navy lg:text-[56px]">
+      Flexible Use Cases
+    </h2>
 
-          {/* Use case 1 */}
-          <div className="mt-16 grid items-center gap-12 lg:grid-cols-2">
-            <img
-              src={USECASE1_IMG}
-              alt="Explore P&IDs with greater efficiency"
-              className="w-full"
-              loading="lazy"
-            />
-            <div>
-              <h3 className="font-display text-3xl font-semibold text-brand-navy lg:text-4xl">
-                Explore P&amp;IDs with greater efficiency
-              </h3>
-              <p className="mt-6 font-semibold text-brand-ink">
-                Use as a standalone product without dependencies on a 3D model
-              </p>
-              <ul className="mt-5 list-disc space-y-3 pl-6 text-[15px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60">
-                <li>Extract metadata and tags and symbols from your P&amp;IDs.</li>
-                <li>
-                  Reduce operational risks by maintaining a high level of data
-                  accuracy and integrity.
-                </li>
-                <li>
-                  Lower costs by decreasing the need for manual data entry and
-                  reducing errors that can lead to expensive corrective actions.
-                </li>
-                <li>
-                  Enable engineers, operators, and project managers to
-                  efficiently understand the entire system architecture and how
-                  different components interact, with AI-powered logic.
-                </li>
-              </ul>
-            </div>
-          </div>
+    {/* Use case 1 */}
+    <div className="mt-16 grid items-center gap-0 lg:grid-cols-2">
+      <div className="w-full h-full overflow-hidden rounded-2xl">
+        <img
+          src={USECASE1_IMG}
+          alt="Explore P&IDs with greater efficiency"
+          className="h-full w-full object-cover object-left scale-[1.35]"
+          loading="lazy"
+        />
+      </div>
+      <div>
+        <h3 className="font-display text-4xl font-semibold text-brand-navy lg:text-4xl">
+          Explore P&amp;IDs with greater efficiency
+        </h3>
+        <p className="mt-6 font-semibold text-brand-ink">
+          Use as a standalone product without dependencies on a 3D model
+        </p>
+        <ul className="mt-5 list-disc space-y-3 pl-6 text-[17px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60">
+          <li>Extract metadata and tags and symbols from your P&amp;IDs.</li>
+          <li>
+            Reduce operational risks by maintaining a high level of data
+            accuracy and integrity.
+          </li>
+          <li>
+            Lower costs by decreasing the need for manual data entry and
+            reducing errors that can lead to expensive corrective actions.
+          </li>
+          <li>
+            Enable engineers, operators, and project managers to
+            efficiently understand the entire system architecture and how
+            different components interact, with AI-powered logic.
+          </li>
+        </ul>
+      </div>
+    </div>
 
-          {/* Use case 2 */}
-          <div className="mt-24 grid items-center gap-12 lg:grid-cols-2">
-            <div className="lg:order-1">
-              <h3 className="font-display text-3xl font-semibold text-brand-navy lg:text-4xl">
-                Integrate P&amp;IDs with
-                <br />
-                3D visualization
-              </h3>
-              <p className="mt-6 font-semibold text-brand-ink">
-                Move quickly from static 2D to immersive 3D
-              </p>
-              <ul className="mt-5 list-disc space-y-3 pl-6 text-[15px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60">
-                <li>Generate intelligence into 3D models from P&amp;IDs.</li>
-                <li>Zero in on specific equipment with greater efficiency.</li>
-                <li>Make quicker sense of the entire plant and interrelated parts.</li>
-                <li>
-                  Facilitates digital transformation in a manageable and
-                  scalable way, adapting to the specific needs of complex
-                  facilities.
-                </li>
-              </ul>
-            </div>
-            <img
-              src={USECASE2_IMG}
-              alt="Integrate P&IDs with 3D visualization"
-              className="w-full lg:order-2"
-              loading="lazy"
-            />
-          </div>
-        </div>
-      </section>
-
+    {/* Use case 2 */}
+    <div className="mt-24 grid items-stretch gap-0 lg:grid-cols-2">
+      <div className="lg:order-1 flex flex-col justify-center">
+        <h3 className="font-display text-4xl font-semibold text-brand-navy lg:text-4xl">
+          Integrate P&amp;IDs with
+          <br />
+          3D visualization
+        </h3>
+        <p className="mt-6 font-semibold text-brand-ink">
+          Move quickly from static 2D to immersive 3D
+        </p>
+        <ul className="mt-5 list-disc space-y-3 pl-6 text-[17px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60">
+          <li>Generate intelligence into 3D models from P&amp;IDs.</li>
+          <li>Zero in on specific equipment with greater efficiency.</li>
+          <li>Make quicker sense of the entire plant and interrelated parts.</li>
+          <li>
+            Facilitates digital transformation in a manageable and
+            scalable way, adapting to the specific needs of complex
+            facilities.
+          </li>
+        </ul>
+      </div>
+ <div
+  className="w-full overflow-hidden rounded-2xl lg:order-2"
+  style={{ aspectRatio: "1440 / 1192" }}
+>
+  <img
+    src="https://visionaize.com/wp-content/uploads/2024/05/side-by-side-desktop-right-1-copy.png"
+    alt="Integrate P&IDs with 3D visualization"
+    className="h-full w-full object-cover object-right"
+    loading="lazy"
+  />
+</div>
+    </div>
+  </div>
+</section>
       {/* GREEN CTA BAND */}
       <section className="bg-[#A4D233]">
         <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 px-6 py-14 sm:flex-row">

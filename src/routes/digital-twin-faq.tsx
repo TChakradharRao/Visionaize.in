@@ -13,7 +13,7 @@ export const Route = createFileRoute("/digital-twin-faq")({
   component: DigitalTwinFaqPage,
 });
 
-// --- Accordion primitives, styled to match the "+ / −" reference pattern ---
+// --- Accordion primitives ---
 
 type AccordionItem = {
   question: string;
@@ -25,23 +25,29 @@ type AccordionGroup = {
   items: AccordionItem[];
 };
 
-function AccordionRow({ item }: { item: AccordionItem }) {
-  const [open, setOpen] = useState(false);
-
+function AccordionRow({
+  item,
+  open,
+  onToggle,
+}: {
+  item: AccordionItem;
+  open: boolean;
+  onToggle: () => void;
+}) {
   return (
     <div className="border-b border-gray-200">
       <button
         type="button"
-        onClick={() => setOpen((o) => !o)}
-        className="flex w-full items-start gap-3 py-4 text-left"
+        onClick={onToggle}
+        className="flex w-full items-start gap-3 py-3.5 text-left"
       >
         <span className="mt-1 flex h-5 w-5 flex-none items-center justify-center text-gray-700">
-          {open ? <Minus size={18} /> : <Plus size={18} />}
+          {open ? <Minus size={16} /> : <Plus size={16} />}
         </span>
-        <span className="text-lg font-semibold text-gray-900">{item.question}</span>
+        <span className="text-base font-semibold text-gray-900">{item.question}</span>
       </button>
       {open && (
-        <div className="pb-5 pl-8 pr-2 text-gray-600 leading-relaxed">
+        <div className="pb-5 pl-8 pr-2 text-gray-600 leading-relaxed whitespace-pre-line">
           {item.answer}
         </div>
       )}
@@ -50,63 +56,84 @@ function AccordionRow({ item }: { item: AccordionItem }) {
 }
 
 function AccordionSection({ group }: { group: AccordionGroup }) {
+  // Only one item open at a time within this section; first item open by default.
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
   return (
-    <section className="mx-auto max-w-3xl py-10">
-      <h2 className="mb-6 text-3xl font-bold text-gray-900">{group.title}</h2>
+    <section className="mx-auto max-w-6xl py-8">
+      <h2 className="mb-4 text-3xl font-bold text-gray-900">{group.title}</h2>
       <div>
-        {group.items.map((item) => (
-          <AccordionRow key={item.question} item={item} />
+        {group.items.map((item, index) => (
+          <AccordionRow
+            key={item.question}
+            item={item}
+            open={openIndex === index}
+            onToggle={() => setOpenIndex((current) => (current === index ? null : index))}
+          />
         ))}
       </div>
     </section>
   );
 }
 
-// --- Sections 3–7 content, in accordion form ---
+// --- FAQ content grouped exactly as in the reference layout ---
 
 const accordionGroups: AccordionGroup[] = [
   {
-    title: "Why Digital Twins Matter",
+    title: "How does a Digital Twin work?",
     items: [
       {
-        question: "Why does it matter for industrial organizations?",
+        question: "What is a Digital Twin?",
         answer:
-          "When data is contextualized inside a digital twin, engineers and operators can act on the right information at the right time and align their work around a single source of truth. That improves planning, helps teams avoid unnecessary downtime, and creates a stronger foundation for AI, automation, and remote collaboration. For asset-intensive businesses, that means better visibility, better coordination, and more confidence in the decisions being made around critical operations.",
+          "A digital twin is a 3D virtual replica of a physical object or system. In terms of industrial businesses this could be oil & gas refineries, manufacturing facilities, or utility power plants. A digital twin is a form of enterprise asset management software that allows for remote operations and predictive maintenance of these facilities. The purpose of a digital twin is to provide an accurate and real-time representation of a physical object or system. This can be extremely beneficial for industrial businesses, as it allows them to detect faults and potential problems with their products before they become an issue, resulting in less downtime and greater productivity. It also allows companies to optimize their processes and improve product quality.",
+      },
+      {
+        question: "How does a Digital Twin work?",
+        answer: `A digital twin works by using an initial 3D scan of the object or structure. IoT sensors are added to the asset to collect data about a physical object or system. This data is then used to create a virtual replica of the object or system. Sensors then relay the physical object's performance to the digital twin. Such data points can include energy output, weather conditions, or uptime and downtime.
+
+The digital twin can then be used to monitor the object or system in real time, and it can also be used to run simulations to predict how the object or system will behave under different conditions. This helps businesses optimize their processes and avoid potential problems.`,
+      },
+      {
+        question: "What is the difference between a Digital Twin and a simulation?",
+        answer:
+          "Digital Twins and simulations are similar, but the most important difference is that a Digital Twin is built on live and real data whereas a simulation is based off data generated by AI. Digital Twins can also take into consideration profitability, management, and safety in addition to forecasting.",
+      },
+      {
+        question: "How to design a Digital Twin?",
+        answer:
+          "When developing digital twins, the thing to remember is that they aren't simply computer simulations of a real-world location. They are directly linked to their structures and exchange data in real time. Digital twins can even take care of integrated building systems such as telecom networks, content storage platforms, and other commercial applications. In a nutshell, digital twins are appendages of an environment instead of static replicas. Designers who keep this in mind will be able to create connections more efficiently.",
       },
     ],
   },
   {
-    title: "What a Digital Twin Can Be Used For",
+    title: "What is a Digital Twin used for?",
     items: [
       {
-        question: "Managing industrial processes",
-        answer:
-          "Digital twins can track production KPIs and identify bottlenecks in real time, helping teams monitor and optimize industrial processes as they happen.",
-      },
-      {
-        question: "Monitoring infrastructure",
-        answer:
-          "Digital twins can track the performance of critical infrastructure, such as power grids and transportation networks, helping predict demand peaks and prevent failures.",
-      },
-      {
-        question: "Training AI models",
-        answer:
-          "Digital twins provide a simulated environment where AI models, including autonomous vehicles, can be trained safely before deployment in the real world.",
-      },
-      {
-        question: "Managing construction projects",
-        answer:
-          "Digital twins can track construction progress end to end, flag potential risks, and help optimize the use of resources on site.",
+        question: "What can a Digital Twin be used for?",
+        answer: `A digital twin can be used for a variety of solutions, from monitoring and managing complex systems to training AI models. Some of the most common use cases for digital twins include: – Managing industrial processes: Digital twins can be used to monitor and optimize industrial processes in real time. For example, a digital twin of a manufacturing plant could be used to track production KPIs and identify bottlenecks. – Monitoring infrastructure: Digital twins can be used to monitor the performance of critical infrastructure, such as power plants and transportation networks. For example, a digital twin of a power grid could be used to predict demand peaks and prevent blackouts. – Training AI models: Digital twins can be used to train AI models in a simulated environment before they are deployed in the real world. For example, a digital twin of a city could be used to train autonomous vehicles. – Managing construction projects: Digital twins can be used to manage construction projects from start to finish. For example, a digital twin of a building could be used to track the progress of construction, identify potential risks, and optimize the use of resources. Digital twins are a versatile tool that can be used for a wide range of applications. The key is to choose the right use case for your specific needs.`,
       },
     ],
   },
   {
-    title: "Background on Digital Twins",
+    title: "History of Digital Twins",
     items: [
       {
-        question: "Who invented digital twins?",
+        question: "History of Digital Twins",
         answer:
-          "Conceptually, the first digital twin was used by NASA during the Apollo 13 mission. The term itself was coined by Dr. Michael Grieves of the University of Michigan in 2002, who described it as a dynamic software model mirroring the physical characteristics and operational performance of a manufactured product or system. The concept has since expanded well beyond manufacturing.",
+          "The concept of digital twins can be traced back to the early days of computing. One of the first examples of a digital twin was SAGE, a massive computer system that was used to track aircraft during the Cold War. In the 1970s, NASA used digital twins to design and test spacecraft. Today, digital twins are used in a variety of industries, from manufacturing to healthcare.",
+      },
+      {
+        question: "Who invented Digital Twins?",
+        answer:
+          "Conceptually, the first digital twin was used by NASA during the Apollo 13 mission, but the term \"digital twin\" was first coined by Dr. Michael Grieves of the University of Michigan in 2002. Grieves defined a digital twin as \"a dynamic software model that mirrors the physical characteristics and operational performance of a manufactured product or system.\" Since then, the concept of digital twins has evolved, and the term is now used to refer to any digital representation of a physical object or system.",
+      },
+      {
+        question: "What is the future of Digital Twins?",
+        answer: `Digital twins are becoming increasingly popular because they offer a wide range of benefits to businesses. As the technology continues to evolve, digital twins are expected to become even more widespread and play a key role across a variety of industries.
+
+One potential future application of digital twins is in the healthcare industry. They could be used to create virtual models of patients, allowing medical professionals to test different treatment options before applying them. This would enable more personalized, accurate, and effective treatment plans.
+
+Digital twins could also transform the construction industry. Since construction projects are often complex and require coordination across multiple teams, digital twins can help companies plan, monitor, and manage projects more efficiently. This can lead to shorter project timelines, reduced costs, and improved overall project outcomes.`,
       },
     ],
   },
@@ -114,36 +141,34 @@ const accordionGroups: AccordionGroup[] = [
     title: "Benefits of a Digital Twin",
     items: [
       {
-        question: "Reducing downtime",
-        answer: "Identifying potential problems before they occur helps minimize unplanned downtime.",
-      },
-      {
-        question: "Improving quality control",
-        answer: "Continuous monitoring throughout the manufacturing process helps catch quality issues early.",
-      },
-      {
-        question: "Reducing costs",
+        question: "What are the benefits of a Digital Twin?",
         answer:
-          "Optimizing processes and reducing waste lowers operating costs, while remote operations cut down the resources needed to monitor an asset.",
-      },
-      {
-        question: "Improving safety",
-        answer: "Identifying hazards and risks through preventive maintenance keeps teams safer on site.",
-      },
-      {
-        question: "Reducing carbon emissions",
-        answer:
-          "Fewer trips to the facility lower emissions, since a fuller scope of work can be planned and coordinated proactively through the digital twin.",
+          "There are many advantages of using a digital twin for industrial businesses. One of the main advantages is that it can help businesses understand and predict how the asset will behave under different conditions. This helps businesses to improve their decision-making and to reduce costs.\n\nSome additional benefits a digital twin can provide for an industrial business include:\n\n– Reducing downtime by identifying potential problems before they occur\n– Improving quality control by monitoring products throughout the manufacturing process\n– Reducing costs by optimizing processes and reducing waste. Remote operations also allow industrial businesses to reduce the amount of resources to monitor the asset.\n– Increasing customer satisfaction by providing a personalized experience\n– Improving safety by identifying hazards and risks through preventive maintenance\n– Reducing carbon emissions with fewer trips to the facility, since the fuller scope of what needs to be looked at can be better and more proactively coordinated through the use of a digital twin.",
       },
     ],
   },
   {
-    title: "Digital Twins in Oil and Gas",
+    title: "Digital Twin industries",
     items: [
       {
-        question: "How are digital twins used in oil and gas?",
+        question: "What industries can a Digital Twin be used for?",
         answer:
-          "They enable Operations Center and field teams to optimize wellhead production and refinery performance, delivering digital insights within the industrial metaverse so teams can plan, optimize, and execute work while keeping people safe, operations compliant, and processes on track. Data-driven insights placed within an intelligent 3D digital twin let teams visualize and verify the actions they need to take, with plans laid out in a richly annotated, high-resolution simulation of the operation.",
+          "Digital twins are being used across a variety of industries to solve complex problems and optimize performance. Some of the most popular industries for digital twins include:\n\n– Manufacturing: Digital twins are being used in manufacturing to optimize production processes and improve quality control.\n\n– Healthcare: Digital twins are being used in healthcare to improve patient care and treatment.\n\n– Retail: Digital twins are being used in retail to improve customer experience and store operations.\n\n– Transportation: Digital twins are being used in transportation to optimize routes and manage traffic congestion.\n\n– Construction: Digital twins are being used in construction to improve project management and mitigate risks.\n\nDigital twins offer a unique opportunity to improve performance across a variety of industries. The key is to find the right use case for your specific needs.",
+      },
+      {
+        question: "Digital Twins & Manufacturing",
+        answer:
+          "Visualize your manufacturing operations through a real-time, up-to-date 3-D digital twin. Imagine your Factory Manager, your Shift Supervisors, and your Maintenance engineers being able to visualize the analytics arrayed and overlaid on a digital twin of your plant assets in 3-D. The vast array of data, analytics, and insights relevant to your operations team can be better understood because it can be displayed within a high fidelity visual likeness of the factory. This visual digital twin allows your operations team to really understand, verify, and carefully plan their actions, whether they are:\nResponding to a critical factory alert that needs to be addressed\nPlanning a plant maintenance operation; or\nCarrying out required inspections on the factory floor.",
+      },
+      {
+        question: "Digital Twins & Power and Energy",
+        answer:
+          "Visualize your power generation, transmission and distribution assets in an intelligent, 3D Digital Twin – the Power Utility Metaverse. Utilities have a vast array of data, analytics, and insights that must be analyzed dynamically and in real time. These insights need to be understood and consumed before making decisions and taking action, particularly in planning their maintenance and inspection programs in power stations and sub-stations.\nV-Suite creates a 3D visual view of your power grid or generation plans–your Power Utility Metaverse. Imagine your Planning and Construction team, your Engineering team, your Electric Operations team, and your Substation Directors and Operators all being able to visualize and interact with stations and sub-stations assets and layout to plan changes to, and monitor operations through a real-time, up-to-date 3-D digital twin, without having to be there on site! The analytics your organization is producing can be arrayed and overlaid on a digital twin of the operation in 3-D. The vast array of data, analytics, and insights can be really understood because it can be displayed within a high fidelity visual likeness of the sites. As a part of the central operations display, or on mobile displays at field sites, the visual digital twin allows your operations team to really understand, verify, and carefully plan their actions, whether they are carrying out routine maintenance or inspections, or planning major overhauls, or responding in real time to operations alerts.",
+      },
+      {
+        question: "Digital Twins & Oil and Gas",
+        answer:
+          "Enable your Operations Center and Field teams to optimize wellhead production and refinery performance delivering digital insights within the industrial metaverse, to allow them to plan, optimize and execute important work, while keeping teams safe, operations compliant, and processes running to plan. How do you balance it all? By placing data-driven insights within an intelligent 3D digital twin your team can visualize and verify the actions they need to take. The plan is laid out in a richly annotated, high-resolution simulation of the operation. Learn more about Digital Twins for Oil & Gas.",
       },
     ],
   },
@@ -156,35 +181,19 @@ function DigitalTwinFaqPage() {
       eyebrow="Knowledge Center"
       intro="Learn how digital twins work, where they deliver value, and why they are becoming a core part of asset-intensive operations across manufacturing, oil and gas, power, and other regulated industries."
       heroImage="https://visionaize.com/wp-content/uploads/2024/12/90045162083.png"
-      sections={[
-        {
-          title: "How does a digital twin work?",
-          body: `A digital twin is a live virtual replica of a physical asset, process, or facility. It combines engineering, operations, and maintenance data so teams can understand what is happening, predict what could happen next, and make better decisions faster.
-
-In practice, this means plant operators, reliability teams, and engineering leaders can work from the same view of the asset while applying analytics, AI, and operational context to real conditions on the ground.`,
-          bullets: ["Connect process, asset, and maintenance data", "Support remote monitoring and predictive operations", "Improve safety, productivity, and reliability"],
-          image: "https://visionaize.com/wp-content/uploads/2025/01/49350947222.png",
-        },
-        {
-          title: "What is a digital twin used for?",
-          body: `Digital twins are used to monitor performance, reduce downtime, support training, guide maintenance activities, and connect teams to a shared view of the plant. They can support everything from day-to-day operations to capital planning, reliability programs, and AI-enabled decision support.
-
-They are especially useful when organizations want to turn disconnected data into a clear operational picture that people across the business can understand and act on.`,
-          bullets: ["Operations and maintenance workflows", "Reliability and inspection planning", "Training, simulation, and decision support"],
-          reverse: true,
-          image: "https://visionaize.com/wp-content/uploads/2024/05/P-and-I-D-document-digitized-2.png",
-        },
-      ]}
-      cards={[
-        { title: "Blog", description: "Read articles on AI, industrial transformation, and digital twin strategy.", href: "/blog", eyebrow: "Insights" },
-        { title: "The Industrial Metaverse", description: "See how immersive industrial environments connect people, data, and operations.", href: "/theindustrialmetaverse", eyebrow: "Concept" },
-        { title: "Pharmaceutical Manufacturing", description: "Discover how digital twins and smart apps improve monitoring and optimization in regulated environments.", href: "/ai-in-pharmaceutical-manufacturing", eyebrow: "Use case" },
-      ]}
+      sections={[]}
+      // cards={[
+      //   { title: "Blog", description: "Read articles on AI, industrial transformation, and digital twin strategy.", href: "/blog", eyebrow: "Insights" },
+      //   { title: "The Industrial Metaverse", description: "See how immersive industrial environments connect people, data, and operations.", href: "/theindustrialmetaverse", eyebrow: "Concept" },
+      //   { title: "Pharmaceutical Manufacturing", description: "Discover how digital twins and smart apps improve monitoring and optimization in regulated environments.", href: "/ai-in-pharmaceutical-manufacturing", eyebrow: "Use case" },
+      // ]}
       cta={{ label: "Request a demo", href: "/contact" }}
     >
-      {accordionGroups.map((group) => (
-        <AccordionSection key={group.title} group={group} />
-      ))}
+      <div className="px-6">
+        {accordionGroups.map((group) => (
+          <AccordionSection key={group.title} group={group} />
+        ))}
+      </div>
     </InsightPage>
   );
 }

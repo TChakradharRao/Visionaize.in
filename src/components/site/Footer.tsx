@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Facebook, Youtube, Linkedin } from "lucide-react";
+import { Facebook, Linkedin, Play } from "lucide-react";
 
 const COLS = [
   {
@@ -56,8 +56,6 @@ export function Footer() {
       `}</style>
 
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-20 pb-10 sm:px-10">
-        {/* Heading block — kept narrow so it never reaches into the area
-            where the curves run. */}
         <div className="max-w-sm">
           <h2 className="font-serif text-6xl font-normal leading-none text-white sm:text-7xl">
             Let&rsquo;s Connect
@@ -77,11 +75,6 @@ export function Footer() {
           </Link>
         </div>
 
-        {/* Bottom row: [ Follow us ] [ empty spacer for the curves ] [ link columns ]
-            - grid-cols widened so the spacer proportionally matches the screenshot
-              (columns now start further right, roughly the same ratio as the reference)
-            - items-end so "FOLLOW US" sits low, level with the lower link rows,
-              instead of pinned to the top of the row */}
         <div className="mt-2 grid gap-y-8 lg:grid-cols-[180px_0.65fr_1.5fr] lg:items-end">
           <div>
             <p className="text-sm font-semibold tracking-wide text-white/90">FOLLOW US</p>
@@ -89,16 +82,21 @@ export function Footer() {
               <a href="#" aria-label="Facebook" className="text-white hover:text-white/70">
                 <Facebook className="h-5 w-5" fill="currentColor" />
               </a>
-              <a href="#" aria-label="YouTube" className="text-white hover:text-white/70">
-                <Youtube className="h-6 w-6" fill="currentColor" />
+
+              <a
+                href="#"
+                aria-label="YouTube"
+                className="flex h-5 w-7 items-center justify-center rounded-md bg-white transition-opacity hover:opacity-80"
+              >
+                <Play className="h-3 w-3 text-[#101a2c]" fill="currentColor" strokeWidth={0} />
               </a>
+
               <a href="#" aria-label="LinkedIn" className="text-white hover:text-white/70">
                 <Linkedin className="h-5 w-5" fill="currentColor" />
               </a>
             </div>
           </div>
 
-          {/* empty spacer — intentionally blank, this is the lane the curves travel through */}
           <div aria-hidden="true" className="hidden lg:block" />
 
           <div className="grid grid-cols-2 gap-x-10 gap-y-6 sm:grid-cols-3">
