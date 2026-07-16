@@ -29,7 +29,7 @@ const seedItem = getSeedContentItem("page", "signal-miner");
 const seedSections = seedItem?.content_json?.sections ?? [];
 const heroSection = seedSections[0];
 const HERO_POSTER = heroSection?.images[0]?.src ?? "https://visionaize.com/wp-content/uploads/2023/11/iStock-1182152185-e1699026887686.jpg";
-const CASE_IMG = HERO_POSTER;
+const CASE_IMG = "https://visionaize.com/wp-content/uploads/2023/11/iStock-1182152185-e1699026887686.jpg";
 const HERO_TITLE = seedItem?.title ?? "Signal Miner";
 const HERO_PARAGRAPHS = heroSection?.paragraphs?.length
   ? heroSection.paragraphs
@@ -169,15 +169,17 @@ const FAQS = [
 
 function SignalMinerPage() {
   const [tab, setTab] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+   const [openIndex, setOpenIndex] = useState<number | null>(0);
   return (
     <>
       <Header />
       <main className="bg-white text-brand-ink">
         {/* HERO */}
-        <section className="relative overflow-hidden">
-          <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-2 lg:py-24">
+       <section className="relative overflow-hidden">
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pt-8 pb-20 lg:pt-10 lg:pb-24 lg:grid-cols-2">
             <div>
-              <h1 className="font-display text-[56px] leading-[1.05] font-semibold lg:text-[72px]">
+              <h1 className="font-display text-[48px] leading-[1.1] font-semibold lg:text-[50px]">
                 <span className="bg-gradient-to-r from-[#8DC73F] to-[#21B8B0] bg-clip-text text-transparent">
                   {HERO_TITLE}
                 </span>
@@ -196,28 +198,24 @@ function SignalMinerPage() {
                 </Link>
               </div>
             </div>
-            <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-black">
-              <img
-                src={HERO_POSTER}
-                alt="Signal Miner platform"
-                className="h-full w-full object-cover opacity-70"
-                loading="eager"
-              />
-              <button
-                type="button"
-                className="absolute inset-0 m-auto flex h-20 w-20 items-center justify-center rounded-full bg-white/90 backdrop-blur transition hover:bg-white"
-                aria-label="Play video"
-              >
-                <Play className="h-8 w-8 translate-x-0.5 fill-brand-navy text-brand-navy" />
-              </button>
-            </div>
+          <div className="relative w-full overflow-hidden  bg-black aspect-[4/3] lg:aspect-[16/11]">
+  <video
+    src="https://visionaize.com/wp-content/uploads/2024/03/signal-miner-2.mp4"
+    className="h-full w-full object-cover"
+    controls
+    autoPlay
+    muted
+    loop
+    playsInline
+  />
+</div>
           </div>
         </section>
 
         {/* KEY CAPABILITIES */}
-        <section className="bg-[#DDEEF7] py-20">
+        <section className="bg-[#DDEEF7] py-20 pt-5">
           <div className="mx-auto max-w-7xl px-6">
-            <h2 className="text-center font-display text-[44px] font-semibold text-brand-navy lg:text-[56px]">
+            <h2 className="text-center font-display text-[40px] font-semibold text-brand-navy lg:text-[50px] mt-0">
               Key Capabilities
             </h2>
             <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -236,42 +234,46 @@ function SignalMinerPage() {
         </section>
 
         {/* CASE STUDY */}
-        <section className="py-24">
-          <div className="mx-auto grid max-w-7xl items-start gap-14 px-6 lg:grid-cols-2">
-            <div>
-              <p className="text-sm font-semibold uppercase tracking-widest text-[#8DC73F]">
-                CASE STUDY
-              </p>
-              <h2 className="mt-3 font-display text-3xl font-semibold text-brand-navy lg:text-[40px] lg:leading-tight">
-                Optimizing OEE with Predictive Maintenance and AI Solutions
-              </h2>
-              <div className="mt-8 flex gap-8 border-b border-brand-ink/15">
-                {CASE_TABS.map((t, i) => (
-                  <button
-                    key={t.label}
-                    onClick={() => setTab(i)}
-                    className={`-mb-px border-b-2 pb-3 text-base font-semibold transition ${
-                      tab === i
-                        ? "border-brand-blue text-brand-blue"
-                        : "border-transparent text-brand-ink/80 hover:text-brand-navy"
-                    }`}
-                  >
-                    {t.label}
-                  </button>
-                ))}
-              </div>
-              <div className="mt-6 rounded-lg border border-brand-ink/10 p-6 text-[15px] leading-relaxed text-brand-ink/80">
-                {CASE_TABS[tab].body}
-              </div>
-            </div>
-            <img
-              src={CASE_IMG}
-              alt="Optimizing OEE with predictive maintenance"
-              className="aspect-[4/3] w-full rounded-2xl object-cover"
-              loading="lazy"
-            />
-          </div>
-        </section>
+ <section className="py-24">
+  <div className="mx-auto grid max-w-7xl items-start gap-14 px-6 lg:grid-cols-2">
+    <div>
+      <p className="text-sm font-semibold uppercase tracking-widest text-[#8DC73F]">
+        CASE STUDY
+      </p>
+      <h2 className="mt-3 font-display text-2xl font-semibold text-brand-navy lg:text-[36px] lg:leading-tight">
+        Optimizing OEE with Predictive Maintenance and AI Solutions
+      </h2>
+
+      <div className="mt-8 flex">
+        {CASE_TABS.map((t, i) => (
+          <button
+            key={t.label}
+            onClick={() => setTab(i)}
+            className={`px-6 py-3 text-base font-semibold transition rounded-t-lg border ${
+              tab === i
+                ? "border-brand-ink/15 border-b-white bg-white text-brand-blue z-10 -mb-px"
+                : "border-transparent text-brand-navy hover:text-brand-blue"
+            }`}
+          >
+            {t.label}
+          </button>
+        ))}
+      </div>
+
+      <div className="rounded-b-lg rounded-tr-lg border border-brand-ink/25 p-6 text-[18px] leading-relaxed text-brand-ink/80">
+        {CASE_TABS[tab].body}
+      </div>
+    </div>
+    
+    <img
+      src={CASE_IMG}
+      alt="Optimizing OEE with predictive maintenance"
+      className="h-full max-h-[300px] w-full rounded-2xl  shadow-2xl shadow-black/30 lg:max-h-[420px] mt-10"
+      loading="lazy"
+    />
+  </div>
+</section>
+
 
         {/* GREEN BAND */}
         <section className="bg-[#A4D233]">
@@ -289,73 +291,83 @@ function SignalMinerPage() {
         </section>
 
         {/* DEPLOYMENT OPTIONS */}
-        <section className="py-24">
-          <div className="mx-auto max-w-7xl px-6">
-            <h2 className="text-center font-display text-[44px] font-semibold text-brand-navy lg:text-[56px]">
-              Deployment Options
-            </h2>
-            <div className="mt-14 grid gap-12 lg:grid-cols-3">
-              {DEPLOYMENT.map((d) => (
-                <div key={d.title}>
-                  <h3 className="font-display text-2xl font-semibold text-brand-navy">
-                    {d.title}
-                  </h3>
-                  <ul className="mt-6 list-disc space-y-3 pl-6 text-[15px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60">
-                    {d.bullets.map((b) => (
-                      <li key={b}>{b}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+    <section className="w-full bg-white py-20">
+      <div className="mx-auto max-w-6xl px-8">
+        <h2 className="text-center font-sans text-[44px] font-normal text-[#1a2733] lg:text-[50px]">
+          Deployment Options
+        </h2>
+ 
+        <div className="mt-12 grid gap-8 sm:grid-cols-1 lg:grid-cols-3 lg:gap-6">
+          {DEPLOYMENT.map((d) => (
+            <div key={d.title}>
+              <h3 className="text-3xl font-normal text-[#1a2733]">
+                {d.title}
+              </h3>
+              <ul className="mt-6 space-y-3 text-[18px] leading-relaxed ">
+                {d.bullets.map((b) => (
+                  <li key={b} className="flex gap-3">
+                    <span className="mt-[10px] h-[5px] w-[5px] flex-shrink-0 rounded-full bg-[#3d5a66]/70" />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-        </section>
+          ))}
+        </div>
+      </div>
+ 
+      <div className="mt-16 h-[8px] w-full bg-gradient-to-r from-[#8DC73F] via-[#21B8B0] to-[#1F88C8]" />
+    </section>
 
-        {/* GRADIENT DIVIDER */}
-        <div className="h-1 w-full bg-gradient-to-r from-[#8DC73F] via-[#21B8B0] to-[#1F88C8]" />
 
         {/* FAQ */}
-        <section className="py-24">
-          <div className="mx-auto max-w-5xl px-6">
-            <h2 className="font-display text-3xl font-semibold text-brand-navy lg:text-4xl">
-              Learn More about Signal Miner
-            </h2>
-            <div className="mt-10 space-y-4">
-              {FAQS.map((f, i) => (
-                <FAQItem key={f.q} q={f.q} a={f.a} defaultOpen={i === 0} />
-              ))}
-            </div>
-            <div className="mt-12 text-center">
-              <Link
-                to="/contact"
-                className="mt-4 inline-flex items-center rounded-full bg-gradient-to-r from-[#8DC73F] via-[#21B8B0] to-[#1F88C8] px-10 py-4 text-base font-semibold text-white shadow-lg shadow-black/10 transition hover:opacity-95"
-              >
-                Contact Sales
-              </Link>
-            </div>
-          </div>
-        </section>
+     <section className="pb-24">
+      <div className="mx-auto max-w-5xl px-6">
+        <h2 className="font-display text-3xl font-semibold text-brand-navy lg:text-4xl">
+          Learn More about Signal Miner
+        </h2>
+        <div className="mt-9 space-y-4">
+          {FAQS.map((f, i) => (
+            <FAQItem
+              key={f.q}
+              q={f.q}
+              a={f.a}
+              open={openIndex === i}
+              onToggle={() => setOpenIndex((v) => (v === i ? null : i))}
+            />
+          ))}
+        </div>
+        <div className="mt-12 text-center">
+          <Link
+            to="/contact"
+            className="mt-3 inline-flex items-center rounded-full bg-gradient-to-r from-[#8DC73F] via-[#21B8B0] to-[#1F88C8] px-10 py-4 text-base font-semibold text-white shadow-lg shadow-black/10 transition hover:opacity-95"
+          >
+            Contact Sales
+          </Link>
+        </div>
+      </div>
+    </section>
       </main>
       <Footer />
     </>
   );
 }
-
 function FAQItem({
   q,
   a,
-  defaultOpen,
+  open,
+  onToggle,
 }: {
   q: string;
   a: React.ReactNode;
-  defaultOpen?: boolean;
+  open: boolean;
+  onToggle: () => void;
 }) {
-  const [open, setOpen] = useState(!!defaultOpen);
   return (
     <div className="border-b border-brand-ink/10 pb-4">
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={onToggle}
         className="flex w-full items-center gap-4 py-3 text-left"
         aria-expanded={open}
       >
@@ -365,7 +377,7 @@ function FAQItem({
         >
           {open ? "−" : "+"}
         </span>
-        <span className="flex-1 font-display text-lg font-semibold text-brand-navy">
+        <span className="flex-1 font-display text-[19px] font-semibold text-brand-navy">
           {q}
         </span>
         <ChevronDown
@@ -375,7 +387,7 @@ function FAQItem({
         />
       </button>
       {open && (
-        <div className="pl-10 pr-4 pb-2 text-[15px] leading-relaxed text-brand-ink/80">
+        <div className="pl-10 pr-4 pb-2 text-[16px] leading-relaxed text-brand-ink/90">
           {a}
         </div>
       )}

@@ -424,7 +424,7 @@ function RemotePlantAccess() {
                   />
                 </div>
                 <h3
-  className="mt-4 text-[22px] font-bold leading-tight text-transparent bg-clip-text"
+  className="mt-4 text-[24px] font-bold leading-tight text-transparent bg-clip-text"
   style={{
     backgroundImage:
       "linear-gradient(90deg, #8CC63F 0%, #39B54A 25%, #28A9A2 55%, #1E88E5 100%)",
@@ -432,7 +432,7 @@ function RemotePlantAccess() {
 >
   {c.title}
 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-brand-ink/80">
+                <p className="mt-3 text-medium leading-relaxed text-brand-ink/80">
                   {c.body}
                 </p>
               </div>
@@ -685,7 +685,7 @@ function ImproveOps() {
   return (
     <section className="bg-white py-20">
       <div className="mx-auto max-w-6xl px-6 text-center">
-        <h2 className="text-3xl font-semibold text-brand-navy md:text-4xl">
+        <h2 className="text-4xl font-semibold text-brand-navy md:text-4xl">
           Improve Your Operations Today
         </h2>
         <div className="mt-12 grid gap-10 md:grid-cols-3">
@@ -697,8 +697,8 @@ function ImproveOps() {
                 className="mb-5 h-14 w-14 object-contain"
                 onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
               />
-              <h3 className="text-lg font-bold text-brand-navy">{s.title}</h3>
-              <p className="mt-3 max-w-xs text-sm leading-relaxed text-brand-ink/75">{s.body}</p>
+              <h3 className="text-2xl font-bold text-brand-navy">{s.title}</h3>
+              <p className="mt-3 max-w-xs text-lg leading-relaxed text-brand-ink/75">{s.body}</p>
             </div>
           ))}
         </div>
@@ -737,7 +737,7 @@ function ReactiveToPredictive() {
           <h2 className="text-3xl font-bold leading-tight text-brand-navy md:text-4xl">
             Transform Operations from Reactive to Predictive
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-brand-ink/80">
+          <p className="mt-5 text-lg leading-relaxed text-brand-ink/80">
             Minimize unpredictability, manual reporting, and data analysis tasks by leveraging
             real-time data to enhance industrial intelligence across your plant. Improve remote
             performance monitoring, predictive maintenance, process performance forecasting,
@@ -763,7 +763,7 @@ function InnovatingTogether() {
             <h3 className="text-2xl font-bold leading-tight text-brand-navy md:text-3xl">
               Turnarounds that Reduce<br />Costs by More Than 10%
             </h3>
-            <p className="mt-6 text-base leading-relaxed text-brand-ink/80">
+            <p className="mt-6 text-lg leading-relaxed text-brand-ink/80">
               A collaboration between PwC and Visionaize, this whitepaper delves deeply into a
               modern approach to Turnarounds that enables operators to maximize productivity and
               significantly reduce downtime.
@@ -840,10 +840,10 @@ function BlogSection() {
                   loading="lazy"
                 />
               </div>
-              <h3 className="mt-5 text-base font-bold leading-snug text-brand-navy">
+              <h3 className="mt-5 text-xl font-bold leading-snug text-brand-navy">
                 {p.title}
               </h3>
-              <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-ink/75">
+              <p className="mt-3 flex-1 text-lg leading-relaxed text-brand-ink/75">
                 {p.excerpt}
               </p>
               <Link
@@ -889,7 +889,7 @@ function Certifications() {
           ))}
         </div>
 
-       <p className="mt-10 text-base font-bold text-brand-ink/90">
+       <p className="mt-10 text-lg font-bold text-brand-ink/90">
   Visionaize Technologies is certified for quality management and information
   security standards.
 </p>

@@ -148,15 +148,16 @@ const FAQS: { q: string; a: string }[] = [
 
 /* ---------- page ---------- */
 function ViziCopilotPage() {
+  const [openFaq, setOpenFaq] = useState<number | null>(0); // add this near the top of the component
   return (
     <>
       <Header />
       <main className="bg-white">
         {/* HERO */}
-        <section className="mx-auto max-w-7xl px-6 pt-14 pb-20">
+        <section className="mx-auto max-w-7xl px-6 pt-10 pb-14">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-              <GradHeading>
+             <GradHeading className="text-3xl lg:text-4xl">
                 VIZI <ViziMark /> CoPilot Gen AI Delivers Precise, Rapid Responses, Improving Operational Efficiency
               </GradHeading>
               <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-brand-ink/80">
@@ -178,7 +179,7 @@ function ViziCopilotPage() {
         </section>
 
         {/* PILLARS NAVY BAND */}
-        <section className="bg-brand-navy py-16">
+        <section className="bg-brand-navy py-12">
           <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-3">
             {PILLARS.map((p) => (
               <div key={p.label} className="flex flex-col items-center text-center">
@@ -191,14 +192,16 @@ function ViziCopilotPage() {
           </div>
         </section>
 
+
+
         {/* FLEXIBILITY SECTION */}
-        <section className="bg-[#F5F7F9] py-20">
+        <section className="bg-[#F5F7F9] py-14">
           <div className="mx-auto max-w-7xl px-6">
-            <h2 className="mx-auto max-w-5xl text-center text-[32px] md:text-[40px] font-semibold leading-tight text-brand-navy">
+            <h2 className="mx-auto max-w-6xl text-center text-[25px] md:text-[35px] leading-tight font-light text-brand-navy">
               VIZI <ViziMark /> CoPilot Offers Flexibility By Operating Either Standalone or Embedded Within Other Solutions to Drive Operational Excellence.
             </h2>
 
-            <div className="mt-14 grid gap-8 lg:grid-cols-2">
+            <div className="mt-10 grid gap-8 lg:grid-cols-2">
               {[EMBEDDED, STANDALONE].map((card) => (
                 <div
                   key={card.title}
@@ -206,10 +209,10 @@ function ViziCopilotPage() {
                 >
                   <img src={card.image} alt="" className="h-72 w-full object-cover" />
                   <div className="p-8">
-                    <h3 className="text-[24px] font-semibold leading-snug text-brand-navy">
+                    <h3 className="text-[26px] leading-snug text-brand-navy">
                       {card.title}
                     </h3>
-                    <p className="mt-5 text-[15px] leading-relaxed text-brand-ink/80">
+                    <p className="mt-5 text-[17px] leading-relaxed text-brand-ink/80">
                       {card.intro.includes("VIZI") ? (
                         <>
                           {card.intro.split("VIZI")[0]}
@@ -221,7 +224,7 @@ function ViziCopilotPage() {
                     </p>
                     <ul className="mt-5 space-y-4">
                       {card.bullets.map(([k, v]) => (
-                        <li key={k} className="flex gap-3 text-[15px] leading-relaxed text-brand-ink/80">
+                        <li key={k} className="flex gap-3 text-[16px] leading-relaxed text-brand-ink/90">
                           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-ink/60" />
                           <span>
                             <strong className="font-semibold text-brand-navy">{k}</strong>: {v}
@@ -237,7 +240,7 @@ function ViziCopilotPage() {
         </section>
 
         {/* LIME STATS BAND */}
-        <section className="bg-[#A4D233] py-7">
+        <section className="bg-[#A4D233] py-6">
           <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-12 gap-y-3 px-6 text-center text-[20px] md:text-[22px] font-medium text-brand-navy">
             {["Operational Efficiency Improvement > 20%", "Productivity Gain > 25%", "Payback Period < 6 months"].map((s) => (
               <span key={s} className="inline-flex items-center gap-3">
@@ -249,42 +252,47 @@ function ViziCopilotPage() {
         </section>
 
         {/* TRANSFORM SECTION */}
-        <section className="bg-[#F5F7F9] py-20">
-          <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
-            <div>
-              <GradHeading className="text-[36px] md:text-[44px]">
-                With VIZI <ViziMark /> CoPilot You Can Transform Your Operations Today
-              </GradHeading>
-              <ul className="mt-8 space-y-5">
-                {TRANSFORM_BULLETS.map(([k, v]) => (
-                  <li key={k} className="flex gap-3 text-[15px] leading-relaxed text-brand-ink/80">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-ink/60" />
-                    <span>
-                      <strong className="font-semibold text-brand-navy">{k}</strong>: {v}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <img
-                src={`${WP}/2024/08/Vizi-Copilot-Chat-Image.png`}
-                alt="VIZI CoPilot chat"
-                className="w-full rounded-xl shadow-xl ring-1 ring-black/5"
-              />
-            </div>
-          </div>
-        </section>
+       <section className="bg-[#F5F7F9] py-14">
+  <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
+    <div>
+     <GradHeading className="!text-[22px] md:!text-[36px]">
+  With VIZI <ViziMark /> CoPilot You Can Transform Your Operations Today
+</GradHeading>
+      <ul className="mt-8 space-y-5">
+        {TRANSFORM_BULLETS.map(([k, v]) => (
+          <li key={k} className="flex gap-3 text-[18px] leading-relaxed text-brand-ink/80">
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-ink/60" />
+            <span>
+              <strong className="font-semibold text-brand-navy">{k}</strong>: {v}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
+    <div>
+  <img
+  src={`${WP}/2024/08/Vizi-Copilot-Chat-Image.png`}
+  alt="VIZI CoPilot chat"
+  className="w-full h-[420px] md:h-[520px] object-contain rounded-xl shadow-xl ring-1 ring-black/5"
+/>
+    </div>
+  </div>
+</section>
 
         {/* FAQ */}
-        <section className="bg-white py-20">
+         <section className="bg-white py-14">
           <div className="mx-auto max-w-5xl px-6">
             <h3 className="text-[28px] md:text-[34px] font-semibold text-brand-navy">
               Learn More about VIZI <ViziMark /> CoPilot Gen AI
             </h3>
             <div className="mt-10 divide-y divide-black/10 border-y border-black/10">
               {FAQS.map((f, i) => (
-                <FaqRow key={f.q} faq={f} defaultOpen={i === 0} />
+                <FaqRow
+                  key={f.q}
+                  faq={f}
+                  isOpen={openFaq === i}
+                  onToggle={() => setOpenFaq((prev) => (prev === i ? null : i))}
+                />
               ))}
             </div>
             <div className="mt-12 flex justify-center">
@@ -300,21 +308,28 @@ function ViziCopilotPage() {
   );
 }
 
-function FaqRow({ faq, defaultOpen }: { faq: { q: string; a: string }; defaultOpen?: boolean }) {
-  const [open, setOpen] = useState(!!defaultOpen);
+function FaqRow({
+  faq,
+  isOpen,
+  onToggle,
+}: {
+  faq: { q: string; a: string };
+  isOpen: boolean;
+  onToggle: () => void;
+}) {
   return (
     <div className="py-5">
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
+        onClick={onToggle}
         className="flex w-full items-start gap-4 text-left"
       >
         <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-navy text-white">
-          {open ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
+          {isOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
         </span>
         <span className="text-[17px] font-medium text-brand-navy">{faq.q}</span>
       </button>
-      {open && (
+      {isOpen && (
         <div className="mt-3 pl-10 text-[15px] leading-relaxed text-brand-ink/80">{faq.a}</div>
       )}
     </div>

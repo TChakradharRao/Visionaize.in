@@ -4,7 +4,8 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ArrowRight, ArrowUpRight, ArrowUp, Play, ChevronDown, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { getSeedContentItem } from "@/lib/seed-content";
-import { useState, useRef, useCallback } from "react";
+import { TIERS } from "@/lib/v-plant-tiers";
+import { useState, useRef, useCallback, useEffect } from "react";
 
 export const Route = createFileRoute("/platform/v-plant")({
   head: () => ({
@@ -45,51 +46,6 @@ const heroParagraphs = heroSection?.paragraphs?.length
       "Many Digital Twins look good, but the true power lies in the ability to stay in sync with its twin in the field. V-Plant has been built to be the most connected and current Digital Twin solution for industrial assets.",
     ];
 const heroImage = heroSection?.images[0]?.src ?? "https://visionaize.com/wp-content/uploads/2022/07/image-2.jpg";
-
-const TIERS = [
-  {
-    name: "V-Plant Explorer",
-    color: "#3EA0A8",
-    intro: "For owners & operators that want to:",
-    bullets: [
-      "Start simple before scaling",
-      "Realize fast time-to-value",
-      "Leverage 3D scans and images",
-      "Use light data integration",
-    ],
-    shot: "https://visionaize.com/wp-content/uploads/2024/05/V-Plant_Explorer-1536x798.png",
-    short:
-      "Start fast and dip your toes into the Digital Twin waters with V-Plant Explorer – an entry-level foray into asset visualization that can scale as needed.",
-  },
-  {
-    name: "V-Plant Pro",
-    color: "#5BAE7E",
-    intro: "For owners & operators that want to:",
-    bullets: [
-      "Integrate mesh and 3D modeling techniques",
-      "“Operationalize” rich 3D models",
-      "Use deeper data integrations",
-      "Scale operational use cases across the plant",
-    ],
-    shot: "https://visionaize.com/wp-content/uploads/2024/05/V-Plant_Pro-1536x792.png",
-    short:
-      "For those that want to scale Digital Twin functionality and operationalize their 3D models. Offers Asset virtualization approaches for both speed and precision.",
-  },
-  {
-    name: "V-Plant 360",
-    color: "#A6E04A",
-    intro: "For owners & operators that want to:",
-    bullets: [
-      "Manage all plant data",
-      "Tap advanced capabilities including VR",
-      "Leverage Model Management of Change (MMOC)",
-      "Scale operational use cases across the plant",
-    ],
-    shot: "https://visionaize.com/wp-content/uploads/2024/05/V-Plant_360.png",
-    short:
-      "For those looking for full Digital Transformation, with all available functionality and deep data integrations. Best option for those ready to apply Digital Twin technology across the plant.",
-  },
-];
 
 const FEATURES = [
   {
@@ -166,6 +122,22 @@ const INTEGRATIONS = [
 /* ---------------- Page ---------------- */
 
 function VPlantPage() {
+  useEffect(() => {
+    const scrollToHash = () => {
+      const hash = window.location.hash.replace("#", "");
+      if (!hash) return;
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    // small delay lets images/layout settle before measuring scroll position
+    const t = setTimeout(scrollToHash, 100);
+    window.addEventListener("hashchange", scrollToHash);
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("hashchange", scrollToHash);
+    };
+  }, []);
+
   return (
     <div className="flex min-h-screen flex-col bg-white">
       <Header />
@@ -217,12 +189,12 @@ function Hero() {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-16 md:grid-cols-2 md:items-center md:py-20">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-10 md:grid-cols-2 md:items-center md:py-14">
         <div>
           <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-brand-navy md:text-5xl lg:text-5xl">
             A 3D digital twin that's<br />always in sync
           </h1>
-          <p className="mt-7 max-w-md text-base leading-relaxed text-brand-ink/80">
+          <p className="mt-7 max-w-md text-lg leading-relaxed text-brand-ink/80">
             {heroParagraphs[0]}
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-4">
@@ -332,7 +304,7 @@ function Hero() {
 }
 function Quote() {
   return (
-   <section className="relative overflow-hidden bg-[#0F2237] py-24 text-white">
+   <section className="relative overflow-hidden bg-[#0F2237] py-14 text-white">
   <div
     aria-hidden
     className="pointer-events-none absolute right-0 top-0 h-full w-full md:w-1/2"
@@ -372,7 +344,7 @@ function Quote() {
 
 function JourneyCards() {
   return (
-<section className="relative overflow-hidden bg-[#DAEEF8] py-40">
+<section className="relative overflow-hidden bg-[#DAEEF8] py-16">
   <div
     aria-hidden
     className="pointer-events-none absolute inset-0"
@@ -385,35 +357,33 @@ function JourneyCards() {
   />
 
   <div className="relative mx-auto max-w-7xl px-6">
-    <h2 className="text-center text-3xl font-semibold text-brand-navy md:text-4xl">
+    <h2 className="text-center text-lg font-semibold text-brand-navy md:text-4xl">
       Digital Twins for Every Stage of The Journey
     </h2>
 
-    <div className="relative mt-14 grid gap-6 md:grid-cols-3">
-      {TIERS.map((t, idx) => (
+    <div className="relative mt-10 grid gap-6 md:grid-cols-3">
+      {TIERS.map((t) => (
         <article
           key={t.name}
           className="relative flex flex-col overflow-hidden bg-white px-7 pb-10 pt-10 shadow-md"
-          style={{ marginTop: `${idx * 24}px` }}
         >
           <div className="mb-6 overflow-hidden rounded bg-[#DAEEF8]">
             <img src={t.shot} alt={t.name} className="block aspect-[16/9] w-full object-cover" />
           </div>
 
-          <h3 className="text-xl font-bold" style={{ color: t.color }}>
+          <h3 className="text-2xl font-bold" style={{ color: t.color }}>
             {t.name}
           </h3>
-          <p className="mt-3 text-sm leading-relaxed text-brand-ink/80">{t.short}</p>
+          <p className="mt-3 text-lg leading-relaxed text-brand-ink/80">{t.short}</p>
 
           <div className="mt-auto pt-8">
-            <button
-              type="button"
-              onClick={() =>
-                document
-                  .getElementById(`tier-detail-${idx}`)
-                  ?.scrollIntoView({ behavior: "smooth", block: "start" })
-              }
-              className="inline-flex items-center gap-3 text-sm font-semibold"
+            <a
+              href={`#v-plant-${t.slug}`}
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById(`v-plant-${t.slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
+              className="inline-flex items-center gap-3 text-medium font-semibold"
               style={{ color: t.color }}
             >
               <span
@@ -423,7 +393,7 @@ function JourneyCards() {
                 <ChevronDown className="h-4 w-4" style={{ color: t.color }} />
               </span>
               Explore Benefits
-            </button>
+            </a>
           </div>
 
           {/* Solid bottom color band, full width of the card */}
@@ -442,7 +412,7 @@ function JourneyCards() {
 
 function BuiltToScale() {
   return (
- <section className="bg-white py-20">
+ <section className="bg-white py-14">
   <div className="mx-auto max-w-7xl px-6">
     <style>{`
       @keyframes floatUpDown {
@@ -454,16 +424,16 @@ function BuiltToScale() {
       }
     `}</style>
 
-    <h2 className="text-center text-3xl font-semibold text-brand-navy md:text-4xl">
+    <h2 className="text-center text-4xl font-semibold text-brand-navy md:text-4xl">
       Digital Twin Technology Built to Scale
     </h2>
-    <div className="mt-16 space-y-24">
+    <div className="mt-12 space-y-14">
       {TIERS.map((t, i) => {
         const reverse = i % 2 === 1;
         return (
           <div
             key={t.name}
-            id={`tier-detail-${i}`}
+            id={`v-plant-${t.slug}`}
             className={`grid scroll-mt-24 items-center gap-12 md:grid-cols-2 ${
               reverse ? "md:[&>*:first-child]:order-2" : ""
             }`}
@@ -480,16 +450,16 @@ function BuiltToScale() {
             </div>
             <div className={reverse ? "md:pr-8" : "md:pl-8"}>
              <div className="flex items-center gap-3">
-  <h3 className="text-3xl font-bold text-brand-navy">{t.name}</h3>
+  <h3 className="text-4xl font-bold text-brand-navy">{t.name}</h3>
   <ArrowUp
-    className="floaty h-7 w-7"
+    className="floaty h-9 w-9"
     style={{ color: t.color, animationDelay: `${i * 0.2}s` }}
   />
 </div>
-              <p className="mt-5 text-base text-brand-ink/85">{t.intro}</p>
+              <p className="mt-5 text-lg text-brand-ink/85">{t.intro}</p>
               <ul className="mt-5 space-y-3">
                 {t.bullets.map((b) => (
-                  <li key={b} className="flex gap-3 text-base text-brand-ink/85">
+                  <li key={b} className="flex gap-3 text-lg text-brand-ink/85">
                     <span
                       aria-hidden
                       className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full"
@@ -511,17 +481,17 @@ function BuiltToScale() {
 
 function Features() {
   return (
-    <section className="bg-white pb-16 pt-4">
+    <section className="bg-white pb-14 pt-2">
       <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center text-3xl font-semibold text-brand-navy md:text-4xl">
+        <h2 className="text-center text-4xl font-semibold text-brand-navy md:text-4xl">
           Features
         </h2>
-        <div className="mt-14 grid gap-10 text-center md:grid-cols-4">
+        <div className="mt-10 grid gap-10 text-center md:grid-cols-4">
           {FEATURES.map((f) => (
             <div key={f.title} className="flex flex-col items-center">
               <img src={f.icon} alt="" className="h-16 w-auto object-contain" loading="lazy" />
-              <h3 className="mt-6 text-xl font-bold leading-snug text-brand-navy">{f.title}</h3>
-              <p className="mt-4 text-m leading-relaxed text-brand-ink/75">{f.body}</p>
+              <h3 className="mt-6 text-2xl font-bold leading-snug text-brand-navy">{f.title}</h3>
+              <p className="mt-4 text-lg leading-relaxed text-brand-ink/75">{f.body}</p>
             </div>
           ))}
         </div>
@@ -532,7 +502,7 @@ function Features() {
 
 function BusinessCaseBand() {
   return (
-  <section className="bg-[#A6E04A] py-10 md:py-15">
+  <section className="bg-[#A6E04A] py-8 md:py-10">
   <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 px-6 md:flex-row md:gap-14">
     <p className="text-2xl font-semi text-brand-navy md:text-2xl">
       Building a case for a 3D Digital Twin
@@ -551,7 +521,7 @@ function BusinessCaseBand() {
 function Testimonial() {
   return (
 <section
-  className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-32"
+  className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-16"
   style={{
     backgroundImage: "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
     backgroundPosition: "right bottom",
@@ -572,7 +542,7 @@ function Testimonial() {
 
 function VideoBenefits() {
   return (
-   <section className="bg-white py-20">
+   <section className="bg-white py-14">
   <div className="mx-auto grid max-w-7xl items-start gap-12 px-6 md:grid-cols-2">
     {/* Laptop mockup with video */}
     <div className="relative mx-auto w-full max-w-xl">
@@ -596,12 +566,12 @@ function VideoBenefits() {
        {BENEFITS.map((b) => (
   <div key={b.title}>
     {typeof b.icon === "string" ? (
-      <img src={b.icon} alt="" className="h-7 w-7" aria-hidden="true" />
+      <img src={b.icon} alt="" className="h-10 w-10" aria-hidden="true" />
     ) : (
-      <b.icon className="h-7 w-7 text-emerald-500" strokeWidth={1.5} />
+      <b.icon className="h-10 w-10 text-emerald-500" strokeWidth={1.5} />
     )}
     <h3 className="mt-3 text-lg font-bold text-brand-navy">{b.title}</h3>
-    <p className="mt-2 text-sm leading-relaxed text-brand-ink/80">{b.body}</p>
+    <p className="mt-2 text-lg leading-relaxed text-brand-ink/80">{b.body}</p>
   </div>
 ))}
       </div>
@@ -613,14 +583,14 @@ function VideoBenefits() {
 
 function GoodCompany() {
   return (
- <section className="bg-white pb-25 pt-8">
+ <section className="bg-white pb-14 pt-6">
   <div className="mx-auto max-w-6xl px-8">
     <h2 className="text-center text-4xl font-semibold text-brand-navy md:text-4xl">
       We are in good company
     </h2>
-    <div className="mt-18 grid grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-3 md:grid-cols-6">
+    <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-3 md:grid-cols-6">
       {PARTNERS.map((p) => (
-        <div key={p.name} className="flex items-center justify-center">
+        <div key={p.src} className="flex items-center justify-center">
           <img
             src={p.src}
             alt={p.name}
@@ -638,7 +608,7 @@ function GoodCompany() {
 function CTA() {
   return (
 <section
-  className="relative overflow-hidden bg-[#0F2237] py-26 bg-no-repeat"
+  className="relative overflow-hidden bg-[#0F2237] py-16 bg-no-repeat"
   style={{
     backgroundImage:
       "url('https://visionaize.in/wp-content/uploads/2022/05/footer-bg-2.png')",
@@ -660,7 +630,7 @@ function CTA() {
     </div>
 
     {/* Right: circular image trio */}
-    <div className="flex items-center justify-center gap-12 pt-16 md:justify-center md:pt-20">
+    <div className="flex items-center justify-center gap-12 pt-8 md:justify-center md:pt-10">
       {[
         {
           label: "Mobile",
@@ -695,7 +665,7 @@ function CTA() {
 function Data() {
   return (
 <section
-  className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-32"
+  className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-16"
   style={{
     backgroundImage: "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
     backgroundPosition: "right bottom",
@@ -715,12 +685,12 @@ function Data() {
 
 function Integrations() {
   return (
-    <section className="bg-white pb-30 pt-20">
+    <section className="bg-white pb-16 pt-10">
       <div className="mx-auto max-w-6xl px-8">
         <h2 className="text-center text-4xl font-semibold text-brand-navy md:text-4xl">
           We integrate with<br />best-in-class technologies
         </h2>
-        <div className="mt-18 grid grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-3 md:grid-cols-5">
+        <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-3 md:grid-cols-5">
           {INTEGRATIONS.map((p) => (
             <div key={p.name} className="flex items-center justify-center">
               <img

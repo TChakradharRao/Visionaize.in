@@ -355,7 +355,7 @@ function FAQItem({
         />
       </button>
       {open && (
-        <div className="pl-10 pr-4 pb-2 text-[15px] leading-relaxed text-brand-ink/80">
+        <div className="pl-10 pr-4 pb-2 text-[18px] leading-relaxed text-brand-ink/80">
           {item.a}
         </div>
       )}

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TheindustrialmetaverseRouteImport } from './routes/theindustrialmetaverse'
+import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as RequestADemoRouteImport } from './routes/request-a-demo'
 import { Route as ReInventingTurnaroundsInTheMetaverseRouteImport } from './routes/re-inventing-turnarounds-in-the-metaverse'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
@@ -43,6 +44,11 @@ import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 const TheindustrialmetaverseRoute = TheindustrialmetaverseRouteImport.update({
   id: '/theindustrialmetaverse',
   path: '/theindustrialmetaverse',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsRoute = SolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RequestADemoRoute = RequestADemoRouteImport.update({
@@ -104,33 +110,33 @@ const BlogIndexRoute = BlogIndexRouteImport.update({
 } as any)
 const SolutionsVirtualRealityAndAugmentedRealityRoute =
   SolutionsVirtualRealityAndAugmentedRealityRouteImport.update({
-    id: '/solutions/virtual-reality-and-augmented-reality',
-    path: '/solutions/virtual-reality-and-augmented-reality',
-    getParentRoute: () => rootRouteImport,
+    id: '/virtual-reality-and-augmented-reality',
+    path: '/virtual-reality-and-augmented-reality',
+    getParentRoute: () => SolutionsRoute,
   } as any)
 const SolutionsRemotePerformanceMonitoringRoute =
   SolutionsRemotePerformanceMonitoringRouteImport.update({
-    id: '/solutions/remote-performance-monitoring',
-    path: '/solutions/remote-performance-monitoring',
-    getParentRoute: () => rootRouteImport,
+    id: '/remote-performance-monitoring',
+    path: '/remote-performance-monitoring',
+    getParentRoute: () => SolutionsRoute,
   } as any)
 const SolutionsRealTimeOptimizationRoute =
   SolutionsRealTimeOptimizationRouteImport.update({
-    id: '/solutions/real-time-optimization',
-    path: '/solutions/real-time-optimization',
-    getParentRoute: () => rootRouteImport,
+    id: '/real-time-optimization',
+    path: '/real-time-optimization',
+    getParentRoute: () => SolutionsRoute,
   } as any)
 const SolutionsProcessPerformancePredictionRoute =
   SolutionsProcessPerformancePredictionRouteImport.update({
-    id: '/solutions/process-performance-prediction',
-    path: '/solutions/process-performance-prediction',
-    getParentRoute: () => rootRouteImport,
+    id: '/process-performance-prediction',
+    path: '/process-performance-prediction',
+    getParentRoute: () => SolutionsRoute,
   } as any)
 const SolutionsDecarbonizationRoute =
   SolutionsDecarbonizationRouteImport.update({
-    id: '/solutions/decarbonization',
-    path: '/solutions/decarbonization',
-    getParentRoute: () => rootRouteImport,
+    id: '/decarbonization',
+    path: '/decarbonization',
+    getParentRoute: () => SolutionsRoute,
   } as any)
 const ServicesSlugRoute = ServicesSlugRouteImport.update({
   id: '/services/$slug',
@@ -216,6 +222,7 @@ export interface FileRoutesByFullPath {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
   '/request-a-demo': typeof RequestADemoRoute
+  '/solutions': typeof SolutionsRouteWithChildren
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
@@ -248,6 +255,7 @@ export interface FileRoutesByTo {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
   '/request-a-demo': typeof RequestADemoRoute
+  '/solutions': typeof SolutionsRouteWithChildren
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
@@ -281,6 +289,7 @@ export interface FileRoutesById {
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
   '/request-a-demo': typeof RequestADemoRoute
+  '/solutions': typeof SolutionsRouteWithChildren
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
@@ -315,6 +324,7 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
     | '/request-a-demo'
+    | '/solutions'
     | '/theindustrialmetaverse'
     | '/blog/$slug'
     | '/industries/digital-twin-for-cement'
@@ -347,6 +357,7 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
     | '/request-a-demo'
+    | '/solutions'
     | '/theindustrialmetaverse'
     | '/blog/$slug'
     | '/industries/digital-twin-for-cement'
@@ -379,6 +390,7 @@ export interface FileRouteTypes {
     | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
     | '/request-a-demo'
+    | '/solutions'
     | '/theindustrialmetaverse'
     | '/blog/$slug'
     | '/industries/digital-twin-for-cement'
@@ -412,6 +424,7 @@ export interface RootRouteChildren {
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ReInventingTurnaroundsInTheMetaverseRoute: typeof ReInventingTurnaroundsInTheMetaverseRoute
   RequestADemoRoute: typeof RequestADemoRoute
+  SolutionsRoute: typeof SolutionsRouteWithChildren
   TheindustrialmetaverseRoute: typeof TheindustrialmetaverseRoute
   BlogSlugRoute: typeof BlogSlugRoute
   IndustriesDigitalTwinForCementRoute: typeof IndustriesDigitalTwinForCementRoute
@@ -426,11 +439,6 @@ export interface RootRouteChildren {
   PlatformViziCopilotRoute: typeof PlatformViziCopilotRoute
   PlatformViziCopilotGenAiRoute: typeof PlatformViziCopilotGenAiRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
-  SolutionsDecarbonizationRoute: typeof SolutionsDecarbonizationRoute
-  SolutionsProcessPerformancePredictionRoute: typeof SolutionsProcessPerformancePredictionRoute
-  SolutionsRealTimeOptimizationRoute: typeof SolutionsRealTimeOptimizationRoute
-  SolutionsRemotePerformanceMonitoringRoute: typeof SolutionsRemotePerformanceMonitoringRoute
-  SolutionsVirtualRealityAndAugmentedRealityRoute: typeof SolutionsVirtualRealityAndAugmentedRealityRoute
   BlogIndexRoute: typeof BlogIndexRoute
 }
 
@@ -441,6 +449,13 @@ declare module '@tanstack/react-router' {
       path: '/theindustrialmetaverse'
       fullPath: '/theindustrialmetaverse'
       preLoaderRoute: typeof TheindustrialmetaverseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions': {
+      id: '/solutions'
+      path: '/solutions'
+      fullPath: '/solutions'
+      preLoaderRoute: typeof SolutionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/request-a-demo': {
@@ -522,38 +537,38 @@ declare module '@tanstack/react-router' {
     }
     '/solutions/virtual-reality-and-augmented-reality': {
       id: '/solutions/virtual-reality-and-augmented-reality'
-      path: '/solutions/virtual-reality-and-augmented-reality'
+      path: '/virtual-reality-and-augmented-reality'
       fullPath: '/solutions/virtual-reality-and-augmented-reality'
       preLoaderRoute: typeof SolutionsVirtualRealityAndAugmentedRealityRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof SolutionsRoute
     }
     '/solutions/remote-performance-monitoring': {
       id: '/solutions/remote-performance-monitoring'
-      path: '/solutions/remote-performance-monitoring'
+      path: '/remote-performance-monitoring'
       fullPath: '/solutions/remote-performance-monitoring'
       preLoaderRoute: typeof SolutionsRemotePerformanceMonitoringRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof SolutionsRoute
     }
     '/solutions/real-time-optimization': {
       id: '/solutions/real-time-optimization'
-      path: '/solutions/real-time-optimization'
+      path: '/real-time-optimization'
       fullPath: '/solutions/real-time-optimization'
       preLoaderRoute: typeof SolutionsRealTimeOptimizationRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof SolutionsRoute
     }
     '/solutions/process-performance-prediction': {
       id: '/solutions/process-performance-prediction'
-      path: '/solutions/process-performance-prediction'
+      path: '/process-performance-prediction'
       fullPath: '/solutions/process-performance-prediction'
       preLoaderRoute: typeof SolutionsProcessPerformancePredictionRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof SolutionsRoute
     }
     '/solutions/decarbonization': {
       id: '/solutions/decarbonization'
-      path: '/solutions/decarbonization'
+      path: '/decarbonization'
       fullPath: '/solutions/decarbonization'
       preLoaderRoute: typeof SolutionsDecarbonizationRouteImport
-      parentRoute: typeof rootRouteImport
+      parentRoute: typeof SolutionsRoute
     }
     '/services/$slug': {
       id: '/services/$slug'
@@ -649,6 +664,29 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface SolutionsRouteChildren {
+  SolutionsDecarbonizationRoute: typeof SolutionsDecarbonizationRoute
+  SolutionsProcessPerformancePredictionRoute: typeof SolutionsProcessPerformancePredictionRoute
+  SolutionsRealTimeOptimizationRoute: typeof SolutionsRealTimeOptimizationRoute
+  SolutionsRemotePerformanceMonitoringRoute: typeof SolutionsRemotePerformanceMonitoringRoute
+  SolutionsVirtualRealityAndAugmentedRealityRoute: typeof SolutionsVirtualRealityAndAugmentedRealityRoute
+}
+
+const SolutionsRouteChildren: SolutionsRouteChildren = {
+  SolutionsDecarbonizationRoute: SolutionsDecarbonizationRoute,
+  SolutionsProcessPerformancePredictionRoute:
+    SolutionsProcessPerformancePredictionRoute,
+  SolutionsRealTimeOptimizationRoute: SolutionsRealTimeOptimizationRoute,
+  SolutionsRemotePerformanceMonitoringRoute:
+    SolutionsRemotePerformanceMonitoringRoute,
+  SolutionsVirtualRealityAndAugmentedRealityRoute:
+    SolutionsVirtualRealityAndAugmentedRealityRoute,
+}
+
+const SolutionsRouteWithChildren = SolutionsRoute._addFileChildren(
+  SolutionsRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SlugRoute: SlugRoute,
@@ -661,6 +699,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReInventingTurnaroundsInTheMetaverseRoute:
     ReInventingTurnaroundsInTheMetaverseRoute,
   RequestADemoRoute: RequestADemoRoute,
+  SolutionsRoute: SolutionsRouteWithChildren,
   TheindustrialmetaverseRoute: TheindustrialmetaverseRoute,
   BlogSlugRoute: BlogSlugRoute,
   IndustriesDigitalTwinForCementRoute: IndustriesDigitalTwinForCementRoute,
@@ -679,14 +718,6 @@ const rootRouteChildren: RootRouteChildren = {
   PlatformViziCopilotRoute: PlatformViziCopilotRoute,
   PlatformViziCopilotGenAiRoute: PlatformViziCopilotGenAiRoute,
   ServicesSlugRoute: ServicesSlugRoute,
-  SolutionsDecarbonizationRoute: SolutionsDecarbonizationRoute,
-  SolutionsProcessPerformancePredictionRoute:
-    SolutionsProcessPerformancePredictionRoute,
-  SolutionsRealTimeOptimizationRoute: SolutionsRealTimeOptimizationRoute,
-  SolutionsRemotePerformanceMonitoringRoute:
-    SolutionsRemotePerformanceMonitoringRoute,
-  SolutionsVirtualRealityAndAugmentedRealityRoute:
-    SolutionsVirtualRealityAndAugmentedRealityRoute,
   BlogIndexRoute: BlogIndexRoute,
 }
 export const routeTree = rootRouteImport

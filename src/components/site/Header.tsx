@@ -48,20 +48,20 @@ const FALLBACK_NAV: NavNodeWithColumns[] = [
     href: "/3d-digital-twin-v-suite",
     target: "",
     children: [
-      {
-        label: "V-Plant",
-        href: "/platform/v-plant",
-        target: "",
-        children: [
-          { label: "V-Plant-Explorer", href: "/platform/v-plant/explorer", target: "", children: [] },
-          { label: "V-Plant Pro", href: "/platform/v-plant/pro", target: "", children: [] },
-          { label: "V-Plant 360", href: "/platform/v-plant/360", target: "", children: [] },
-        ],
-      },
+     {
+  label: "V-Plant",
+  href: "/platform/v-plant",
+  target: "",
+  children: [
+    { label: "V-Plant-Explorer", href: "/platform/v-plant/#v-plant-explorer", target: "", children: [] },
+    { label: "V-Plant Pro", href: "/platform/v-plant/#v-plant-pro", target: "", children: [] },
+    { label: "V-Plant 360", href: "/platform/v-plant/#v-plant-360", target: "", children: [] },
+  ],
+},
       { label: "V-Smart DocX", href: "/platform/v-smart-docx", target: "", children: [] },
       { label: "VIZI CoPilot", href: "/platform/vizi-copilot-gen-ai", target: "", children: [] },
       { label: "Signal Miner", href: "/platform/signal-miner", target: "", children: [] },
-      { label: "Microsoft Fabric Expertise", href: "/platform/microsoft-fabric-expertise", target: "", children: [] },
+    
     ],
   },
   {
