@@ -11,16 +11,19 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as TheindustrialmetaverseRouteImport } from './routes/theindustrialmetaverse'
 import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as SocialDigitalRouteImport } from './routes/social-digital'
 import { Route as RequestADemoRouteImport } from './routes/request-a-demo'
 import { Route as ReInventingTurnaroundsInTheMetaverseRouteImport } from './routes/re-inventing-turnarounds-in-the-metaverse'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as DigitalTwinFaqRouteImport } from './routes/digital-twin-faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompanyRouteImport } from './routes/company'
+import { Route as BuildABusinessCaseRouteImport } from './routes/build-a-business-case'
 import { Route as AiInPharmaceuticalManufacturingRouteImport } from './routes/ai-in-pharmaceutical-manufacturing'
 import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as SlugRouteImport } from './routes/$slug'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as SolutionsIndexRouteImport } from './routes/solutions/index'
 import { Route as BlogIndexRouteImport } from './routes/blog.index'
 import { Route as SolutionsVirtualRealityAndAugmentedRealityRouteImport } from './routes/solutions.virtual-reality-and-augmented-reality'
 import { Route as SolutionsRemotePerformanceMonitoringRouteImport } from './routes/solutions.remote-performance-monitoring'
@@ -49,6 +52,11 @@ const TheindustrialmetaverseRoute = TheindustrialmetaverseRouteImport.update({
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SocialDigitalRoute = SocialDigitalRouteImport.update({
+  id: '/social-digital',
+  path: '/social-digital',
   getParentRoute: () => rootRouteImport,
 } as any)
 const RequestADemoRoute = RequestADemoRouteImport.update({
@@ -82,6 +90,11 @@ const CompanyRoute = CompanyRouteImport.update({
   path: '/company',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BuildABusinessCaseRoute = BuildABusinessCaseRouteImport.update({
+  id: '/build-a-business-case',
+  path: '/build-a-business-case',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AiInPharmaceuticalManufacturingRoute =
   AiInPharmaceuticalManufacturingRouteImport.update({
     id: '/ai-in-pharmaceutical-manufacturing',
@@ -102,6 +115,11 @@ const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsIndexRoute = SolutionsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => SolutionsRoute,
 } as any)
 const BlogIndexRoute = BlogIndexRouteImport.update({
   id: '/blog/',
@@ -216,12 +234,14 @@ export interface FileRoutesByFullPath {
   '/$slug': typeof SlugRoute
   '/about-us': typeof AboutUsRoute
   '/ai-in-pharmaceutical-manufacturing': typeof AiInPharmaceuticalManufacturingRoute
+  '/build-a-business-case': typeof BuildABusinessCaseRoute
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
   '/request-a-demo': typeof RequestADemoRoute
+  '/social-digital': typeof SocialDigitalRoute
   '/solutions': typeof SolutionsRouteWithChildren
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -243,19 +263,21 @@ export interface FileRoutesByFullPath {
   '/solutions/remote-performance-monitoring': typeof SolutionsRemotePerformanceMonitoringRoute
   '/solutions/virtual-reality-and-augmented-reality': typeof SolutionsVirtualRealityAndAugmentedRealityRoute
   '/blog/': typeof BlogIndexRoute
+  '/solutions/': typeof SolutionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
   '/about-us': typeof AboutUsRoute
   '/ai-in-pharmaceutical-manufacturing': typeof AiInPharmaceuticalManufacturingRoute
+  '/build-a-business-case': typeof BuildABusinessCaseRoute
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
   '/request-a-demo': typeof RequestADemoRoute
-  '/solutions': typeof SolutionsRouteWithChildren
+  '/social-digital': typeof SocialDigitalRoute
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
@@ -276,6 +298,7 @@ export interface FileRoutesByTo {
   '/solutions/remote-performance-monitoring': typeof SolutionsRemotePerformanceMonitoringRoute
   '/solutions/virtual-reality-and-augmented-reality': typeof SolutionsVirtualRealityAndAugmentedRealityRoute
   '/blog': typeof BlogIndexRoute
+  '/solutions': typeof SolutionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -283,12 +306,14 @@ export interface FileRoutesById {
   '/$slug': typeof SlugRoute
   '/about-us': typeof AboutUsRoute
   '/ai-in-pharmaceutical-manufacturing': typeof AiInPharmaceuticalManufacturingRoute
+  '/build-a-business-case': typeof BuildABusinessCaseRoute
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
   '/request-a-demo': typeof RequestADemoRoute
+  '/social-digital': typeof SocialDigitalRoute
   '/solutions': typeof SolutionsRouteWithChildren
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
   '/blog/$slug': typeof BlogSlugRoute
@@ -310,6 +335,7 @@ export interface FileRoutesById {
   '/solutions/remote-performance-monitoring': typeof SolutionsRemotePerformanceMonitoringRoute
   '/solutions/virtual-reality-and-augmented-reality': typeof SolutionsVirtualRealityAndAugmentedRealityRoute
   '/blog/': typeof BlogIndexRoute
+  '/solutions/': typeof SolutionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -318,12 +344,14 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/about-us'
     | '/ai-in-pharmaceutical-manufacturing'
+    | '/build-a-business-case'
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
     | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
     | '/request-a-demo'
+    | '/social-digital'
     | '/solutions'
     | '/theindustrialmetaverse'
     | '/blog/$slug'
@@ -345,19 +373,21 @@ export interface FileRouteTypes {
     | '/solutions/remote-performance-monitoring'
     | '/solutions/virtual-reality-and-augmented-reality'
     | '/blog/'
+    | '/solutions/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/$slug'
     | '/about-us'
     | '/ai-in-pharmaceutical-manufacturing'
+    | '/build-a-business-case'
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
     | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
     | '/request-a-demo'
-    | '/solutions'
+    | '/social-digital'
     | '/theindustrialmetaverse'
     | '/blog/$slug'
     | '/industries/digital-twin-for-cement'
@@ -378,18 +408,21 @@ export interface FileRouteTypes {
     | '/solutions/remote-performance-monitoring'
     | '/solutions/virtual-reality-and-augmented-reality'
     | '/blog'
+    | '/solutions'
   id:
     | '__root__'
     | '/'
     | '/$slug'
     | '/about-us'
     | '/ai-in-pharmaceutical-manufacturing'
+    | '/build-a-business-case'
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
     | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
     | '/request-a-demo'
+    | '/social-digital'
     | '/solutions'
     | '/theindustrialmetaverse'
     | '/blog/$slug'
@@ -411,6 +444,7 @@ export interface FileRouteTypes {
     | '/solutions/remote-performance-monitoring'
     | '/solutions/virtual-reality-and-augmented-reality'
     | '/blog/'
+    | '/solutions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -418,12 +452,14 @@ export interface RootRouteChildren {
   SlugRoute: typeof SlugRoute
   AboutUsRoute: typeof AboutUsRoute
   AiInPharmaceuticalManufacturingRoute: typeof AiInPharmaceuticalManufacturingRoute
+  BuildABusinessCaseRoute: typeof BuildABusinessCaseRoute
   CompanyRoute: typeof CompanyRoute
   ContactRoute: typeof ContactRoute
   DigitalTwinFaqRoute: typeof DigitalTwinFaqRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ReInventingTurnaroundsInTheMetaverseRoute: typeof ReInventingTurnaroundsInTheMetaverseRoute
   RequestADemoRoute: typeof RequestADemoRoute
+  SocialDigitalRoute: typeof SocialDigitalRoute
   SolutionsRoute: typeof SolutionsRouteWithChildren
   TheindustrialmetaverseRoute: typeof TheindustrialmetaverseRoute
   BlogSlugRoute: typeof BlogSlugRoute
@@ -456,6 +492,13 @@ declare module '@tanstack/react-router' {
       path: '/solutions'
       fullPath: '/solutions'
       preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/social-digital': {
+      id: '/social-digital'
+      path: '/social-digital'
+      fullPath: '/social-digital'
+      preLoaderRoute: typeof SocialDigitalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/request-a-demo': {
@@ -500,6 +543,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CompanyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/build-a-business-case': {
+      id: '/build-a-business-case'
+      path: '/build-a-business-case'
+      fullPath: '/build-a-business-case'
+      preLoaderRoute: typeof BuildABusinessCaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ai-in-pharmaceutical-manufacturing': {
       id: '/ai-in-pharmaceutical-manufacturing'
       path: '/ai-in-pharmaceutical-manufacturing'
@@ -527,6 +577,13 @@ declare module '@tanstack/react-router' {
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/solutions/': {
+      id: '/solutions/'
+      path: '/'
+      fullPath: '/solutions/'
+      preLoaderRoute: typeof SolutionsIndexRouteImport
+      parentRoute: typeof SolutionsRoute
     }
     '/blog/': {
       id: '/blog/'
@@ -670,6 +727,7 @@ interface SolutionsRouteChildren {
   SolutionsRealTimeOptimizationRoute: typeof SolutionsRealTimeOptimizationRoute
   SolutionsRemotePerformanceMonitoringRoute: typeof SolutionsRemotePerformanceMonitoringRoute
   SolutionsVirtualRealityAndAugmentedRealityRoute: typeof SolutionsVirtualRealityAndAugmentedRealityRoute
+  SolutionsIndexRoute: typeof SolutionsIndexRoute
 }
 
 const SolutionsRouteChildren: SolutionsRouteChildren = {
@@ -681,6 +739,7 @@ const SolutionsRouteChildren: SolutionsRouteChildren = {
     SolutionsRemotePerformanceMonitoringRoute,
   SolutionsVirtualRealityAndAugmentedRealityRoute:
     SolutionsVirtualRealityAndAugmentedRealityRoute,
+  SolutionsIndexRoute: SolutionsIndexRoute,
 }
 
 const SolutionsRouteWithChildren = SolutionsRoute._addFileChildren(
@@ -692,6 +751,7 @@ const rootRouteChildren: RootRouteChildren = {
   SlugRoute: SlugRoute,
   AboutUsRoute: AboutUsRoute,
   AiInPharmaceuticalManufacturingRoute: AiInPharmaceuticalManufacturingRoute,
+  BuildABusinessCaseRoute: BuildABusinessCaseRoute,
   CompanyRoute: CompanyRoute,
   ContactRoute: ContactRoute,
   DigitalTwinFaqRoute: DigitalTwinFaqRoute,
@@ -699,6 +759,7 @@ const rootRouteChildren: RootRouteChildren = {
   ReInventingTurnaroundsInTheMetaverseRoute:
     ReInventingTurnaroundsInTheMetaverseRoute,
   RequestADemoRoute: RequestADemoRoute,
+  SocialDigitalRoute: SocialDigitalRoute,
   SolutionsRoute: SolutionsRouteWithChildren,
   TheindustrialmetaverseRoute: TheindustrialmetaverseRoute,
   BlogSlugRoute: BlogSlugRoute,

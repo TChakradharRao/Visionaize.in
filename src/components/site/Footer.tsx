@@ -5,12 +5,12 @@ const COLS = [
   {
     title: "SOFTWARE",
     links: [
-      ["V-Plant", "/software/v-plant"],
-      ["Signal Miner", "/software/signal-miner"],
+      ["V-Plant", "platform/v-plant"],
+      ["Signal Miner", "/platform/signal-miner"],
       ["Intelligent Demand Forecast", "/software/intelligent-demand-forecast"],
       ["Utilities Control Center", "/software/utilities-control-center"],
       ["Solutions", "/solutions"],
-      ["Social-Digital", "/software/social-digital"],
+      ["Social-Digital", "/social-digital"],
     ],
   },
   {

@@ -48,20 +48,19 @@ const FALLBACK_NAV: NavNodeWithColumns[] = [
     href: "/3d-digital-twin-v-suite",
     target: "",
     children: [
-     {
-  label: "V-Plant",
-  href: "/platform/v-plant",
-  target: "",
-  children: [
-    { label: "V-Plant-Explorer", href: "/platform/v-plant/#v-plant-explorer", target: "", children: [] },
-    { label: "V-Plant Pro", href: "/platform/v-plant/#v-plant-pro", target: "", children: [] },
-    { label: "V-Plant 360", href: "/platform/v-plant/#v-plant-360", target: "", children: [] },
-  ],
-},
+      {
+        label: "V-Plant",
+        href: "/platform/v-plant",
+        target: "",
+        children: [
+          { label: "V-Plant-Explorer", href: "/platform/v-plant/#v-plant-explorer", target: "", children: [] },
+          { label: "V-Plant Pro", href: "/platform/v-plant/#v-plant-pro", target: "", children: [] },
+          { label: "V-Plant 360", href: "/platform/v-plant/#v-plant-360", target: "", children: [] },
+        ],
+      },
       { label: "V-Smart DocX", href: "/platform/v-smart-docx", target: "", children: [] },
       { label: "VIZI CoPilot", href: "/platform/vizi-copilot-gen-ai", target: "", children: [] },
       { label: "Signal Miner", href: "/platform/signal-miner", target: "", children: [] },
-    
     ],
   },
   {
@@ -104,7 +103,10 @@ const ROUTE_REMAP: Record<string, string> = {
   "/digital-twin-for-manufacturing": "/industries/digital-twin-for-manufacturing",
   "/digital-twin-for-power-and-energy": "/industries/digital-twin-for-power-and-energy",
   "/digital-twin-for-cement": "/industries/digital-twin-for-cement",
+  "/renewable-energy": "/industries/renewable-energy",
+  "/sugar-industry": "/industries/sugar-industry",
   "/remote-performance-monitoring": "/solutions/remote-performance-monitoring",
+  "/predictive-maintenance": "/solutions/predictive-maintenance",
   "/process-performance-prediction": "/solutions/process-performance-prediction",
   "/real-time-optimization": "/solutions/real-time-optimization",
   "/decarbonization": "/solutions/decarbonization",
@@ -193,6 +195,13 @@ function attachSolutionsColumns(nodes: NavNodeWithColumns[]): NavNodeWithColumns
     if (node.label === "Solutions" || node.href === "/solutions") {
       return {
         ...node,
+        // Also guarantee the flat children list (used on mobile) always
+        // includes the full By Industry + By Application set, even if the
+        // CMS menu only returned a subset.
+        children:
+          node.children.length > 0
+            ? node.children
+            : [...SOLUTIONS_BY_INDUSTRY, ...SOLUTIONS_BY_APPLICATION],
         columns: node.columns ?? [
           { heading: "By Industry", items: SOLUTIONS_BY_INDUSTRY },
           { heading: "By Application", items: SOLUTIONS_BY_APPLICATION },

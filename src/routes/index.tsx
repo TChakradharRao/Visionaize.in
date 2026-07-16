@@ -30,7 +30,7 @@ const HERO_LINES = [
   "INDUSTRIAL SAFETY",
   "OPERATIONAL PRODUCTIVITY",
   "INDUSTRIAL SUSTAINABILITY",
- " REMOTE MONITORING "
+  " REMOTE MONITORING ",
 ];
 
 const PRODUCT_PILLS = [
@@ -191,8 +191,7 @@ const IMPROVE_STEPS = [
   {
     title: "Discover Use Cases",
     body: "Allow our experts to understand your unique use cases and provide recommendations for quick wins.",
-   
-      icon: "https://visionaize.in/wp-content/uploads/2024/10/04e53ef6-cf2b-4556-b8b5-dfd74f1e285e-300x158.png",
+    icon: "https://visionaize.in/wp-content/uploads/2024/10/04e53ef6-cf2b-4556-b8b5-dfd74f1e285e-300x158.png",
   },
   {
     title: "Improve Operations",
@@ -228,11 +227,11 @@ const BLOG_POSTS = [
 const CERTIFICATIONS = [
   {
     title: "ISO/IEC 27001:2022 — Information Security Management",
-    img: "https://visionaize.in/wp-content/uploads/2026/04/VISIONAIZE-TECHNOLOGIES-PRIVATE-LIMITED-27001-1-01-scaled.png", // replace with actual cert image URL
+    img: "https://visionaize.in/wp-content/uploads/2026/04/VISIONAIZE-TECHNOLOGIES-PRIVATE-LIMITED-27001-1-01-scaled.png",
   },
   {
     title: "ISO 9001:2015 — Quality Management System",
-    img: "https://visionaize.in/wp-content/uploads/2026/04/VISIONAIZE-TECHNOLOGIES-PRIVATE-LIMITED-qms-01-1447x2048.png", // replace with actual cert image URL
+    img: "https://visionaize.in/wp-content/uploads/2026/04/VISIONAIZE-TECHNOLOGIES-PRIVATE-LIMITED-qms-01-1447x2048.png",
   },
 ];
 
@@ -240,7 +239,7 @@ const CERTIFICATIONS = [
 
 function Home() {
   return (
-    <div className="min-h-screen flex flex-col bg-white">
+    <div className="min-h-screen flex flex-col bg-white overflow-x-hidden">
       <Header />
       <Hero />
       <IntroAndStats />
@@ -268,8 +267,9 @@ function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-black">
-      {/* Background video */}
+    <section className="relative overflow-hidden bg-black min-h-[480px] sm:min-h-[560px] md:min-h-[620px]">
+      {/* Background video: object-cover keeps it filling the section edge-to-edge
+          at every breakpoint, cropping the sides/top rather than letterboxing */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
         src="https://visionaize.com/wp-content/uploads/2024/12/iStock-1219920849-2-1-1-1-1-1.mp4"
@@ -281,51 +281,71 @@ function Hero() {
         aria-hidden
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" aria-hidden />
-      <div className="relative mx-auto max-w-7xl min-h-[560px] grid md:grid-cols-12 items-end px-6 pb-16">
+
+      <div className="relative mx-auto flex min-h-[480px] max-w-7xl flex-col justify-end px-4 pb-10 sm:min-h-[560px] sm:px-6 sm:pb-16 md:min-h-[620px] md:grid md:grid-cols-12 md:items-end">
         <div className="md:col-span-9">
-          {/* Rotating keyword band, flush to viewport left edge on the design */}
-         <div className="relative -ml-6 md:-ml-12 translate-y-16">
+          {/* Rotating keyword band, flush to viewport left edge on the design.
+              Sizing steps down through the breakpoints instead of using a
+              fixed 640px min-width, so it no longer forces horizontal scroll
+              on small phones. */}
+          <div className="relative -ml-4 translate-y-8 sm:-ml-6 sm:translate-y-12 md:-ml-12 md:translate-y-16">
             <div
-              className="relative inline-flex items-center pl-8 md:pl-16 pr-20 py-6 text-white text-2xl md:text-4xl font-bold tracking-wide shadow-xl"
+              className="relative inline-flex max-w-[92vw] items-center pl-4 pr-10 py-3 text-base font-bold tracking-wide text-white shadow-xl sm:max-w-none sm:pl-8 sm:pr-16 sm:py-4 sm:text-xl md:pl-16 md:pr-20 md:py-6 md:text-2xl lg:text-4xl"
               style={{
                 background:
                   "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 35%, #3EA0A8 70%, #6FC7E0 100%)",
-                clipPath: "polygon(0 0, 100% 0, calc(100% - 56px) 100%, 0 100%)",
-                minWidth: "640px",
+                clipPath: "polygon(0 0, 100% 0, calc(100% - 32px) 100%, 0 100%)",
               }}
             >
-              <span className="opacity-90 mr-3">THE FUTURE OF</span>
-              <span key={i} className="animate-fade-in border-l-2 border-white/80 pl-3">
+              <span className="mr-2 whitespace-nowrap opacity-90 sm:mr-3">THE FUTURE OF</span>
+              <span
+                key={i}
+                className="animate-fade-in whitespace-nowrap border-l-2 border-white/80 pl-2 sm:pl-3"
+              >
                 {HERO_LINES[i]}
               </span>
             </div>
           </div>
+
+          {/* Product pills: below md, hover-to-expand doesn't work on touch,
+              so this renders as a plain horizontal row of icon links instead
+              of the absolutely-positioned expanding column used on desktop. */}
+          <div className="mt-6 flex flex-wrap gap-3 sm:mt-8 md:hidden">
+            {PRODUCT_PILLS.map((p) => (
+              <Link
+                key={p.label}
+                to={p.href}
+                aria-label={p.label}
+                className="flex h-11 w-11 items-center justify-center rounded-full shadow-lg sm:h-12 sm:w-12"
+                style={{ background: p.color }}
+              >
+                <img src={p.icon} alt="" className="h-6 w-6 object-contain" />
+              </Link>
+            ))}
+          </div>
         </div>
 
-        {/* Right rail product pills */}
- <div className="absolute right-8 top-28 z-20 flex flex-col gap-5">
-  {PRODUCT_PILLS.map((p) => (
-  <Link
-  key={p.label}
-  to={p.href}
-  className="group relative flex h-16 w-16 hover:w-[250px] self-end items-center overflow-hidden rounded-full transition-all duration-500 ease-in-out"
-  style={{ background: p.color }}
->
-  <div className="absolute left-0 top-0 flex h-16 w-16 items-center justify-center rounded-full">
-    <img
-      src={p.icon}
-      alt={p.label}
-      className="h-8 w-8 object-contain"
-    />
-  </div>
+        {/* Right rail product pills — desktop only (md and up) */}
+        <div className="absolute right-4 top-24 z-20 hidden flex-col gap-5 md:right-8 md:top-28 md:flex">
+          {PRODUCT_PILLS.map((p) => (
+            <Link
+              key={p.label}
+              to={p.href}
+              className="group relative flex h-16 w-16 self-end items-center overflow-hidden rounded-full transition-all duration-500 ease-in-out hover:w-[250px]"
+              style={{ background: p.color }}
+            >
+              <div className="absolute left-0 top-0 flex h-16 w-16 items-center justify-center rounded-full">
+                <img src={p.icon} alt={p.label} className="h-8 w-8 object-contain" />
+              </div>
 
-  <span className="ml-20 whitespace-nowrap text-white text-lg font-semibold opacity-0 transition-all duration-300 group-hover:opacity-100">
-    {p.label}
-  </span>
-</Link>
-  ))}
-</div>
+              <span className="ml-20 whitespace-nowrap text-lg font-semibold text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
+                {p.label}
+              </span>
+            </Link>
+          ))}
+        </div>
       </div>
+
       <style>{`
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
         .animate-fade-in { animation: fadeIn .55s ease-out both; }
@@ -337,74 +357,70 @@ function Hero() {
 /* ---------- Intro + stats ---------- */
 function IntroAndStats() {
   return (
-<section className="bg-white pt-0 pb-0">
-  <div className="mx-auto grid max-w-7xl items-center gap-10 px-6 md:grid-cols-[1.2fr_1fr] md:gap-16">
-    
-    {/* Image column */}
-    <div className="flex justify-center md:justify-start">
-      <img
-        src="https://visionaize.com/wp-content/uploads/2024/11/Group-1000007065.png"
-        alt="Visionaize 3D Digital Twin & Smart Apps"
-        className="w-full max-w-none h-[500px] md:h-[650px] lg:h-[650px] object-contain md:w-[190%]"
-      />
-    </div>
+    <section className="bg-white pb-12 pt-10 md:pb-0 md:pt-0">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 sm:gap-10 md:grid-cols-[1.2fr_1fr] md:gap-16">
+        {/* Image column: overflow-hidden contains the intentional "bleed"
+            width used at md/lg so it can't cause horizontal scrolling */}
+        <div className="flex justify-center overflow-hidden md:justify-start">
+          <img
+            src="https://visionaize.com/wp-content/uploads/2024/11/Group-1000007065.png"
+            alt="Visionaize 3D Digital Twin & Smart Apps"
+            className="h-[260px] w-full max-w-none object-contain sm:h-[360px] md:h-[500px] md:w-[150%] lg:h-[650px] lg:w-[190%]"
+          />
+        </div>
 
-    {/* Text column */}
-   <div>
-  <h2 className="text-2xl md:text-[32px] font-semibold leading-snug text-brand-navy">
-    Visionaize's 3D Digital Twin &amp; Smart Apps Enable Real-Time Monitoring,
-    Optimization, and Prediction for Heavy Industry
-  </h2>
+        {/* Text column */}
+        <div className="px-2 sm:px-0">
+          <h2 className="text-xl font-semibold leading-snug text-brand-navy sm:text-2xl md:text-[32px]">
+            Visionaize's 3D Digital Twin &amp; Smart Apps Enable Real-Time Monitoring,
+            Optimization, and Prediction for Heavy Industry
+          </h2>
 
-  <ul className="mt-8 space-y-4">
-    {STATS.map((s, index) => (
-      <li
-        key={s.label}
-        className="flex items-baseline gap-2 text-brand-ink/90"
-      >
-        <span
-          className="mt-1 inline-block h-2 w-2 flex-none rounded-full"
-          style={{ background: s.color }}
-        />
+          <ul className="mt-6 space-y-4 sm:mt-8">
+            {STATS.map((s, index) => (
+              <li
+                key={s.label}
+                className="flex flex-wrap items-baseline gap-2 text-brand-ink/90"
+              >
+                <span
+                  className="mt-1 inline-block h-2 w-2 flex-none rounded-full"
+                  style={{ background: s.color }}
+                />
 
-        {s.prefix && (
-          <span className="text-sm text-brand-ink/70">
-            {s.prefix}
-          </span>
-        )}
+                {s.prefix && (
+                  <span className="text-sm text-brand-ink/70">{s.prefix}</span>
+                )}
 
-        <span
-          className="text-xl font-bold animate-percentage"
-          style={{
-            color: s.color,
-            animationDelay: `${index * 0.2}s`,
-          }}
-        >
-          {s.value}
-        </span>
+                <span
+                  className="animate-percentage text-lg font-bold sm:text-xl"
+                  style={{
+                    color: s.color,
+                    animationDelay: `${index * 0.2}s`,
+                  }}
+                >
+                  {s.value}
+                </span>
 
-        <span className="text-base text-brand-ink/85">
-          {s.label}
-        </span>
-      </li>
-    ))}
-  </ul>
-</div>
-  </div>
-</section>
+                <span className="text-sm text-brand-ink/85 sm:text-base">{s.label}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
   );
 }
 
 /* ---------- Remote Plant Access cards ---------- */
 function RemotePlantAccess() {
   return (
-    <section className="bg-[#E6F4FB] py-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center text-3xl font-semibold text-brand-navy md:text-4xl">
+    <section className="bg-[#E6F4FB] py-14 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Remote Plant Access - Be There From Anywhere
         </h2>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
           {PLATFORM_CARDS.map((c) => (
             <article
               key={c.title}
@@ -424,17 +440,15 @@ function RemotePlantAccess() {
                   />
                 </div>
                 <h3
-  className="mt-4 text-[24px] font-bold leading-tight text-transparent bg-clip-text"
-  style={{
-    backgroundImage:
-      "linear-gradient(90deg, #8CC63F 0%, #39B54A 25%, #28A9A2 55%, #1E88E5 100%)",
-  }}
->
-  {c.title}
-</h3>
-                <p className="mt-3 text-medium leading-relaxed text-brand-ink/80">
-                  {c.body}
-                </p>
+                  className="mt-4 bg-clip-text text-xl font-bold leading-tight text-transparent sm:text-[24px]"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(90deg, #8CC63F 0%, #39B54A 25%, #28A9A2 55%, #1E88E5 100%)",
+                  }}
+                >
+                  {c.title}
+                </h3>
+                <p className="mt-3 text-base leading-relaxed text-brand-ink/80">{c.body}</p>
               </div>
 
               {/* spacer pushes link + accent bar to bottom, keeping card heights aligned */}
@@ -450,13 +464,13 @@ function RemotePlantAccess() {
               </div>
 
               {/* colored accent bar at the very bottom, per-card color */}
-            <div
-  className="h-1 w-full"
-  style={{
-    background:
-      "linear-gradient(to right, #93C01F 0%, #52B788 45%, #00A8E8 100%)",
-  }}
-/>
+              <div
+                className="h-1 w-full"
+                style={{
+                  background:
+                    "linear-gradient(to right, #93C01F 0%, #52B788 45%, #00A8E8 100%)",
+                }}
+              />
             </article>
           ))}
         </div>
@@ -464,6 +478,7 @@ function RemotePlantAccess() {
     </section>
   );
 }
+
 /* ---------- Case Study Carousel ---------- */
 function CaseStudyCarousel() {
   const [idx, setIdx] = useState(0);
@@ -485,7 +500,7 @@ function CaseStudyCarousel() {
   const cs = CASE_STUDIES[idx];
 
   return (
-    <section className="bg-white py-20">
+    <section className="bg-white py-14 sm:py-20">
       <style>{`
         @keyframes csSlideInRight {
           from { transform: translateX(48px); opacity: 0; }
@@ -499,25 +514,28 @@ function CaseStudyCarousel() {
         .cs-slide-left  { animation: csSlideInLeft  0.45s cubic-bezier(0.22, 1, 0.36, 1); }
       `}</style>
 
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center text-3xl font-semibold text-brand-navy md:text-4xl">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Demonstrated Success in Oil &amp; Gas, Manufacturing, and Power Industries
         </h2>
 
-        <div className="relative mt-14">
+        <div className="relative mt-10 sm:mt-14">
+          {/* Arrows sit just inside the safe area on mobile (left-0/right-0)
+              and step outward on larger screens, so they never overlap the
+              page's own edge padding or get clipped off-screen. */}
           <button
             onClick={prev}
             aria-label="Previous case study"
-            className="absolute -left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 text-brand-navy shadow-md ring-1 ring-brand-ink/10 hover:bg-secondary"
+            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-1.5 text-brand-navy shadow-md ring-1 ring-brand-ink/10 hover:bg-secondary sm:-left-2 sm:p-2 md:-left-4"
           >
-            <ChevronLeft className="h-6 w-6" />
+            <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
           <button
             onClick={next}
             aria-label="Next case study"
-            className="absolute -right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-2 text-brand-navy shadow-md ring-1 ring-brand-ink/10 hover:bg-secondary"
+            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-1.5 text-brand-navy shadow-md ring-1 ring-brand-ink/10 hover:bg-secondary sm:-right-2 sm:p-2 md:-right-4"
           >
-            <ChevronRight className="h-6 w-6" />
+            <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
 
           {/* overflow-hidden clips the slide motion; it's scoped to just this
@@ -528,7 +546,7 @@ function CaseStudyCarousel() {
                 change, which restarts the CSS animation each time */}
             <div
               key={idx}
-              className={`grid items-start gap-10 md:grid-cols-2 px-6 ${
+              className={`grid items-start gap-8 px-8 sm:gap-10 sm:px-10 md:grid-cols-2 md:px-6 ${
                 direction === 1 ? "cs-slide-right" : "cs-slide-left"
               }`}
             >
@@ -536,14 +554,16 @@ function CaseStudyCarousel() {
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-lime">
                   CASE STUDY
                 </p>
-                <h3 className="mt-3 text-3xl font-bold text-brand-navy">{cs.title}</h3>
+                <h3 className="mt-3 text-xl font-bold text-brand-navy sm:text-2xl md:text-3xl">
+                  {cs.title}
+                </h3>
 
-                <div className="mt-8 flex gap-6 border-b border-brand-ink/10">
+                <div className="mt-6 flex gap-4 overflow-x-auto border-b border-brand-ink/10 sm:mt-8 sm:gap-6">
                   {(["Challenge", "Solution", "Results"] as const).map((t) => (
                     <button
                       key={t}
                       onClick={() => setTab(t)}
-                      className={`relative -mb-px pb-3 text-sm font-semibold transition ${
+                      className={`relative -mb-px whitespace-nowrap pb-3 text-sm font-semibold transition ${
                         tab === t ? "text-brand-blue" : "text-brand-ink/55 hover:text-brand-ink"
                       }`}
                     >
@@ -555,9 +575,9 @@ function CaseStudyCarousel() {
                   ))}
                 </div>
 
-               <div className="mt-6 rounded-md border border-brand-ink/10 bg-white p-6 text-base leading-8 text-brand-ink/85">
-  {cs.tabs[tab]}
-</div>
+                <div className="mt-6 rounded-md border border-brand-ink/10 bg-white p-4 text-base leading-7 text-brand-ink/85 sm:p-6 sm:leading-8">
+                  {cs.tabs[tab]}
+                </div>
               </div>
 
               <div className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-br from-[#E6F4FB] to-[#CDE7F3] shadow-lg">
@@ -579,6 +599,7 @@ function CaseStudyCarousel() {
     </section>
   );
 }
+
 /* ---------- Testimonial slider on navy with decorative arcs ---------- */
 function TestimonialSlider() {
   const [i, setI] = useState(0);
@@ -591,60 +612,58 @@ function TestimonialSlider() {
 
   const t = TESTIMONIALS[i];
   return (
-<section className="relative overflow-hidden bg-[#0F2237] pt-24 pb-8 text-white">
-  {/* decorative arcs */}
-  <svg
-    className="pointer-events-none absolute -bottom-32 -right-32 h-[520px] w-[520px] opacity-70"
-    viewBox="0 0 500 500"
-    fill="none"
-  >
-    <circle cx="250" cy="250" r="240" stroke="#A6E04A" strokeWidth="1.5" />
-    <circle cx="250" cy="250" r="200" stroke="#3EA0A8" strokeWidth="1.5" />
-    <circle cx="250" cy="250" r="160" stroke="#2E8DC5" strokeWidth="1.5" />
-  </svg>
-
-  <div className="relative mx-auto max-w-5xl px-6 pb-32 text-center">
-    <h2
-      className="mb-12 text-center text-3xl font-bold md:text-4xl
-                 bg-gradient-to-r from-[#A6E04A] via-[#3EA0A8] to-[#2E8DC5]
-                 bg-clip-text text-transparent drop-shadow-sm"
-    >
-      Trusted by Global Industry Leaders
-    </h2>
-
-    <div className="flex items-center gap-6">
-      <button
-        onClick={prev}
-        aria-label="Previous"
-        className="rounded-full p-2 text-white/60 hover:bg-white/10 hover:text-white"
+    <section className="relative overflow-hidden bg-[#0F2237] pb-8 pt-16 text-white sm:pt-24">
+      {/* decorative arcs */}
+      <svg
+        className="pointer-events-none absolute -bottom-32 -right-32 h-[340px] w-[340px] opacity-70 sm:h-[420px] sm:w-[420px] md:h-[520px] md:w-[520px]"
+        viewBox="0 0 500 500"
+        fill="none"
       >
-        <ChevronLeft className="h-7 w-7" />
-      </button>
-      <div className="flex-1">
-        <p className="text-balance text-xl font-medium leading-relaxed text-white md:text-2xl">
-          &ldquo;{t.quote}&rdquo;
-        </p>
+        <circle cx="250" cy="250" r="240" stroke="#A6E04A" strokeWidth="1.5" />
+        <circle cx="250" cy="250" r="200" stroke="#3EA0A8" strokeWidth="1.5" />
+        <circle cx="250" cy="250" r="160" stroke="#2E8DC5" strokeWidth="1.5" />
+      </svg>
+
+      <div className="relative mx-auto max-w-5xl px-4 pb-24 text-center sm:px-6 sm:pb-32">
+        <h2
+          className="mb-10 bg-gradient-to-r from-[#A6E04A] via-[#3EA0A8] to-[#2E8DC5] bg-clip-text text-center text-2xl font-bold text-transparent drop-shadow-sm sm:mb-12 sm:text-3xl md:text-4xl"
+        >
+          Trusted by Global Industry Leaders
+        </h2>
+
+        <div className="flex items-center gap-3 sm:gap-6">
+          <button
+            onClick={prev}
+            aria-label="Previous"
+            className="flex-none rounded-full p-1.5 text-white/60 hover:bg-white/10 hover:text-white sm:p-2"
+          >
+            <ChevronLeft className="h-6 w-6 sm:h-7 sm:w-7" />
+          </button>
+          <div className="flex-1">
+            <p className="text-balance text-base font-medium leading-relaxed text-white sm:text-xl md:text-2xl">
+              &ldquo;{t.quote}&rdquo;
+            </p>
+          </div>
+          <button
+            onClick={next}
+            aria-label="Next"
+            className="flex-none rounded-full p-1.5 text-white/60 hover:bg-white/10 hover:text-white sm:p-2"
+          >
+            <ChevronRight className="h-6 w-6 sm:h-7 sm:w-7" />
+          </button>
+        </div>
       </div>
-      <button
-        onClick={next}
-        aria-label="Next"
-        className="rounded-full p-2 text-white/60 hover:bg-white/10 hover:text-white"
-      >
-        <ChevronRight className="h-7 w-7" />
-      </button>
-    </div>
-  </div>
 
-  {/* logo image pinned to the very bottom of the section */}
-  <div className="absolute inset-x-0 bottom-0 z-10">
-    <img
-      src="https://visionaize.in/wp-content/uploads/2022/05/Logos-mini-desktop.png"
-      alt={`${t.name}, ${t.role}`}
-      className="mx-auto h-auto w-full max-w-5xl object-contain px-6"
-      loading="lazy"
-    />
-  </div>
-</section>
+      {/* logo image pinned to the very bottom of the section */}
+      <div className="absolute inset-x-0 bottom-0 z-10">
+        <img
+          src="https://visionaize.in/wp-content/uploads/2022/05/Logos-mini-desktop.png"
+          alt={`${t.name}, ${t.role}`}
+          className="mx-auto h-auto w-full max-w-5xl object-contain px-4 sm:px-6"
+          loading="lazy"
+        />
+      </div>
+    </section>
   );
 }
 
@@ -652,13 +671,13 @@ function TestimonialSlider() {
 function NavyPartners() {
   return (
     <section className="relative bg-[#0F2237] pb-16 pt-4">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 items-center gap-8 px-6 md:grid-cols-5">
+      <div className="mx-auto grid max-w-7xl grid-cols-2 items-center gap-8 px-4 sm:px-6 md:grid-cols-5">
         {NAVY_PARTNERS.map((p) => (
           <div key={p.name} className="flex items-center justify-center">
             <img
               src={p.logo}
               alt={p.name}
-              className="h-10 md:h-12 max-w-[180px] object-contain opacity-90"
+              className="h-10 max-w-[180px] object-contain opacity-90 md:h-12"
               onError={(e) => {
                 const img = e.target as HTMLImageElement;
                 img.outerHTML = `<span class="text-white/80 text-lg font-semibold tracking-wide">${p.name}</span>`;
@@ -683,12 +702,12 @@ function NavyPartners() {
 /* ---------- Improve Operations with icons ---------- */
 function ImproveOps() {
   return (
-    <section className="bg-white py-20">
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <h2 className="text-4xl font-semibold text-brand-navy md:text-4xl">
+    <section className="bg-white py-14 sm:py-20">
+      <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
+        <h2 className="text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Improve Your Operations Today
         </h2>
-        <div className="mt-12 grid gap-10 md:grid-cols-3">
+        <div className="mt-10 grid gap-10 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
           {IMPROVE_STEPS.map((s) => (
             <div key={s.title} className="flex flex-col items-center">
               <img
@@ -697,18 +716,19 @@ function ImproveOps() {
                 className="mb-5 h-14 w-14 object-contain"
                 onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
               />
-              <h3 className="text-2xl font-bold text-brand-navy">{s.title}</h3>
-              <p className="mt-3 max-w-xs text-lg leading-relaxed text-brand-ink/75">{s.body}</p>
+              <h3 className="text-xl font-bold text-brand-navy sm:text-2xl">{s.title}</h3>
+              <p className="mt-3 max-w-xs text-base leading-relaxed text-brand-ink/75 sm:text-lg">
+                {s.body}
+              </p>
             </div>
           ))}
         </div>
-        <div className="mt-12">
+        <div className="mt-10 sm:mt-12">
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full px-9 py-4 text-sm font-semibold text-white shadow-md transition hover:shadow-lg"
+            className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-md transition hover:shadow-lg sm:px-9 sm:py-4"
             style={{
-              background:
-                "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
+              background: "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
             }}
           >
             Meet with an Expert
@@ -722,9 +742,11 @@ function ImproveOps() {
 /* ---------- Reactive to Predictive (video) ---------- */
 function ReactiveToPredictive() {
   return (
-    <section className="bg-[#D6ECF7] py-20">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 md:grid-cols-2 md:items-center">
-        <div className="relative aspect-video overflow-hidden rounded-lg bg-brand-navy shadow-xl">
+    <section className="bg-[#D6ECF7] py-14 sm:py-20">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 sm:gap-10 md:grid-cols-2 md:items-center">
+        {/* aspect-video keeps a correct 16:9 box at every width, so the
+            player never gets cropped or stretched on small screens */}
+        <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-brand-navy shadow-xl">
           <video
             src="https://visionaize.com/wp-content/uploads/2024/10/1714666253230.mp4"
             className="h-full w-full object-cover"
@@ -734,10 +756,10 @@ function ReactiveToPredictive() {
           />
         </div>
         <div>
-          <h2 className="text-3xl font-bold leading-tight text-brand-navy md:text-4xl">
+          <h2 className="text-2xl font-bold leading-tight text-brand-navy sm:text-3xl md:text-4xl">
             Transform Operations from Reactive to Predictive
           </h2>
-          <p className="mt-5 text-lg leading-relaxed text-brand-ink/80">
+          <p className="mt-4 text-base leading-relaxed text-brand-ink/80 sm:mt-5 sm:text-lg">
             Minimize unpredictability, manual reporting, and data analysis tasks by leveraging
             real-time data to enhance industrial intelligence across your plant. Improve remote
             performance monitoring, predictive maintenance, process performance forecasting,
@@ -752,18 +774,20 @@ function ReactiveToPredictive() {
 /* ---------- Innovating Together (whitepaper + partner logos) ---------- */
 function InnovatingTogether() {
   return (
-    <section className="bg-white py-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center text-3xl font-semibold text-brand-navy md:text-4xl">
+    <section className="bg-white py-14 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Innovating Together with Our Valued Partners
         </h2>
 
-        <div className="mt-14 grid items-center gap-12 md:grid-cols-2">
+        <div className="mt-10 grid items-center gap-10 sm:mt-14 sm:gap-12 md:grid-cols-2">
           <div>
-            <h3 className="text-2xl font-bold leading-tight text-brand-navy md:text-3xl">
-              Turnarounds that Reduce<br />Costs by More Than 10%
+            <h3 className="text-xl font-bold leading-tight text-brand-navy sm:text-2xl md:text-3xl">
+              Turnarounds that Reduce
+              <br />
+              Costs by More Than 10%
             </h3>
-            <p className="mt-6 text-lg leading-relaxed text-brand-ink/80">
+            <p className="mt-5 text-base leading-relaxed text-brand-ink/80 sm:mt-6 sm:text-lg">
               A collaboration between PwC and Visionaize, this whitepaper delves deeply into a
               modern approach to Turnarounds that enables operators to maximize productivity and
               significantly reduce downtime.
@@ -772,10 +796,9 @@ function InnovatingTogether() {
               href="https://visionaize.com/re-inventing-turnarounds-in-the-metaverse/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-8 inline-flex items-center gap-2 rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-md transition hover:shadow-lg"
+              className="mt-6 inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg sm:mt-8 sm:px-8 sm:py-3.5"
               style={{
-                background:
-                  "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
+                background: "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
               }}
             >
               Download White Paper
@@ -785,7 +808,7 @@ function InnovatingTogether() {
             <img
               src="https://visionaize.com/wp-content/uploads/2024/10/caa1b2e0de661dece3de9db3994b2f91.png"
               alt="Reinventing Turnarounds in the Metaverse whitepaper"
-              className="w-full max-w-md"
+              className="w-full max-w-xs sm:max-w-md"
               onError={(e) =>
                 ((e.target as HTMLImageElement).src =
                   "https://visionaize.com/wp-content/uploads/2024/02/image_27-removebg-preview.png")
@@ -795,13 +818,13 @@ function InnovatingTogether() {
           </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-2 items-center gap-10 md:grid-cols-5">
+        <div className="mt-12 grid grid-cols-2 items-center gap-8 sm:mt-16 sm:gap-10 md:grid-cols-5">
           {LIGHT_PARTNERS.map((p) => (
             <div key={p.name} className="flex items-center justify-center">
               <img
                 src={p.logo}
                 alt={p.name}
-                className="h-10 md:h-12 max-w-[180px] "
+                className="h-10 max-w-[180px] md:h-12"
                 onError={(e) => {
                   const img = e.target as HTMLImageElement;
                   img.outerHTML = `<span class="text-brand-ink/50 text-lg font-semibold tracking-wide">${p.name}</span>`;
@@ -819,13 +842,13 @@ function InnovatingTogether() {
 /* ---------- Blog grid ---------- */
 function BlogSection() {
   return (
-    <section className="bg-white pb-20">
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center text-3xl font-semibold text-brand-navy md:text-4xl">
+    <section className="bg-white pb-14 sm:pb-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Explore Our Latest Articles
         </h2>
 
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+        <div className="mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
           {BLOG_POSTS.map((p) => (
             <article key={p.title} className="group flex flex-col pb-5">
               <div className="aspect-[16/10] overflow-hidden rounded">
@@ -840,10 +863,10 @@ function BlogSection() {
                   loading="lazy"
                 />
               </div>
-              <h3 className="mt-5 text-xl font-bold leading-snug text-brand-navy">
+              <h3 className="mt-5 text-lg font-bold leading-snug text-brand-navy sm:text-xl">
                 {p.title}
               </h3>
-              <p className="mt-3 flex-1 text-lg leading-relaxed text-brand-ink/75">
+              <p className="mt-3 flex-1 text-base leading-relaxed text-brand-ink/75 sm:text-lg">
                 {p.excerpt}
               </p>
               <Link
@@ -870,33 +893,34 @@ function BlogSection() {
 
 function Certifications() {
   return (
-    <section className="bg-white py-20">
-      <div className="mx-auto max-w-6xl px-6 text-center">
-        <h2 className="text-3xl font-semibold text-brand-navy md:text-4xl">
+    <section className="bg-white py-14 sm:py-20">
+      <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
+        <h2 className="text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Our Certifications &amp; Compliance
         </h2>
 
-        <div className="mt-12 grid gap-10 md:grid-cols-2 md:place-items-center">
+        <div className="mt-10 grid gap-8 sm:mt-12 sm:grid-cols-2 sm:gap-10 md:place-items-center">
           {CERTIFICATIONS.map((c) => (
             <img
               key={c.title}
               src={c.img}
               alt={c.title}
-              className="h-auto w-full max-w-sm object-contain shadow-md"
+              className="h-auto w-full max-w-xs object-contain shadow-md sm:max-w-sm"
               loading="lazy"
               onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
             />
           ))}
         </div>
 
-       <p className="mt-10 text-lg font-bold text-brand-ink/90">
-  Visionaize Technologies is certified for quality management and information
-  security standards.
-</p>
+        <p className="mt-8 text-base font-bold text-brand-ink/90 sm:mt-10 sm:text-lg">
+          Visionaize Technologies is certified for quality management and information
+          security standards.
+        </p>
       </div>
     </section>
   );
 }
+
 // /* ---------- Let's Connect CTA ---------- */
 // function LetsConnect() {
 //   return (

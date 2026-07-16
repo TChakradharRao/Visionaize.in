@@ -64,7 +64,7 @@ export function SolutionPage(props: SolutionPageProps) {
             >
               {props.title}
             </h1>
-            <div className="mt-8 space-y-5 text-[15px] leading-7 text-slate-700">
+            <div className="mt-8 space-y-5 text-[18px] leading-7 text-slate-700">
               {props.heroParagraphs.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
@@ -95,7 +95,7 @@ export function SolutionPage(props: SolutionPageProps) {
           {props.problems.map((p) => (
             <div key={p.title} className="text-center">
               <h3 className="text-2xl font-semibold text-slate-900">{p.title}</h3>
-              <p className="mt-4 text-[15px] leading-7 text-slate-600">{p.body}</p>
+              <p className="mt-4 text-[18px] leading-7 text-slate-700">{p.body}</p>
             </div>
           ))}
         </div>
@@ -107,7 +107,7 @@ export function SolutionPage(props: SolutionPageProps) {
           <h2 className="text-3xl md:text-4xl font-semibold text-slate-900">
             {props.introBand.heading}
           </h2>
-          <div className="mt-6 space-y-5 text-[15px] leading-7 text-slate-700">
+          <div className="mt-6 space-y-5 text-[20px] leading-7 text-slate-900">
             {props.introBand.paragraphs.map((p, i) => (
               <p key={i}>{p}</p>
             ))}
@@ -127,7 +127,7 @@ export function SolutionPage(props: SolutionPageProps) {
             </h2>
             <ul className="mt-8 space-y-3">
               {props.benefits.bullets.map((b) => (
-                <li key={b} className="flex items-start text-[15px] leading-7 text-slate-700">
+                <li key={b} className="flex items-start text-[18px] leading-7 text-slate-800">
                   <span className="mt-2 mr-3 inline-block h-1.5 w-1.5 rounded-full bg-slate-700" />
                   {b}
                 </li>
@@ -189,7 +189,7 @@ export function SolutionPage(props: SolutionPageProps) {
           </h3>
           <Link
             to="/contact"
-            className="inline-flex items-center rounded-full bg-white px-7 py-3 text-sm font-semibold text-slate-900 shadow hover:bg-slate-50"
+            className="inline-flex items-center rounded-full bg-white px-7 py-3 text-lg font-semibold text-slate-900 shadow hover:bg-slate-50"
           >
             Connect with us
           </Link>
@@ -221,7 +221,7 @@ export function SolutionPage(props: SolutionPageProps) {
                   </span>
                 </button>
                 {isOpen && (
-                  <div className="space-y-4 pb-6 pl-9 pr-4 text-[15px] leading-7 text-slate-700">
+                  <div className="space-y-4 pb-6 pl-9 pr-4 text-[18px] leading-7 text-slate-700">
                     {f.a.map((p, j) => (
                       <p key={j}>{p}</p>
                     ))}
@@ -231,7 +231,7 @@ export function SolutionPage(props: SolutionPageProps) {
             );
           })}
         </div>
-        <div className="mt-10 flex justify-center">
+        <div className="mt-10 flex justify-center font-lg ">
           <GradientPill href="/contact">{props.faqCtaLabel ?? "Learn More"}</GradientPill>
         </div>
       </section>

@@ -49,10 +49,12 @@ function DecarbonizationPage() {
       heroImage={heroImage}
       heroParagraphs={heroParagraphs}
       problems={problems}
-      introBand={{
-        heading: "Empowering Sustainability: Monitor, Reduce, Thrive!",
-        paragraphs: introParagraphs,
-      }}
+     introBand={{
+  heading: "Empowering Sustainability: Monitor, Reduce, Thrive!",
+  paragraphs: [
+    "Looking for a comprehensive approach to carbon emission monitoring and reduction? The Visionaize DecarbAI solution covers scope 1 direct emissions, scope 2 indirect emissions and scope 3 indirect emissions from others' sources. Reduce carbon emissions by efficient energy management, and by reducing plant upsets and shutdowns which result heavy emissions from flare and other sources.",
+  ],
+}}
       benefits={{
         heading: (
           <>
