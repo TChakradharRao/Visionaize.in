@@ -33,15 +33,34 @@ export const Route = createFileRoute("/industries/digital-twin-for-oil-and-gas")
 
 const seedItem = getSeedContentItem("page", "digital-twin-for-oil-and-gas");
 const seedSections = seedItem?.content_json?.sections ?? [];
-const heroSection = seedSections.find((section) => section.heading?.toLowerCase() === "plan more clearly");
-const heroParagraphs = heroSection?.paragraphs?.length ? heroSection.paragraphs : ["Reduce downtime and maximize the productivity of your oil & gas infrastructure."];
-const heroImage = heroSection?.images[0]?.src ?? seedSections.flatMap((section) => section.images ?? []).find((image) => !image.src.endsWith(".svg"))?.src ?? "https://visionaize.com/wp-content/uploads/2022/07/offshore-oil-platform-iStock-636032898-1.png";
-const introSection = seedSections.find((section) => section.heading?.toLowerCase() === "plan more clearly");
-const introParagraphs = introSection?.paragraphs?.length ? introSection.paragraphs : [
-  "Oil & Gas infrastructure that yields greater productivity and profitability, with less downtime and safer working conditions can be realized with a 3D Digital Twin that is designed to stay connected and in sync through the operations of complex assets.",
-  "Learn more from a product demo or an RoI exploration with a 3D Digital Twin expert.",
-];
 
+const FALLBACK_HERO_IMAGE =
+  "https://visionaize.com/wp-content/uploads/2022/07/offshore-oil-platform-iStock-636032898-1.png";
+
+// Hero section — matches the actual banner heading ("Oil & Gas")
+const heroSection = seedSections.find(
+  (section) => section.heading?.toLowerCase() === "oil & gas"
+);
+
+const heroParagraphs = heroSection?.paragraphs?.length
+  ? heroSection.paragraphs
+  : ["Reduce downtime and maximize the productivity of your oil & gas infrastructure."];
+
+// Only use heroSection's own image — never fall back to a random image
+// scraped from an unrelated section further down the page.
+const heroImage = heroSection?.images?.[0]?.src ?? FALLBACK_HERO_IMAGE;
+
+// Intro/"Plan More Clearly" section
+const introSection = seedSections.find(
+  (section) => section.heading?.toLowerCase() === "plan more clearly"
+);
+
+const introParagraphs = introSection?.paragraphs?.length
+  ? introSection.paragraphs
+  : [
+      "Oil & Gas infrastructure that yields greater productivity and profitability, with less downtime and safer working conditions can be realized with a 3D Digital Twin that is designed to stay connected and in sync through the operations of complex assets.",
+      "Learn more from a product demo or an RoI exploration with a 3D Digital Twin expert.",
+    ];
 const PILLARS = [
   {
     icon: "https://visionaize.com/wp-content/uploads/2022/05/Vector-6.svg",
@@ -59,7 +78,6 @@ const PILLARS = [
     body: "Enables teams to contextualize rich data, anytime, from anywhere",
   },
 ];
-
 const CASE_STUDIES = [
   {
     eyebrow: "CASE STUDY",
@@ -72,7 +90,8 @@ const CASE_STUDIES = [
       Results:
         "The refinery achieved a measurable lift in inspection throughput, cut redundant fieldwork, and built a defensible RBI program that scales across the plant.",
     },
-    img: "https://visionaize.com/wp-content/uploads/2023/11/steel-service-platform-and-stairs-equipment-refinery-SBI-300930077-scaled-1.jpg",
+    img: "https://visionaize.com/wp-content/uploads/2023/11/iStock-469895003-copy@0.5x-1.png",
+
   },
   {
     eyebrow: "CASE STUDY",
@@ -85,7 +104,8 @@ const CASE_STUDIES = [
       Results:
         "OEE improved across the producer's fleet, unplanned events were caught earlier, and cross-functional teams finally collaborated against the same source of truth.",
     },
-    img: "https://visionaize.com/wp-content/uploads/2023/11/oil-refinery-equipment-for-primary-oil-refining-SBI-300925954-1.jpg",
+    // img: "https://visionaize.com/wp-content/uploads/2023/11/iStock-469895003-copy@0.5x-1.png",
+        img: "https://visionaize.com/wp-content/uploads/2023/11/steel-service-platform-and-stairs-equipment-refinery-SBI-300930077-scaled-1.jpg",
   },
   {
     eyebrow: "CASE STUDY",
@@ -124,8 +144,6 @@ function OilAndGasPage() {
       <Quote />
       <TalkDigitalTwins />
       <Whitepaper />
-      <LetsConnect />
-
       <Footer />
     </div>
   );
@@ -147,8 +165,7 @@ function Hero() {
           <h1
             className="text-[64px] font-light leading-[1.05] tracking-tight"
             style={{
-              background:
-                "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 100%)",
+              background: "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -157,7 +174,10 @@ function Hero() {
             Oil &amp; Gas
           </h1>
           {heroParagraphs.map((paragraph, index) => (
-            <p key={index} className="mt-6 text-[18px] leading-relaxed text-[#0F1B2D]">
+            <p
+              key={index}
+              className="mt-6 text-[18px] leading-relaxed text-[#0F1B2D]"
+            >
               {paragraph}
             </p>
           ))}
@@ -198,8 +218,8 @@ function Intro() {
               {index === 1 ? (
                 <>
                   {paragraph.split("RoI exploration")[0]}
-                  <a
-                    href="#talk-to-an-expert"
+                  
+                   <a href="#talk-to-an-expert"
                     className="font-semibold text-[#2E8DC5] underline-offset-4 hover:underline"
                   >
                     RoI exploration
@@ -211,9 +231,9 @@ function Intro() {
               )}
             </p>
           ))}
-          <div className="mt-10">
-            <a
-              href="#talk-to-an-expert"
+          <div className="mt-10 flex flex-wrap items-center gap-4">
+            
+             <a href="#talk-to-an-expert"
               className="inline-flex items-center rounded-full px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg"
               style={{
                 background:
@@ -222,6 +242,12 @@ function Intro() {
             >
               Talk to an expert
             </a>
+            <Link
+              to="/industries/oil-and-gas/build-a-business-case"
+              className="inline-flex items-center rounded-full border border-[#0F1B2D] px-7 py-3 text-sm font-semibold text-[#0F1B2D] transition hover:bg-[#0F1B2D] hover:text-white"
+            >
+              Explore the RoI
+            </Link>
           </div>
         </div>
         <div className="flex justify-center bg-[#E6F0F7] p-8">
@@ -240,19 +266,41 @@ function Intro() {
 function CaseStudyCarousel() {
   const [idx, setIdx] = useState(0);
   const [tab, setTab] = useState<"Challenge" | "Solution" | "Results">("Challenge");
+  const [direction, setDirection] = useState<"next" | "prev">("next");
   const cs = CASE_STUDIES[idx];
+
   const next = () => {
+    setDirection("next");
     setIdx((i) => (i + 1) % CASE_STUDIES.length);
     setTab("Challenge");
   };
   const prev = () => {
+    setDirection("prev");
     setIdx((i) => (i - 1 + CASE_STUDIES.length) % CASE_STUDIES.length);
+    setTab("Challenge");
+  };
+  const goTo = (i: number) => {
+    setDirection(i > idx ? "next" : "prev");
+    setIdx(i);
     setTab("Challenge");
   };
 
   return (
     <section className="bg-white pb-20">
-      <div className="relative mx-auto max-w-[1280px] px-6">
+      <style>{`
+        @keyframes slideFromRight {
+          from { opacity: 0; transform: translateX(40px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideFromLeft {
+          from { opacity: 0; transform: translateX(-40px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        .cs-slide-next { animation: slideFromRight 0.4s ease forwards; }
+        .cs-slide-prev { animation: slideFromLeft 0.4s ease forwards; }
+      `}</style>
+
+      <div className="relative mx-auto max-w-[1280px] overflow-hidden px-6">
         <button
           aria-label="Previous case study"
           onClick={prev}
@@ -272,7 +320,12 @@ function CaseStudyCarousel() {
           </svg>
         </button>
 
-        <div className="grid grid-cols-1 items-center gap-10 px-10 lg:grid-cols-2">
+        <div
+          key={idx}
+          className={`grid grid-cols-1 items-center gap-10 px-10 lg:grid-cols-2 ${
+            direction === "next" ? "cs-slide-next" : "cs-slide-prev"
+          }`}
+        >
           <div>
             <p className="text-xs font-semibold tracking-[0.18em] text-[#A6E04A]">
               {cs.eyebrow}
@@ -317,10 +370,7 @@ function CaseStudyCarousel() {
             <button
               key={i}
               aria-label={`Go to slide ${i + 1}`}
-              onClick={() => {
-                setIdx(i);
-                setTab("Challenge");
-              }}
+              onClick={() => goTo(i)}
               className={`h-2 rounded-full transition-all ${
                 i === idx ? "w-8 bg-[#2E8DC5]" : "w-2 bg-[#CBD5E1]"
               }`}
@@ -334,9 +384,9 @@ function CaseStudyCarousel() {
 
 function Wellhead() {
   return (
-    <section className="bg-white py-24">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-16 px-6 lg:grid-cols-2">
-        <div>
+    <section className="bg-white pt-2 pb-24">
+      <div className="grid grid-cols-1 items-start lg:grid-cols-[3fr_2fr]">
+        <div className="flex flex-col justify-center px-6 py-10 lg:pl-[max(1.5rem,calc((100vw-1280px)/2+24px))] lg:pr-12">
           <h2 className="text-[42px] font-semibold leading-tight">
             Better wellhead production and refinery performance
           </h2>
@@ -360,11 +410,12 @@ function Wellhead() {
             &amp; Gas operations to new heights.
           </p>
         </div>
-        <div>
+
+        <div className="relative h-[280px] self-center lg:h-[460px]">
           <img
-            src="https://visionaize.com/wp-content/uploads/2023/12/Reinventing-Mockup-1024x1024.png"
+            src="https://visionaize.in/wp-content/uploads/2022/07/Rectangle-425-3.png"
             alt="3D digital twin of a refinery"
-            className="w-full"
+            className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
           />
         </div>
@@ -375,47 +426,21 @@ function Wellhead() {
 
 function Quote() {
   return (
-    <section className="relative overflow-hidden bg-white py-20">
+    <section className="relative overflow-hidden bg-white pb-20 pt-0">
       <div className="mx-auto max-w-[1280px] px-6">
         <div className="relative">
-          {/* Decorative gradient quote glyphs */}
-          <svg
-            className="pointer-events-none absolute -right-4 top-1/2 hidden -translate-y-1/2 lg:block"
-            width="520"
-            height="380"
-            viewBox="0 0 520 380"
-            fill="none"
-          >
-            <defs>
-              <linearGradient id="qg" x1="0" y1="0" x2="520" y2="380" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#A6E04A" />
-                <stop offset="100%" stopColor="#2E8DC5" />
-              </linearGradient>
-            </defs>
-            {/* Left big quote */}
-            <path
-              d="M40 340 C 40 200, 120 100, 240 60"
-              stroke="url(#qg)" strokeWidth="2" fill="none" strokeLinecap="round"
-            />
-            <path
-              d="M90 340 C 90 220, 160 140, 260 110"
-              stroke="url(#qg)" strokeWidth="2" fill="none" strokeLinecap="round"
-            />
-            {/* Right big quote */}
-            <path
-              d="M280 340 C 280 200, 360 100, 480 60"
-              stroke="url(#qg)" strokeWidth="2" fill="none" strokeLinecap="round"
-            />
-            <path
-              d="M330 340 C 330 220, 400 140, 500 110"
-              stroke="url(#qg)" strokeWidth="2" fill="none" strokeLinecap="round"
-            />
-          </svg>
+          {/* Background image in place of the decorative curve lines */}
+          <img
+            src="https://visionaize.in/wp-content/uploads/2022/05/home-quote-min.png"
+            alt=""
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-4 top-1/2 hidden w-[520px] -translate-y-1/2 lg:block"
+          />
 
-          <blockquote className="relative max-w-[920px] text-[34px] font-medium leading-[1.3] text-[#0F1B2D]">
+          <blockquote className="relative max-w-[830px] text-[30px] font-medium leading-[1.3] text-[#0F1B2D]">
             During the early stages of an implementation, V-Suite helped the
             inspection team find and solve a corrosion problem in 2 days. A
-            similar exercise required 2 weeks using a competitor’s product”
+            similar exercise required 2 weeks using a competitor's product"
           </blockquote>
           <p className="relative mt-6 text-sm font-semibold tracking-wider text-[#3a4658]">
             NCRA/CHS
@@ -428,13 +453,13 @@ function Quote() {
 
 function TalkDigitalTwins() {
   return (
-    <section id="talk-to-an-expert" className="bg-[#F1F5F9] py-24">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-12 px-6 lg:grid-cols-2">
+    <section id="talk-to-an-expert" className="bg-[#F1F5F9] py-16">
+      <div className="mx-auto grid max-w-[1250px] grid-cols-1 gap-12 px-6 lg:grid-cols-[3fr_2fr]">
         <div>
           <h2 className="text-[44px] font-semibold leading-tight">
             Let’s talk digital twins
           </h2>
-          <p className="mt-6 text-[16px] leading-[1.8] text-[#3a4658]">
+          <p className="mt-6 text-[18px] leading-[1.8] text-[#3a4658]">
             Enable your operations center and field teams to optimize wellhead
             production and refinery performance, by delivering digital insights
             within The Industrial Metaverse.
@@ -444,7 +469,7 @@ function TalkDigitalTwins() {
           </h3>
           <ul className="mt-6 space-y-4">
             {FORM_TOPICS.map((t) => (
-              <li key={t} className="flex items-start gap-3 text-[16px] text-[#0F1B2D]">
+              <li key={t} className="flex items-start gap-3 text-[17px] text-[#0F1B2D]">
                 <span
                   className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white"
                   style={{
@@ -462,12 +487,12 @@ function TalkDigitalTwins() {
           </ul>
         </div>
 
-        <div className="rounded-lg bg-white p-8 shadow-md">
+        <div className="rounded-lg bg-white p-6 shadow-md">
           <h3 className="text-[24px] font-semibold text-[#2E8DC5]">
             Talk to an expert
           </h3>
           <form
-            className="mt-6 grid grid-cols-1 gap-4"
+            className="mt-6 grid grid-cols-1 gap-3"
             onSubmit={(e) => e.preventDefault()}
           >
             <Input placeholder="First name*" />
@@ -484,7 +509,7 @@ function TalkDigitalTwins() {
               <option>Other</option>
             </select>
             <textarea
-              rows={4}
+              rows={3}
               placeholder="Message"
               className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-sm text-[#3a4658] focus:border-[#2E8DC5] focus:outline-none"
             />
@@ -555,53 +580,4 @@ function Whitepaper() {
   );
 }
 
-function LetsConnect() {
-  return (
-    <section className="relative overflow-hidden bg-[#0F1B2D] py-24">
-      {/* Decorative arc */}
-      <svg
-        className="pointer-events-none absolute right-0 top-0 h-full w-2/3 opacity-50"
-        viewBox="0 0 800 400"
-        fill="none"
-        preserveAspectRatio="none"
-      >
-        <path
-          d="M-100 400 C 200 100, 600 100, 900 400"
-          stroke="url(#cg)"
-          strokeWidth="1.5"
-          fill="none"
-        />
-        <path
-          d="M-100 380 C 250 120, 650 120, 900 380"
-          stroke="url(#cg)"
-          strokeWidth="1.5"
-          fill="none"
-        />
-        <defs>
-          <linearGradient id="cg" x1="0" y1="0" x2="800" y2="400">
-            <stop offset="0%" stopColor="#A6E04A" />
-            <stop offset="100%" stopColor="#2E8DC5" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <div className="relative mx-auto max-w-[1280px] px-6">
-        <h2 className="text-[64px] font-semibold leading-[1.05] text-white">
-          Let’s Connect
-        </h2>
-        <p className="mt-6 max-w-[520px] text-[18px] leading-relaxed text-white/80">
-          Learn how Visionaize can reduce downtime and increase productivity
-        </p>
-        <Link
-          to="/contact"
-          className="mt-10 inline-flex items-center rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-md transition hover:shadow-lg"
-          style={{
-            background:
-              "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
-          }}
-        >
-          Talk to an expert
-        </Link>
-      </div>
-    </section>
-  );
-}
+

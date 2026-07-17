@@ -43,6 +43,7 @@ import { Route as IndustriesDigitalTwinForOilAndGasRouteImport } from './routes/
 import { Route as IndustriesDigitalTwinForManufacturingRouteImport } from './routes/industries.digital-twin-for-manufacturing'
 import { Route as IndustriesDigitalTwinForCementRouteImport } from './routes/industries.digital-twin-for-cement'
 import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
+import { Route as IndustriesOilAndGasBuildABusinessCaseRouteImport } from './routes/industries/oil-and-gas/build-a-business-case'
 
 const TheindustrialmetaverseRoute = TheindustrialmetaverseRouteImport.update({
   id: '/theindustrialmetaverse',
@@ -228,6 +229,12 @@ const BlogSlugRoute = BlogSlugRouteImport.update({
   path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndustriesOilAndGasBuildABusinessCaseRoute =
+  IndustriesOilAndGasBuildABusinessCaseRouteImport.update({
+    id: '/industries/oil-and-gas/build-a-business-case',
+    path: '/industries/oil-and-gas/build-a-business-case',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -264,6 +271,7 @@ export interface FileRoutesByFullPath {
   '/solutions/virtual-reality-and-augmented-reality': typeof SolutionsVirtualRealityAndAugmentedRealityRoute
   '/blog/': typeof BlogIndexRoute
   '/solutions/': typeof SolutionsIndexRoute
+  '/industries/oil-and-gas/build-a-business-case': typeof IndustriesOilAndGasBuildABusinessCaseRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -299,6 +307,7 @@ export interface FileRoutesByTo {
   '/solutions/virtual-reality-and-augmented-reality': typeof SolutionsVirtualRealityAndAugmentedRealityRoute
   '/blog': typeof BlogIndexRoute
   '/solutions': typeof SolutionsIndexRoute
+  '/industries/oil-and-gas/build-a-business-case': typeof IndustriesOilAndGasBuildABusinessCaseRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -336,6 +345,7 @@ export interface FileRoutesById {
   '/solutions/virtual-reality-and-augmented-reality': typeof SolutionsVirtualRealityAndAugmentedRealityRoute
   '/blog/': typeof BlogIndexRoute
   '/solutions/': typeof SolutionsIndexRoute
+  '/industries/oil-and-gas/build-a-business-case': typeof IndustriesOilAndGasBuildABusinessCaseRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -374,6 +384,7 @@ export interface FileRouteTypes {
     | '/solutions/virtual-reality-and-augmented-reality'
     | '/blog/'
     | '/solutions/'
+    | '/industries/oil-and-gas/build-a-business-case'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -409,6 +420,7 @@ export interface FileRouteTypes {
     | '/solutions/virtual-reality-and-augmented-reality'
     | '/blog'
     | '/solutions'
+    | '/industries/oil-and-gas/build-a-business-case'
   id:
     | '__root__'
     | '/'
@@ -445,6 +457,7 @@ export interface FileRouteTypes {
     | '/solutions/virtual-reality-and-augmented-reality'
     | '/blog/'
     | '/solutions/'
+    | '/industries/oil-and-gas/build-a-business-case'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -476,6 +489,7 @@ export interface RootRouteChildren {
   PlatformViziCopilotGenAiRoute: typeof PlatformViziCopilotGenAiRoute
   ServicesSlugRoute: typeof ServicesSlugRoute
   BlogIndexRoute: typeof BlogIndexRoute
+  IndustriesOilAndGasBuildABusinessCaseRoute: typeof IndustriesOilAndGasBuildABusinessCaseRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -718,6 +732,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/industries/oil-and-gas/build-a-business-case': {
+      id: '/industries/oil-and-gas/build-a-business-case'
+      path: '/industries/oil-and-gas/build-a-business-case'
+      fullPath: '/industries/oil-and-gas/build-a-business-case'
+      preLoaderRoute: typeof IndustriesOilAndGasBuildABusinessCaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -780,6 +801,8 @@ const rootRouteChildren: RootRouteChildren = {
   PlatformViziCopilotGenAiRoute: PlatformViziCopilotGenAiRoute,
   ServicesSlugRoute: ServicesSlugRoute,
   BlogIndexRoute: BlogIndexRoute,
+  IndustriesOilAndGasBuildABusinessCaseRoute:
+    IndustriesOilAndGasBuildABusinessCaseRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

@@ -59,6 +59,22 @@ export interface MenuItem {
   children?: MenuItem[];
 }
 
+export interface BusinessCaseSubmission {
+  name: string;
+  email: string;
+  company: string;
+  target_capacity_bpd: string;
+  actual_output_bpd: string;
+  location: string;
+  planned_downtime_yearly: string;
+  unplanned_downtime_yearly: string;
+  implementation_schedule: string;
+  time_spent_on_data_pct: string;
+  use_cases: string[];
+  other_use_cases?: string;
+  source_page?: string;
+}
+
 async function refreshOnce(): Promise<boolean> {
   try {
     const res = await fetch(`${BASE}/api/auth/refresh`, {
@@ -121,4 +137,8 @@ export const api = {
     name: string; email: string; company?: string; phone?: string;
     message: string; source_page?: string;
   }) => apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify(data) }),
+
+  submitBusinessCase: (data: BusinessCaseSubmission) =>
+    apiFetch("/api/public/business-case", { method: "POST", body: JSON.stringify(data) }),
+
 };
