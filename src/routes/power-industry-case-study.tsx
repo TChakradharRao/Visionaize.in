@@ -3,18 +3,18 @@ import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 
-export const Route = createFileRoute("/ai-in-pharmaceutical-manufacturing")({
+export const Route = createFileRoute("/power-industry-case-study")({
   head: () => ({
     meta: [
-      { title: "AI in Pharmaceutical Manufacturing — Visionaize" },
+      { title: "Power Industry Case Study — Visionaize" },
       {
         name: "description",
         content:
-          "See how AI, digital twins, and smart apps are helping pharmaceutical manufacturers improve operations, compliance, and visibility.",
+          "Discover how industries are transforming operations with AI-powered Digital Twins and intelligent automation. Explore how Visionaize helps organizations reduce downtime, optimize energy usage, and improve asset reliability.",
       },
     ],
   }),
-  component: PharmaceuticalManufacturingPage,
+  component: PowerCaseStudyPage,
 });
 
 interface FormState {
@@ -25,7 +25,7 @@ interface FormState {
   contactMe: boolean;
 }
 
-function PharmaHero() {
+function CaseStudyHero() {
   const [form, setForm] = useState<FormState>({
     firstName: "",
     lastName: "",
@@ -38,49 +38,45 @@ function PharmaHero() {
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     // Wire this up to your actual lead-capture endpoint (e.g. api.submitContact
-    // or a dedicated whitepaper-download handler) when the backend is ready.
+    // or a dedicated case-study-download handler) when the backend is ready.
     setSubmitted(true);
   }
 
   return (
-    <section className="bg-[#f3f5f7]">
-      <div className="mx-auto max-w-8xl px-6 pt-2 pb-4 md:pt-10 md:pb-8">
+    <section id="problem-content">
+      <div className="mx-auto max-w-7xl px-6 pt-2 pb-6 md:pt-10 md:pb-8">
         <div className="grid gap-9 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-center">
           {/* Left: headline + copy */}
           <div>
             <h1 className="text-3xl font-bold leading-tight text-brand-navy md:text-4xl">
-              Stronger compliance. Smarter quality. Lower risk.
+              Transforming Industrial Operations with AI &amp; Digital Twins
             </h1>
 
             <p className="mt-6 max-w-xl text-base leading-relaxed text-brand-ink/70">
-              In a highly regulated industry, AI empowers pharmaceutical manufacturers to detect
-              deviations early, ensure consistency, and stay audit-ready at all times.
+              Discover how industries are transforming operations with AI-powered Digital Twins
+              and intelligent automation. Visionaize helps organizations reduce downtime, optimize
+              energy usage, improve asset reliability, and drive smarter decisions through
+              real-time operational intelligence.
             </p>
 
-            <p className="mt-6 max-w-xl text-base font-semibold text-brand-navy">
-              Step into a new era of intelligent, compliant manufacturing.
+            <p className="mt-4 max-w-xl text-base leading-relaxed text-brand-ink/70">
+              Explore our case studies to see how businesses are accelerating efficiency,
+              sustainability, and digital transformation.
             </p>
 
-            <a
-              href="#whitepaper-form"
-              className="mt-8 inline-flex items-center gap-3 group"
-            >
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white shadow-md transition group-hover:shadow-lg">
-                <svg
-                  aria-hidden
-                  viewBox="0 0 16 16"
-                  className="h-4 w-4"
-                >
+            <a href="#whitepaper-form" className="mt-8 inline-flex items-center gap-3 group">
+              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-md transition group-hover:shadow-lg">
+                <svg aria-hidden viewBox="0 0 16 16" className="h-4 w-4">
                   <defs>
-                    <linearGradient id="diveInArrowGradientPharma" x1="0" y1="0" x2="16" y2="16">
+                    <linearGradient id="diveInArrowGradientCaseStudy" x1="0" y1="0" x2="16" y2="16">
                       <stop offset="0%" stopColor="#8CC63F" />
                       <stop offset="100%" stopColor="#1B75BC" />
                     </linearGradient>
                   </defs>
-                  <path d="M1 2 L15 2 L8 13 Z" fill="url(#diveInArrowGradientPharma)" />
+                  <path d="M1 2 L15 2 L8 13 Z" fill="url(#diveInArrowGradientCaseStudy)" />
                 </svg>
               </span>
-              <span className="bg-gradient-to-r from-brand-lime to-brand-blue bg-clip-text text-lg font-semibold text-transparent">
+              <span className="bg-gradient-to-r from-brand-lime to-brand-blue bg-clip-text text-xl font-semibold text-transparent">
                 Dive in!
               </span>
             </a>
@@ -88,30 +84,28 @@ function PharmaHero() {
 
           {/* Right: tilted mockup with the form card overlapping its right
               edge, vertically centered — same layout pattern used across
-              the whitepaper landing pages. Uses relative/absolute
-              positioning within a fixed-height wrapper so it stays
-              predictable across breakpoints. */}
-          <div className="relative mx-auto w-full max-w-2xl py-6 lg:mx-0 lg:py-10">
-            <div className="mr-auto ml-0 w-[68%] -rotate-6 overflow-hidden rounded-md sm:w-[58%] lg:w-[52%] lg:-translate-x-4">
+              the whitepaper/case-study landing pages. */}
+          <div className="relative mx-auto w-full max-w-5xl overflow-visible px-4 py-6 lg:mx-0 lg:py-12">
+            <div className="mr-auto ml-0 w-[80%] -rotate-6 rounded-md sm:w-[68%] lg:w-[62%]">
               <img
-                src="https://visionaize.in/wp-content/uploads/2026/03/IndustrialMetaverse-Cover-Mockup-1.png"
-                alt="AI in Pharmaceutical Manufacturing — whitepaper cover"
-                className="aspect-[3/4] w-full object-cover"
+                src="https://visionaize.in/wp-content/uploads/2026/05/Group-1171277152-1-1.png"
+                alt="Power Industry Case Study — cover"
+                className="w-full rounded-md object-contain"
                 loading="eager"
               />
             </div>
 
             <div
               id="whitepaper-form"
-              className="absolute right-0 top-1/2 z-10 w-[88%] -translate-y-1/2 rounded-2xl bg-white p-6 shadow-2xl sm:w-[62%] sm:p-8 lg:w-[58%]"
+              className="absolute right-0 top-1/2 z-10 w-[88%] -translate-y-1/2 rounded-2xl bg-white p-6 shadow-2xl sm:w-[58%] sm:p-8 lg:w-[52%]"
             >
               <h2 className="text-xl font-bold text-brand-navy md:text-2xl">
-                Get the white paper
+                Access the Case Study
               </h2>
 
               {submitted ? (
                 <div className="mt-6 rounded-lg bg-brand-mist/60 p-6 text-brand-ink/80">
-                  Thanks! Your whitepaper access request has been received.
+                  Thanks! Your case study access request has been received.
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="mt-6 space-y-4">
@@ -177,126 +171,102 @@ function PharmaHero() {
 function OverviewSection() {
   return (
     <section className="bg-[#f3f5f7]">
-      <div className="mx-auto max-w-4xl px-6 pt-2 pb-10 md:pt-4 md:pb-14">
-        <div className="space-y-4 text-medium leading-relaxed text-brand-ink/70 md:text-base">
-          <p>
-            Pharmaceutical manufacturing is facing rising complexity, strict regulations, and
-            increasing cost pressures, while large volumes of operational data remain
-            underutilized. AI addresses this gap by connecting fragmented systems and
-            transforming raw data into actionable insights, enabling better visibility, faster
-            decision-making, and improved operational efficiency across the value chain.
-          </p>
-          <p>
-            By enabling predictive maintenance, real-time monitoring, and early detection of
-            process deviations, AI helps reduce downtime, improve yield, and ensure consistent
-            product quality. It also strengthens compliance and supports a shift from reactive to
-            intelligent, data-driven manufacturing, making pharma operations more resilient,
-            efficient, and future-ready.
-          </p>
-        </div>
-
-        <h2 className="mt-8 text-lg font-bold text-brand-navy md:text-xl">What You'll Learn</h2>
-        <ul className="mt-3 space-y-2 text-medium  leading-relaxed text-brand-ink/70 md:text-base">
-          <li className="flex gap-2">
-            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
-            <span>
-              How AI improves <span className="font-semibold text-brand-navy">yield, quality, and uptime</span>
-            </span>
-          </li>
-          <li className="flex gap-2">
-            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
-            <span>
-              Key use cases across{" "}
-              <span className="font-semibold text-brand-navy">production, quality, and supply chain</span>
-            </span>
-          </li>
-          <li className="flex gap-2">
-            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
-            <span>
-              Real-world results including:
-              <ul className="mt-2 space-y-1.5">
-                <li className="flex gap-2">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/40" />
-                  +20% yield improvement
-                </li>
-                <li className="flex gap-2">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/40" />
-                  -30% downtime reduction
-                </li>
-                <li className="flex gap-2">
-                  <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/40" />
-                  -25% cost savings
-                </li>
-              </ul>
-            </span>
-          </li>
-        </ul>
-
-        <h2 className="mt-8 text-lg font-bold text-brand-navy md:text-xl">Why It Matters</h2>
-        <p className="mt-3 text-sm leading-relaxed text-brand-ink/70 md:text-base">
-          AI helps pharma companies:
-        </p>
+      <div className="mx-auto max-w-6xl px-6 pt-4 pb-10 md:pt-5 md:pb-14">
+        <h2 className="text-lg font-bold text-brand-navy md:text-2xl">What You'll Discover</h2>
         <ul className="mt-3 space-y-2 text-medium leading-relaxed text-brand-ink/70 md:text-base">
           <li className="flex gap-2">
             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
-            Reduce batch failures
+            <span>Real-world industrial transformation use cases</span>
           </li>
           <li className="flex gap-2">
             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
-            Ensure continuous compliance
+            <span>AI-driven operational optimization strategies</span>
           </li>
           <li className="flex gap-2">
             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
-            Optimize processes in real time
+            <span>Predictive maintenance and asset reliability improvements</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
+            <span>Measurable business outcomes and performance gains</span>
           </li>
         </ul>
 
-        <p className="mt-6 text-sm leading-relaxed text-brand-ink/70 md:text-base">
-          Move from reactive manufacturing to a{" "}
-          <span className="font-semibold text-brand-navy">Smart Pharma Plant</span>.
-        </p>
+        <h2 className="mt-8 text-lg font-bold text-brand-navy md:text-2xl">Why Visionaize?</h2>
+        <div className="mt-3 space-y-4 text-lg leading-relaxed text-brand-ink/80 md:text-base">
+          <p>
+            Visionaize delivers advanced AI and Digital Twin solutions that empower industries to
+            transform complex operations into intelligent, connected, and high-performing
+            ecosystems.
+          </p>
+          <p>Our solutions help organizations to:</p>
+        </div>
+        <ul className="mt-3 space-y-2 text-medium leading-relaxed text-brand-ink/70 md:text-base">
+          <li className="flex gap-2">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
+            <span>Improve operational efficiency</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
+            <span>Reduce downtime and maintenance costs</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
+            <span>Enhance asset visibility and monitoring</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
+            <span>Enable predictive and prescriptive decision-making</span>
+          </li>
+          <li className="flex gap-2">
+            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
+            <span>Support sustainability and ESG initiatives</span>
+          </li>
+        </ul>
 
-        <h2 className="mt-6 text-lg font-bold text-brand-navy md:text-xl">Access the Whitepaper</h2>
-        <p className="mt-3 text-medium  leading-relaxed text-brand-ink/70 md:text-base">
-          The future of pharma manufacturing is predictive, intelligent, and autonomous.
+        <h2 className="mt-8 text-lg font-bold text-brand-navy md:text-xl">Download the Case Study</h2>
+        <p className="mt-3 text-medium leading-relaxed text-brand-ink/70 md:text-base">
+          Fill out the form to access the case study and learn how Visionaize is helping
+          industries accelerate digital transformation through AI-powered innovation.
         </p>
 
         <a
+          id="main-inner-contact-post1"
           href="#whitepaper-form"
           className="mt-4 inline-block text-medium font-bold text-brand-blue hover:underline md:text-base"
         >
-          Download the Whitepaper &gt;&gt;
+          Access the Case Study Now &gt;&gt;
         </a>
       </div>
     </section>
   );
 }
 
-function PharmaCTA() {
+function CaseStudyCTA() {
   return (
     <section className="bg-gradient-to-r from-brand-lime via-teal-500 to-brand-blue">
       <div className="mx-auto max-w-4xl px-6 py-16 text-center md:py-20">
         <h2 className="text-3xl font-bold leading-tight text-white md:text-3xl">
-          From Batch to Intelligent: Discover how AI is transforming pharma operations.
+          The Next Generation of Intelligent Power Operations Starts Now
         </h2>
 
         <a
           href="#whitepaper-form"
           className="mt-8 inline-flex items-center rounded-full bg-white px-8 py-4 text-base font-bold text-brand-ink shadow-md transition hover:brightness-95"
         >
-          Download the white paper
+          Download the Case Study
         </a>
       </div>
     </section>
   );
 }
 
-function PharmaceuticalManufacturingPage() {
+function PowerCaseStudyPage() {
   return (
     <HeaderFooterWrapper>
-      <PharmaHero />
+      <CaseStudyHero />
       <OverviewSection />
-      <PharmaCTA />
+      <CaseStudyCTA />
     </HeaderFooterWrapper>
   );
 }

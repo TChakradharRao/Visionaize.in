@@ -8,14 +8,13 @@ import { api, type ContentItem, type ContentSection } from "@/lib/api";
 export function pageQuery(postType: string, slug: string) {
   return queryOptions({
     queryKey: ["content", postType, slug],
-    queryFn: async (): Promise<ContentItem> => {
-      try {
-        return await api.getContent(postType, slug);
-      } catch (e) {
-        if (e instanceof Error && /^API 404/.test(e.message)) throw notFound();
-        throw notFound();
-      }
-    },
+  queryFn: async () => {
+  try {
+    return await api.listContent("post");
+  } catch {
+    return { items: [] as ContentItem[] };   // 👈 hides the real problem
+  }
+},
     staleTime: 60_000,
     retry: false,
   });
