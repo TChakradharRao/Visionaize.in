@@ -1,22 +1,10 @@
 import { Facebook, Twitter, Linkedin, Mail } from "lucide-react";
+import type { BlogPost, ContentBlock } from "@/lib/blogData";
 
-export type ContentBlock =
-  | { type: "p"; text: string }
-  | { type: "h2"; text: string }
-  | { type: "h3"; text: string }
-  | { type: "ul"; items: string[] }
-  | { type: "table"; headers: string[]; rows: string[][] };
-
-export interface StaticBlogPost {
-  slug: string;
-  title: string;
-  excerpt: string;
-  cover_image: string;
-  published_at: string;
-  author?: string;
-  reading_time?: string;
-  blocks: ContentBlock[];
-}
+// Re-exported so existing imports of `StaticBlogPost` / `ContentBlock` from
+// this file keep working; the real source of truth now lives in blogData.ts.
+export type { ContentBlock };
+export type StaticBlogPost = BlogPost;
 
 function optimized(url: string): string {
   return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=1200&output=webp&q=85`;
@@ -179,18 +167,17 @@ function ShareRowMobile({ title, url }: { title: string; url: string }) {
   );
 }
 
-export function BlogPostLayout({ post }: { post: StaticBlogPost }) {
+export function BlogPostLayout({ post }: { post: BlogPost }) {
   const url = typeof window !== "undefined" ? window.location.href : "";
 
   return (
     <article className="bg-white">
       <div className="mx-auto max-w-5xl px-6 pt-4 pb-8 md:pt-6 md:pb-10">
-        {/* Title block — no gradient band, plain page like the reference post */}
         <h1 className="text-3xl md:text-4xl font-bold leading-tight text-brand-navy">
           {post.title}
         </h1>
-        {(post.published_at || post.author) && (
-          <p className="mt-4 text-sm text-brand-ink/50">
+        <div className="mt-4 flex flex-col gap-2 text-sm text-brand-ink/60">
+          <div>
             {post.author && <span>{post.author}</span>}
             {post.author && post.published_at && <span> · </span>}
             {post.published_at &&
@@ -200,53 +187,50 @@ export function BlogPostLayout({ post }: { post: StaticBlogPost }) {
                 day: "numeric",
               })}
             {post.reading_time && <span> · {post.reading_time} read</span>}
-          </p>
-        )}
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            {post.category && (
+              <span className="rounded-full bg-brand-mist/60 px-3 py-1 text-xs font-medium text-brand-navy">
+                {post.category}
+              </span>
+            )}
+            {post.tags?.map((t) => (
+              <span
+                key={t}
+                className="rounded-full border border-brand-navy/10 px-3 py-1 text-xs text-brand-ink/80"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
 
         {/* Body content */}
+        {post.cover_image && (
+          <div className="mt-8">
+            <img
+              src={optimized(post.cover_image)}
+              alt={post.title}
+              className="w-full rounded-xl object-cover"
+              loading="lazy"
+            />
+          </div>
+        )}
+
+        {post.excerpt && (
+          <p className="mt-6 text-xl text-brand-ink/80">{post.excerpt}</p>
+        )}
+
         <div className="mt-8">
-          {post.blocks.map((block, i) => {
-            // Inline the cover image after the first paragraph, matching the
-            // reference post's layout (image appears within the intro copy).
-            if (i === 3 && post.cover_image) {
-              return (
-                <div key={`img-${i}`}>
-                  <img
-                    src={optimized(post.cover_image)}
-                    alt={post.title}
-                    className="mt-8 w-full rounded-xl object-cover"
-                    loading="lazy"
-                  />
-                  <Block block={block} i={i} />
-                </div>
-              );
-            }
-            return <Block key={i} block={block} i={i} />;
-          })}
+          {post.blocks.map((block, i) => (
+            <Block key={i} block={block} i={i} />
+          ))}
         </div>
 
         <ShareRowMobile title={post.title} url={url} />
       </div>
 
       <ShareSidebar title={post.title} url={url} />
-
-      {/* CTA */}
-      {/* <section className="bg-brand-navy text-white">
-        <div className="mx-auto flex max-w-5xl flex-col items-start gap-6 px-6 py-16 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h3 className="text-3xl font-bold md:text-4xl">Let's Connect</h3>
-            <p className="mt-2 text-white/70">
-              Learn how Visionaize can reduce downtime and increase productivity.
-            </p>
-          </div>
-          <a
-            href="/contact"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-lime px-6 py-3 text-sm font-semibold text-brand-navy shadow-sm transition hover:brightness-95"
-          >
-            Talk to an expert
-          </a>
-        </div>
-      </section> */}
     </article>
   );
 }

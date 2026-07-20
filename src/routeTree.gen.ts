@@ -9,29 +9,24 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025RouteImport } from './routes/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025'
-import { Route as WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRouteImport } from './routes/why-digital-twins-are-a-strategic-imperative-for-utility-ceos'
-import { Route as WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRouteImport } from './routes/why-ai-optimization-is-outperforming-traditional-advanced-process-control'
-import { Route as VisualIntelligenceMeetsContextRouteImport } from './routes/visual-intelligence-meets-context'
+import { Route as VrTourRequestRouteImport } from './routes/vr-tour-request'
+import { Route as ViziCopilotGenAiDemoLinkRouteImport } from './routes/vizi-copilot-gen-ai-demo-link'
 import { Route as TheindustrialmetaverseRouteImport } from './routes/theindustrialmetaverse'
-import { Route as TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRouteImport } from './routes/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant'
 import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as SocialDigitalContactRouteImport } from './routes/social-digital-contact'
 import { Route as SocialDigitalRouteImport } from './routes/social-digital'
-import { Route as RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRouteImport } from './routes/robots-digital-twin-powering-next‑gen-industrial-operation'
+import { Route as SignalMinerContactRouteImport } from './routes/signal-miner-contact'
 import { Route as RequestADemoRouteImport } from './routes/request-a-demo'
 import { Route as RenewableEnergyWhitepaperRouteImport } from './routes/renewable-energy-whitepaper'
 import { Route as ReInventingTurnaroundsInTheMetaverseRouteImport } from './routes/re-inventing-turnarounds-in-the-metaverse'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PowerIndustryWhitepaperRouteImport } from './routes/power-industry-whitepaper'
 import { Route as PowerIndustryCaseStudyRouteImport } from './routes/power-industry-case-study'
-import { Route as OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRouteImport } from './routes/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation'
-import { Route as MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRouteImport } from './routes/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency'
 import { Route as DigitalTwinFaqRouteImport } from './routes/digital-twin-faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompanyRouteImport } from './routes/company'
 import { Route as CementIndustryWhitepaperRouteImport } from './routes/cement-industry-whitepaper'
 import { Route as BuildABusinessCaseRouteImport } from './routes/build-a-business-case'
-import { Route as BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRouteImport } from './routes/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry'
 import { Route as AiInPharmaceuticalManufacturingRouteImport } from './routes/ai-in-pharmaceutical-manufacturing'
 import { Route as AboutUsRouteImport } from './routes/about-us'
 import { Route as SlugRouteImport } from './routes/$slug'
@@ -50,37 +45,22 @@ import { Route as PlatformVSmartDocxRouteImport } from './routes/platform.v-smar
 import { Route as PlatformVPlantRouteImport } from './routes/platform.v-plant'
 import { Route as PlatformSignalMinerRouteImport } from './routes/platform.signal-miner'
 import { Route as PlatformMicrosoftFabricExpertiseRouteImport } from './routes/platform.microsoft-fabric-expertise'
-import { Route as InsightsInsightsDigitalTwinResourceCenterRouteImport } from './routes/insights.insights-digital-twin-resource-center'
+import { Route as InsightsInsightsDigitalTwinResourceCenterRouteImport } from './routes/insights/insights-digital-twin-resource-center'
 import { Route as IndustriesDigitalTwinForPowerAndEnergyRouteImport } from './routes/industries.digital-twin-for-power-and-energy'
 import { Route as IndustriesDigitalTwinForOilAndGasRouteImport } from './routes/industries.digital-twin-for-oil-and-gas'
 import { Route as IndustriesDigitalTwinForManufacturingRouteImport } from './routes/industries.digital-twin-for-manufacturing'
 import { Route as IndustriesDigitalTwinForCementRouteImport } from './routes/industries.digital-twin-for-cement'
 import { Route as IndustriesOilAndGasBuildABusinessCaseRouteImport } from './routes/industries/oil-and-gas/build-a-business-case'
 
-const WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025Route =
-  WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025RouteImport.update({
-    id: '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025',
-    path: '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRoute =
-  WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRouteImport.update({
-    id: '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos',
-    path: '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRoute =
-  WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRouteImport.update(
-    {
-      id: '/why-ai-optimization-is-outperforming-traditional-advanced-process-control',
-      path: '/why-ai-optimization-is-outperforming-traditional-advanced-process-control',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const VisualIntelligenceMeetsContextRoute =
-  VisualIntelligenceMeetsContextRouteImport.update({
-    id: '/visual-intelligence-meets-context',
-    path: '/visual-intelligence-meets-context',
+const VrTourRequestRoute = VrTourRequestRouteImport.update({
+  id: '/vr-tour-request',
+  path: '/vr-tour-request',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ViziCopilotGenAiDemoLinkRoute =
+  ViziCopilotGenAiDemoLinkRouteImport.update({
+    id: '/vizi-copilot-gen-ai-demo-link',
+    path: '/vizi-copilot-gen-ai-demo-link',
     getParentRoute: () => rootRouteImport,
   } as any)
 const TheindustrialmetaverseRoute = TheindustrialmetaverseRouteImport.update({
@@ -88,17 +68,14 @@ const TheindustrialmetaverseRoute = TheindustrialmetaverseRouteImport.update({
   path: '/theindustrialmetaverse',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRoute =
-  TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRouteImport.update(
-    {
-      id: '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant',
-      path: '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SocialDigitalContactRoute = SocialDigitalContactRouteImport.update({
+  id: '/social-digital-contact',
+  path: '/social-digital-contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SocialDigitalRoute = SocialDigitalRouteImport.update({
@@ -106,14 +83,11 @@ const SocialDigitalRoute = SocialDigitalRouteImport.update({
   path: '/social-digital',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRoute =
-  RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRouteImport.update(
-    {
-      id: '/robots-digital-twin-powering-next‑gen-industrial-operation',
-      path: '/robots-digital-twin-powering-next‑gen-industrial-operation',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
+const SignalMinerContactRoute = SignalMinerContactRouteImport.update({
+  id: '/signal-miner-contact',
+  path: '/signal-miner-contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const RequestADemoRoute = RequestADemoRouteImport.update({
   id: '/request-a-demo',
   path: '/request-a-demo',
@@ -146,22 +120,6 @@ const PowerIndustryCaseStudyRoute = PowerIndustryCaseStudyRouteImport.update({
   path: '/power-industry-case-study',
   getParentRoute: () => rootRouteImport,
 } as any)
-const OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRoute =
-  OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRouteImport.update(
-    {
-      id: '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation',
-      path: '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
-const MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRoute =
-  MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRouteImport.update(
-    {
-      id: '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency',
-      path: '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
 const DigitalTwinFaqRoute = DigitalTwinFaqRouteImport.update({
   id: '/digital-twin-faq',
   path: '/digital-twin-faq',
@@ -188,14 +146,6 @@ const BuildABusinessCaseRoute = BuildABusinessCaseRouteImport.update({
   path: '/build-a-business-case',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRoute =
-  BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRouteImport.update(
-    {
-      id: '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry',
-      path: '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry',
-      getParentRoute: () => rootRouteImport,
-    } as any,
-  )
 const AiInPharmaceuticalManufacturingRoute =
   AiInPharmaceuticalManufacturingRouteImport.update({
     id: '/ai-in-pharmaceutical-manufacturing',
@@ -336,29 +286,24 @@ export interface FileRoutesByFullPath {
   '/$slug': typeof SlugRoute
   '/about-us': typeof AboutUsRoute
   '/ai-in-pharmaceutical-manufacturing': typeof AiInPharmaceuticalManufacturingRoute
-  '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry': typeof BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRoute
   '/build-a-business-case': typeof BuildABusinessCaseRoute
   '/cement-industry-whitepaper': typeof CementIndustryWhitepaperRoute
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
-  '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency': typeof MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRoute
-  '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation': typeof OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRoute
   '/power-industry-case-study': typeof PowerIndustryCaseStudyRoute
   '/power-industry-whitepaper': typeof PowerIndustryWhitepaperRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
   '/renewable-energy-whitepaper': typeof RenewableEnergyWhitepaperRoute
   '/request-a-demo': typeof RequestADemoRoute
-  '/robots-digital-twin-powering-next‑gen-industrial-operation': typeof RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRoute
+  '/signal-miner-contact': typeof SignalMinerContactRoute
   '/social-digital': typeof SocialDigitalRoute
+  '/social-digital-contact': typeof SocialDigitalContactRoute
   '/solutions': typeof SolutionsRouteWithChildren
-  '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant': typeof TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRoute
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
-  '/visual-intelligence-meets-context': typeof VisualIntelligenceMeetsContextRoute
-  '/why-ai-optimization-is-outperforming-traditional-advanced-process-control': typeof WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRoute
-  '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos': typeof WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRoute
-  '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025': typeof WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025Route
+  '/vizi-copilot-gen-ai-demo-link': typeof ViziCopilotGenAiDemoLinkRoute
+  '/vr-tour-request': typeof VrTourRequestRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
   '/industries/digital-twin-for-manufacturing': typeof IndustriesDigitalTwinForManufacturingRoute
   '/industries/digital-twin-for-oil-and-gas': typeof IndustriesDigitalTwinForOilAndGasRoute
@@ -385,28 +330,23 @@ export interface FileRoutesByTo {
   '/$slug': typeof SlugRoute
   '/about-us': typeof AboutUsRoute
   '/ai-in-pharmaceutical-manufacturing': typeof AiInPharmaceuticalManufacturingRoute
-  '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry': typeof BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRoute
   '/build-a-business-case': typeof BuildABusinessCaseRoute
   '/cement-industry-whitepaper': typeof CementIndustryWhitepaperRoute
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
-  '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency': typeof MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRoute
-  '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation': typeof OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRoute
   '/power-industry-case-study': typeof PowerIndustryCaseStudyRoute
   '/power-industry-whitepaper': typeof PowerIndustryWhitepaperRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
   '/renewable-energy-whitepaper': typeof RenewableEnergyWhitepaperRoute
   '/request-a-demo': typeof RequestADemoRoute
-  '/robots-digital-twin-powering-next‑gen-industrial-operation': typeof RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRoute
+  '/signal-miner-contact': typeof SignalMinerContactRoute
   '/social-digital': typeof SocialDigitalRoute
-  '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant': typeof TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRoute
+  '/social-digital-contact': typeof SocialDigitalContactRoute
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
-  '/visual-intelligence-meets-context': typeof VisualIntelligenceMeetsContextRoute
-  '/why-ai-optimization-is-outperforming-traditional-advanced-process-control': typeof WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRoute
-  '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos': typeof WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRoute
-  '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025': typeof WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025Route
+  '/vizi-copilot-gen-ai-demo-link': typeof ViziCopilotGenAiDemoLinkRoute
+  '/vr-tour-request': typeof VrTourRequestRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
   '/industries/digital-twin-for-manufacturing': typeof IndustriesDigitalTwinForManufacturingRoute
   '/industries/digital-twin-for-oil-and-gas': typeof IndustriesDigitalTwinForOilAndGasRoute
@@ -434,29 +374,24 @@ export interface FileRoutesById {
   '/$slug': typeof SlugRoute
   '/about-us': typeof AboutUsRoute
   '/ai-in-pharmaceutical-manufacturing': typeof AiInPharmaceuticalManufacturingRoute
-  '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry': typeof BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRoute
   '/build-a-business-case': typeof BuildABusinessCaseRoute
   '/cement-industry-whitepaper': typeof CementIndustryWhitepaperRoute
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
-  '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency': typeof MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRoute
-  '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation': typeof OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRoute
   '/power-industry-case-study': typeof PowerIndustryCaseStudyRoute
   '/power-industry-whitepaper': typeof PowerIndustryWhitepaperRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/re-inventing-turnarounds-in-the-metaverse': typeof ReInventingTurnaroundsInTheMetaverseRoute
   '/renewable-energy-whitepaper': typeof RenewableEnergyWhitepaperRoute
   '/request-a-demo': typeof RequestADemoRoute
-  '/robots-digital-twin-powering-next‑gen-industrial-operation': typeof RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRoute
+  '/signal-miner-contact': typeof SignalMinerContactRoute
   '/social-digital': typeof SocialDigitalRoute
+  '/social-digital-contact': typeof SocialDigitalContactRoute
   '/solutions': typeof SolutionsRouteWithChildren
-  '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant': typeof TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRoute
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
-  '/visual-intelligence-meets-context': typeof VisualIntelligenceMeetsContextRoute
-  '/why-ai-optimization-is-outperforming-traditional-advanced-process-control': typeof WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRoute
-  '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos': typeof WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRoute
-  '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025': typeof WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025Route
+  '/vizi-copilot-gen-ai-demo-link': typeof ViziCopilotGenAiDemoLinkRoute
+  '/vr-tour-request': typeof VrTourRequestRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
   '/industries/digital-twin-for-manufacturing': typeof IndustriesDigitalTwinForManufacturingRoute
   '/industries/digital-twin-for-oil-and-gas': typeof IndustriesDigitalTwinForOilAndGasRoute
@@ -485,29 +420,24 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/about-us'
     | '/ai-in-pharmaceutical-manufacturing'
-    | '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry'
     | '/build-a-business-case'
     | '/cement-industry-whitepaper'
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
-    | '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency'
-    | '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation'
     | '/power-industry-case-study'
     | '/power-industry-whitepaper'
     | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
     | '/renewable-energy-whitepaper'
     | '/request-a-demo'
-    | '/robots-digital-twin-powering-next‑gen-industrial-operation'
+    | '/signal-miner-contact'
     | '/social-digital'
+    | '/social-digital-contact'
     | '/solutions'
-    | '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant'
     | '/theindustrialmetaverse'
-    | '/visual-intelligence-meets-context'
-    | '/why-ai-optimization-is-outperforming-traditional-advanced-process-control'
-    | '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos'
-    | '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025'
+    | '/vizi-copilot-gen-ai-demo-link'
+    | '/vr-tour-request'
     | '/industries/digital-twin-for-cement'
     | '/industries/digital-twin-for-manufacturing'
     | '/industries/digital-twin-for-oil-and-gas'
@@ -534,28 +464,23 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/about-us'
     | '/ai-in-pharmaceutical-manufacturing'
-    | '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry'
     | '/build-a-business-case'
     | '/cement-industry-whitepaper'
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
-    | '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency'
-    | '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation'
     | '/power-industry-case-study'
     | '/power-industry-whitepaper'
     | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
     | '/renewable-energy-whitepaper'
     | '/request-a-demo'
-    | '/robots-digital-twin-powering-next‑gen-industrial-operation'
+    | '/signal-miner-contact'
     | '/social-digital'
-    | '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant'
+    | '/social-digital-contact'
     | '/theindustrialmetaverse'
-    | '/visual-intelligence-meets-context'
-    | '/why-ai-optimization-is-outperforming-traditional-advanced-process-control'
-    | '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos'
-    | '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025'
+    | '/vizi-copilot-gen-ai-demo-link'
+    | '/vr-tour-request'
     | '/industries/digital-twin-for-cement'
     | '/industries/digital-twin-for-manufacturing'
     | '/industries/digital-twin-for-oil-and-gas'
@@ -582,29 +507,24 @@ export interface FileRouteTypes {
     | '/$slug'
     | '/about-us'
     | '/ai-in-pharmaceutical-manufacturing'
-    | '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry'
     | '/build-a-business-case'
     | '/cement-industry-whitepaper'
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
-    | '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency'
-    | '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation'
     | '/power-industry-case-study'
     | '/power-industry-whitepaper'
     | '/privacy-policy'
     | '/re-inventing-turnarounds-in-the-metaverse'
     | '/renewable-energy-whitepaper'
     | '/request-a-demo'
-    | '/robots-digital-twin-powering-next‑gen-industrial-operation'
+    | '/signal-miner-contact'
     | '/social-digital'
+    | '/social-digital-contact'
     | '/solutions'
-    | '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant'
     | '/theindustrialmetaverse'
-    | '/visual-intelligence-meets-context'
-    | '/why-ai-optimization-is-outperforming-traditional-advanced-process-control'
-    | '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos'
-    | '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025'
+    | '/vizi-copilot-gen-ai-demo-link'
+    | '/vr-tour-request'
     | '/industries/digital-twin-for-cement'
     | '/industries/digital-twin-for-manufacturing'
     | '/industries/digital-twin-for-oil-and-gas'
@@ -632,29 +552,24 @@ export interface RootRouteChildren {
   SlugRoute: typeof SlugRoute
   AboutUsRoute: typeof AboutUsRoute
   AiInPharmaceuticalManufacturingRoute: typeof AiInPharmaceuticalManufacturingRoute
-  BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRoute: typeof BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRoute
   BuildABusinessCaseRoute: typeof BuildABusinessCaseRoute
   CementIndustryWhitepaperRoute: typeof CementIndustryWhitepaperRoute
   CompanyRoute: typeof CompanyRoute
   ContactRoute: typeof ContactRoute
   DigitalTwinFaqRoute: typeof DigitalTwinFaqRoute
-  MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRoute: typeof MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRoute
-  OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRoute: typeof OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRoute
   PowerIndustryCaseStudyRoute: typeof PowerIndustryCaseStudyRoute
   PowerIndustryWhitepaperRoute: typeof PowerIndustryWhitepaperRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ReInventingTurnaroundsInTheMetaverseRoute: typeof ReInventingTurnaroundsInTheMetaverseRoute
   RenewableEnergyWhitepaperRoute: typeof RenewableEnergyWhitepaperRoute
   RequestADemoRoute: typeof RequestADemoRoute
-  RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRoute: typeof RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRoute
+  SignalMinerContactRoute: typeof SignalMinerContactRoute
   SocialDigitalRoute: typeof SocialDigitalRoute
+  SocialDigitalContactRoute: typeof SocialDigitalContactRoute
   SolutionsRoute: typeof SolutionsRouteWithChildren
-  TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRoute: typeof TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRoute
   TheindustrialmetaverseRoute: typeof TheindustrialmetaverseRoute
-  VisualIntelligenceMeetsContextRoute: typeof VisualIntelligenceMeetsContextRoute
-  WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRoute: typeof WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRoute
-  WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRoute: typeof WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRoute
-  WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025Route: typeof WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025Route
+  ViziCopilotGenAiDemoLinkRoute: typeof ViziCopilotGenAiDemoLinkRoute
+  VrTourRequestRoute: typeof VrTourRequestRoute
   IndustriesDigitalTwinForCementRoute: typeof IndustriesDigitalTwinForCementRoute
   IndustriesDigitalTwinForManufacturingRoute: typeof IndustriesDigitalTwinForManufacturingRoute
   IndustriesDigitalTwinForOilAndGasRoute: typeof IndustriesDigitalTwinForOilAndGasRoute
@@ -673,32 +588,18 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025': {
-      id: '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025'
-      path: '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025'
-      fullPath: '/why-industrial-plants-can-t-afford-to-ignore-ai-in-2025'
-      preLoaderRoute: typeof WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025RouteImport
+    '/vr-tour-request': {
+      id: '/vr-tour-request'
+      path: '/vr-tour-request'
+      fullPath: '/vr-tour-request'
+      preLoaderRoute: typeof VrTourRequestRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos': {
-      id: '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos'
-      path: '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos'
-      fullPath: '/why-digital-twins-are-a-strategic-imperative-for-utility-ceos'
-      preLoaderRoute: typeof WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/why-ai-optimization-is-outperforming-traditional-advanced-process-control': {
-      id: '/why-ai-optimization-is-outperforming-traditional-advanced-process-control'
-      path: '/why-ai-optimization-is-outperforming-traditional-advanced-process-control'
-      fullPath: '/why-ai-optimization-is-outperforming-traditional-advanced-process-control'
-      preLoaderRoute: typeof WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/visual-intelligence-meets-context': {
-      id: '/visual-intelligence-meets-context'
-      path: '/visual-intelligence-meets-context'
-      fullPath: '/visual-intelligence-meets-context'
-      preLoaderRoute: typeof VisualIntelligenceMeetsContextRouteImport
+    '/vizi-copilot-gen-ai-demo-link': {
+      id: '/vizi-copilot-gen-ai-demo-link'
+      path: '/vizi-copilot-gen-ai-demo-link'
+      fullPath: '/vizi-copilot-gen-ai-demo-link'
+      preLoaderRoute: typeof ViziCopilotGenAiDemoLinkRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/theindustrialmetaverse': {
@@ -708,18 +609,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TheindustrialmetaverseRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant': {
-      id: '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant'
-      path: '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant'
-      fullPath: '/the-rise-of-autonomous-industrial-control-why-real-time-optimization-rto-is-becoming-the-brain-of-the-modern-plant'
-      preLoaderRoute: typeof TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/solutions': {
       id: '/solutions'
       path: '/solutions'
       fullPath: '/solutions'
       preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/social-digital-contact': {
+      id: '/social-digital-contact'
+      path: '/social-digital-contact'
+      fullPath: '/social-digital-contact'
+      preLoaderRoute: typeof SocialDigitalContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/social-digital': {
@@ -729,11 +630,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SocialDigitalRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/robots-digital-twin-powering-next‑gen-industrial-operation': {
-      id: '/robots-digital-twin-powering-next‑gen-industrial-operation'
-      path: '/robots-digital-twin-powering-next‑gen-industrial-operation'
-      fullPath: '/robots-digital-twin-powering-next‑gen-industrial-operation'
-      preLoaderRoute: typeof RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRouteImport
+    '/signal-miner-contact': {
+      id: '/signal-miner-contact'
+      path: '/signal-miner-contact'
+      fullPath: '/signal-miner-contact'
+      preLoaderRoute: typeof SignalMinerContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/request-a-demo': {
@@ -778,20 +679,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PowerIndustryCaseStudyRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation': {
-      id: '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation'
-      path: '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation'
-      fullPath: '/operational-efficiency-and-decarbonization-the-synergy-in-industrial-transformation'
-      preLoaderRoute: typeof OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency': {
-      id: '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency'
-      path: '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency'
-      fullPath: '/mining-the-future-with-visionaize-signal-miner-to-reveal-hidden-insights-and-maximize-efficiency'
-      preLoaderRoute: typeof MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/digital-twin-faq': {
       id: '/digital-twin-faq'
       path: '/digital-twin-faq'
@@ -825,13 +712,6 @@ declare module '@tanstack/react-router' {
       path: '/build-a-business-case'
       fullPath: '/build-a-business-case'
       preLoaderRoute: typeof BuildABusinessCaseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry': {
-      id: '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry'
-      path: '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry'
-      fullPath: '/bridging-the-data-gap-how-ai-and-3d-digital-twins-unlock-real-time-emissions-monitoring-in-the-process-industry'
-      preLoaderRoute: typeof BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ai-in-pharmaceutical-manufacturing': {
@@ -1035,17 +915,11 @@ const rootRouteChildren: RootRouteChildren = {
   SlugRoute: SlugRoute,
   AboutUsRoute: AboutUsRoute,
   AiInPharmaceuticalManufacturingRoute: AiInPharmaceuticalManufacturingRoute,
-  BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRoute:
-    BridgingTheDataGapHowAiAnd3dDigitalTwinsUnlockRealTimeEmissionsMonitoringInTheProcessIndustryRoute,
   BuildABusinessCaseRoute: BuildABusinessCaseRoute,
   CementIndustryWhitepaperRoute: CementIndustryWhitepaperRoute,
   CompanyRoute: CompanyRoute,
   ContactRoute: ContactRoute,
   DigitalTwinFaqRoute: DigitalTwinFaqRoute,
-  MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRoute:
-    MiningTheFutureWithVisionaizeSignalMinerToRevealHiddenInsightsAndMaximizeEfficiencyRoute,
-  OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRoute:
-    OperationalEfficiencyAndDecarbonizationTheSynergyInIndustrialTransformationRoute,
   PowerIndustryCaseStudyRoute: PowerIndustryCaseStudyRoute,
   PowerIndustryWhitepaperRoute: PowerIndustryWhitepaperRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
@@ -1053,20 +927,13 @@ const rootRouteChildren: RootRouteChildren = {
     ReInventingTurnaroundsInTheMetaverseRoute,
   RenewableEnergyWhitepaperRoute: RenewableEnergyWhitepaperRoute,
   RequestADemoRoute: RequestADemoRoute,
-  RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRoute:
-    RobotsDigitalTwinPoweringNextChar8209genIndustrialOperationRoute,
+  SignalMinerContactRoute: SignalMinerContactRoute,
   SocialDigitalRoute: SocialDigitalRoute,
+  SocialDigitalContactRoute: SocialDigitalContactRoute,
   SolutionsRoute: SolutionsRouteWithChildren,
-  TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRoute:
-    TheRiseOfAutonomousIndustrialControlWhyRealTimeOptimizationRtoIsBecomingTheBrainOfTheModernPlantRoute,
   TheindustrialmetaverseRoute: TheindustrialmetaverseRoute,
-  VisualIntelligenceMeetsContextRoute: VisualIntelligenceMeetsContextRoute,
-  WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRoute:
-    WhyAiOptimizationIsOutperformingTraditionalAdvancedProcessControlRoute,
-  WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRoute:
-    WhyDigitalTwinsAreAStrategicImperativeForUtilityCeosRoute,
-  WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025Route:
-    WhyIndustrialPlantsCanTAffordToIgnoreAiIn2025Route,
+  ViziCopilotGenAiDemoLinkRoute: ViziCopilotGenAiDemoLinkRoute,
+  VrTourRequestRoute: VrTourRequestRoute,
   IndustriesDigitalTwinForCementRoute: IndustriesDigitalTwinForCementRoute,
   IndustriesDigitalTwinForManufacturingRoute:
     IndustriesDigitalTwinForManufacturingRoute,

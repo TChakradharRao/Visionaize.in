@@ -75,6 +75,49 @@ export interface BusinessCaseSubmission {
   source_page?: string;
 }
 
+export interface ViziCopilotDemoSubmission {
+  first_name: string;
+  last_name: string;
+  company_name: string;
+  business_email: string;
+  phone_number: string;
+  contact_me: boolean;
+  source_page?: string;
+}
+
+export interface SignalMinerContactSubmission {
+  first_name: string;
+  last_name: string;
+  company: string;
+  title: string;
+  phone_number?: string;
+  email: string;
+  seeking_solutions: string[];
+  comments?: string;
+  source_page?: string;
+}
+
+export interface VrTourRequestSubmission {
+  first_name: string;
+  last_name: string;
+  company_name: string;
+  business_email: string;
+  phone_number?: string;
+  message?: string;
+  source_page?: string;
+}
+
+export interface SocialDigitalContactSubmission {
+  first_name: string;
+  last_name: string;
+  company_name: string;
+  business_email: string;
+  phone_number: string;
+  hear_about_us?: string;
+  message?: string;
+  source_page?: string;
+}
+
 async function refreshOnce(): Promise<boolean> {
   try {
     const res = await fetch(`${BASE}/api/auth/refresh`, {
@@ -140,5 +183,17 @@ export const api = {
 
   submitBusinessCase: (data: BusinessCaseSubmission) =>
     apiFetch("/api/public/business-case", { method: "POST", body: JSON.stringify(data) }),
+
+  submitViziCopilotDemo: (data: ViziCopilotDemoSubmission) =>
+    apiFetch("/api/public/vizi-copilot-demo", { method: "POST", body: JSON.stringify(data) }),
+
+  submitSignalMinerContact: (data: SignalMinerContactSubmission) =>
+    apiFetch("/api/public/signal-miner-contact", { method: "POST", body: JSON.stringify(data) }),
+
+  submitVrTourRequest: (data: VrTourRequestSubmission) =>
+    apiFetch("/api/public/vr-tour-request", { method: "POST", body: JSON.stringify(data) }),
+
+  submitSocialDigitalContact: (data: SocialDigitalContactSubmission) =>
+    apiFetch("/api/public/social-digital-contact", { method: "POST", body: JSON.stringify(data) }),
 
 };
