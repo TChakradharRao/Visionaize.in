@@ -21,60 +21,61 @@ function PrivacyPolicyPage() {
       <Header />
       <main className="min-h-screen bg-white">
         {/* Hero */}
-      <section
-  className="px-6 py-24 text-center md:py-28"
-  style={{
-    background:
-      "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 35%, #3EA0A8 70%, #6FC7E0 100%)",
-  }}
->
-  <h1 className="text-6xl font-bold text-brand-navy md:text-4xl">
-    Privacy Policy
-  </h1>
-</section>
+        <section
+          className="px-4 py-16 text-center sm:px-6 sm:py-20 md:py-28"
+          style={{
+            background:
+              "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 35%, #3EA0A8 70%, #6FC7E0 100%)",
+          }}
+        >
+          <h1 className="text-3xl font-bold text-brand-navy sm:text-4xl md:text-6xl">
+            Privacy Policy
+          </h1>
+        </section>
+
         {/* Content */}
-        <section className="px-0 py-14 md:py-16">
-  <div className="mx-auto max-w-6xl text-brand-ink">
-            <h2 className="text-2xl font-bold text-brand-navy">Privacy Policy</h2>
+        <section className="px-4 py-10 sm:px-6 sm:py-14 md:py-16">
+          <div className="mx-auto max-w-6xl text-brand-ink">
+            <h2 className="text-xl font-bold text-brand-navy sm:text-2xl">Privacy Policy</h2>
             <p className="mt-2 text-sm text-brand-ink/70">Last updated: August 16, 2024</p>
 
-            <p className="mt-6 leading-relaxed">
+            <p className="mt-6 text-sm leading-relaxed sm:text-base">
               This Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your information when You use the Service and tells You about Your privacy rights and how the law protects You.
             </p>
 
-            <p className="mt-4 leading-relaxed">
+            <p className="mt-4 text-sm leading-relaxed sm:text-base">
               When you visit or log in to our website, cookies and similar technologies may be used by our{" "}
               <a href="#" className="text-brand-blue underline">
                 online data partners or vendors
               </a>{" "}
               to associate these activities with other personal information they or others have about you, including by association with your email or home address. We (or service providers on our behalf) may then send communications and marketing to these email or home addresses. You may opt out of receiving this advertising by visiting{" "}
-              <a
+              
                 href="https://app.retention.com/optout"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-brand-blue underline"
-              >
+                className="break-words text-brand-blue underline"
+             <a>
                 https://app.retention.com/optout
               </a>
             </p>
 
-            <p className="mt-4 leading-relaxed">
+            <p className="mt-4 text-sm leading-relaxed sm:text-base">
               We use Your Personal data to provide and improve the Service. By using the Service, You agree to the collection and use of information in accordance with this Privacy Policy.
             </p>
 
-            <h2 className="mt-10 text-2xl font-bold text-brand-navy">
+            <h2 className="mt-10 text-xl font-bold text-brand-navy sm:text-2xl">
               Interpretation and Definitions
             </h2>
 
-            <h3 className="mt-8 text-xl font-bold text-brand-navy">Interpretation</h3>
-            <p className="mt-3 leading-relaxed">
+            <h3 className="mt-8 text-lg font-bold text-brand-navy sm:text-xl">Interpretation</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.
             </p>
 
-            <h3 className="mt-8 text-xl font-bold text-brand-navy">Definitions</h3>
-            <p className="mt-3 leading-relaxed">For the purposes of this Privacy Policy:</p>
+            <h3 className="mt-8 text-lg font-bold text-brand-navy sm:text-xl">Definitions</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">For the purposes of this Privacy Policy:</p>
 
-            <ul className="mt-4 list-disc space-y-3 pl-6 leading-relaxed">
+            <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-relaxed sm:pl-6 sm:text-base">
               <li>
                 <strong>Account</strong> means a unique account created for You to access our Service or parts of our Service.
               </li>
@@ -104,11 +105,11 @@ function PrivacyPolicyPage() {
               </li>
               <li>
                 <strong>Website</strong> refers to Visionaize, accessible from{" "}
-                <a
-                  href="https://visionaize.in/"
+                
+                <a  href="https://visionaize.in/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-brand-blue underline"
+                  className="break-words text-brand-blue underline"
                 >
                   https://visionaize.in/
                 </a>
@@ -118,35 +119,35 @@ function PrivacyPolicyPage() {
               </li>
             </ul>
 
-            <h2 className="mt-10 text-2xl font-bold text-brand-navy">
+            <h2 className="mt-10 text-xl font-bold text-brand-navy sm:text-2xl">
               Collecting and Using Your Personal Data
             </h2>
 
-            <h3 className="mt-8 text-xl font-bold text-brand-navy">Types of Data Collected</h3>
+            <h3 className="mt-8 text-lg font-bold text-brand-navy sm:text-xl">Types of Data Collected</h3>
 
-            <h3 className="mt-6 text-lg font-bold text-brand-navy">Personal Data</h3>
-            <p className="mt-3 leading-relaxed">
+            <h3 className="mt-6 text-base font-bold text-brand-navy sm:text-lg">Personal Data</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               While using Our Service, We may ask You to provide Us with certain personally identifiable information that can be used to contact or identify You. Personally identifiable information may include, but is not limited to:
             </p>
-            <ul className="mt-3 list-disc space-y-2 pl-6 leading-relaxed">
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:pl-6 sm:text-base">
               <li>Email address</li>
               <li>First name and last name</li>
               <li>Phone number</li>
               <li>Usage Data</li>
             </ul>
 
-            <h3 className="mt-8 text-lg font-bold text-brand-navy">Usage Data</h3>
-            <p className="mt-3 leading-relaxed">
+            <h3 className="mt-8 text-base font-bold text-brand-navy sm:text-lg">Usage Data</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               Usage Data is collected automatically when using the Service. Usage Data may include information such as Your Device's Internet Protocol address (e.g. IP address), browser type, browser version, the pages of our Service that You visit, the time and date of Your visit, the time spent on those pages, unique device identifiers and other diagnostic data. When You access the Service by or through a mobile device, We may collect certain information automatically, including, but not limited to, the type of mobile device You use, Your mobile device unique ID, the IP address of Your mobile device, Your mobile operating system, the type of mobile Internet browser You use, unique device identifiers and other diagnostic data. We may also collect information that Your browser sends whenever You visit our Service or when You access the Service by or through a mobile device.
             </p>
 
-            <h3 className="mt-8 text-lg font-bold text-brand-navy">
+            <h3 className="mt-8 text-base font-bold text-brand-navy sm:text-lg">
               Tracking Technologies and Cookies
             </h3>
-            <p className="mt-3 leading-relaxed">
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               We use Cookies and similar tracking technologies to track the activity on Our Service and store certain information. Tracking technologies used are beacons, tags, and scripts to collect and track information and to improve and analyze Our Service. The technologies We use may include:
             </p>
-            <ul className="mt-3 list-disc space-y-3 pl-6 leading-relaxed">
+            <ul className="mt-3 list-disc space-y-3 pl-5 text-sm leading-relaxed sm:pl-6 sm:text-base">
               <li>
                 <strong>Cookies or Browser Cookies.</strong> A cookie is a small file placed on Your Device. You can instruct Your browser to refuse all Cookies or to indicate when a Cookie is being sent. However, if You do not accept Cookies, You may not be able to use some parts of our Service. Unless you have adjusted Your browser setting so that it will refuse Cookies, our Service may use Cookies.
               </li>
@@ -154,10 +155,10 @@ function PrivacyPolicyPage() {
                 <strong>Web Beacons.</strong> Certain sections of our Service and our emails may contain small electronic files known as web beacons (also referred to as clear gifs, pixel tags, and single-pixel gifs) that permit the Company, for example, to count users who have visited those pages or opened an email and for other related website statistics (for example, recording the popularity of a certain section and verifying system and server integrity).
               </li>
             </ul>
-            <p className="mt-4 leading-relaxed">
+            <p className="mt-4 text-sm leading-relaxed sm:text-base">
               Cookies can be "Persistent" or "Session" Cookies. Persistent Cookies remain on Your personal computer or mobile device when You go offline, while Session Cookies are deleted as soon as You close Your web browser. You can learn more about cookies on TermsFeed website article. We use both Session and Persistent Cookies for the purposes set out below:
             </p>
-            <ul className="mt-4 list-disc space-y-3 pl-6 leading-relaxed">
+            <ul className="mt-4 list-disc space-y-3 pl-5 text-sm leading-relaxed sm:pl-6 sm:text-base">
               <li>
                 <strong>Necessary / Essential Cookies</strong> Type: Session Cookies Administered by: Us Purpose: These Cookies are essential to provide You with services available through the Website and to enable You to use some of its features. They help to authenticate users and prevent fraudulent use of user accounts. Without these Cookies, the services that You have asked for cannot be provided, and We only use these Cookies to provide You with those services.
               </li>
@@ -169,9 +170,9 @@ function PrivacyPolicyPage() {
               </li>
             </ul>
 
-            <h3 className="mt-8 text-xl font-bold text-brand-navy">Use of Your Personal Data</h3>
-            <p className="mt-3 leading-relaxed">The Company may use Personal Data for the following purposes:</p>
-            <ul className="mt-3 list-disc space-y-3 pl-6 leading-relaxed">
+            <h3 className="mt-8 text-lg font-bold text-brand-navy sm:text-xl">Use of Your Personal Data</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">The Company may use Personal Data for the following purposes:</p>
+            <ul className="mt-3 list-disc space-y-3 pl-5 text-sm leading-relaxed sm:pl-6 sm:text-base">
               <li>
                 <strong>To provide and maintain our Service</strong>, including to monitor the usage of our Service.
               </li>
@@ -198,8 +199,8 @@ function PrivacyPolicyPage() {
               </li>
             </ul>
 
-            <p className="mt-6 leading-relaxed">We may share Your personal information in the following situations:</p>
-            <ul className="mt-3 list-disc space-y-3 pl-6 leading-relaxed">
+            <p className="mt-6 text-sm leading-relaxed sm:text-base">We may share Your personal information in the following situations:</p>
+            <ul className="mt-3 list-disc space-y-3 pl-5 text-sm leading-relaxed sm:pl-6 sm:text-base">
               <li>
                 <strong>With Service Providers:</strong> We may share Your personal information with Service Providers to monitor and analyze the use of our Service, to contact You.
               </li>
@@ -220,36 +221,36 @@ function PrivacyPolicyPage() {
               </li>
             </ul>
 
-            <h3 className="mt-8 text-xl font-bold text-brand-navy">Retention of Your Personal Data</h3>
-            <p className="mt-3 leading-relaxed">
+            <h3 className="mt-8 text-lg font-bold text-brand-navy sm:text-xl">Retention of Your Personal Data</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               The Company will retain Your Personal Data only for as long as is necessary for the purposes set out in this Privacy Policy. We will retain and use Your Personal Data to the extent necessary to comply with our legal obligations (for example, if we are required to retain your data to comply with applicable laws), resolve disputes, and enforce our legal agreements and policies.
             </p>
 
-            <h3 className="mt-8 text-xl font-bold text-brand-navy">Transfer of Your Personal Data</h3>
-            <p className="mt-3 leading-relaxed">
+            <h3 className="mt-8 text-lg font-bold text-brand-navy sm:text-xl">Transfer of Your Personal Data</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               Your information, including Personal Data, is processed at the Company's operating offices and in any other places where the parties involved in the processing are located. It means that this information may be transferred to — and maintained on — computers located outside of Your state, province, country or other governmental jurisdiction where the data protection laws may differ than those from Your jurisdiction. Your consent to this Privacy Policy followed by Your submission of such information represents Your agreement to that transfer. The Company will take all steps reasonably necessary to ensure that Your data is treated securely and in accordance with this Privacy Policy and no transfer of Your Personal Data will take place to an organization or a country unless there are adequate controls in place including the security of Your data and other personal information.
             </p>
 
-            <h3 className="mt-8 text-xl font-bold text-brand-navy">Delete Your Personal Data</h3>
-            <p className="mt-3 leading-relaxed">
+            <h3 className="mt-8 text-lg font-bold text-brand-navy sm:text-xl">Delete Your Personal Data</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               You have the right to delete or request that We assist in deleting the Personal Data that We have collected about You. Our Service may give You the ability to delete certain information about You from within the Service. You may update, amend, or delete Your information at any time by signing in to Your Account, if you have one, and visiting the account settings section that allows you to manage Your personal information. You may also contact Us to request access to, correct, or delete any personal information that You have provided to Us. Please note, however, that We may need to retain certain information when we have a legal obligation or lawful basis to do so.
             </p>
 
-            <h2 className="mt-10 text-2xl font-bold text-brand-navy">Disclosure of Your Personal Data</h2>
+            <h2 className="mt-10 text-xl font-bold text-brand-navy sm:text-2xl">Disclosure of Your Personal Data</h2>
 
-            <h3 className="mt-8 text-xl font-bold text-brand-navy">Business Transactions</h3>
-            <p className="mt-3 leading-relaxed">
+            <h3 className="mt-8 text-lg font-bold text-brand-navy sm:text-xl">Business Transactions</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               If the Company is involved in a merger, acquisition or asset sale, Your Personal Data may be transferred. We will provide notice before Your Personal Data is transferred and becomes subject to a different Privacy Policy.
             </p>
 
-            <h3 className="mt-8 text-xl font-bold text-brand-navy">Law enforcement</h3>
-            <p className="mt-3 leading-relaxed">
+            <h3 className="mt-8 text-lg font-bold text-brand-navy sm:text-xl">Law enforcement</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               Under certain circumstances, the Company may be required to disclose Your Personal Data if required to do so by law or in response to valid requests by public authorities (e.g. a court or a government agency).
             </p>
 
-            <h3 className="mt-8 text-xl font-bold text-brand-navy">Other legal requirements</h3>
-            <p className="mt-3 leading-relaxed">The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:</p>
-            <ul className="mt-3 list-disc space-y-2 pl-6 leading-relaxed">
+            <h3 className="mt-8 text-lg font-bold text-brand-navy sm:text-xl">Other legal requirements</h3>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">The Company may disclose Your Personal Data in the good faith belief that such action is necessary to:</p>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:pl-6 sm:text-base">
               <li>Comply with a legal obligation</li>
               <li>Protect and defend the rights or property of the Company</li>
               <li>Prevent or investigate possible wrongdoing in connection with the Service</li>
@@ -257,24 +258,24 @@ function PrivacyPolicyPage() {
               <li>Protect against legal liability</li>
             </ul>
 
-            <h2 className="mt-10 text-2xl font-bold text-brand-navy">Children's Privacy</h2>
-            <p className="mt-3 leading-relaxed">
+            <h2 className="mt-10 text-xl font-bold text-brand-navy sm:text-2xl">Children's Privacy</h2>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               Our Service does not address anyone under the age of 13. We do not knowingly collect personally identifiable information from anyone under the age of 13. If You are a parent or guardian and You are aware that Your child has provided Us with Personal Data, please contact Us. If We become aware that We have collected Personal Data from anyone under the age of 13 without verification of parental consent, We take steps to remove that information from Our servers. If We need to rely on consent as a legal basis for processing Your information and Your country requires consent from a parent, We may require Your parent's consent before We collect and use that information.
             </p>
 
-            <h2 className="mt-10 text-2xl font-bold text-brand-navy">Links to Other Websites</h2>
-            <p className="mt-3 leading-relaxed">
+            <h2 className="mt-10 text-xl font-bold text-brand-navy sm:text-2xl">Links to Other Websites</h2>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               Our Service may contain links to other websites that are not operated by Us. If You click on a third party link, You will be directed to that third party's site. We strongly advise You to review the Privacy Policy of every site You visit. We have no control over and assume no responsibility for the content, privacy policies or practices of any third party sites or services.
             </p>
 
-            <h2 className="mt-10 text-2xl font-bold text-brand-navy">Changes to this Privacy Policy</h2>
-            <p className="mt-3 leading-relaxed">
+            <h2 className="mt-10 text-xl font-bold text-brand-navy sm:text-2xl">Changes to this Privacy Policy</h2>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">
               We may update Our Privacy Policy from time to time. We will notify You of any changes by posting the new Privacy Policy on this page. We will let You know via email and/or a prominent notice on Our Service, prior to the change becoming effective and update the "Last updated" date at the top of this Privacy Policy. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
             </p>
 
-            <h2 className="mt-10 text-2xl font-bold text-brand-navy">Contact Us</h2>
-            <p className="mt-3 leading-relaxed">If you have any questions about this Privacy Policy, You can contact us:</p>
-            <ul className="mt-3 list-disc space-y-2 pl-6 leading-relaxed">
+            <h2 className="mt-10 text-xl font-bold text-brand-navy sm:text-2xl">Contact Us</h2>
+            <p className="mt-3 text-sm leading-relaxed sm:text-base">If you have any questions about this Privacy Policy, You can contact us:</p>
+            <ul className="mt-3 list-disc space-y-2 pl-5 text-sm leading-relaxed sm:pl-6 sm:text-base">
               <li>
                 By email:{" "}
                 <a href="mailto:info@visionaize.com" className="text-brand-blue underline">

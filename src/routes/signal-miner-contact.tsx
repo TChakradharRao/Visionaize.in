@@ -47,7 +47,7 @@ type FormState = {
 };
 
 type FormErrors = Partial<
-  Record<Exclude<keyof FormState, "seekingSolutions" | "comments" | "phoneNumber">, string>
+  Record<Exclude<keyof FormState, "seekingSolutions" | "comments">, string>
 >;
 
 const initialState: FormState = {
@@ -62,14 +62,32 @@ const initialState: FormState = {
 };
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const PHONE_REGEX = /^\d{10}$/;
+const NAME_REGEX = /^[A-Za-z\s.'-]+$/;
 
 function validate(form: FormState): FormErrors {
   const errors: FormErrors = {};
 
-  if (!form.firstName.trim()) errors.firstName = "First name is required";
-  if (!form.lastName.trim()) errors.lastName = "Last name is required";
+  if (!form.firstName.trim()) {
+    errors.firstName = "First name is required";
+  } else if (!NAME_REGEX.test(form.firstName.trim())) {
+    errors.firstName = "Enter a valid first name";
+  }
+
+  if (!form.lastName.trim()) {
+    errors.lastName = "Last name is required";
+  } else if (!NAME_REGEX.test(form.lastName.trim())) {
+    errors.lastName = "Enter a valid last name";
+  }
+
   if (!form.company.trim()) errors.company = "Company is required";
   if (!form.title.trim()) errors.title = "Title is required";
+
+  if (!form.phoneNumber.trim()) {
+    errors.phoneNumber = "Phone number is required";
+  } else if (!PHONE_REGEX.test(form.phoneNumber.trim())) {
+    errors.phoneNumber = "Enter a valid 10-digit phone number";
+  }
 
   if (!form.email.trim()) {
     errors.email = "Email is required";
@@ -91,7 +109,13 @@ function SignalMinerContactPage() {
   const handleChange =
     (field: keyof Omit<FormState, "seekingSolutions">) =>
     (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-      const value = e.target.value;
+      let value = e.target.value;
+
+      // Restrict phone number field to digits only, capped at 10.
+      if (field === "phoneNumber") {
+        value = value.replace(/\D/g, "").slice(0, 10);
+      }
+
       setForm((prev) => ({ ...prev, [field]: value }));
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     };
@@ -123,7 +147,7 @@ function SignalMinerContactPage() {
         last_name: form.lastName.trim(),
         company: form.company.trim(),
         title: form.title.trim(),
-        phone_number: form.phoneNumber.trim() || undefined,
+        phone_number: form.phoneNumber.trim(),
         email: form.email.trim(),
         seeking_solutions: form.seekingSolutions,
         comments: form.comments.trim() || undefined,
@@ -243,11 +267,15 @@ function SignalMinerContactPage() {
                   <div>
                     <input
                       type="tel"
-                      placeholder="Phone number"
+                      inputMode="numeric"
+                      placeholder="Phone number*"
                       value={form.phoneNumber}
                       onChange={handleChange("phoneNumber")}
-                      className={fieldClass(false)}
+                      aria-invalid={!!errors.phoneNumber}
+                      className={fieldClass(!!errors.phoneNumber)}
+                      maxLength={10}
                     />
+                    {errors.phoneNumber && <FieldError message={errors.phoneNumber} />}
                   </div>
 
                   <div>

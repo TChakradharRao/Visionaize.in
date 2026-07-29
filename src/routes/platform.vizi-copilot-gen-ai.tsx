@@ -40,6 +40,26 @@ const ViziMark = () => (
   />
 );
 
+/**
+ * Renders any string, inserting <ViziMark /> between "VIZI" and "CoPilot"
+ * wherever that phrase appears. Falls back to the plain string otherwise.
+ * Used for card intros and bullet descriptions that mention VIZI CoPilot.
+ */
+function renderWithVizi(text: string) {
+  if (!text.includes("VIZI")) return text;
+
+  const before = text.split("VIZI")[0];
+  const afterRaw = text.split("VIZI").slice(1).join("VIZI");
+  const after = afterRaw.replace(/^\s*CoPilot/, "CoPilot");
+
+  return (
+    <>
+      {before}
+      VIZI <ViziMark /> {after}
+    </>
+  );
+}
+
 const GradHeading = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <h1
     className={`text-[40px] md:text-[52px] leading-[1.15] font-semibold bg-gradient-to-r from-[#7BC242] via-[#3FB6A8] to-[#1F9CD8] bg-clip-text text-transparent ${className}`}
@@ -49,8 +69,8 @@ const GradHeading = ({ children, className = "" }: { children: React.ReactNode; 
 );
 
 const PrimaryCTA = ({ children }: { children: React.ReactNode }) => (
-  <a
-    href="/contact"
+  
+  <a  href="/contact"
     className="inline-flex items-center justify-center rounded-full px-8 py-3.5 text-base font-semibold text-white shadow-md transition hover:opacity-95"
     style={{
       background:
@@ -62,9 +82,9 @@ const PrimaryCTA = ({ children }: { children: React.ReactNode }) => (
 );
 
 const GhostCTA = ({ children }: { children: React.ReactNode }) => (
-  <a
-    href="/contact"
-    className="inline-flex items-center justify-center rounded-full border border-brand-navy/80 px-8 py-3.5 text-base font-semibold text-brand-navy hover:bg-brand-navy hover:text-white transition"
+  
+   <a href="/vizi-copilot-gen-ai-demo-link"
+    className="inline-flex items-center justify-center rounded-full border border-brand-navy/80 px-8 py-3.5 text-base font-semibold text-brand-navy "
   >
     {children}
   </a>
@@ -111,44 +131,49 @@ const TRANSFORM_BULLETS: [string, string][] = [
   ["Facilitate Collaboration", "Enhance team collaboration with shared Gen AI-driven insights and recommendations."],
 ];
 
-const FAQS: { q: string; a: string }[] = [
+const FAQS: { q: string; a: string | string[] }[] = [
   {
     q: "Which large language model (LLM) do you use?",
     a: "VIZI CoPilot uses OpenAI, Azure OpenAI, Gemini and Llama for prompting/ training purposes to maximize the accuracy. But for deployment, we are flexible and can use any of LLMs as per client requirements while minimizing the cost of operation.",
   },
   {
     q: "Can you deploy GenAI application on premise or only on cloud?",
-    a: "VIZI CoPilot can be deployed on-premise, on private cloud, or on public cloud — whichever best fits your data residency, security, and operational policies.",
+    a: "We are flexible to deploy on-premise or cloud. But in the case of Azure OpenAI, it will be deployed on Azure cloud.",
   },
   {
     q: "Once VIZI CoPilot is deployed, can the user add more documents for the same application and get the insights out of these?",
-    a: "Yes. Users can continuously add new documents and data sources; the system re-indexes them and incorporates the new content into responses without re-training the underlying model.",
+    a: "Yes, Super Users in the client organization will be able to upload additional documents and VIZI CoPilot will start giving insights/ answers right after uploading. Overtime accuracy of answers will enhance.",
   },
   {
     q: "Can user comment if he/ she doesn't like the answer and whether the system learn from it?",
-    a: "Users can flag and comment on responses. That feedback is captured and used in our continual improvement loop to refine retrieval, prompts, and ranking over time.",
+    a: "Yes, VIZI CoPilot has feedback loop and it learns from the comments of the user which are verified by the Super User to enhance the authenticity.",
   },
   {
     q: "How does the Retrieval Augmented Generation (RAG) work?",
-    a: "Your documents are chunked, embedded and stored in a vector database. At query time we retrieve the most relevant passages and pass them to the LLM as grounded context, producing answers backed by your own knowledge base.",
+    a: "By integrating domain-specific data and contextual knowledge, VIZI CoPilot enhances LLMs to deliver highly accurate and relevant responses.",
   },
   {
     q: "Does VIZI CoPilot have hallucination control?",
-    a: "Yes — answers are grounded in retrieved passages, citations are surfaced, low-confidence responses are filtered, and guardrails restrict the model to in-scope content.",
+    a: "Yes. With thorough pre-training, user feedback, and fine-tuning, VIZI CoPilot ensures responses remain within defined boundaries, maintaining accuracy.",
   },
   {
     q: "What are the output formats?",
-    a: "Responses can be returned as natural-language answers, structured JSON, tables, and downloadable reports — and embedded into existing dashboards and workflows.",
+    a: "VIZI CoPilot supports text-based, chart, and tabular outputs to suit your needs.",
   },
   {
     q: "What is the VIZI CoPilot accelerator?",
-    a: "A pre-built deployment kit — connectors, prompt templates, ingestion pipelines and evaluation harness — that gets a production-grade CoPilot live for your use case in weeks, not months.",
+    a: [
+      "Seamless loading of various data types directly from the source.",
+      "Automatic data chunking to eliminate unnecessary noise.",
+      "Automatic embedding and vectorizing of data and query prompts.",
+      "Easy saving of prompts for quick retrieval, and the ability to create ontologies and FAQs on the fly.",
+    ],
   },
 ];
 
 /* ---------- page ---------- */
 function ViziCopilotPage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(0); // add this near the top of the component
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
   return (
     <>
       <Header />
@@ -157,7 +182,7 @@ function ViziCopilotPage() {
         <section className="mx-auto max-w-7xl px-6 pt-10 pb-14">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div>
-             <GradHeading className="text-3xl lg:text-4xl">
+              <GradHeading className="text-3xl lg:text-4xl">
                 VIZI <ViziMark /> CoPilot Gen AI Delivers Precise, Rapid Responses, Improving Operational Efficiency
               </GradHeading>
               <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-brand-ink/80">
@@ -192,8 +217,6 @@ function ViziCopilotPage() {
           </div>
         </section>
 
-
-
         {/* FLEXIBILITY SECTION */}
         <section className="bg-[#F5F7F9] py-14">
           <div className="mx-auto max-w-7xl px-6">
@@ -213,21 +236,14 @@ function ViziCopilotPage() {
                       {card.title}
                     </h3>
                     <p className="mt-5 text-[17px] leading-relaxed text-brand-ink/80">
-                      {card.intro.includes("VIZI") ? (
-                        <>
-                          {card.intro.split("VIZI")[0]}
-                          VIZI <ViziMark /> {card.intro.split("VIZI").slice(1).join("VIZI").replace(/^\s*CoPilot/, "CoPilot")}
-                        </>
-                      ) : (
-                        card.intro
-                      )}
+                      {renderWithVizi(card.intro)}
                     </p>
                     <ul className="mt-5 space-y-4">
                       {card.bullets.map(([k, v]) => (
                         <li key={k} className="flex gap-3 text-[16px] leading-relaxed text-brand-ink/90">
                           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-ink/60" />
                           <span>
-                            <strong className="font-semibold text-brand-navy">{k}</strong>: {v}
+                            <strong className="font-semibold text-brand-navy">{k}</strong>: {renderWithVizi(v)}
                           </span>
                         </li>
                       ))}
@@ -252,35 +268,35 @@ function ViziCopilotPage() {
         </section>
 
         {/* TRANSFORM SECTION */}
-       <section className="bg-[#F5F7F9] py-14">
-  <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
-    <div>
-     <GradHeading className="!text-[22px] md:!text-[36px]">
-  With VIZI <ViziMark /> CoPilot You Can Transform Your Operations Today
-</GradHeading>
-      <ul className="mt-8 space-y-5">
-        {TRANSFORM_BULLETS.map(([k, v]) => (
-          <li key={k} className="flex gap-3 text-[18px] leading-relaxed text-brand-ink/80">
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-ink/60" />
-            <span>
-              <strong className="font-semibold text-brand-navy">{k}</strong>: {v}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
-    <div>
-  <img
-  src={`${WP}/2024/08/Vizi-Copilot-Chat-Image.png`}
-  alt="VIZI CoPilot chat"
-  className="w-full h-[420px] md:h-[520px] object-contain rounded-xl shadow-xl ring-1 ring-black/5"
-/>
-    </div>
-  </div>
-</section>
+        <section className="bg-[#F5F7F9] py-14">
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
+            <div>
+              <GradHeading className="!text-[22px] md:!text-[36px]">
+                With VIZI <ViziMark /> CoPilot You Can Transform Your Operations Today
+              </GradHeading>
+              <ul className="mt-8 space-y-5">
+                {TRANSFORM_BULLETS.map(([k, v]) => (
+                  <li key={k} className="flex gap-3 text-[18px] leading-relaxed text-brand-ink/80">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-ink/60" />
+                    <span>
+                      <strong className="font-semibold text-brand-navy">{k}</strong>: {v}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <img
+                src={`${WP}/2024/08/Vizi-Copilot-Chat-Image.png`}
+                alt="VIZI CoPilot chat"
+                className="w-full h-[420px] md:h-[520px] object-contain rounded-xl shadow-xl ring-1 ring-black/5"
+              />
+            </div>
+          </div>
+        </section>
 
         {/* FAQ */}
-         <section className="bg-white py-14">
+        <section className="bg-white py-14">
           <div className="mx-auto max-w-5xl px-6">
             <h3 className="text-[28px] md:text-[34px] font-semibold text-brand-navy">
               Learn More about VIZI <ViziMark /> CoPilot Gen AI
@@ -313,7 +329,7 @@ function FaqRow({
   isOpen,
   onToggle,
 }: {
-  faq: { q: string; a: string };
+  faq: { q: string; a: string | string[] };
   isOpen: boolean;
   onToggle: () => void;
 }) {
@@ -327,10 +343,20 @@ function FaqRow({
         <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-navy text-white">
           {isOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
         </span>
-        <span className="text-[17px] font-medium text-brand-navy">{faq.q}</span>
+        <span className="text-[17px] font-medium text-brand-navy">{renderWithVizi(faq.q)}</span>
       </button>
       {isOpen && (
-        <div className="mt-3 pl-10 text-[15px] leading-relaxed text-brand-ink/80">{faq.a}</div>
+        <div className="mt-3 pl-10 text-[15px] leading-relaxed text-brand-ink/80">
+          {Array.isArray(faq.a) ? (
+            <ul className="list-disc space-y-2 pl-5">
+              {faq.a.map((line, idx) => (
+                <li key={idx}>{renderWithVizi(line)}</li>
+              ))}
+            </ul>
+          ) : (
+            renderWithVizi(faq.a)
+          )}
+        </div>
       )}
     </div>
   );

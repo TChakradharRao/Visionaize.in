@@ -44,34 +44,34 @@ function PowerHero() {
 
   return (
     <section id="problem-content">
-      <div className="mx-auto max-w-7xl px-6 pt-2 pb-6 md:pt-10 md:pb-8">
+      <div className="mx-auto max-w-7xl px-4 pt-2 pb-6 sm:px-6 md:pt-10 md:pb-8">
         <div className="grid gap-9 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-center">
           {/* Left: headline + copy */}
           <div>
-            <h1 className="text-3xl font-bold leading-tight text-brand-navy md:text-4xl">
+            <h1 className="text-3xl font-bold leading-tight text-brand-navy sm:text-4xl">
               The Digital Frontier of Power &amp; Energy
             </h1>
 
-            <p className="mt-4 max-w-2xl text-base font-semibold text-brand-navy">
+            <p className="mt-4 max-w-2xl text-sm font-semibold text-brand-navy sm:text-base">
               Orchestrating Efficiency through AI, Digital Twins, and Intelligent Operations
             </p>
 
-            <p className="mt-6 max-w-xl text-medium leading-relaxed text-brand-ink/70">
+            <p className="mt-6 max-w-xl text-sm leading-relaxed text-brand-ink/70 sm:text-base">
               India's Power &amp; Energy sector is rapidly evolving, demanding smarter, efficient,
               and sustainable operations.
             </p>
 
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-brand-ink/70">
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-brand-ink/70 sm:text-base">
               Discover how AI-powered Digital Twins and Agentic AI are enabling smarter operations
               through predictive intelligence, real-time monitoring, and optimized performance.
             </p>
 
-            <p className="mt-6 max-w-xl text-base font-semibold text-brand-navy">
+            <p className="mt-6 max-w-xl text-sm font-semibold text-brand-navy sm:text-base">
               Welcome to the Future of Intelligent Power Operations.
             </p>
 
             <a href="#whitepaper-form" className="mt-8 inline-flex items-center gap-3 group">
-              <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-white shadow-md transition group-hover:shadow-lg">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white shadow-md transition group-hover:shadow-lg sm:h-14 sm:w-14">
                 <svg aria-hidden viewBox="0 0 16 16" className="h-4 w-4">
                   <defs>
                     <linearGradient id="diveInArrowGradientPower" x1="0" y1="0" x2="16" y2="16">
@@ -82,17 +82,19 @@ function PowerHero() {
                   <path d="M1 2 L15 2 L8 13 Z" fill="url(#diveInArrowGradientPower)" />
                 </svg>
               </span>
-              <span className="bg-gradient-to-r from-brand-lime to-brand-blue bg-clip-text text-xl font-semibold text-transparent">
+              <span className="bg-gradient-to-r from-brand-lime to-brand-blue bg-clip-text text-lg font-semibold text-transparent sm:text-xl">
                 Dive in!
               </span>
             </a>
           </div>
 
-          {/* Right: tilted mockup with the form card overlapping its right
-              edge, vertically centered — same layout pattern used across
-              the whitepaper landing pages. */}
-          <div className="relative mx-auto w-full max-w-4xl overflow-visible px-4 py-6 lg:mx-0 lg:py-10">
-            <div className="mr-auto ml-0 w-[70%] -rotate-6 rounded-md sm:w-[58%] lg:w-[51%]">
+          {/* Right: mockup + form. On mobile/tablet these stack normally in
+              document flow (image, then form below it) so the form never
+              overflows a container sized only for the image. At lg and up,
+              where the 2-column grid gives room, the form overlaps the
+              image's right edge and is vertically centered on it. */}
+          <div className="mx-auto w-full max-w-4xl py-6 lg:relative lg:mx-0 lg:py-10">
+            <div className="mx-auto w-[70%] -rotate-6 sm:w-[55%] lg:mr-auto lg:ml-0 lg:w-[51%]">
               <img
                 src="https://visionaize.in/wp-content/uploads/2026/05/Group-1171277152-1-768x758.png"
                 alt="Power Industry Whitepaper — cover"
@@ -103,7 +105,7 @@ function PowerHero() {
 
             <div
               id="whitepaper-form"
-              className="absolute right-0 top-1/2 z-10 w-[88%] -translate-y-1/2 rounded-2xl bg-white p-6 shadow-2xl sm:w-[62%] sm:p-8 lg:w-[58%]"
+              className="relative z-10 mx-auto mt-8 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl sm:p-8 lg:absolute lg:right-0 lg:top-1/2 lg:mt-0 lg:w-[58%] lg:max-w-none lg:-translate-y-1/2"
             >
               <h2 className="text-xl font-bold text-brand-navy md:text-2xl">
                 Access the whitepaper
@@ -153,7 +155,7 @@ function PowerHero() {
                       type="checkbox"
                       checked={form.contactMe}
                       onChange={(e) => setForm((f) => ({ ...f, contactMe: e.target.checked }))}
-                      className="mt-0.5 h-4 w-4 rounded border-brand-navy/30"
+                      className="mt-0.5 h-4 w-4 shrink-0 rounded border-brand-navy/30"
                     />
                     Please have a Visionaize Digital Twin expert contact me
                   </label>
@@ -177,9 +179,9 @@ function PowerHero() {
 function OverviewSection() {
   return (
     <section className="bg-[#f3f5f7]">
-      <div className="mx-auto max-w-6xl px-6 pt-4 pb-10 md:pt-5 md:pb-14">
+      <div className="mx-auto max-w-6xl px-4 pt-4 pb-10 sm:px-6 md:pt-5 md:pb-14">
         <h2 className="text-lg font-bold text-brand-navy md:text-2xl">Problem</h2>
-        <div className="mt-3 space-y-4 text-lg leading-relaxed text-brand-ink/80 md:text-base">
+        <div className="mt-3 space-y-4 text-sm leading-relaxed text-brand-ink/80 md:text-base">
           <p>
             Power utilities and thermal plants face major operational challenges including
             unplanned outages, fluctuating coal quality, rising fuel costs, equipment degradation,
@@ -193,7 +195,7 @@ function OverviewSection() {
         </div>
 
         <h2 className="mt-8 text-lg font-bold text-brand-navy md:text-2xl">Solution</h2>
-        <div className="mt-3 space-y-4 text-lg leading-relaxed text-brand-ink/80 md:text-base">
+        <div className="mt-3 space-y-4 text-sm leading-relaxed text-brand-ink/80 md:text-base">
           <p>
             Visionaize enables intelligent power operations through AI-driven Digital Twin
             platforms that combine real-time plant data, physics-based models, and predictive
@@ -201,7 +203,7 @@ function OverviewSection() {
           </p>
           <p>Our solutions help power plants to:</p>
         </div>
-        <ul className="mt-3 space-y-2 text-medium leading-relaxed text-brand-ink/70 md:text-base">
+        <ul className="mt-3 space-y-2 text-sm leading-relaxed text-brand-ink/70 md:text-base">
           <li className="flex gap-2">
             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
             <span>Optimize heat rate and fuel efficiency</span>
@@ -231,15 +233,15 @@ function OverviewSection() {
         <h2 className="mt-8 text-lg font-bold text-brand-navy md:text-xl">
           The Future of Power Generation
         </h2>
-        <p className="mt-3 text-medium leading-relaxed text-brand-ink/70 md:text-base">
+        <p className="mt-3 text-sm leading-relaxed text-brand-ink/70 md:text-base">
           AI and Digital Twin technologies are transforming conventional power plants into
           intelligent, self-optimizing energy ecosystems that improve efficiency, reliability, and
           sustainability.
         </p>
-        <p className="mt-3 text-medium leading-relaxed text-brand-ink/70 md:text-base">
+        <p className="mt-3 text-sm leading-relaxed text-brand-ink/70 md:text-base">
           Access the full whitepaper to explore:
         </p>
-        <ul className="mt-3 space-y-2 text-medium leading-relaxed text-brand-ink/70 md:text-base">
+        <ul className="mt-3 space-y-2 text-sm leading-relaxed text-brand-ink/70 md:text-base">
           <li className="flex gap-2">
             <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-brand-ink/50" />
             <span>How Agentic AI enables predictive and prescriptive operations</span>
@@ -259,16 +261,16 @@ function OverviewSection() {
         </ul>
 
         <h2 className="mt-8 text-lg font-bold text-brand-navy md:text-xl">Access the Whitepaper</h2>
-        <p className="mt-3 text-medium leading-relaxed text-brand-ink/70 md:text-base">
+        <p className="mt-3 text-sm leading-relaxed text-brand-ink/70 md:text-base">
           Learn how Visionaize is helping power and energy leaders accelerate digital
           transformation with AI-powered Digital Twin solutions built for the evolving energy
           landscape.
         </p>
 
-        <a
-          id="main-inner-contact-post1"
+        
+        <a  id="main-inner-contact-post1"
           href="#whitepaper-form"
-          className="mt-4 inline-block text-medium font-bold text-brand-blue hover:underline md:text-base"
+          className="mt-4 inline-block text-sm font-bold text-brand-blue hover:underline md:text-base"
         >
           Download the whitepaper now &gt;&gt;
         </a>
@@ -280,13 +282,13 @@ function OverviewSection() {
 function PowerCTA() {
   return (
     <section className="bg-gradient-to-r from-brand-lime via-teal-500 to-brand-blue">
-      <div className="mx-auto max-w-4xl px-6 py-16 text-center md:py-20">
-        <h2 className="text-3xl font-bold leading-tight text-white md:text-3xl">
+      <div className="mx-auto max-w-4xl px-4 py-14 text-center sm:px-6 md:py-20">
+        <h2 className="text-2xl font-bold leading-tight text-white sm:text-3xl">
           The Next Generation of Intelligent Power Operations Starts Now
         </h2>
 
-        <a
-          href="#whitepaper-form"
+        
+        <a  href="#whitepaper-form"
           className="mt-8 inline-flex items-center rounded-full bg-white px-8 py-4 text-base font-bold text-brand-ink shadow-md transition hover:brightness-95"
         >
           Download the Whitepaper

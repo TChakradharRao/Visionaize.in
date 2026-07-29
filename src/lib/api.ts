@@ -1,8 +1,4 @@
-/**
- * Tiny fetch wrapper for the Visionaize backend.
- * Set VITE_API_BASE_URL (e.g. "https://api.visionaize.com") in .env.
- * Falls back to "" so calls go to /api/... on the same origin (nginx-proxied).
- */
+
 const BASE = (import.meta.env.VITE_API_BASE_URL as string | undefined) ?? "";
 
 let accessToken: string | null = null;
@@ -17,6 +13,18 @@ export interface User {
 
 export interface SectionImage { src: string; alt: string }
 export interface SectionCTA { label: string; href: string }
+
+export interface CompanyLeadFormSubmission {
+  first_name: string;
+  last_name: string;
+  company_name: string;
+  business_email: string;
+  phone_number: string;
+  hear_about_us?: string;
+  message?: string;
+  source_page?: string;
+}
+
 export interface ContentSection {
   heading: string | null;
   level: number;
@@ -75,15 +83,14 @@ export interface BusinessCaseSubmission {
   source_page?: string;
 }
 
-export interface ViziCopilotDemoSubmission {
-  first_name: string;
-  last_name: string;
-  company_name: string;
-  business_email: string;
-  phone_number: string;
-  contact_me: boolean;
+export type RequestDemoSubmission = {
+  name: string;
+  email: string;
+  company?: string;
+  phone: string;
+  message?: string;
   source_page?: string;
-}
+};
 
 export interface SignalMinerContactSubmission {
   first_name: string;
@@ -96,14 +103,73 @@ export interface SignalMinerContactSubmission {
   comments?: string;
   source_page?: string;
 }
+ 
+export type CementWhitepaperSubmission = {
+  first_name: string;
+  last_name: string;
+  company: string;
+  email: string;
+  contact_me: boolean;
+  source_page?: string;
+};
 
+export type TurnaroundsWhitepaperSubmission = {
+  first_name: string;
+  last_name: string;
+  company: string;
+  email: string;
+  contact_me: boolean;
+  source_page?: string;
+};
+
+export type MetaverseWhitepaperSubmission = {
+  first_name: string;
+  last_name: string;
+  company: string;
+  email: string;
+  contact_me: boolean;
+  source_page?: string;
+};
+export interface OilAndGasContactSubmission {
+  company: string;
+  email: string;
+  first_name: string;
+  last_name: string;
+  company_name: string;
+  business_email: string;
+  phone_number: string;
+  hear_about_us: string;
+  message?: string;
+  source_page?: string;
+}
 export interface VrTourRequestSubmission {
+  email: string;
   first_name: string;
   last_name: string;
   company_name: string;
   business_email: string;
   phone_number?: string;
   message?: string;
+  source_page?: string;
+}
+export type RenewableEnergyWhitepaperSubmission = {
+  first_name: string;
+  last_name: string;
+  company: string;
+  email: string;
+  contact_me: boolean;
+  source_page?: string;
+};
+
+
+
+export interface ViziCopilotDemoSubmission {
+  first_name: string;
+  last_name: string;
+  company_name: string;
+  business_email: string;
+  phone_number: string;
+  contact_me: boolean;
   source_page?: string;
 }
 
@@ -181,19 +247,140 @@ export const api = {
     message: string; source_page?: string;
   }) => apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify(data) }),
 
-  submitBusinessCase: (data: BusinessCaseSubmission) =>
-    apiFetch("/api/public/business-case", { method: "POST", body: JSON.stringify(data) }),
+  submitCompanyLeadForm: (data: CompanyLeadFormSubmission) =>
+    apiFetch("/api/public/contact", {
+      method: "POST",
+      body: JSON.stringify({
+        name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+        email: data.business_email,
+        company: data.company_name,
+        phone: data.phone_number,
+        message: data.message || "",
+        source_page: data.source_page || "/company-lead-form",
+        payload: data,
+      }),
+    }),
+
+    submitBusinessCase: (data: BusinessCaseSubmission) =>
+    apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      company: data.company,
+      phone: null,
+      message: JSON.stringify(data),
+      source_page: data.source_page || "/business-case",
+      payload: data,
+    }) }),
+
+    submitSignalMinerContact: (data: SignalMinerContactSubmission) =>
+    apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify({
+      name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+      email: data.email,
+      company: data.company,
+      phone: data.phone_number || null,
+      message: data.comments || "",
+      source_page: data.source_page || "/signal-miner-contact",
+      payload: data,
+    }) }),
+
+    submitRequestDemo: (data: RequestDemoSubmission) =>
+    apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify({
+      name: data.name,
+      email: data.email,
+      company: data.company,
+      phone: data.phone,
+      message: data.message || "Requesting a demo",
+      source_page: data.source_page || "/request-demo",
+      payload: data,
+    }) }),
+
+    submitCementWhitepaper: (data: CementWhitepaperSubmission) =>
+    apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify({
+      name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+      email: data.email,
+      company: data.company,
+      phone: null,
+      message: `Requested cement whitepaper. Contact me: ${data.contact_me}`,
+      source_page: data.source_page || "/cement-whitepaper",
+      payload: data,
+    }) }),
+
+    submitTurnaroundsWhitepaper: (data: TurnaroundsWhitepaperSubmission) =>
+    apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify({
+      name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+      email: data.email,
+      company: data.company,
+      phone: null,
+      message: `Requested turnarounds whitepaper. Contact me: ${data.contact_me}`,
+      source_page: data.source_page || "/turnarounds-whitepaper",
+      payload: data,
+    }) }),
+
+    submitMetaverseWhitepaper: (data: MetaverseWhitepaperSubmission) =>
+    apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify({
+      name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+      email: data.email,
+      company: data.company,
+      phone: null,
+      message: `Requested metaverse whitepaper. Contact me: ${data.contact_me}`,
+      source_page: data.source_page || "/metaverse-whitepaper",
+      payload: data,
+    }) }),
+    
+  submitVrTourRequest: (data: VrTourRequestSubmission) =>
+    apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify({
+      name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+      email: data.business_email || data.email,
+      company: data.company_name,
+      phone: data.phone_number || null,
+      message: data.message || "",
+      source_page: data.source_page || "/vr-tour-request",
+      payload: data,
+    }) }),
+
+  submitOilAndGasContact: (data: OilAndGasContactSubmission) =>
+  apiFetch("/api/public/contact", {method: "POST",  body: JSON.stringify({
+    name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+    email: data.business_email || data.email,
+    company: data.company_name || data.company,
+    phone: data.phone_number || null,
+    message: data.message || "",
+    source_page: data.source_page || "/oil-and-gas-contact",
+    payload: data,
+  }), }),
+  
+  submitRenewableEnergyWhitepaper: (data: RenewableEnergyWhitepaperSubmission) =>
+    apiFetch("/api/public/contact", {  method: "POST", body: JSON.stringify({
+      name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+      email: data.email,
+      company: data.company,
+      phone: null,
+      message: `Requested renewable energy whitepaper. Contact me: ${data.contact_me}`,
+      source_page: data.source_page || "/renewable-energy-whitepaper",
+      payload: data,
+    }), }),
+
 
   submitViziCopilotDemo: (data: ViziCopilotDemoSubmission) =>
-    apiFetch("/api/public/vizi-copilot-demo", { method: "POST", body: JSON.stringify(data) }),
-
-  submitSignalMinerContact: (data: SignalMinerContactSubmission) =>
-    apiFetch("/api/public/signal-miner-contact", { method: "POST", body: JSON.stringify(data) }),
-
-  submitVrTourRequest: (data: VrTourRequestSubmission) =>
-    apiFetch("/api/public/vr-tour-request", { method: "POST", body: JSON.stringify(data) }),
+    apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify({
+      name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+      email: data.business_email,
+      company: data.company_name,
+      phone: data.phone_number || null,
+      message: `Vizi Copilot demo request. Contact me: ${data.contact_me}`,
+      source_page: data.source_page || "/vizi-copilot-demo",
+      payload: data,
+    }) }),
 
   submitSocialDigitalContact: (data: SocialDigitalContactSubmission) =>
-    apiFetch("/api/public/social-digital-contact", { method: "POST", body: JSON.stringify(data) }),
+    apiFetch("/api/public/contact", { method: "POST", body: JSON.stringify({
+      name: `${data.first_name || ""} ${data.last_name || ""}`.trim(),
+      email: data.business_email,
+      company: data.company_name,
+      phone: data.phone_number || null,
+      message: data.message || "",
+      source_page: data.source_page || "/social-digital-contact",
+      payload: data,
+    }) }),
 
 };

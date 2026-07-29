@@ -1,11 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Zap,  Target, BarChart3 } from "lucide-react";
+import { Zap, Target, BarChart3 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ArrowRight, ArrowUpRight, ArrowUp, Play, ChevronDown, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { getSeedContentItem } from "@/lib/seed-content";
 import { TIERS } from "@/lib/v-plant-tiers";
 import { useState, useRef, useCallback, useEffect } from "react";
+
 
 export const Route = createFileRoute("/platform/v-plant")({
   head: () => ({
@@ -40,12 +41,43 @@ export const Route = createFileRoute("/platform/v-plant")({
 const seedItem = getSeedContentItem("page", "v-plant");
 const seedSections = seedItem?.content_json?.sections ?? [];
 const heroSection = seedSections[0];
-const heroParagraphs = heroSection?.paragraphs?.length
+
+const heroParagraphs: string[] = heroSection?.paragraphs?.length
   ? heroSection.paragraphs
   : [
       "Many Digital Twins look good, but the true power lies in the ability to stay in sync with its twin in the field. V-Plant has been built to be the most connected and current Digital Twin solution for industrial assets.",
     ];
+
 const heroImage = heroSection?.images[0]?.src ?? "https://visionaize.com/wp-content/uploads/2022/07/image-2.jpg";
+
+/**
+ * Renders a hero paragraph string, converting the phrase "stay in sync"
+ * into a styled Link to /solutions/maintain-and-sustain.
+ * Works regardless of whether the text comes from the CMS seed content
+ * or the hardcoded fallback above, since both are plain strings.
+ */
+function renderHeroParagraph(text: string) {
+  const marker = "stay in sync";
+  const idx = text.indexOf(marker);
+  if (idx === -1) return text;
+
+  const before = text.slice(0, idx);
+  const after = text.slice(idx + marker.length);
+
+  return (
+    <>
+      {before}
+      <Link
+        to="/solutions/maintain-and-sustain"
+        className="!text-[#2563EB] !no-underline hover:!no-underline"
+        style={{ color: "#2563EB", textDecoration: "none" }}
+      >
+        {marker}
+      </Link>
+      {after}
+    </>
+  );
+}
 
 const FEATURES = [
   {
@@ -119,6 +151,7 @@ const INTEGRATIONS = [
   { name: "Oracle", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-528.png" },
   { name: "OSIsoft", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-529.png" },
 ];
+
 /* ---------------- Page ---------------- */
 
 function VPlantPage() {
@@ -129,7 +162,6 @@ function VPlantPage() {
       const el = document.getElementById(hash);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     };
-    // small delay lets images/layout settle before measuring scroll position
     const t = setTimeout(scrollToHash, 100);
     window.addEventListener("hashchange", scrollToHash);
     return () => {
@@ -139,7 +171,7 @@ function VPlantPage() {
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col bg-white">
+    <div className="flex min-h-screen flex-col overflow-x-hidden bg-white">
       <Header />
       <Hero />
       <Quote />
@@ -151,8 +183,8 @@ function VPlantPage() {
       <VideoBenefits />
       <GoodCompany />
       <CTA />
-       <Data/>
-       <Integrations />
+      <Data />
+      <Integrations />
       <Footer />
     </div>
   );
@@ -189,18 +221,18 @@ function Hero() {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-10 md:grid-cols-2 md:items-center md:py-14">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:gap-10 sm:px-6 sm:py-10 md:grid-cols-2 md:items-center md:py-14">
         <div>
-          <h1 className="text-4xl font-bold leading-[1.1] tracking-tight text-brand-navy md:text-5xl lg:text-5xl">
-            A 3D digital twin that's<br />always in sync
+          <h1 className="text-3xl font-bold leading-[1.15] tracking-tight text-brand-navy sm:text-4xl md:text-5xl">
+            A 3D digital twin that's<br className="hidden sm:block" /> always in sync
           </h1>
-          <p className="mt-7 max-w-md text-lg leading-relaxed text-brand-ink/80">
-            {heroParagraphs[0]}
+          <p className="mt-5 max-w-md text-base leading-relaxed text-brand-ink/80 sm:mt-7 sm:text-lg">
+            {renderHeroParagraph(heroParagraphs[0])}
           </p>
-          <div className="mt-9 flex flex-wrap items-center gap-4">
+          <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-9 sm:gap-4">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-md"
+              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md sm:px-7 sm:py-3.5"
               style={{
                 background:
                   "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
@@ -211,7 +243,7 @@ function Hero() {
             <button
               type="button"
               onClick={() => setShowVideo(true)}
-              className="inline-flex items-center gap-3 rounded-full border border-brand-ink/15 bg-white px-6 py-3.5 text-sm font-semibold text-brand-navy hover:border-brand-ink/30"
+              className="inline-flex items-center gap-3 rounded-full border border-brand-ink/15 bg-white px-5 py-3 text-sm font-semibold text-brand-navy hover:border-brand-ink/30 sm:px-6 sm:py-3.5"
             >
               Watch video
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-navy text-white">
@@ -228,9 +260,8 @@ function Hero() {
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerUp}
-          className="relative aspect-[16/9] w-full select-none overflow-hidden rounded-md bg-brand-navy/5 md:aspect-[4/3]"
+          className="relative aspect-[4/3] w-full touch-none select-none overflow-hidden rounded-md bg-brand-navy/5 sm:aspect-[16/9] md:aspect-[4/3]"
         >
-          {/* Right image (full width, base layer) */}
           <img
             src="https://visionaize.com/wp-content/uploads/2022/07/image1.jpg"
             alt="Field photograph of plant"
@@ -238,7 +269,6 @@ function Hero() {
             className="absolute inset-0 h-full w-full object-cover"
           />
 
-          {/* Left image (clipped to slider position) */}
           <div
             className="absolute inset-0 h-full w-full overflow-hidden"
             style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
@@ -251,15 +281,13 @@ function Hero() {
             />
           </div>
 
-          {/* Divider line */}
           <div
             className="absolute inset-y-0 w-0.5 bg-white/90"
             style={{ left: `${sliderPos}%` }}
           />
 
-          {/* Drag handle */}
           <div
-            className="absolute top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full bg-white shadow-lg"
+            className="absolute top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full bg-white shadow-lg sm:h-10 sm:w-10"
             style={{ left: `${sliderPos}%` }}
           >
             <span className="flex items-center text-brand-navy">
@@ -284,7 +312,7 @@ function Hero() {
               type="button"
               aria-label="Close video"
               onClick={() => setShowVideo(false)}
-              className="absolute -top-12 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
+              className="absolute -top-10 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:-top-12"
             >
               <X className="h-5 w-5" />
             </button>
@@ -302,196 +330,245 @@ function Hero() {
     </section>
   );
 }
+
 function Quote() {
   return (
-   <section className="relative overflow-hidden bg-[#0F2237] py-14 text-white">
-  <div
-    aria-hidden
-    className="pointer-events-none absolute right-0 top-0 h-full w-full md:w-1/2"
-    style={{
-      backgroundImage:
-        "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "top right",
-      backgroundSize: "contain",
-      opacity: 0.5,
-    }}
-  />
-  <div
-    aria-hidden
-    className="pointer-events-none absolute right-6 top-10 select-none text-[20rem] font-serif leading-none"
-    style={{
-      background: "linear-gradient(135deg, #A6E04A 0%, #2E8DC5 80%)",
-      WebkitBackgroundClip: "text",
-      WebkitTextFillColor: "transparent",
-      opacity: 0.18,
-    }}
-  >
-  
-  </div>
-  <div className="relative mx-auto max-w-7xl px-6">
-    <p className="text-balance text-3xl font-light leading-tight tracking-tight md:text-5xl">
-      An hour in V-Plant is<br />like 8 hours in the field
-    </p>
-    <p className="mt-8 text-sm font-semibold">
-      <span style={{ color: "#A6E04A" }}>Top 5</span>{" "}
-      <span className="text-white/80">Global Oil &amp; Gas Company</span>
-    </p>
-  </div>
-</section>
+    <section className="relative overflow-hidden bg-[#0F2237] py-10 text-white sm:py-14">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute right-0 top-0 hidden h-full w-full md:block md:w-1/2"
+        style={{
+          backgroundImage:
+            "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "top right",
+          backgroundSize: "contain",
+          opacity: 0.5,
+        }}
+      />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <p className="text-balance text-2xl font-light leading-tight tracking-tight sm:text-3xl md:text-5xl">
+          An hour in V-Plant is<br /> like 8 hours in the field
+        </p>
+        <p className="mt-6 text-sm font-semibold sm:mt-8">
+          <span style={{ color: "#A6E04A" }}>Top 5</span>{" "}
+          <span className="text-white/80">Global Oil &amp; Gas Company</span>
+        </p>
+      </div>
+    </section>
   );
 }
 
 function JourneyCards() {
+  // Heights grow left -> right to visualize "scaling up" through the journey
+  const CARD_MIN_HEIGHTS = ["380px", "600px", "650px"];
+
   return (
-<section className="relative overflow-hidden bg-[#DAEEF8] py-16">
-  <div
-    aria-hidden
-    className="pointer-events-none absolute inset-0"
-    style={{
-      backgroundImage: "url('https://visionaize.in/wp-content/uploads/2025/12/Arrows.png')",
-      backgroundRepeat: "no-repeat",
-      backgroundPosition: "right center",
-      backgroundSize: "90% 120%",
-    }}
-  />
+    <section className="relative overflow-hidden bg-[#DAEEF8] py-12 sm:py-16">
+      <style>{`
+        .journey-grid {
+          display: grid;
+          gap: 1.5rem;
+          grid-template-columns: 1fr;
+        }
+        @media (min-width: 768px) {
+          .journey-grid {
+            grid-template-columns: repeat(3, 1fr);
+            align-items: end;
+          }
+        }
+      `}</style>
 
-  <div className="relative mx-auto max-w-7xl px-6">
-    <h2 className="text-center text-lg font-semibold text-brand-navy md:text-4xl">
-      Digital Twins for Every Stage of The Journey
-    </h2>
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 hidden md:block"
+        style={{
+          backgroundImage: "url('https://visionaize.in/wp-content/uploads/2025/12/Arrows.png')",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "right center",
+          backgroundSize: "90% 120%",
+        }}
+      />
 
-    <div className="relative mt-10 grid gap-6 md:grid-cols-3">
-      {TIERS.map((t) => (
-        <article
-          key={t.name}
-          className="relative flex flex-col overflow-hidden bg-white px-7 pb-10 pt-10 shadow-md"
-        >
-          <div className="mb-6 overflow-hidden rounded bg-[#DAEEF8]">
-            <img src={t.shot} alt={t.name} className="block aspect-[16/9] w-full object-cover" />
-          </div>
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
+        <h2 className="text-center text-xl font-semibold text-brand-navy sm:text-2xl md:text-4xl">
+          Digital Twins for Every Stage of The Journey
+        </h2>
 
-          <h3 className="text-2xl font-bold" style={{ color: t.color }}>
-            {t.name}
-          </h3>
-          <p className="mt-3 text-lg leading-relaxed text-brand-ink/80">{t.short}</p>
-
-          <div className="mt-auto pt-8">
-            <a
-              href={`#v-plant-${t.slug}`}
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById(`v-plant-${t.slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
-              }}
-              className="inline-flex items-center gap-3 text-medium font-semibold"
-              style={{ color: t.color }}
+        <div className="journey-grid relative mt-8 sm:mt-10">
+          {TIERS.map((t, i) => (
+            <article
+              key={t.name}
+              id={`journey-${t.slug}`}
+              className="relative flex scroll-mt-24 flex-col overflow-hidden bg-white px-5 pb-8 pt-8 shadow-md sm:px-7 sm:pb-10 sm:pt-10"
+              style={{ minHeight: CARD_MIN_HEIGHTS[i] ?? CARD_MIN_HEIGHTS[CARD_MIN_HEIGHTS.length - 1] }}
             >
-              <span
-                className="flex h-8 w-8 items-center justify-center rounded-full border-2"
-                style={{ borderColor: t.color }}
-              >
-                <ChevronDown className="h-4 w-4" style={{ color: t.color }} />
-              </span>
-              Explore Benefits
-            </a>
-          </div>
+              <div className="mb-5 overflow-hidden rounded bg-[#DAEEF8] sm:mb-6">
+                <img src={t.shot} alt={t.name} className="block aspect-[16/9] w-full object-cover" />
+              </div>
 
-          {/* Solid bottom color band, full width of the card */}
-          <span
-            aria-hidden
-            className="absolute inset-x-0 bottom-0 h-2"
-            style={{ background: t.color }}
-          />
-        </article>
-      ))}
-    </div>
-  </div>
-</section>
+              <h3 className="text-xl font-bold sm:text-2xl" style={{ color: t.color }}>
+                {t.name}
+              </h3>
+              <p className="mt-3 text-base leading-relaxed text-brand-ink/80 sm:text-lg">{t.short}</p>
+
+              <div className="mt-auto pt-6 sm:pt-8">
+                
+               <a   href={`#v-plant-${t.slug}`}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById(`v-plant-${t.slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+                  }}
+                  className="inline-flex items-center gap-3 text-sm font-semibold sm:text-base"
+                  style={{ color: t.color }}
+                >
+                  <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white shadow-[0_2px_10px_rgba(15,34,55,0.15)]">
+                    <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M1 1 L15 1 L8 13 Z" fill="#000000" />
+                    </svg>
+                  </span>
+                  Explore Benefits
+                </a>
+              </div>
+
+              <span
+                aria-hidden
+                className="absolute inset-x-0 bottom-0 h-2"
+                style={{ background: t.color }}
+              />
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
 function BuiltToScale() {
-  return (
- <section className="bg-white py-14">
-  <div className="mx-auto max-w-7xl px-6">
-    <style>{`
-      @keyframes floatUpDown {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-6px); }
-      }
-      .floaty {
-        animation: floatUpDown 2.2s ease-in-out infinite;
-      }
-    `}</style>
+  const IMAGE_POSITION = [
+    "left center",
+    "right center",
+    "left center",
+  ];
 
-    <h2 className="text-center text-4xl font-semibold text-brand-navy md:text-4xl">
-      Digital Twin Technology Built to Scale
-    </h2>
-    <div className="mt-12 space-y-14">
-      {TIERS.map((t, i) => {
-        const reverse = i % 2 === 1;
-        return (
-          <div
-            key={t.name}
-            id={`v-plant-${t.slug}`}
-            className={`grid scroll-mt-24 items-center gap-12 md:grid-cols-2 ${
-              reverse ? "md:[&>*:first-child]:order-2" : ""
-            }`}
-          >
-            <div className="relative">
-              <div className="relative mx-auto max-w-xl rounded-t-xl border-x-8 border-t-8 border-brand-ink/15 bg-white">
-                <img
-                  src={t.shot}
-                  alt={`${t.name} screenshot`}
-                  className="block aspect-[4/3] w-full object-cover"
-                />
+  interface ThinArrowUpProps {
+    color: string;
+    style?: React.CSSProperties;
+    className?: string;
+  }
+
+  const ThinArrowUp = ({ color, style, className }: ThinArrowUpProps) => (
+    <svg
+      viewBox="0 0 24 28"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      style={style}
+    >
+      <path
+        d="M12 26 L12 2 M4 10 L12 2 L20 10"
+        stroke={color}
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+
+  return (
+    <section className="bg-white py-10 sm:py-14">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <style>{`
+          @keyframes floatUpDown {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+          }
+          .floaty {
+            animation: floatUpDown 2.2s ease-in-out infinite;
+          }
+        `}</style>
+
+        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
+          Digital Twin Technology Built to Scale
+        </h2>
+        <div className="mt-10 space-y-12 sm:mt-12 sm:space-y-14">
+          {TIERS.map((t, i) => {
+            const reverse = i % 2 === 1;
+            const objectPosition = IMAGE_POSITION[i] ?? "center";
+            return (
+              <div
+                key={t.name}
+                id={`v-plant-${t.slug}`}
+                className={`grid scroll-mt-24 items-center gap-10 sm:gap-12 md:grid-cols-2 md:gap-16 ${
+                  reverse ? "md:[&>*:first-child]:order-2" : ""
+                }`}
+              >
+                <div className="relative">
+                  <div className="relative mx-auto max-w-xl overflow-hidden rounded-xl bg-white">
+                    <div className="aspect-[4/3] w-full overflow-hidden">
+                      <img
+                        src={t.shot}
+                        alt={`${t.name} screenshot`}
+                        className="block h-full w-full object-cover"
+                        style={{ objectPosition }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <div className="flex items-center gap-3">
+                    <h3 className="text-2xl font-bold text-brand-navy sm:text-3xl md:text-4xl">{t.name}</h3>
+                    <button
+                      type="button"
+                      aria-label={`Back to ${t.name} card`}
+                      onClick={() =>
+                        document.getElementById(`journey-${t.slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" })
+                      }
+                      className="flex-none rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy/40"
+                    >
+                      <ThinArrowUp
+                        color={t.color}
+                        className="floaty h-7 w-7 sm:h-9 sm:w-9"
+                        style={{ animationDelay: `${i * 0.2}s` }}
+                      />
+                    </button>
+                  </div>
+                  <p className="mt-4 text-base text-brand-ink/85 sm:mt-5 sm:text-lg">{t.intro}</p>
+                  <ul className="mt-4 space-y-2.5 sm:mt-5 sm:space-y-3">
+                    {t.bullets.map((b) => (
+                      <li key={b} className="flex gap-3 text-base text-brand-ink/85 sm:text-lg">
+                        <span
+                          aria-hidden
+                          className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full"
+                          style={{ background: t.color }}
+                        />
+                        <span>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              <div className="mx-auto h-3 max-w-2xl rounded-b-2xl bg-brand-ink/15" />
-            </div>
-            <div className={reverse ? "md:pr-8" : "md:pl-8"}>
-             <div className="flex items-center gap-3">
-  <h3 className="text-4xl font-bold text-brand-navy">{t.name}</h3>
-  <ArrowUp
-    className="floaty h-9 w-9"
-    style={{ color: t.color, animationDelay: `${i * 0.2}s` }}
-  />
-</div>
-              <p className="mt-5 text-lg text-brand-ink/85">{t.intro}</p>
-              <ul className="mt-5 space-y-3">
-                {t.bullets.map((b) => (
-                  <li key={b} className="flex gap-3 text-lg text-brand-ink/85">
-                    <span
-                      aria-hidden
-                      className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full"
-                      style={{ background: t.color }}
-                    />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        );
-      })}
-    </div>
-  </div>
-</section>
+            );
+          })}
+        </div>
+      </div>
+    </section>
   );
 }
 
 function Features() {
   return (
-    <section className="bg-white pb-14 pt-2">
-      <div className="mx-auto max-w-7xl px-6">
-        <h2 className="text-center text-4xl font-semibold text-brand-navy md:text-4xl">
+    <section className="bg-white pb-10 pt-2 sm:pb-14">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Features
         </h2>
-        <div className="mt-10 grid gap-10 text-center md:grid-cols-4">
+        <div className="mt-8 grid gap-8 text-center sm:mt-10 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-10">
           {FEATURES.map((f) => (
             <div key={f.title} className="flex flex-col items-center">
-              <img src={f.icon} alt="" className="h-16 w-auto object-contain" loading="lazy" />
-              <h3 className="mt-6 text-2xl font-bold leading-snug text-brand-navy">{f.title}</h3>
-              <p className="mt-4 text-lg leading-relaxed text-brand-ink/75">{f.body}</p>
+              <img src={f.icon} alt="" className="h-14 w-auto object-contain sm:h-16" loading="lazy" />
+              <h3 className="mt-5 text-lg font-bold leading-snug text-brand-navy sm:mt-6 sm:text-2xl">{f.title}</h3>
+              <p className="mt-3 text-base leading-relaxed text-brand-ink/75 sm:mt-4 sm:text-lg">{f.body}</p>
             </div>
           ))}
         </div>
@@ -502,205 +579,219 @@ function Features() {
 
 function BusinessCaseBand() {
   return (
-  <section className="bg-[#A6E04A] py-8 md:py-10">
-  <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 px-6 md:flex-row md:gap-14">
-    <p className="text-2xl font-semi text-brand-navy md:text-2xl">
-      Building a case for a 3D Digital Twin
-    </p>
-    <Link
-      to="/contact"
-      className="inline-flex items-center gap-2 rounded-full bg-white px-9 py-4 text-base font-semibold text-brand-blue shadow-sm hover:bg-white/90"
-    >
-      Build a business case
-    </Link>
-  </div>
-</section>
+    <section className="bg-[#A6E04A] py-7 sm:py-8 md:py-10">
+      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-5 px-4 text-center sm:gap-8 sm:px-6 md:flex-row md:gap-14 md:text-left">
+        <p className="text-lg font-semibold text-brand-navy sm:text-xl md:text-2xl">
+          Building a case for a 3D Digital Twin
+        </p>
+        <Link
+          to="/contact"
+          className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand-blue shadow-sm hover:bg-white/90 sm:px-9 sm:py-4 sm:text-base"
+        >
+          Build a business case
+        </Link>
+      </div>
+    </section>
   );
 }
 
 function Testimonial() {
   return (
-<section
-  className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-16"
-  style={{
-    backgroundImage: "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
-    backgroundPosition: "right bottom",
-    backgroundSize: "45% auto",
-  }}
->
-  <div className="relative mx-auto max-w-5xl px-6">
-    <blockquote className="max-w-2xl text-balance text-1xl font-medium leading-snug text-brand-navy md:text-3xl">
-      During the early stages of an implementation, V-Plant helped the
-      inspection team find and solve a corrosion problem in 2 days. A similar
-      exercise required 2 weeks using a competitor's product.
-    </blockquote>
-    <p className="mt-10 text-sm font-semibold text-brand-ink/70">CHS, Inc.</p>
-  </div>
-</section>
+    <section
+      className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-12 sm:py-16"
+      style={{
+        backgroundImage: "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
+        backgroundPosition: "right bottom",
+        backgroundSize: "45% auto",
+      }}
+    >
+      <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
+        <blockquote className="max-w-2xl text-balance text-xl font-medium leading-snug text-brand-navy sm:text-2xl md:text-3xl">
+          During the early stages of an implementation, V-Plant helped the
+          inspection team find and solve a corrosion problem in 2 days. A similar
+          exercise required 2 weeks using a competitor's product.
+        </blockquote>
+        <p className="mt-8 text-sm font-semibold text-brand-ink/70 sm:mt-10">CHS, Inc.</p>
+      </div>
+    </section>
   );
 }
 
 function VideoBenefits() {
   return (
-   <section className="bg-white py-14">
-  <div className="mx-auto grid max-w-7xl items-start gap-12 px-6 md:grid-cols-2">
-    {/* Laptop mockup with video */}
-    <div className="relative mx-auto w-full max-w-xl">
-      <div className="relative rounded-t-xl border-x-8 border-t-8 border-brand-ink/15 bg-black">
-        <video
-          src="https://visionaize.com/wp-content/uploads/2022/07/3Dtwinanimation.mp4"
-          className="block aspect-[3/3] w-full object-cover"
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      </div>
-      <div className="mx-auto h-3 max-w-2xl rounded-b-2xl bg-brand-ink/15" />
-    </div>
+    <section className="bg-white py-10 sm:py-14">
+      <div className="mx-auto grid max-w-7xl items-start gap-10 px-4 sm:px-6 md:grid-cols-2 md:gap-12">
+        {/* Laptop mockup with video */}
+        <div className="relative mx-auto w-full max-w-xl">
+          <div className="relative rounded-t-xl border-x-4 border-t-4 border-brand-ink/15 bg-black sm:border-x-8 sm:border-t-8">
+            <video
+              src="https://visionaize.com/wp-content/uploads/2022/07/3Dtwinanimation.mp4"
+              className="block aspect-square w-full object-cover"
+              autoPlay
+              loop
+              muted
+              playsInline
+            />
+          </div>
+          <div className="mx-auto h-2 max-w-2xl rounded-b-2xl bg-brand-ink/15 sm:h-3" />
+        </div>
 
-    {/* Benefits */}
-    <div>
-      <h2 className="text-4xl font-bold text-brand-navy md:text-5xl">Benefits</h2>
-      <div className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2">
-       {BENEFITS.map((b) => (
-  <div key={b.title}>
-    {typeof b.icon === "string" ? (
-      <img src={b.icon} alt="" className="h-10 w-10" aria-hidden="true" />
-    ) : (
-      <b.icon className="h-10 w-10 text-emerald-500" strokeWidth={1.5} />
-    )}
-    <h3 className="mt-3 text-lg font-bold text-brand-navy">{b.title}</h3>
-    <p className="mt-2 text-lg leading-relaxed text-brand-ink/80">{b.body}</p>
-  </div>
-))}
+        {/* Benefits */}
+        <div>
+          <h2 className="text-3xl font-bold text-brand-navy sm:text-4xl md:text-5xl">Benefits</h2>
+          <div className="mt-8 grid gap-x-8 gap-y-8 sm:mt-10 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-10">
+            {BENEFITS.map((b) => (
+              <div key={b.title}>
+                {typeof b.icon === "string" ? (
+                  <img src={b.icon} alt="" className="h-10 w-10" aria-hidden="true" />
+                ) : (
+                  <b.icon className="h-10 w-10 text-emerald-500" strokeWidth={1.5} />
+                )}
+                <h3 className="mt-3 text-lg font-bold text-brand-navy">{b.title}</h3>
+                <p className="mt-2 text-base leading-relaxed text-brand-ink/80 sm:text-lg">{b.body}</p>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</section>
+    </section>
   );
 }
 
 function GoodCompany() {
   return (
- <section className="bg-white pb-14 pt-6">
-  <div className="mx-auto max-w-6xl px-8">
-    <h2 className="text-center text-4xl font-semibold text-brand-navy md:text-4xl">
-      We are in good company
-    </h2>
-    <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-3 md:grid-cols-6">
-      {PARTNERS.map((p) => (
-        <div key={p.src} className="flex items-center justify-center">
-          <img
-            src={p.src}
-            alt={p.name}
-            className="h-20 w-auto max-w-[180px] object-contain"
-            loading="lazy"
-          />
+    <section className="bg-white pb-10 pt-6 sm:pb-14">
+      <div className="mx-auto max-w-6xl px-4 sm:px-8">
+        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
+          We are in good company
+        </h2>
+        <div className="mt-10 flex flex-wrap justify-center gap-x-10 gap-y-10 sm:mt-14 sm:gap-x-14 sm:gap-y-14 md:gap-x-16">
+          {PARTNERS.map((p, i) => (
+            <>
+              <div
+                key={`${p.src}-${i}`}
+                className="flex w-[calc(50%-1.25rem)] items-center justify-center sm:w-[calc(33.333%-2.34rem)] md:w-auto"
+              >
+                <img
+                  src={p.src}
+                  alt={p.name}
+                  className="h-12 w-auto max-w-[130px] object-contain sm:h-16 sm:max-w-[150px] md:h-20 md:max-w-[170px]"
+                  loading="lazy"
+                />
+              </div>
+              {/* Force a line break after the 6th logo on md+ so row 1 = 6, row 2 = rest, both centered */}
+              {i === 5 && <div key="break" className="hidden w-full md:block" />}
+            </>
+          ))}
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </div>
+    </section>
   );
 }
 
 function CTA() {
   return (
-<section
-  className="relative overflow-hidden bg-[#0F2237] py-16 bg-no-repeat"
-  style={{
-    backgroundImage:
-      "url('https://visionaize.in/wp-content/uploads/2022/05/footer-bg-2.png')",
-    backgroundPosition: "right center",
-    backgroundSize: "65% auto",
-  }}
->
-  <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-16 px-6 md:grid-cols-2">
-    {/* Left copy */}
-    <div>
-      <h2 className="text-5xl font-semibold leading-tight text-white md:text-4xl">
-        Contextualize mountains of data with cutting edge technology
-      </h2>
-      <p className="mt-8 max-w-md text-large leading-relaxed text-white/70">
-        Reliable connectivity and data are critical drivers to successful
-        infrastructure management. Taking advantage of IIoT sensors requires
-        flexible methods to interact with real-time data.
-      </p>
-    </div>
-
-    {/* Right: circular image trio */}
-    <div className="flex items-center justify-center gap-12 pt-8 md:justify-center md:pt-10">
-      {[
-        {
-          label: "Mobile",
-          src: "https://visionaize.in/wp-content/uploads/2022/05/image-36.png",
-        },
-        {
-          label: "Virtual Reality",
-          src: "https://visionaize.in/wp-content/uploads/2022/11/iStock-1148243718-1-2048x1365.jpg",
-        },
-        {
-          label: "Augmented Reality",
-          src: "https://visionaize.in/wp-content/uploads/2022/05/image-38.png",
-        },
-      ].map((item) => (
-        <div key={item.label} className="flex flex-col items-center gap-3">
-          <div className="h-24 w-24 overflow-hidden rounded-full ring-4 ring-white/90 md:h-30 md:w-30">
-            <img
-              src={item.src}
-              alt={item.label}
-              className="h-full w-full object-cover"
-            />
-          </div>
-          <span className="text-sm font-medium text-white">{item.label}</span>
+    <section
+      className="relative overflow-hidden bg-[#0F2237] bg-no-repeat py-12 sm:py-16"
+      style={{
+        backgroundImage:
+          "url('https://visionaize.in/wp-content/uploads/2022/05/footer-bg-2.png')",
+        backgroundPosition: "right center",
+        backgroundSize: "65% auto",
+      }}
+    >
+      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 md:grid-cols-2 md:gap-16">
+        {/* Left copy */}
+        <div>
+          <h2 className="text-2xl font-semibold leading-tight text-white sm:text-3xl md:text-4xl">
+            Contextualize mountains of data with cutting edge technology
+          </h2>
+          <p className="mt-6 max-w-md text-base leading-relaxed text-white/70 sm:mt-8 sm:text-lg">
+            Reliable connectivity and data are critical drivers to successful
+            infrastructure management. Taking advantage of IIoT sensors requires
+            flexible methods to interact with real-time data.
+          </p>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+
+        {/* Right: circular image trio */}
+        <div className="flex flex-wrap items-center justify-center gap-8 pt-4 sm:gap-12 sm:pt-8 md:pt-10">
+          {[
+            {
+              label: "Mobile",
+              src: "https://visionaize.in/wp-content/uploads/2022/05/image-36.png",
+            },
+            {
+              label: "Virtual Reality",
+              src: "https://visionaize.in/wp-content/uploads/2022/11/iStock-1148243718-1-2048x1365.jpg",
+            },
+            {
+              label: "Augmented Reality",
+              src: "https://visionaize.in/wp-content/uploads/2022/05/image-38.png",
+            },
+          ].map((item) => (
+            <div key={item.label} className="flex flex-col items-center gap-3">
+              <div className="h-20 w-20 overflow-hidden rounded-full ring-4 ring-white/90 sm:h-24 sm:w-24 md:h-28 md:w-28">
+                <img
+                  src={item.src}
+                  alt={item.label}
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <span className="text-sm font-medium text-white">{item.label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
 function Data() {
   return (
-<section
-  className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-16"
-  style={{
-    backgroundImage: "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
-    backgroundPosition: "right bottom",
-    backgroundSize: "45% auto",
-  }}
->
-  <div className="relative mx-auto max-w-5xl px-6">
-    <blockquote className="max-w-2xl text-balance text-1xl font-medium leading-snug text-brand-navy md:text-3xl">
-     It is astounding how this platform is able to integrate data from complex systems like SCADA, AMI Meter, and GIS Systems to provide accurate 3D visualizations.
-    </blockquote>
-    <p className="mt-10 text-sm font-semibold text-brand-ink/70">Bill Andrew, President, Delaware Electric Cooperative
-</p>
-  </div>
-</section>
+    <section
+      className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-12 sm:py-16"
+      style={{
+        backgroundImage: "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
+        backgroundPosition: "right bottom",
+        backgroundSize: "45% auto",
+      }}
+    >
+      <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
+        <blockquote className="max-w-2xl text-balance text-xl font-medium leading-snug text-brand-navy sm:text-2xl md:text-3xl">
+          It is astounding how this platform is able to integrate data from complex systems like SCADA, AMI Meter, and GIS Systems to provide accurate 3D visualizations.
+        </blockquote>
+        <p className="mt-8 text-sm font-semibold text-brand-ink/70 sm:mt-10">
+          Bill Andrew, President, Delaware Electric Cooperative
+        </p>
+      </div>
+    </section>
   );
 }
-
 function Integrations() {
   return (
-    <section className="bg-white pb-16 pt-10">
-      <div className="mx-auto max-w-6xl px-8">
-        <h2 className="text-center text-4xl font-semibold text-brand-navy md:text-4xl">
+    <section className="bg-white pb-12 pt-8 sm:pb-16 sm:pt-10">
+      <div className="mx-auto max-w-6xl px-4 sm:px-8">
+        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           We integrate with<br />best-in-class technologies
         </h2>
-        <div className="mt-10 grid grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-3 md:grid-cols-5">
-          {INTEGRATIONS.map((p) => (
-            <div key={p.name} className="flex items-center justify-center">
-              <img
-                src={p.src}
-                alt={p.name}
-                className="h-20 w-auto max-w-[180px] object-contain"
-                loading="lazy"
-              />
-            </div>
-          ))}
+        <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-10 sm:mt-10 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-14 md:grid-cols-5">
+          {INTEGRATIONS.map((p) => {
+            const isGEVernova = p.name === "GE Vernova";
+            return (
+              <div key={p.name} className="flex items-center justify-center">
+                <img
+                  src={p.src}
+                  alt={p.name}
+                  className={
+                    isGEVernova
+                      ? "h-24 w-auto max-w-[220px] object-contain sm:h-32 sm:max-w-[280px]"
+                      : "h-14 w-auto max-w-[140px] object-contain sm:h-20 sm:max-w-[180px]"
+                  }
+                  loading="lazy"
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

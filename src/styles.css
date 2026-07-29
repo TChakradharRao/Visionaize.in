@@ -2,6 +2,7 @@
 @source "../src";
 @import "tw-animate-css";
 
+
 @custom-variant dark (&:is(.dark *));
 
 /*
@@ -173,4 +174,10 @@
   display: inline-block;
   opacity: 0;
   animation: slideDownIn 0.6s ease forwards;
+}
+
+*{
+  font-family:"Fira Sans";
+  font-weight:bold;
+
 }

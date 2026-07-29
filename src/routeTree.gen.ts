@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as VrTourRequestRouteImport } from './routes/vr-tour-request'
 import { Route as ViziCopilotGenAiDemoLinkRouteImport } from './routes/vizi-copilot-gen-ai-demo-link'
+import { Route as UtilitiesControlCenterRouteImport } from './routes/utilities-control-center'
 import { Route as TheindustrialmetaverseRouteImport } from './routes/theindustrialmetaverse'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as SocialDigitalContactRouteImport } from './routes/social-digital-contact'
@@ -22,6 +23,7 @@ import { Route as ReInventingTurnaroundsInTheMetaverseRouteImport } from './rout
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PowerIndustryWhitepaperRouteImport } from './routes/power-industry-whitepaper'
 import { Route as PowerIndustryCaseStudyRouteImport } from './routes/power-industry-case-study'
+import { Route as IntelligentDemandForecastRouteImport } from './routes/intelligent-demand-forecast'
 import { Route as DigitalTwinFaqRouteImport } from './routes/digital-twin-faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompanyRouteImport } from './routes/company'
@@ -37,6 +39,8 @@ import { Route as SolutionsVirtualRealityAndAugmentedRealityRouteImport } from '
 import { Route as SolutionsRemotePerformanceMonitoringRouteImport } from './routes/solutions.remote-performance-monitoring'
 import { Route as SolutionsRealTimeOptimizationRouteImport } from './routes/solutions.real-time-optimization'
 import { Route as SolutionsProcessPerformancePredictionRouteImport } from './routes/solutions.process-performance-prediction'
+import { Route as SolutionsPredictiveMaintenanceRouteImport } from './routes/solutions.predictive-maintenance'
+import { Route as SolutionsMaintainAndSustainRouteImport } from './routes/solutions.maintain-and-sustain'
 import { Route as SolutionsDecarbonizationRouteImport } from './routes/solutions.decarbonization'
 import { Route as ServicesSlugRouteImport } from './routes/services.$slug'
 import { Route as PlatformViziCopilotGenAiRouteImport } from './routes/platform.vizi-copilot-gen-ai'
@@ -46,10 +50,17 @@ import { Route as PlatformVPlantRouteImport } from './routes/platform.v-plant'
 import { Route as PlatformSignalMinerRouteImport } from './routes/platform.signal-miner'
 import { Route as PlatformMicrosoftFabricExpertiseRouteImport } from './routes/platform.microsoft-fabric-expertise'
 import { Route as InsightsInsightsDigitalTwinResourceCenterRouteImport } from './routes/insights/insights-digital-twin-resource-center'
+import { Route as IndustriesSugarBioEthanolIndustryRouteImport } from './routes/industries.sugar-bio-ethanol-industry'
+import { Route as IndustriesRenewablesEnergyRouteImport } from './routes/industries.renewables-energy'
 import { Route as IndustriesDigitalTwinForPowerAndEnergyRouteImport } from './routes/industries.digital-twin-for-power-and-energy'
 import { Route as IndustriesDigitalTwinForOilAndGasRouteImport } from './routes/industries.digital-twin-for-oil-and-gas'
 import { Route as IndustriesDigitalTwinForManufacturingRouteImport } from './routes/industries.digital-twin-for-manufacturing'
 import { Route as IndustriesDigitalTwinForCementRouteImport } from './routes/industries.digital-twin-for-cement'
+import { Route as AdminManageColumnsRouteImport } from './routes/admin.manage-columns'
+import { Route as AdminLoginRouteImport } from './routes/admin.login'
+import { Route as AdminFieldMappingRouteImport } from './routes/admin.field-mapping'
+import { Route as AdminEnquiriesRouteImport } from './routes/admin.enquiries'
+import { Route as AdminAnalyticsRouteImport } from './routes/admin.analytics'
 import { Route as IndustriesOilAndGasBuildABusinessCaseRouteImport } from './routes/industries/oil-and-gas/build-a-business-case'
 
 const VrTourRequestRoute = VrTourRequestRouteImport.update({
@@ -63,6 +74,11 @@ const ViziCopilotGenAiDemoLinkRoute =
     path: '/vizi-copilot-gen-ai-demo-link',
     getParentRoute: () => rootRouteImport,
   } as any)
+const UtilitiesControlCenterRoute = UtilitiesControlCenterRouteImport.update({
+  id: '/utilities-control-center',
+  path: '/utilities-control-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TheindustrialmetaverseRoute = TheindustrialmetaverseRouteImport.update({
   id: '/theindustrialmetaverse',
   path: '/theindustrialmetaverse',
@@ -120,6 +136,12 @@ const PowerIndustryCaseStudyRoute = PowerIndustryCaseStudyRouteImport.update({
   path: '/power-industry-case-study',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IntelligentDemandForecastRoute =
+  IntelligentDemandForecastRouteImport.update({
+    id: '/intelligent-demand-forecast',
+    path: '/intelligent-demand-forecast',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const DigitalTwinFaqRoute = DigitalTwinFaqRouteImport.update({
   id: '/digital-twin-faq',
   path: '/digital-twin-faq',
@@ -201,6 +223,18 @@ const SolutionsProcessPerformancePredictionRoute =
     path: '/process-performance-prediction',
     getParentRoute: () => SolutionsRoute,
   } as any)
+const SolutionsPredictiveMaintenanceRoute =
+  SolutionsPredictiveMaintenanceRouteImport.update({
+    id: '/predictive-maintenance',
+    path: '/predictive-maintenance',
+    getParentRoute: () => SolutionsRoute,
+  } as any)
+const SolutionsMaintainAndSustainRoute =
+  SolutionsMaintainAndSustainRouteImport.update({
+    id: '/maintain-and-sustain',
+    path: '/maintain-and-sustain',
+    getParentRoute: () => SolutionsRoute,
+  } as any)
 const SolutionsDecarbonizationRoute =
   SolutionsDecarbonizationRouteImport.update({
     id: '/decarbonization',
@@ -250,6 +284,18 @@ const InsightsInsightsDigitalTwinResourceCenterRoute =
     path: '/insights/insights-digital-twin-resource-center',
     getParentRoute: () => rootRouteImport,
   } as any)
+const IndustriesSugarBioEthanolIndustryRoute =
+  IndustriesSugarBioEthanolIndustryRouteImport.update({
+    id: '/industries/sugar-bio-ethanol-industry',
+    path: '/industries/sugar-bio-ethanol-industry',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const IndustriesRenewablesEnergyRoute =
+  IndustriesRenewablesEnergyRouteImport.update({
+    id: '/industries/renewables-energy',
+    path: '/industries/renewables-energy',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const IndustriesDigitalTwinForPowerAndEnergyRoute =
   IndustriesDigitalTwinForPowerAndEnergyRouteImport.update({
     id: '/industries/digital-twin-for-power-and-energy',
@@ -274,6 +320,31 @@ const IndustriesDigitalTwinForCementRoute =
     path: '/industries/digital-twin-for-cement',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminManageColumnsRoute = AdminManageColumnsRouteImport.update({
+  id: '/admin/manage-columns',
+  path: '/admin/manage-columns',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminLoginRoute = AdminLoginRouteImport.update({
+  id: '/admin/login',
+  path: '/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminFieldMappingRoute = AdminFieldMappingRouteImport.update({
+  id: '/admin/field-mapping',
+  path: '/admin/field-mapping',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminEnquiriesRoute = AdminEnquiriesRouteImport.update({
+  id: '/admin/enquiries',
+  path: '/admin/enquiries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminAnalyticsRoute = AdminAnalyticsRouteImport.update({
+  id: '/admin/analytics',
+  path: '/admin/analytics',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndustriesOilAndGasBuildABusinessCaseRoute =
   IndustriesOilAndGasBuildABusinessCaseRouteImport.update({
     id: '/industries/oil-and-gas/build-a-business-case',
@@ -291,6 +362,7 @@ export interface FileRoutesByFullPath {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
+  '/intelligent-demand-forecast': typeof IntelligentDemandForecastRoute
   '/power-industry-case-study': typeof PowerIndustryCaseStudyRoute
   '/power-industry-whitepaper': typeof PowerIndustryWhitepaperRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -302,12 +374,20 @@ export interface FileRoutesByFullPath {
   '/social-digital-contact': typeof SocialDigitalContactRoute
   '/solutions': typeof SolutionsRouteWithChildren
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
+  '/utilities-control-center': typeof UtilitiesControlCenterRoute
   '/vizi-copilot-gen-ai-demo-link': typeof ViziCopilotGenAiDemoLinkRoute
   '/vr-tour-request': typeof VrTourRequestRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/enquiries': typeof AdminEnquiriesRoute
+  '/admin/field-mapping': typeof AdminFieldMappingRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/manage-columns': typeof AdminManageColumnsRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
   '/industries/digital-twin-for-manufacturing': typeof IndustriesDigitalTwinForManufacturingRoute
   '/industries/digital-twin-for-oil-and-gas': typeof IndustriesDigitalTwinForOilAndGasRoute
   '/industries/digital-twin-for-power-and-energy': typeof IndustriesDigitalTwinForPowerAndEnergyRoute
+  '/industries/renewables-energy': typeof IndustriesRenewablesEnergyRoute
+  '/industries/sugar-bio-ethanol-industry': typeof IndustriesSugarBioEthanolIndustryRoute
   '/insights/insights-digital-twin-resource-center': typeof InsightsInsightsDigitalTwinResourceCenterRoute
   '/platform/microsoft-fabric-expertise': typeof PlatformMicrosoftFabricExpertiseRoute
   '/platform/signal-miner': typeof PlatformSignalMinerRoute
@@ -317,6 +397,8 @@ export interface FileRoutesByFullPath {
   '/platform/vizi-copilot-gen-ai': typeof PlatformViziCopilotGenAiRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/solutions/decarbonization': typeof SolutionsDecarbonizationRoute
+  '/solutions/maintain-and-sustain': typeof SolutionsMaintainAndSustainRoute
+  '/solutions/predictive-maintenance': typeof SolutionsPredictiveMaintenanceRoute
   '/solutions/process-performance-prediction': typeof SolutionsProcessPerformancePredictionRoute
   '/solutions/real-time-optimization': typeof SolutionsRealTimeOptimizationRoute
   '/solutions/remote-performance-monitoring': typeof SolutionsRemotePerformanceMonitoringRoute
@@ -335,6 +417,7 @@ export interface FileRoutesByTo {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
+  '/intelligent-demand-forecast': typeof IntelligentDemandForecastRoute
   '/power-industry-case-study': typeof PowerIndustryCaseStudyRoute
   '/power-industry-whitepaper': typeof PowerIndustryWhitepaperRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -345,12 +428,20 @@ export interface FileRoutesByTo {
   '/social-digital': typeof SocialDigitalRoute
   '/social-digital-contact': typeof SocialDigitalContactRoute
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
+  '/utilities-control-center': typeof UtilitiesControlCenterRoute
   '/vizi-copilot-gen-ai-demo-link': typeof ViziCopilotGenAiDemoLinkRoute
   '/vr-tour-request': typeof VrTourRequestRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/enquiries': typeof AdminEnquiriesRoute
+  '/admin/field-mapping': typeof AdminFieldMappingRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/manage-columns': typeof AdminManageColumnsRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
   '/industries/digital-twin-for-manufacturing': typeof IndustriesDigitalTwinForManufacturingRoute
   '/industries/digital-twin-for-oil-and-gas': typeof IndustriesDigitalTwinForOilAndGasRoute
   '/industries/digital-twin-for-power-and-energy': typeof IndustriesDigitalTwinForPowerAndEnergyRoute
+  '/industries/renewables-energy': typeof IndustriesRenewablesEnergyRoute
+  '/industries/sugar-bio-ethanol-industry': typeof IndustriesSugarBioEthanolIndustryRoute
   '/insights/insights-digital-twin-resource-center': typeof InsightsInsightsDigitalTwinResourceCenterRoute
   '/platform/microsoft-fabric-expertise': typeof PlatformMicrosoftFabricExpertiseRoute
   '/platform/signal-miner': typeof PlatformSignalMinerRoute
@@ -360,6 +451,8 @@ export interface FileRoutesByTo {
   '/platform/vizi-copilot-gen-ai': typeof PlatformViziCopilotGenAiRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/solutions/decarbonization': typeof SolutionsDecarbonizationRoute
+  '/solutions/maintain-and-sustain': typeof SolutionsMaintainAndSustainRoute
+  '/solutions/predictive-maintenance': typeof SolutionsPredictiveMaintenanceRoute
   '/solutions/process-performance-prediction': typeof SolutionsProcessPerformancePredictionRoute
   '/solutions/real-time-optimization': typeof SolutionsRealTimeOptimizationRoute
   '/solutions/remote-performance-monitoring': typeof SolutionsRemotePerformanceMonitoringRoute
@@ -379,6 +472,7 @@ export interface FileRoutesById {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
+  '/intelligent-demand-forecast': typeof IntelligentDemandForecastRoute
   '/power-industry-case-study': typeof PowerIndustryCaseStudyRoute
   '/power-industry-whitepaper': typeof PowerIndustryWhitepaperRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
@@ -390,12 +484,20 @@ export interface FileRoutesById {
   '/social-digital-contact': typeof SocialDigitalContactRoute
   '/solutions': typeof SolutionsRouteWithChildren
   '/theindustrialmetaverse': typeof TheindustrialmetaverseRoute
+  '/utilities-control-center': typeof UtilitiesControlCenterRoute
   '/vizi-copilot-gen-ai-demo-link': typeof ViziCopilotGenAiDemoLinkRoute
   '/vr-tour-request': typeof VrTourRequestRoute
+  '/admin/analytics': typeof AdminAnalyticsRoute
+  '/admin/enquiries': typeof AdminEnquiriesRoute
+  '/admin/field-mapping': typeof AdminFieldMappingRoute
+  '/admin/login': typeof AdminLoginRoute
+  '/admin/manage-columns': typeof AdminManageColumnsRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
   '/industries/digital-twin-for-manufacturing': typeof IndustriesDigitalTwinForManufacturingRoute
   '/industries/digital-twin-for-oil-and-gas': typeof IndustriesDigitalTwinForOilAndGasRoute
   '/industries/digital-twin-for-power-and-energy': typeof IndustriesDigitalTwinForPowerAndEnergyRoute
+  '/industries/renewables-energy': typeof IndustriesRenewablesEnergyRoute
+  '/industries/sugar-bio-ethanol-industry': typeof IndustriesSugarBioEthanolIndustryRoute
   '/insights/insights-digital-twin-resource-center': typeof InsightsInsightsDigitalTwinResourceCenterRoute
   '/platform/microsoft-fabric-expertise': typeof PlatformMicrosoftFabricExpertiseRoute
   '/platform/signal-miner': typeof PlatformSignalMinerRoute
@@ -405,6 +507,8 @@ export interface FileRoutesById {
   '/platform/vizi-copilot-gen-ai': typeof PlatformViziCopilotGenAiRoute
   '/services/$slug': typeof ServicesSlugRoute
   '/solutions/decarbonization': typeof SolutionsDecarbonizationRoute
+  '/solutions/maintain-and-sustain': typeof SolutionsMaintainAndSustainRoute
+  '/solutions/predictive-maintenance': typeof SolutionsPredictiveMaintenanceRoute
   '/solutions/process-performance-prediction': typeof SolutionsProcessPerformancePredictionRoute
   '/solutions/real-time-optimization': typeof SolutionsRealTimeOptimizationRoute
   '/solutions/remote-performance-monitoring': typeof SolutionsRemotePerformanceMonitoringRoute
@@ -425,6 +529,7 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
+    | '/intelligent-demand-forecast'
     | '/power-industry-case-study'
     | '/power-industry-whitepaper'
     | '/privacy-policy'
@@ -436,12 +541,20 @@ export interface FileRouteTypes {
     | '/social-digital-contact'
     | '/solutions'
     | '/theindustrialmetaverse'
+    | '/utilities-control-center'
     | '/vizi-copilot-gen-ai-demo-link'
     | '/vr-tour-request'
+    | '/admin/analytics'
+    | '/admin/enquiries'
+    | '/admin/field-mapping'
+    | '/admin/login'
+    | '/admin/manage-columns'
     | '/industries/digital-twin-for-cement'
     | '/industries/digital-twin-for-manufacturing'
     | '/industries/digital-twin-for-oil-and-gas'
     | '/industries/digital-twin-for-power-and-energy'
+    | '/industries/renewables-energy'
+    | '/industries/sugar-bio-ethanol-industry'
     | '/insights/insights-digital-twin-resource-center'
     | '/platform/microsoft-fabric-expertise'
     | '/platform/signal-miner'
@@ -451,6 +564,8 @@ export interface FileRouteTypes {
     | '/platform/vizi-copilot-gen-ai'
     | '/services/$slug'
     | '/solutions/decarbonization'
+    | '/solutions/maintain-and-sustain'
+    | '/solutions/predictive-maintenance'
     | '/solutions/process-performance-prediction'
     | '/solutions/real-time-optimization'
     | '/solutions/remote-performance-monitoring'
@@ -469,6 +584,7 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
+    | '/intelligent-demand-forecast'
     | '/power-industry-case-study'
     | '/power-industry-whitepaper'
     | '/privacy-policy'
@@ -479,12 +595,20 @@ export interface FileRouteTypes {
     | '/social-digital'
     | '/social-digital-contact'
     | '/theindustrialmetaverse'
+    | '/utilities-control-center'
     | '/vizi-copilot-gen-ai-demo-link'
     | '/vr-tour-request'
+    | '/admin/analytics'
+    | '/admin/enquiries'
+    | '/admin/field-mapping'
+    | '/admin/login'
+    | '/admin/manage-columns'
     | '/industries/digital-twin-for-cement'
     | '/industries/digital-twin-for-manufacturing'
     | '/industries/digital-twin-for-oil-and-gas'
     | '/industries/digital-twin-for-power-and-energy'
+    | '/industries/renewables-energy'
+    | '/industries/sugar-bio-ethanol-industry'
     | '/insights/insights-digital-twin-resource-center'
     | '/platform/microsoft-fabric-expertise'
     | '/platform/signal-miner'
@@ -494,6 +618,8 @@ export interface FileRouteTypes {
     | '/platform/vizi-copilot-gen-ai'
     | '/services/$slug'
     | '/solutions/decarbonization'
+    | '/solutions/maintain-and-sustain'
+    | '/solutions/predictive-maintenance'
     | '/solutions/process-performance-prediction'
     | '/solutions/real-time-optimization'
     | '/solutions/remote-performance-monitoring'
@@ -512,6 +638,7 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
+    | '/intelligent-demand-forecast'
     | '/power-industry-case-study'
     | '/power-industry-whitepaper'
     | '/privacy-policy'
@@ -523,12 +650,20 @@ export interface FileRouteTypes {
     | '/social-digital-contact'
     | '/solutions'
     | '/theindustrialmetaverse'
+    | '/utilities-control-center'
     | '/vizi-copilot-gen-ai-demo-link'
     | '/vr-tour-request'
+    | '/admin/analytics'
+    | '/admin/enquiries'
+    | '/admin/field-mapping'
+    | '/admin/login'
+    | '/admin/manage-columns'
     | '/industries/digital-twin-for-cement'
     | '/industries/digital-twin-for-manufacturing'
     | '/industries/digital-twin-for-oil-and-gas'
     | '/industries/digital-twin-for-power-and-energy'
+    | '/industries/renewables-energy'
+    | '/industries/sugar-bio-ethanol-industry'
     | '/insights/insights-digital-twin-resource-center'
     | '/platform/microsoft-fabric-expertise'
     | '/platform/signal-miner'
@@ -538,6 +673,8 @@ export interface FileRouteTypes {
     | '/platform/vizi-copilot-gen-ai'
     | '/services/$slug'
     | '/solutions/decarbonization'
+    | '/solutions/maintain-and-sustain'
+    | '/solutions/predictive-maintenance'
     | '/solutions/process-performance-prediction'
     | '/solutions/real-time-optimization'
     | '/solutions/remote-performance-monitoring'
@@ -557,6 +694,7 @@ export interface RootRouteChildren {
   CompanyRoute: typeof CompanyRoute
   ContactRoute: typeof ContactRoute
   DigitalTwinFaqRoute: typeof DigitalTwinFaqRoute
+  IntelligentDemandForecastRoute: typeof IntelligentDemandForecastRoute
   PowerIndustryCaseStudyRoute: typeof PowerIndustryCaseStudyRoute
   PowerIndustryWhitepaperRoute: typeof PowerIndustryWhitepaperRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
@@ -568,12 +706,20 @@ export interface RootRouteChildren {
   SocialDigitalContactRoute: typeof SocialDigitalContactRoute
   SolutionsRoute: typeof SolutionsRouteWithChildren
   TheindustrialmetaverseRoute: typeof TheindustrialmetaverseRoute
+  UtilitiesControlCenterRoute: typeof UtilitiesControlCenterRoute
   ViziCopilotGenAiDemoLinkRoute: typeof ViziCopilotGenAiDemoLinkRoute
   VrTourRequestRoute: typeof VrTourRequestRoute
+  AdminAnalyticsRoute: typeof AdminAnalyticsRoute
+  AdminEnquiriesRoute: typeof AdminEnquiriesRoute
+  AdminFieldMappingRoute: typeof AdminFieldMappingRoute
+  AdminLoginRoute: typeof AdminLoginRoute
+  AdminManageColumnsRoute: typeof AdminManageColumnsRoute
   IndustriesDigitalTwinForCementRoute: typeof IndustriesDigitalTwinForCementRoute
   IndustriesDigitalTwinForManufacturingRoute: typeof IndustriesDigitalTwinForManufacturingRoute
   IndustriesDigitalTwinForOilAndGasRoute: typeof IndustriesDigitalTwinForOilAndGasRoute
   IndustriesDigitalTwinForPowerAndEnergyRoute: typeof IndustriesDigitalTwinForPowerAndEnergyRoute
+  IndustriesRenewablesEnergyRoute: typeof IndustriesRenewablesEnergyRoute
+  IndustriesSugarBioEthanolIndustryRoute: typeof IndustriesSugarBioEthanolIndustryRoute
   InsightsInsightsDigitalTwinResourceCenterRoute: typeof InsightsInsightsDigitalTwinResourceCenterRoute
   PlatformMicrosoftFabricExpertiseRoute: typeof PlatformMicrosoftFabricExpertiseRoute
   PlatformSignalMinerRoute: typeof PlatformSignalMinerRoute
@@ -600,6 +746,13 @@ declare module '@tanstack/react-router' {
       path: '/vizi-copilot-gen-ai-demo-link'
       fullPath: '/vizi-copilot-gen-ai-demo-link'
       preLoaderRoute: typeof ViziCopilotGenAiDemoLinkRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/utilities-control-center': {
+      id: '/utilities-control-center'
+      path: '/utilities-control-center'
+      fullPath: '/utilities-control-center'
+      preLoaderRoute: typeof UtilitiesControlCenterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/theindustrialmetaverse': {
@@ -677,6 +830,13 @@ declare module '@tanstack/react-router' {
       path: '/power-industry-case-study'
       fullPath: '/power-industry-case-study'
       preLoaderRoute: typeof PowerIndustryCaseStudyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/intelligent-demand-forecast': {
+      id: '/intelligent-demand-forecast'
+      path: '/intelligent-demand-forecast'
+      fullPath: '/intelligent-demand-forecast'
+      preLoaderRoute: typeof IntelligentDemandForecastRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/digital-twin-faq': {
@@ -784,6 +944,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SolutionsProcessPerformancePredictionRouteImport
       parentRoute: typeof SolutionsRoute
     }
+    '/solutions/predictive-maintenance': {
+      id: '/solutions/predictive-maintenance'
+      path: '/predictive-maintenance'
+      fullPath: '/solutions/predictive-maintenance'
+      preLoaderRoute: typeof SolutionsPredictiveMaintenanceRouteImport
+      parentRoute: typeof SolutionsRoute
+    }
+    '/solutions/maintain-and-sustain': {
+      id: '/solutions/maintain-and-sustain'
+      path: '/maintain-and-sustain'
+      fullPath: '/solutions/maintain-and-sustain'
+      preLoaderRoute: typeof SolutionsMaintainAndSustainRouteImport
+      parentRoute: typeof SolutionsRoute
+    }
     '/solutions/decarbonization': {
       id: '/solutions/decarbonization'
       path: '/decarbonization'
@@ -847,6 +1021,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InsightsInsightsDigitalTwinResourceCenterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/industries/sugar-bio-ethanol-industry': {
+      id: '/industries/sugar-bio-ethanol-industry'
+      path: '/industries/sugar-bio-ethanol-industry'
+      fullPath: '/industries/sugar-bio-ethanol-industry'
+      preLoaderRoute: typeof IndustriesSugarBioEthanolIndustryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/industries/renewables-energy': {
+      id: '/industries/renewables-energy'
+      path: '/industries/renewables-energy'
+      fullPath: '/industries/renewables-energy'
+      preLoaderRoute: typeof IndustriesRenewablesEnergyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/industries/digital-twin-for-power-and-energy': {
       id: '/industries/digital-twin-for-power-and-energy'
       path: '/industries/digital-twin-for-power-and-energy'
@@ -875,6 +1063,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndustriesDigitalTwinForCementRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/manage-columns': {
+      id: '/admin/manage-columns'
+      path: '/admin/manage-columns'
+      fullPath: '/admin/manage-columns'
+      preLoaderRoute: typeof AdminManageColumnsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/login': {
+      id: '/admin/login'
+      path: '/admin/login'
+      fullPath: '/admin/login'
+      preLoaderRoute: typeof AdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/field-mapping': {
+      id: '/admin/field-mapping'
+      path: '/admin/field-mapping'
+      fullPath: '/admin/field-mapping'
+      preLoaderRoute: typeof AdminFieldMappingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/enquiries': {
+      id: '/admin/enquiries'
+      path: '/admin/enquiries'
+      fullPath: '/admin/enquiries'
+      preLoaderRoute: typeof AdminEnquiriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin/analytics': {
+      id: '/admin/analytics'
+      path: '/admin/analytics'
+      fullPath: '/admin/analytics'
+      preLoaderRoute: typeof AdminAnalyticsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/industries/oil-and-gas/build-a-business-case': {
       id: '/industries/oil-and-gas/build-a-business-case'
       path: '/industries/oil-and-gas/build-a-business-case'
@@ -887,6 +1110,8 @@ declare module '@tanstack/react-router' {
 
 interface SolutionsRouteChildren {
   SolutionsDecarbonizationRoute: typeof SolutionsDecarbonizationRoute
+  SolutionsMaintainAndSustainRoute: typeof SolutionsMaintainAndSustainRoute
+  SolutionsPredictiveMaintenanceRoute: typeof SolutionsPredictiveMaintenanceRoute
   SolutionsProcessPerformancePredictionRoute: typeof SolutionsProcessPerformancePredictionRoute
   SolutionsRealTimeOptimizationRoute: typeof SolutionsRealTimeOptimizationRoute
   SolutionsRemotePerformanceMonitoringRoute: typeof SolutionsRemotePerformanceMonitoringRoute
@@ -896,6 +1121,8 @@ interface SolutionsRouteChildren {
 
 const SolutionsRouteChildren: SolutionsRouteChildren = {
   SolutionsDecarbonizationRoute: SolutionsDecarbonizationRoute,
+  SolutionsMaintainAndSustainRoute: SolutionsMaintainAndSustainRoute,
+  SolutionsPredictiveMaintenanceRoute: SolutionsPredictiveMaintenanceRoute,
   SolutionsProcessPerformancePredictionRoute:
     SolutionsProcessPerformancePredictionRoute,
   SolutionsRealTimeOptimizationRoute: SolutionsRealTimeOptimizationRoute,
@@ -920,6 +1147,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompanyRoute: CompanyRoute,
   ContactRoute: ContactRoute,
   DigitalTwinFaqRoute: DigitalTwinFaqRoute,
+  IntelligentDemandForecastRoute: IntelligentDemandForecastRoute,
   PowerIndustryCaseStudyRoute: PowerIndustryCaseStudyRoute,
   PowerIndustryWhitepaperRoute: PowerIndustryWhitepaperRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
@@ -932,8 +1160,14 @@ const rootRouteChildren: RootRouteChildren = {
   SocialDigitalContactRoute: SocialDigitalContactRoute,
   SolutionsRoute: SolutionsRouteWithChildren,
   TheindustrialmetaverseRoute: TheindustrialmetaverseRoute,
+  UtilitiesControlCenterRoute: UtilitiesControlCenterRoute,
   ViziCopilotGenAiDemoLinkRoute: ViziCopilotGenAiDemoLinkRoute,
   VrTourRequestRoute: VrTourRequestRoute,
+  AdminAnalyticsRoute: AdminAnalyticsRoute,
+  AdminEnquiriesRoute: AdminEnquiriesRoute,
+  AdminFieldMappingRoute: AdminFieldMappingRoute,
+  AdminLoginRoute: AdminLoginRoute,
+  AdminManageColumnsRoute: AdminManageColumnsRoute,
   IndustriesDigitalTwinForCementRoute: IndustriesDigitalTwinForCementRoute,
   IndustriesDigitalTwinForManufacturingRoute:
     IndustriesDigitalTwinForManufacturingRoute,
@@ -941,6 +1175,9 @@ const rootRouteChildren: RootRouteChildren = {
     IndustriesDigitalTwinForOilAndGasRoute,
   IndustriesDigitalTwinForPowerAndEnergyRoute:
     IndustriesDigitalTwinForPowerAndEnergyRoute,
+  IndustriesRenewablesEnergyRoute: IndustriesRenewablesEnergyRoute,
+  IndustriesSugarBioEthanolIndustryRoute:
+    IndustriesSugarBioEthanolIndustryRoute,
   InsightsInsightsDigitalTwinResourceCenterRoute:
     InsightsInsightsDigitalTwinResourceCenterRoute,
   PlatformMicrosoftFabricExpertiseRoute: PlatformMicrosoftFabricExpertiseRoute,

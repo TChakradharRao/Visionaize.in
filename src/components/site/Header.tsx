@@ -1,10 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { type ReactNode, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { ChevronDown, Menu, X } from "lucide-react";
 import { api, type MenuItem } from "@/lib/api";
 
-type NavNode = { label: string; href: string; target?: string; children: NavNode[] };
+type NavNode = { label: ReactNode; href: string; target?: string; children: NavNode[] };
 type NavColumn = { heading: string; items: NavNode[] };
 type NavNodeWithColumns = NavNode & { columns?: NavColumn[] };
 
@@ -22,8 +22,8 @@ const SOLUTIONS_BY_INDUSTRY: NavNode[] = [
   { label: "Manufacturing", href: "/industries/digital-twin-for-manufacturing", target: "", children: [] },
   { label: "Oil & Gas", href: "/industries/digital-twin-for-oil-and-gas", target: "", children: [] },
   { label: "Power & Energy", href: "/industries/digital-twin-for-power-and-energy", target: "", children: [] },
-  { label: "Renewable Energy", href: "/industries/renewable-energy", target: "", children: [] },
-  { label: "Sugar Industry", href: "/industries/sugar-industry", target: "", children: [] },
+  { label: "Renewable Energy", href: "/industries/renewables-energy", target: "", children: [] },
+  { label: "Sugar Industry", href: "/industries/sugar-bio-ethanol-industry/", target: "", children: [] },
 ];
 
 const SOLUTIONS_BY_APPLICATION: NavNode[] = [
@@ -36,16 +36,16 @@ const SOLUTIONS_BY_APPLICATION: NavNode[] = [
 ];
 
 const COMPANY_CHILDREN: NavNode[] = [
-  { label: "Certifications & Compliance", href: "/company/certifications-compliance", target: "", children: [] },
-  { label: "Meet the team", href: "/company/meet-the-team", target: "", children: [] },
-  { label: "Office Locations", href: "/company/office-locations", target: "", children: [] },
-  { label: "Contact Us", href: "/contact", target: "", children: [] },
+  { label: "Certifications & Compliance", href: "/company#certifications", target: "", children: [] },
+  { label: "Meet the team", href: "/company#team", target: "", children: [] },
+  { label: "Office Locations", href: "/company#office", target: "", children: [] },
+  { label: "Contact Us", href: "/company#contact", target: "", children: [] },
 ];
 
 const FALLBACK_NAV: NavNodeWithColumns[] = [
   {
     label: "V-Suite Platform",
-    href: "/3d-digital-twin-v-suite",
+    href: "/",
     target: "",
     children: [
       {
@@ -59,7 +59,21 @@ const FALLBACK_NAV: NavNodeWithColumns[] = [
         ],
       },
       { label: "V-Smart DocX", href: "/platform/v-smart-docx", target: "", children: [] },
-      { label: "VIZI CoPilot", href: "/platform/vizi-copilot-gen-ai", target: "", children: [] },
+{ label: (
+    <span className="inline-flex items-center gap-1.5">
+      VIZI
+      <img
+        src="https://visionaize.in/wp-content/uploads/2025/08/Visionaize_logo_without_text-bg.png"
+        alt=""
+        className="h-4 w-auto object-contain"
+      />
+      CoPilot
+    </span>
+  ),
+  href: "/platform/vizi-copilot-gen-ai",
+  target: "",
+  children: [],
+},
       { label: "Signal Miner", href: "/platform/signal-miner", target: "", children: [] },
     ],
   },
@@ -67,7 +81,6 @@ const FALLBACK_NAV: NavNodeWithColumns[] = [
     label: "Solutions",
     href: "/solutions",
     target: "",
-    // Flat list kept for mobile menu; desktop mega-menu uses `columns` below.
     children: [...SOLUTIONS_BY_INDUSTRY, ...SOLUTIONS_BY_APPLICATION],
     columns: [
       { heading: "By Industry", items: SOLUTIONS_BY_INDUSTRY },
@@ -182,22 +195,15 @@ function attachInsightsChildren(nodes: NavNodeWithColumns[]): NavNodeWithColumns
       }
       return { ...node, children: merged.filter((child, index, arr) => arr.findIndex((item) => item.href === child.href) === index) };
     }
-    // Preserve columns (used by the Solutions mega-menu) when present.
     return { ...node, children: node.children.map((child) => ({ ...child })), columns: node.columns };
   });
 }
 
-// If the CMS-driven "Solutions" menu doesn't come with columns (e.g. it's built
-// from the WP menu API rather than the fallback), attach our fixed two-column
-// layout so the dropdown always renders "By Industry" / "By Application".
 function attachSolutionsColumns(nodes: NavNodeWithColumns[]): NavNodeWithColumns[] {
   return nodes.map((node) => {
     if (node.label === "Solutions" || node.href === "/solutions") {
       return {
         ...node,
-        // Also guarantee the flat children list (used on mobile) always
-        // includes the full By Industry + By Application set, even if the
-        // CMS menu only returned a subset.
         children:
           node.children.length > 0
             ? node.children
@@ -249,36 +255,36 @@ export function Header() {
   const nav = useNav();
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-white/95 backdrop-blur border-b border-border">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-6 py-6 lg:px-10 lg:py-7">
+    <header className="sticky top-0 z-40 w-full border-b border-border bg-white/95 backdrop-blur">
+      <div className="mx-auto flex max-w-7xl items-center px-4 py-3.5 sm:px-6 sm:py-4 lg:px-8 lg:py-5 xl:px-10 xl:py-7">
         <Link to="/" className="flex shrink-0 items-center" aria-label="Visionaize home">
           <img
             src="https://visionaize.in/wp-content/uploads/2024/03/Group-1000007231-1-1-3.svg"
             alt="Visionaize"
-            className="h-12 w-auto"
+            className="h-8 w-auto sm:h-9 md:h-10 lg:h-11 xl:h-12"
           />
         </Link>
 
-        <nav className="hidden lg:flex items-center gap-8">
+        <nav className="hidden items-center gap-4 lg:ml-8 lg:flex xl:ml-12 xl:gap-8">
           {nav.slice(0, 6).map((item) => (
-            <div key={item.label} className="group relative">
+            <div key={item.href} className="group relative">
               <NavLink
                 href={item.href}
                 target={item.target}
-                className="inline-flex items-center gap-1.5 py-2 text-base font-medium text-brand-navy hover:text-brand-blue transition-colors"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap py-2 text-sm font-medium text-brand-navy transition-colors hover:text-brand-blue xl:text-base"
               >
                 {item.label}
                 {(item.children.length > 0 || (item.columns && item.columns.length > 0)) && (
-                  <ChevronDown className="h-4 w-4 opacity-60" />
+                  <ChevronDown className="h-4 w-4 flex-none opacity-60" />
                 )}
               </NavLink>
 
               {/* Mega-menu with column headings (used for Solutions) */}
               {item.columns && item.columns.length > 0 && (
-                <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                  <div className="flex min-w-[520px] gap-10 rounded-b-md border-t-2 border-brand-blue bg-white p-6 shadow-lg">
+                <div className="invisible absolute left-0 top-full z-50 max-w-[92vw] pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+                  <div className="flex min-w-[420px] max-w-[92vw] gap-8 overflow-x-auto rounded-b-md border-t-2 border-brand-blue bg-white p-5 shadow-lg xl:min-w-[520px] xl:gap-10 xl:p-6">
                     {item.columns.map((col) => (
-                      <div key={col.heading} className="min-w-[200px]">
+                      <div key={col.heading} className="min-w-[180px] xl:min-w-[200px]">
                         <div
                           className="mb-3 bg-clip-text text-sm font-semibold text-transparent"
                           style={{
@@ -291,10 +297,10 @@ export function Header() {
                         <div className="flex flex-col gap-3">
                           {col.items.map((c) => (
                             <NavLink
-                              key={`${c.label}-${c.href}`}
+                              key={c.href}
                               href={c.href}
                               target={c.target}
-                              className="text-sm text-brand-ink hover:text-brand-blue"
+                              className="whitespace-nowrap text-sm text-brand-ink hover:text-brand-blue"
                             >
                               {c.label}
                             </NavLink>
@@ -308,14 +314,14 @@ export function Header() {
 
               {/* Standard single-column dropdown (Company, Insights, V-Suite Platform, etc.) */}
               {!item.columns && item.children.length > 0 && (
-                <div className="invisible absolute left-0 top-full pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
-                  <div className="min-w-64 rounded-b-md border-t-2 border-brand-blue bg-white p-2 shadow-lg">
+                <div className="invisible absolute left-0 top-full z-50 pt-2 opacity-0 transition-all group-hover:visible group-hover:opacity-100">
+                  <div className="min-w-56 max-w-[92vw] rounded-b-md border-t-2 border-brand-blue bg-white p-2 shadow-lg xl:min-w-64">
                     {item.children.map((c) => (
-                      <div key={`${c.label}-${c.href}`}>
+                      <div key={c.href}>
                         <NavLink
                           href={c.href}
                           target={c.target}
-                          className="block rounded-md px-3 py-2 text-sm text-brand-ink hover:bg-secondary hover:text-brand-blue"
+                          className="block whitespace-nowrap rounded-md px-3 py-2 text-sm text-brand-ink hover:bg-secondary hover:text-brand-blue"
                         >
                           {c.label}
                         </NavLink>
@@ -323,10 +329,10 @@ export function Header() {
                           <div>
                             {c.children.map((gc) => (
                               <NavLink
-                                key={`${gc.label}-${gc.href}`}
+                                key={`${c.href}-${gc.href}`}
                                 href={gc.href}
                                 target={gc.target}
-                                className="block rounded-md px-3 py-2 pl-8 text-sm text-brand-ink hover:bg-secondary hover:text-brand-blue"
+                                className="block whitespace-nowrap rounded-md px-3 py-2 pl-8 text-sm text-brand-ink hover:bg-secondary hover:text-brand-blue"
                               >
                                 {gc.label}
                               </NavLink>
@@ -342,20 +348,20 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex shrink-0 items-center gap-4">
+        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3 md:gap-4">
           <Link
             to="/contact"
-            className="hidden sm:inline-flex items-center rounded-full bg-brand-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-blue transition-colors whitespace-nowrap"
+            className="hidden whitespace-nowrap rounded-full bg-brand-navy px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-brand-blue sm:inline-flex sm:px-5 sm:py-2.5 sm:text-sm"
           >
             Talk to an expert
           </Link>
           <img
             src="https://visionaize.in/wp-content/uploads/2024/03/Official_logo_of_the_Confederation_of_Indian_Industry_CII.svg-1.svg"
             alt="Confederation of Indian Industry"
-            className="hidden sm:block h-10 w-auto shrink-0"
+            className="hidden h-8 w-auto shrink-0 md:block md:h-9 lg:h-10"
           />
           <button
-            className="lg:hidden text-brand-navy"
+            className="text-brand-navy lg:hidden"
             onClick={() => setOpen(!open)}
             aria-label="Toggle menu"
           >
@@ -365,11 +371,11 @@ export function Header() {
       </div>
 
       {open && (
-        <div className="lg:hidden border-t border-border bg-white">
-          <nav className="mx-auto max-w-7xl px-6 py-4 space-y-1">
+        <div className="border-t border-border bg-white lg:hidden">
+          <nav className="mx-auto max-h-[75vh] max-w-7xl space-y-1 overflow-y-auto px-4 py-4 sm:px-6">
             {nav.flatMap((item) => [
               <NavLink
-                key={`g-${item.label}`}
+                key={item.href}
                 href={item.href}
                 target={item.target}
                 className="block rounded-md px-3 py-2 text-sm font-semibold text-brand-navy"
@@ -378,7 +384,7 @@ export function Header() {
               </NavLink>,
               ...item.children.flatMap((c) => [
                 <NavLink
-                  key={`${item.label}-${c.label}-${c.href}`}
+                  key={`${item.href}-${c.href}`}
                   href={c.href}
                   target={c.target}
                   className="block rounded-md px-6 py-2 text-sm text-brand-ink hover:bg-secondary"
@@ -387,7 +393,7 @@ export function Header() {
                 </NavLink>,
                 ...c.children.map((gc) => (
                   <NavLink
-                    key={`${item.label}-${c.label}-${gc.label}-${gc.href}`}
+                    key={`${c.href}-${gc.href}`}
                     href={gc.href}
                     target={gc.target}
                     className="block rounded-md px-9 py-2 text-sm text-brand-ink hover:bg-secondary"
@@ -397,7 +403,7 @@ export function Header() {
                 )),
               ]),
             ])}
-            <div className="flex items-center gap-3 mt-3">
+            <div className="mt-3 flex items-center gap-3">
               <Link
                 to="/contact"
                 className="flex-1 rounded-full bg-brand-navy px-5 py-2.5 text-center text-sm font-semibold text-white"

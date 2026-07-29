@@ -106,9 +106,9 @@ function GradientPill({
   href?: string;
 }) {
   return (
-    <a
-      href={href}
-      className="inline-flex items-center justify-center rounded-full px-8 py-3 text-sm font-semibold text-white shadow-md transition hover:opacity-90"
+    
+    <a  href={href}
+      className="inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:opacity-90 sm:px-8"
       style={{
         background:
           "linear-gradient(90deg,#A6E04A 0%,#5BAE7E 45%,#2BA8C7 100%)",
@@ -128,11 +128,11 @@ function RPMPage() {
       <Header />
 
       {/* HERO */}
-      <section className="mx-auto max-w-7xl px-6 pt-14 pb-20">
-        <div className="grid items-center gap-12 md:grid-cols-2">
+      <section className="mx-auto max-w-7xl px-4 pt-4 pb-14 sm:px-6 sm:pt-6 sm:pb-20">
+        <div className="grid items-center gap-8 sm:gap-10 md:grid-cols-2 md:gap-12">
           <div>
             <h1
-              className="text-5xl md:text-6xl font-light leading-[1.1] tracking-tight bg-clip-text text-transparent"
+              className="text-3xl font-light leading-[1.15] tracking-tight bg-clip-text text-transparent sm:text-4xl md:text-5xl lg:text-6xl"
               style={{
                 backgroundImage:
                   "linear-gradient(90deg,#A6E04A 0%,#5BAE7E 50%,#2BA8C7 100%)",
@@ -140,7 +140,7 @@ function RPMPage() {
             >
               Remote Performance Monitoring (RPM)
             </h1>
-            <div className="mt-8 space-y-5 text-[15px] leading-7 text-slate-700">
+            <div className="mt-6 space-y-4 text-base leading-7 text-slate-700 sm:mt-8 sm:space-y-5">
               <p>
                 With data captured by DCS, SCADA, Historians, LIMS, APM and ERP
                 systems, operators face steep challenges in extracting insights
@@ -154,8 +154,8 @@ function RPMPage() {
               </p>
               <p>Connect with a solutions expert to learn more.</p>
             </div>
-            <div className="mt-8">
-              <GradientPill href="/contact">Request a demo</GradientPill>
+            <div className="mt-6 sm:mt-8">
+              <GradientPill href="/request-a-demo/">Request a demo</GradientPill>
             </div>
           </div>
           <div>
@@ -178,15 +178,15 @@ function RPMPage() {
       />
 
       {/* COMMON PROBLEMS */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <h2 className="text-center text-4xl md:text-5xl font-light text-slate-900">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
+        <h2 className="text-center text-3xl font-light text-slate-900 sm:text-4xl md:text-5xl">
           Common Problems, Unique Solutions
         </h2>
-        <div className="mt-14 grid gap-10 md:grid-cols-4">
+        <div className="mt-10 grid gap-8 sm:mt-14 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4">
           {PROBLEMS.map((p) => (
             <div key={p.title} className="text-center">
-              <h3 className="text-2xl font-semibold text-slate-900">{p.title}</h3>
-              <p className="mt-4 text-[15px] leading-7 text-slate-600">
+              <h3 className="text-xl font-semibold text-slate-900 sm:text-2xl">{p.title}</h3>
+              <p className="mt-4 text-base leading-7 text-slate-600">
                 {p.body}
               </p>
             </div>
@@ -196,11 +196,11 @@ function RPMPage() {
 
       {/* EXPERTS BAND */}
       <section className="bg-[#D8F3FB]">
-        <div className="mx-auto max-w-5xl px-6 py-20 text-center">
-          <h2 className="text-3xl md:text-4xl font-light text-slate-900">
+        <div className="mx-auto max-w-5xl px-4 py-14 text-center sm:px-6 sm:py-20">
+          <h2 className="text-2xl font-light text-slate-900 sm:text-3xl md:text-4xl">
             Built by experts who have been there done that
           </h2>
-          <p className="mt-6 text-[15px] leading-7 text-slate-700">
+          <p className="mt-4 text-base leading-7 text-slate-700 sm:mt-6">
             The best solutions are built by people who have experienced the
             problems first hand. Visionaize's Remote Performance Monitoring
             solution is built and managed by industry leaders and AI experts
@@ -211,8 +211,8 @@ function RPMPage() {
       </section>
 
       {/* MONITOR & IMPROVE */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid items-center gap-12 md:grid-cols-2">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
+        <div className="grid items-center gap-8 sm:gap-10 md:grid-cols-2 md:gap-12">
           <div>
             <img
               src={DASHBOARD_IMG}
@@ -221,16 +221,16 @@ function RPMPage() {
             />
           </div>
           <div>
-            <h2 className="text-4xl md:text-5xl font-light text-slate-900">
+            <h2 className="text-3xl font-light text-slate-900 sm:text-4xl md:text-5xl">
               Monitor and improve your plant - from wherever
             </h2>
-            <ul className="mt-8 space-y-3">
+            <ul className="mt-6 space-y-3 sm:mt-8">
               {BENEFITS.map((b) => (
                 <li
                   key={b}
-                  className="flex items-start text-[15px] leading-7 text-slate-700"
+                  className="flex items-start text-base leading-7 text-slate-700"
                 >
-                  <span className="mt-2 mr-3 inline-block h-1.5 w-1.5 rounded-full bg-slate-700" />
+                  <span className="mt-2 mr-3 inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-slate-700" />
                   {b}
                 </li>
               ))}
@@ -240,22 +240,22 @@ function RPMPage() {
       </section>
 
       {/* CASE STUDY */}
-      <section className="mx-auto max-w-7xl px-6 py-20">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
         <div className="text-xs font-bold tracking-widest text-[#A6E04A]">
           CASE STUDY
         </div>
-        <h2 className="mt-3 max-w-2xl text-3xl md:text-4xl font-semibold text-slate-900">
+        <h2 className="mt-3 max-w-2xl text-2xl font-semibold text-slate-900 sm:text-3xl md:text-4xl">
           Real-Time Monitoring and Improvement of Ethylene Plant
         </h2>
 
-        <div className="mt-10 grid gap-10 md:grid-cols-2">
+        <div className="mt-8 grid gap-8 sm:mt-10 sm:gap-10 md:grid-cols-2">
           <div>
-            <div className="flex gap-8 border-b border-slate-200">
+            <div className="flex gap-4 overflow-x-auto border-b border-slate-200 sm:gap-8">
               {CASE_TABS.map((t, i) => (
                 <button
                   key={t.key}
                   onClick={() => setTab(i)}
-                  className={`pb-3 text-lg ${
+                  className={`whitespace-nowrap pb-3 text-base sm:text-lg ${
                     tab === i
                       ? "border-b-2 border-[#2BA8C7] font-semibold text-slate-900"
                       : "text-slate-500"
@@ -265,13 +265,13 @@ function RPMPage() {
                 </button>
               ))}
             </div>
-            <div className="mt-6 space-y-5 rounded-md border border-slate-200 p-6 text-[15px] leading-7 text-slate-700">
+            <div className="mt-6 space-y-5 rounded-md border border-slate-200 p-4 text-base leading-7 text-slate-700 sm:p-6">
               {CASE_TABS[tab].paragraphs.map((p, i) => (
                 <p key={i}>{p}</p>
               ))}
             </div>
           </div>
-          <div className="overflow-hidden rounded-md shadow-xl">
+          <div className="aspect-[4/3] overflow-hidden rounded-md shadow-xl md:aspect-auto md:h-full">
             <img src={CASE_IMG} alt="Ethylene plant" className="h-full w-full object-cover" />
           </div>
         </div>
@@ -279,16 +279,16 @@ function RPMPage() {
 
       {/* GREEN CTA BAND */}
       <section
-        className="py-14"
+        className="py-10 sm:py-14"
         style={{ background: "linear-gradient(90deg,#A6E04A 0%,#9ED84F 100%)" }}
       >
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-6 px-6 md:flex-row">
-          <h3 className="text-2xl md:text-3xl font-semibold text-slate-900">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-4 px-4 text-center sm:gap-6 sm:px-6 md:flex-row">
+          <h3 className="text-xl font-semibold text-slate-900 sm:text-2xl md:text-3xl">
             Connect with a Solution Specialist
           </h3>
           <Link
             to="/contact"
-            className="inline-flex items-center rounded-full bg-white px-7 py-3 text-sm font-semibold text-slate-900 shadow hover:bg-slate-50"
+            className="inline-flex flex-shrink-0 items-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow hover:bg-slate-50 sm:px-7"
           >
             Connect with us
           </Link>
@@ -296,22 +296,22 @@ function RPMPage() {
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-6xl px-6 py-20">
-        <h2 className="text-3xl md:text-4xl font-semibold text-slate-900">
+      <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
+        <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl md:text-4xl">
           Learn more about Remote Performance Monitoring (RPM)
         </h2>
-        <div className="mt-10 divide-y divide-slate-200 border-t border-b border-slate-200">
+        <div className="mt-8 divide-y divide-slate-200 border-t border-b border-slate-200 sm:mt-10">
           {FAQS.map((f, i) => {
             const isOpen = open === i;
             return (
               <div key={f.q}>
                 <button
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full items-center justify-between py-5 text-left"
+                  className="flex w-full items-center justify-between py-4 text-left sm:py-5"
                 >
-                  <span className="flex items-center gap-3 text-lg font-semibold text-slate-900">
+                  <span className="flex items-start gap-3 text-base font-semibold text-slate-900 sm:items-center sm:text-lg">
                     <span
-                      className="inline-flex h-6 w-6 items-center justify-center text-2xl leading-none text-[#A6E04A]"
+                      className="mt-0.5 inline-flex h-6 w-6 flex-none items-center justify-center text-2xl leading-none text-[#A6E04A] sm:mt-0"
                       aria-hidden
                     >
                       {isOpen ? "−" : "+"}
@@ -320,7 +320,7 @@ function RPMPage() {
                   </span>
                 </button>
                 {isOpen && (
-                  <div className="space-y-4 pb-6 pl-9 pr-4 text-[15px] leading-7 text-slate-700">
+                  <div className="space-y-4 pb-6 pl-8 pr-2 text-base leading-7 text-slate-700 sm:pl-9 sm:pr-4">
                     {f.a.map((p, j) => (
                       <p key={j}>{p}</p>
                     ))}
@@ -330,8 +330,8 @@ function RPMPage() {
             );
           })}
         </div>
-        <div className="mt-10 flex justify-center">
-          <GradientPill href="/contact">Learn More</GradientPill>
+        <div className="mt-8 flex justify-center sm:mt-10">
+          <GradientPill href="/request-a-demo/">Learn More</GradientPill>
         </div>
       </section>
 

@@ -44,7 +44,7 @@ function PharmaHero() {
 
   return (
     <section className="bg-[#f3f5f7]">
-      <div className="mx-auto max-w-8xl px-6 pt-2 pb-4 md:pt-10 md:pb-8">
+      <div className="mx-auto max-w-6xl px-6 pt-2 pb-4 md:pt-10 md:pb-8">
         <div className="grid gap-9 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-center">
           {/* Left: headline + copy */}
           <div>

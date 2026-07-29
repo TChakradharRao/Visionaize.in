@@ -43,15 +43,39 @@ const OUTCOMES = [
   "Improved worker safety",
 ];
 
+type FormErrors = Partial<{
+  first_name: string;
+  last_name: string;
+  company: string;
+  email: string;
+  target_capacity: string;
+  actual_output: string;
+  location: string;
+  planned_downtime: string;
+  unplanned_downtime: string;
+  implementation_schedule: string;
+  time_spent_pct: string;
+  use_cases: string;
+}>;
+
 function BuildBusinessCasePage() {
   const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">(
     "idle"
   );
   const [errorMsg, setErrorMsg] = useState("");
+  const [errors, setErrors] = useState<FormErrors>({});
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [company, setCompany] = useState("");
+  const [email, setEmail] = useState("");
   const [targetCapacity, setTargetCapacity] = useState("");
   const [actualOutput, setActualOutput] = useState("");
+  const [location, setLocation] = useState("");
   const [plannedDowntime, setPlannedDowntime] = useState("");
   const [unplannedDowntime, setUnplannedDowntime] = useState("");
+  const [implementationSchedule, setImplementationSchedule] = useState("");
+  const [timeSpentPct, setTimeSpentPct] = useState("");
   const [useCases, setUseCases] = useState<string[]>([]);
   const [otherUseCases, setOtherUseCases] = useState("");
 
@@ -61,12 +85,6 @@ function BuildBusinessCasePage() {
   // form — even though it visually spans across both the gradient hero and
   // the image/outcomes section — can never extend far enough to cover the
   // Footer.
-  //
-  // The form itself sits `lg:top-6` (24px) down from the top of the
-  // wrapper, so that offset must be added to the reserved height too —
-  // otherwise the wrapper is reserved ~24px short of the form's true
-  // bottom edge. FORM_BOTTOM_GAP adds a little extra breathing room so the
-  // form's bottom edge doesn't sit flush against the next section/Footer.
   const FORM_TOP_OFFSET = 24; // px, matches `lg:top-6` on the form
   const FORM_BOTTOM_GAP = 32; // px, extra clearance below the form
 
@@ -97,13 +115,55 @@ function BuildBusinessCasePage() {
     );
   };
 
+  const validate = (): FormErrors => {
+    const next: FormErrors = {};
+    const numericPattern = /^[\d,]+$/;
+
+    if (!firstName.trim()) next.first_name = "First name is required";
+    if (!lastName.trim()) next.last_name = "Last name is required";
+    if (!company.trim()) next.company = "Company name is required";
+
+    if (!email.trim()) {
+      next.email = "Business email is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      next.email = "Enter a valid email address";
+    }
+
+    if (!targetCapacity.trim()) {
+      next.target_capacity = "Target capacity is required";
+    } else if (!numericPattern.test(targetCapacity)) {
+      next.target_capacity = "Enter a valid number (e.g. 250,000)";
+    }
+
+    if (!actualOutput.trim()) {
+      next.actual_output = "Actual output is required";
+    } else if (!numericPattern.test(actualOutput)) {
+      next.actual_output = "Enter a valid number (e.g. 250,000)";
+    }
+
+    if (!location) next.location = "Please select a location";
+    if (!plannedDowntime.trim())
+      next.planned_downtime = "Planned downtime is required";
+    if (!unplannedDowntime.trim())
+      next.unplanned_downtime = "Unplanned downtime is required";
+    if (!implementationSchedule)
+      next.implementation_schedule = "Please select an implementation schedule";
+    if (!timeSpentPct) next.time_spent_pct = "Please select a percentage range";
+    if (useCases.length === 0)
+      next.use_cases = "Please select at least one use case";
+
+    return next;
+  };
+
   const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const f = new FormData(e.currentTarget);
 
-    if (useCases.length === 0) {
+    const nextErrors = validate();
+    setErrors(nextErrors);
+
+    if (Object.keys(nextErrors).length > 0) {
       setStatus("err");
-      setErrorMsg("Please select at least one use case.");
+      setErrorMsg("Please fix the highlighted fields below.");
       return;
     }
 
@@ -111,26 +171,33 @@ function BuildBusinessCasePage() {
     setErrorMsg("");
     try {
       await api.submitBusinessCase({
-        name: `${f.get("first_name") || ""} ${f.get("last_name") || ""}`.trim(),
-        email: String(f.get("email") || ""),
-        company: String(f.get("company") || ""),
+        name: `${firstName} ${lastName}`.trim(),
+        email,
+        company,
         target_capacity_bpd: targetCapacity,
         actual_output_bpd: actualOutput,
-        location: String(f.get("location") || ""),
+        location,
         planned_downtime_yearly: plannedDowntime,
         unplanned_downtime_yearly: unplannedDowntime,
-        implementation_schedule: String(f.get("implementation_schedule") || ""),
-        time_spent_on_data_pct: String(f.get("time_spent_pct") || ""),
+        implementation_schedule: implementationSchedule,
+        time_spent_on_data_pct: timeSpentPct,
         use_cases: useCases,
         other_use_cases: otherUseCases || undefined,
         source_page: "/industries/oil-and-gas/build-a-business-case/",
       });
       setStatus("ok");
-      (e.target as HTMLFormElement).reset();
+      setErrors({});
+      setFirstName("");
+      setLastName("");
+      setCompany("");
+      setEmail("");
       setTargetCapacity("");
       setActualOutput("");
+      setLocation("");
       setPlannedDowntime("");
       setUnplannedDowntime("");
+      setImplementationSchedule("");
+      setTimeSpentPct("");
       setUseCases([]);
       setOtherUseCases("");
     } catch (err) {
@@ -145,18 +212,6 @@ function BuildBusinessCasePage() {
     <>
       <Header />
       <main className="min-h-screen bg-white">
-        {/*
-          This outer wrapper holds BOTH the gradient hero and the
-          image/outcomes section, and is the positioning context for the
-          form. On large screens the form is absolutely positioned so it
-          visually overlaps the boundary between the two sections.
-
-          `lg:min-h-[var(--form-h)]` reserves exactly the form's measured
-          height on this wrapper, so no matter how tall the form is, the
-          wrapper (and therefore everything after it, including the
-          Footer) is always pushed down far enough to clear it. The form
-          can overlay the two sections above it, but never the Footer.
-        */}
         <div
           className="relative overflow-visible lg:min-h-[var(--form-h)]"
           style={{ ["--form-h" as string]: `${reservedWrapperHeight}px` }}
@@ -183,14 +238,13 @@ function BuildBusinessCasePage() {
             </div>
           </section>
 
-          {/* Form: static/in-flow on mobile (sits right under the hero
-              text); absolutely positioned on large screens so it overlays
-              both the hero above and the image/outcomes section below. */}
+          {/* Form */}
           <div className="relative z-20 px-6 lg:absolute lg:inset-0 lg:px-0">
             <div className="mx-auto max-w-7xl lg:relative lg:h-full lg:px-6">
               <form
                 ref={formRef}
                 onSubmit={onSubmit}
+                noValidate
                 className="mt-14 w-full rounded-2xl bg-white p-6 shadow-2xl lg:absolute lg:right-6 lg:top-6 lg:mt-0 lg:w-[460px]"
               >
                 <h2 className="text-xl font-semibold text-brand-navy">
@@ -199,16 +253,34 @@ function BuildBusinessCasePage() {
 
                 <SectionLabel>Your Information</SectionLabel>
                 <div className="mt-2 space-y-2">
-                  <Input name="first_name" placeholder="First Name" required />
-                  <Input name="last_name" placeholder="Last Name" required />
-                  <Input name="company" placeholder="Company Name" required />
+                  <Input
+                    name="first_name"
+                    placeholder="First Name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    error={errors.first_name}
+                  />
+                  <Input
+                    name="last_name"
+                    placeholder="Last Name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    error={errors.last_name}
+                  />
+                  <Input
+                    name="company"
+                    placeholder="Company Name"
+                    value={company}
+                    onChange={(e) => setCompany(e.target.value)}
+                    error={errors.company}
+                  />
                   <Input
                     name="email"
                     placeholder="Business Email Address"
                     type="email"
-                    required
-                    pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
-                    title="Please enter a valid email address containing @"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    error={errors.email}
                   />
                 </div>
 
@@ -219,24 +291,29 @@ function BuildBusinessCasePage() {
                 <Input
                   name="target_capacity"
                   placeholder="e.g. 250,000"
-                  required
                   inputMode="numeric"
                   value={targetCapacity}
                   onChange={(e) => setTargetCapacity(e.target.value)}
+                  error={errors.target_capacity}
                 />
 
                 <FieldLabel>Actual Output (Barrels/Day)*</FieldLabel>
                 <Input
                   name="actual_output"
                   placeholder="e.g. 250,000"
-                  required
                   inputMode="numeric"
                   value={actualOutput}
                   onChange={(e) => setActualOutput(e.target.value)}
+                  error={errors.actual_output}
                 />
 
                 <FieldLabel>Location*</FieldLabel>
-                <Select name="location" required defaultValue="">
+                <Select
+                  name="location"
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                  error={errors.location}
+                >
                   <option value="" disabled>
                     —Please choose an option—
                   </option>
@@ -253,23 +330,28 @@ function BuildBusinessCasePage() {
                 <Input
                   name="planned_downtime"
                   placeholder="e.g. 10 days"
-                  required
                   value={plannedDowntime}
                   onChange={(e) => setPlannedDowntime(e.target.value)}
+                  error={errors.planned_downtime}
                 />
 
                 <FieldLabel>Unplanned Downtime/yearly*</FieldLabel>
                 <Input
                   name="unplanned_downtime"
                   placeholder="e.g. 10 days"
-                  required
                   value={unplannedDowntime}
                   onChange={(e) => setUnplannedDowntime(e.target.value)}
+                  error={errors.unplanned_downtime}
                 />
 
                 <SectionLabel>Timing</SectionLabel>
                 <FieldLabel>Implementation Schedule*</FieldLabel>
-                <Select name="implementation_schedule" required defaultValue="">
+                <Select
+                  name="implementation_schedule"
+                  value={implementationSchedule}
+                  onChange={(e) => setImplementationSchedule(e.target.value)}
+                  error={errors.implementation_schedule}
+                >
                   <option value="" disabled>
                     —Please choose an option—
                   </option>
@@ -288,7 +370,12 @@ function BuildBusinessCasePage() {
                   What is the Percentage of Time Spent Looking for data,
                   Interacting with Systems as a Percentage of Total Work Time?*
                 </FieldLabel>
-                <Select name="time_spent_pct" required defaultValue="">
+                <Select
+                  name="time_spent_pct"
+                  value={timeSpentPct}
+                  onChange={(e) => setTimeSpentPct(e.target.value)}
+                  error={errors.time_spent_pct}
+                >
                   <option value="" disabled>
                     —Please choose an option—
                   </option>
@@ -318,6 +405,9 @@ function BuildBusinessCasePage() {
                     </label>
                   ))}
                 </div>
+                {errors.use_cases && (
+                  <p className="mt-1 text-xs text-red-500">{errors.use_cases}</p>
+                )}
 
                 <FieldLabel>Other use cases (please describe)</FieldLabel>
                 <Input
@@ -354,8 +444,7 @@ function BuildBusinessCasePage() {
             </div>
           </div>
 
-          {/* Image / outcomes section — the form (on large screens) overlaps
-              down onto this section's top-right area. */}
+          {/* Image / outcomes section */}
           <section className="bg-[#F5F7FA] pb-24 pt-14 md:pb-28 md:pt-25">
             <div className="mx-auto max-w-7xl px-6">
               <div className="max-w-2xl">
@@ -419,24 +508,33 @@ function FieldLabel({ children }: { children: React.ReactNode }) {
 
 function Select({
   name,
-  required,
-  defaultValue,
+  value,
+  onChange,
+  error,
   children,
 }: {
   name: string;
-  required?: boolean;
-  defaultValue?: string;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+  error?: string;
   children: React.ReactNode;
 }) {
   return (
-    <select
-      name={name}
-      defaultValue={defaultValue}
-      required={required}
-      className="block h-[36px] w-full rounded-lg border border-gray-700 bg-white px-3 text-[14px] font-medium text-brand-navy focus:border-brand-blue focus:outline-none"
-    >
-      {children}
-    </select>
+    <div>
+      <select
+        name={name}
+        value={value}
+        onChange={onChange}
+        className={`block h-[36px] w-full rounded-lg border bg-white px-3 text-[14px] font-medium text-brand-navy focus:outline-none ${
+          error
+            ? "border-red-400 focus:border-red-400"
+            : "border-gray-700 focus:border-brand-blue"
+        }`}
+      >
+        {children}
+      </select>
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
+    </div>
   );
 }
 
@@ -444,37 +542,38 @@ function Input({
   name,
   placeholder,
   type = "text",
-  required = false,
-  pattern,
-  title,
   maxLength,
   inputMode,
   value,
   onChange,
+  error,
 }: {
   name: string;
   placeholder: string;
   type?: string;
-  required?: boolean;
-  pattern?: string;
-  title?: string;
   maxLength?: number;
   inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"];
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  error?: string;
 }) {
   return (
-    <input
-      name={name}
-      type={type}
-      required={required}
-      pattern={pattern}
-      title={title}
-      maxLength={maxLength}
-      inputMode={inputMode}
-      placeholder={placeholder}
-      {...(value !== undefined ? { value, onChange } : {})}
-      className="block h-[36px] w-full rounded-lg border border-gray-700 bg-white px-3 text-[14px] font-medium text-brand-navy placeholder:text-brand-navy focus:border-brand-blue focus:outline-none"
-    />
+    <div>
+      <input
+        name={name}
+        type={type}
+        maxLength={maxLength}
+        inputMode={inputMode}
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        className={`block h-[36px] w-full rounded-lg border bg-white px-3 text-[14px] font-medium text-brand-navy placeholder:text-brand-navy focus:outline-none ${
+          error
+            ? "border-red-400 focus:border-red-400"
+            : "border-gray-700 focus:border-brand-blue"
+        }`}
+      />
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
+    </div>
   );
 }

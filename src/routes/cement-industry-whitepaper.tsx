@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/cement-industry-whitepaper")({
   head: () => ({
@@ -17,6 +18,26 @@ export const Route = createFileRoute("/cement-industry-whitepaper")({
   component: CementIndustryPage,
 });
 
+const FREE_EMAIL_DOMAINS = new Set([
+  "gmail.com",
+  "yahoo.com",
+  "hotmail.com",
+  "outlook.com",
+  "live.com",
+  "aol.com",
+  "icloud.com",
+  "me.com",
+  "mail.com",
+  "protonmail.com",
+  "proton.me",
+  "yandex.com",
+  "gmx.com",
+  "zoho.com",
+  "rediffmail.com",
+]);
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 interface FormState {
   firstName: string;
   lastName: string;
@@ -25,21 +46,81 @@ interface FormState {
   contactMe: boolean;
 }
 
-function CementHero() {
-  const [form, setForm] = useState<FormState>({
-    firstName: "",
-    lastName: "",
-    company: "",
-    email: "",
-    contactMe: false,
-  });
-  const [submitted, setSubmitted] = useState(false);
+type FormErrors = Partial<Record<Exclude<keyof FormState, "contactMe">, string>>;
 
-  function handleSubmit(e: React.FormEvent) {
+const initialState: FormState = {
+  firstName: "",
+  lastName: "",
+  company: "",
+  email: "",
+  contactMe: false,
+};
+
+function validate(form: FormState): FormErrors {
+  const errors: FormErrors = {};
+
+  if (!form.firstName.trim()) errors.firstName = "First name is required";
+  if (!form.lastName.trim()) errors.lastName = "Last name is required";
+  if (!form.company.trim()) errors.company = "Company name is required";
+
+  if (!form.email.trim()) {
+    errors.email = "Business email is required";
+  } else if (!EMAIL_REGEX.test(form.email.trim())) {
+    errors.email = "Enter a valid email address";
+  } else {
+    const domain = form.email.trim().split("@")[1]?.toLowerCase();
+    if (domain && FREE_EMAIL_DOMAINS.has(domain)) {
+      errors.email = "Please use your business email, not a personal one (e.g. Gmail, Yahoo)";
+    }
+  }
+
+  return errors;
+}
+
+function CementHero() {
+  const [form, setForm] = useState<FormState>(initialState);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange =
+    (field: keyof Omit<FormState, "contactMe">) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setForm((prev) => ({ ...prev, [field]: value }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    };
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Wire this up to your actual lead-capture endpoint (e.g. api.submitContact
-    // or a dedicated whitepaper-download handler) when the backend is ready.
-    setSubmitted(true);
+
+    const validationErrors = validate(form);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setStatus("err");
+      setErrorMsg("Please fix the highlighted fields below.");
+      return;
+    }
+
+    setStatus("sending");
+    setErrorMsg("");
+    setErrors({});
+
+    try {
+      await api.submitCementWhitepaper({
+        first_name: form.firstName.trim(),
+        last_name: form.lastName.trim(),
+        company: form.company.trim(),
+        email: form.email.trim(),
+        contact_me: form.contactMe,
+        source_page: "/cement-industry-whitepaper",
+      });
+      setStatus("ok");
+      setForm(initialState);
+    } catch (err) {
+      setStatus("err");
+      setErrorMsg(err instanceof Error ? err.message : "Unable to submit. Please try again.");
+    }
   }
 
   return (
@@ -83,16 +164,7 @@ function CementHero() {
 
           {/* Right: tilted mockup with the form card overlapping its right
               edge, vertically centered — same layout pattern used across
-              the whitepaper landing pages.
-
-              Fix for image getting cropped at the top-left corner:
-              - object-contain instead of object-cover (SVGs shouldn't be
-                force-cropped to an aspect ratio the way photos can be)
-              - removed the negative translate-x that pushed the rotated
-                box outside its own container's bounds
-              - added horizontal padding + overflow-visible on the wrapper
-                so the rotated corners have room and don't get clipped by
-                any ancestor's overflow-hidden */}
+              the whitepaper landing pages. */}
           <div className="relative mx-auto w-full max-w-4xl overflow-visible px-4 py-6 lg:mx-0 lg:py-10">
             <div className="mr-auto ml-0 w-[68%] -rotate-6 rounded-md sm:w-[58%] lg:w-[51%]">
               <img
@@ -111,44 +183,60 @@ function CementHero() {
                 Access the whitepaper
               </h2>
 
-              {submitted ? (
+              {status === "ok" ? (
                 <div className="mt-6 rounded-lg bg-brand-mist/60 p-6 text-brand-ink/80">
-                  Thanks! Your whitepaper access request has been received.
+                  Thanks! Your whitepaper access request has been received — check your
+                  inbox for a confirmation email.
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-                  <input
-                    type="text"
-                    required
-                    placeholder="First name*"
-                    value={form.firstName}
-                    onChange={(e) => setForm((f) => ({ ...f, firstName: e.target.value }))}
-                    className="w-full rounded-md border border-brand-navy/20 px-4 py-3 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
-                  />
-                  <input
-                    type="text"
-                    required
-                    placeholder="Last name*"
-                    value={form.lastName}
-                    onChange={(e) => setForm((f) => ({ ...f, lastName: e.target.value }))}
-                    className="w-full rounded-md border border-brand-navy/20 px-4 py-3 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
-                  />
-                  <input
-                    type="text"
-                    required
-                    placeholder="Company name*"
-                    value={form.company}
-                    onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))}
-                    className="w-full rounded-md border border-brand-navy/20 px-4 py-3 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
-                  />
-                  <input
-                    type="email"
-                    required
-                    placeholder="Business Email*"
-                    value={form.email}
-                    onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                    className="w-full rounded-md border border-brand-navy/20 px-4 py-3 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
-                  />
+                <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="First name*"
+                      value={form.firstName}
+                      onChange={handleChange("firstName")}
+                      aria-invalid={!!errors.firstName}
+                      className={fieldClass(!!errors.firstName)}
+                    />
+                    {errors.firstName && <FieldError message={errors.firstName} />}
+                  </div>
+
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Last name*"
+                      value={form.lastName}
+                      onChange={handleChange("lastName")}
+                      aria-invalid={!!errors.lastName}
+                      className={fieldClass(!!errors.lastName)}
+                    />
+                    {errors.lastName && <FieldError message={errors.lastName} />}
+                  </div>
+
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Company name*"
+                      value={form.company}
+                      onChange={handleChange("company")}
+                      aria-invalid={!!errors.company}
+                      className={fieldClass(!!errors.company)}
+                    />
+                    {errors.company && <FieldError message={errors.company} />}
+                  </div>
+
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="Business Email*"
+                      value={form.email}
+                      onChange={handleChange("email")}
+                      aria-invalid={!!errors.email}
+                      className={fieldClass(!!errors.email)}
+                    />
+                    {errors.email && <FieldError message={errors.email} />}
+                  </div>
 
                   <label className="flex items-start gap-3 pt-1 text-sm text-brand-ink/70">
                     <input
@@ -162,10 +250,15 @@ function CementHero() {
 
                   <button
                     type="submit"
-                    className="mt-2 w-full rounded-full bg-gradient-to-r from-brand-lime to-brand-blue py-4 text-base font-semibold text-white shadow-sm transition hover:brightness-95"
+                    disabled={status === "sending"}
+                    className="mt-2 w-full rounded-full bg-gradient-to-r from-brand-lime to-brand-blue py-4 text-base font-semibold text-white shadow-sm transition hover:brightness-95 disabled:opacity-60"
                   >
-                    Access Now
+                    {status === "sending" ? "Sending…" : "Access Now"}
                   </button>
+
+                  {status === "err" && errorMsg && (
+                    <p className="text-sm text-red-600">{errorMsg}</p>
+                  )}
                 </form>
               )}
             </div>
@@ -174,6 +267,20 @@ function CementHero() {
       </div>
     </section>
   );
+}
+
+function fieldClass(hasError: boolean) {
+  return [
+    "w-full rounded-md border px-4 py-3 text-brand-ink placeholder:text-brand-ink/50",
+    "focus:outline-none focus:ring-1",
+    hasError
+      ? "border-red-400 focus:border-red-400 focus:ring-red-400"
+      : "border-brand-navy/20 focus:border-brand-blue focus:ring-brand-blue",
+  ].join(" ");
+}
+
+function FieldError({ message }: { message: string }) {
+  return <p className="mt-1 text-xs text-red-600">{message}</p>;
 }
 
 function OverviewSection() {

@@ -10,6 +10,7 @@ export default defineConfig({
     port: 8080,
     strictPort: true,
   },
+  // base:"/in/",
   plugins: [
     TanStackRouterVite({ target: "react", autoCodeSplitting: true }),
     react(),

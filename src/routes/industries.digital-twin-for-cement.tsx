@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { getSeedContentItem } from "@/lib/seed-content";
+import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/industries/digital-twin-for-cement")({
   head: () => ({
@@ -127,16 +128,16 @@ function CementPage() {
 function Hero() {
   return (
     <section
-      className="relative h-[640px] w-full bg-cover bg-center"
+      className="relative flex min-h-[420px] w-full items-center bg-cover bg-center sm:min-h-[520px] md:min-h-[600px] lg:min-h-[640px]"
       style={{
         backgroundImage: `url('${heroImage}')`,
       }}
     >
       <div className="absolute inset-0 bg-black/25" />
-      <div className="relative mx-auto flex h-full max-w-[1280px] items-center px-6">
-        <div className="w-full max-w-[520px] bg-white p-12">
+      <div className="relative mx-auto flex w-full max-w-[1280px] items-center px-4 py-10 sm:px-6 sm:py-14 md:py-0">
+        <div className="w-full max-w-full bg-white p-6 sm:max-w-[440px] sm:p-8 md:max-w-[500px] md:p-10 lg:max-w-[520px] lg:p-12">
           <h1
-            className="text-[64px] font-light leading-[1.05] tracking-tight"
+            className="text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[68px]"
             style={{
               background:
                 "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
@@ -148,7 +149,7 @@ function Hero() {
             Cement
           </h1>
           {heroParagraphs.map((paragraph, index) => (
-            <p key={index} className="mt-6 text-[18px] leading-relaxed text-[#0F1B2D]">
+            <p key={index} className="mt-5 text-base leading-relaxed text-[#0F1B2D] sm:mt-6 sm:text-lg md:text-[19px]">
               {paragraph}
             </p>
           ))}
@@ -160,13 +161,13 @@ function Hero() {
 
 function Pillars() {
   return (
-    <section className="bg-[#0F1B2D] py-20">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-12 px-6 md:grid-cols-3">
+    <section className="bg-[#0F1B2D] py-10 sm:py-12 md:py-16 lg:py-20">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-4 sm:px-6 md:grid-cols-3 md:gap-12">
         {PILLARS.map((p) => (
           <div key={p.title} className="flex flex-col items-center text-center">
-            <img src={p.icon} alt="" className="h-20 w-20" loading="lazy" />
-            <h3 className="mt-6 text-[24px] font-semibold text-white" dangerouslySetInnerHTML={{ __html: p.title }} />
-            <p className="mt-4 max-w-[280px] text-[15px] leading-relaxed text-white/80">{p.body}</p>
+            <img src={p.icon} alt="" className="h-16 w-16 sm:h-20 sm:w-20" loading="lazy" />
+            <h3 className="mt-5 text-xl font-semibold text-white sm:mt-6 sm:text-2xl md:text-[26px]" dangerouslySetInnerHTML={{ __html: p.title }} />
+            <p className="mt-4 max-w-[280px] text-base leading-relaxed text-white/80 sm:text-[17px]">{p.body}</p>
           </div>
         ))}
       </div>
@@ -176,21 +177,21 @@ function Pillars() {
 
 function Intro() {
   return (
-    <section className="bg-white py-24">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-16 px-6 lg:grid-cols-2">
+    <section className="bg-white py-10 sm:py-12 md:py-16 lg:py-20">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 px-4 sm:px-6 sm:gap-12 lg:grid-cols-2 lg:gap-16">
         <div>
-          <h2 className="text-[44px] font-semibold leading-tight">
+          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-[40px] lg:text-[46px]">
             Run a stabler kiln, with fewer surprises
           </h2>
           {introParagraphs.map((paragraph, index) => (
-            <p key={index} className="mt-6 text-[16px] leading-[1.8] text-[#3a4658]">
+            <p key={index} className="mt-5 text-base leading-relaxed text-[#3a4658] sm:mt-6 sm:text-lg sm:leading-[1.8]">
               {paragraph}
             </p>
           ))}
-          <div className="mt-10">
+          <div className="mt-8 sm:mt-10">
             <a
               href="#talk-to-an-expert"
-              className="inline-flex items-center rounded-full px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg"
+              className="inline-flex items-center rounded-full px-6 py-3 text-base font-semibold text-white shadow-md transition hover:shadow-lg sm:px-7 sm:py-3.5"
               style={{
                 background:
                   "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
@@ -200,7 +201,7 @@ function Intro() {
             </a>
           </div>
         </div>
-        <div className="flex justify-center bg-[#E6F0F7] p-8">
+        <div className="flex justify-center bg-[#E6F0F7] p-6 sm:p-8">
           <img
             src="https://visionaize.com/wp-content/uploads/2022/07/Group-523-2.png"
             alt="Visionaize 3D Digital Twin for cement"
@@ -226,14 +227,14 @@ function CaseStudyCarousel() {
     setTab("Challenge");
   };
   return (
-    <section className="bg-white pb-20">
-      <div className="relative mx-auto max-w-[1280px] px-6">
+    <section className="bg-white pb-10 sm:pb-12 md:pb-16 lg:pb-20">
+      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6">
         <button
           aria-label="Previous case study"
           onClick={prev}
           className="absolute left-0 top-1/2 z-10 -translate-y-1/2 text-[#2E8DC5] hover:text-[#A6E04A]"
         >
-          <svg width="28" height="56" viewBox="0 0 28 56" fill="none">
+          <svg width="20" height="40" viewBox="0 0 28 56" fill="none" className="sm:h-[48px] sm:w-[24px] md:h-[56px] md:w-[28px]">
             <path d="M22 4L6 28L22 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
@@ -242,22 +243,22 @@ function CaseStudyCarousel() {
           onClick={next}
           className="absolute right-0 top-1/2 z-10 -translate-y-1/2 text-[#2E8DC5] hover:text-[#A6E04A]"
         >
-          <svg width="28" height="56" viewBox="0 0 28 56" fill="none">
+          <svg width="20" height="40" viewBox="0 0 28 56" fill="none" className="sm:h-[48px] sm:w-[24px] md:h-[56px] md:w-[28px]">
             <path d="M6 4L22 28L6 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
 
-        <div className="grid grid-cols-1 items-center gap-10 px-10 lg:grid-cols-2">
+        <div className="grid grid-cols-1 items-center gap-8 px-7 sm:gap-10 sm:px-9 md:px-10 lg:grid-cols-2">
           <div>
-            <p className="text-xs font-semibold tracking-[0.18em] text-[#A6E04A]">{cs.eyebrow}</p>
-            <h3 className="mt-3 text-[34px] font-semibold leading-tight">{cs.title}</h3>
+            <p className="text-xs font-semibold tracking-[0.18em] text-[#A6E04A] sm:text-sm">{cs.eyebrow}</p>
+            <h3 className="mt-3 text-2xl font-semibold leading-tight sm:text-3xl md:text-[36px]">{cs.title}</h3>
 
-            <div className="mt-8 flex gap-6 border-b border-[#E2E8F0]">
+            <div className="mt-6 flex gap-5 overflow-x-auto border-b border-[#E2E8F0] sm:mt-8 sm:gap-6">
               {(["Challenge", "Solution", "Results"] as const).map((t) => (
                 <button
                   key={t}
                   onClick={() => setTab(t)}
-                  className={`pb-3 text-sm font-semibold transition ${
+                  className={`whitespace-nowrap pb-3 text-sm font-semibold transition sm:text-base ${
                     tab === t
                       ? "border-b-2 border-[#2E8DC5] text-[#2E8DC5]"
                       : "text-[#64748B] hover:text-[#0F1B2D]"
@@ -268,8 +269,8 @@ function CaseStudyCarousel() {
               ))}
             </div>
 
-            <div className="mt-6 rounded border border-[#E2E8F0] p-6">
-              <p className="text-[15px] leading-[1.8] text-[#3a4658]">{cs.tabs[tab]}</p>
+            <div className="mt-6 rounded border border-[#E2E8F0] p-5 sm:p-6">
+              <p className="text-base leading-relaxed text-[#3a4658] sm:text-[17px] sm:leading-[1.8]">{cs.tabs[tab]}</p>
             </div>
           </div>
 
@@ -300,12 +301,12 @@ function CaseStudyCarousel() {
 
 function PlantReimagined() {
   return (
-    <section className="bg-white py-24">
-      <div className="mx-auto max-w-[1280px] px-6">
-        <h2 className="text-[44px] font-semibold leading-tight">
+    <section className="bg-white pb-10 pt-4 sm:pb-12 sm:pt-6 md:pb-16 md:pt-8 lg:pb-20 lg:pt-10">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
+        <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-[40px] lg:text-[46px]">
           Cement plants, reimagined
         </h2>
-        <div className="mt-8 max-w-[920px] space-y-6 text-[16px] leading-[1.8] text-[#3a4658]">
+        <div className="mt-6 max-w-[920px] space-y-5 text-base leading-relaxed text-[#3a4658] sm:mt-8 sm:space-y-6 sm:text-lg sm:leading-[1.8]">
           <p>
             From the quarry to the packing plant, the cement value chain runs
             on a handful of high-energy, high-temperature processes. Visionaize
@@ -329,21 +330,205 @@ function PlantReimagined() {
   );
 }
 
+/* ---------- Talk to an Expert form ---------- */
+
+type FormState = {
+  firstName: string;
+  lastName: string;
+  companyName: string;
+  businessEmail: string;
+  phoneNumber: string;
+  hearAboutUs: string;
+  message: string;
+};
+
+type FormErrors = Partial<Record<keyof FormState, string>>;
+
+const HEAR_ABOUT_US_OPTIONS = [
+  "Web Search",
+  "LinkedIn",
+  "Industry Event",
+  "Referral",
+  "Other",
+];
+
+const initialFormState: FormState = {
+  firstName: "",
+  lastName: "",
+  companyName: "",
+  businessEmail: "",
+  phoneNumber: "",
+  hearAboutUs: "",
+  message: "",
+};
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Exactly 10 digits — matches the backend's phone validation.
+const PHONE_REGEX = /^\d{10}$/;
+const MESSAGE_MAX_LENGTH = 1000;
+
+// Common free/personal email providers — rejected for a "Business Email" field.
+// Keep in sync with the FREE_EMAIL_DOMAINS set in routes/companyLeadForm.js.
+const FREE_EMAIL_DOMAINS = new Set([
+  "gmail.com",
+  "yahoo.com",
+  "hotmail.com",
+  "outlook.com",
+  "live.com",
+  "aol.com",
+  "icloud.com",
+  "me.com",
+  "mail.com",
+  "protonmail.com",
+  "proton.me",
+  "yandex.com",
+  "gmx.com",
+  "zoho.com",
+  "rediffmail.com",
+]);
+
+function isBusinessEmail(email: string): boolean {
+  const domain = email.split("@")[1]?.toLowerCase().trim();
+  return !!domain && !FREE_EMAIL_DOMAINS.has(domain);
+}
+
+function validateForm(form: FormState): FormErrors {
+  const errors: FormErrors = {};
+
+  const firstName = form.firstName.trim();
+  const lastName = form.lastName.trim();
+  const companyName = form.companyName.trim();
+  const businessEmail = form.businessEmail.trim();
+  const phoneDigits = form.phoneNumber.replace(/\D/g, "");
+  const message = form.message.trim();
+
+  if (!firstName) {
+    errors.firstName = "First name is required";
+  } else if (firstName.length > 100) {
+    errors.firstName = "First name is too long";
+  }
+
+  if (!lastName) {
+    errors.lastName = "Last name is required";
+  } else if (lastName.length > 100) {
+    errors.lastName = "Last name is too long";
+  }
+
+  if (!companyName) {
+    errors.companyName = "Company name is required";
+  } else if (companyName.length > 150) {
+    errors.companyName = "Company name is too long";
+  }
+
+  if (!businessEmail) {
+    errors.businessEmail = "Business email is required";
+  } else if (!EMAIL_REGEX.test(businessEmail)) {
+    errors.businessEmail = "Enter a valid email address";
+  } else if (!isBusinessEmail(businessEmail)) {
+    errors.businessEmail =
+      "Please use your business email address, not a personal one (e.g. Gmail, Yahoo)";
+  }
+
+  if (!form.phoneNumber.trim()) {
+    errors.phoneNumber = "Phone number is required";
+  } else if (!PHONE_REGEX.test(phoneDigits)) {
+    errors.phoneNumber = "Enter a valid 10-digit phone number";
+  }
+
+  // hearAboutUs and message are optional.
+  if (message.length > MESSAGE_MAX_LENGTH) {
+    errors.message = `Message must be ${MESSAGE_MAX_LENGTH} characters or fewer`;
+  }
+
+  return errors;
+}
+
+function fieldClass(hasError: boolean) {
+  return [
+    "w-full rounded border px-4 py-3 text-base text-[#3a4658] placeholder:text-[#94A3B8]",
+    "focus:outline-none focus:ring-1",
+    hasError
+      ? "border-red-400 focus:border-red-400 focus:ring-red-400"
+      : "border-[#CBD5E1] focus:border-[#2E8DC5] focus:ring-[#2E8DC5]",
+  ].join(" ");
+}
+
+function FieldError({ message }: { message: string }) {
+  return <p className="mt-1 text-sm text-red-600">{message}</p>;
+}
+
 function TalkDigitalTwins() {
+  const [form, setForm] = useState<FormState>(initialFormState);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
+    "idle"
+  );
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+
+  const handleChange =
+    (field: keyof FormState) =>
+    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+      const value = e.target.value;
+      setForm((prev) => ({ ...prev, [field]: value }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const digitsOnly = e.target.value.replace(/\D/g, "").slice(0, 10);
+    setForm((prev) => ({ ...prev, phoneNumber: digitsOnly }));
+    setErrors((prev) => ({ ...prev, phoneNumber: undefined }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    const validationErrors = validateForm(form);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      return;
+    }
+
+    setStatus("submitting");
+    setErrorMessage(null);
+
+    try {
+      await api.submitCompanyLeadForm({
+        first_name: form.firstName.trim(),
+        last_name: form.lastName.trim(),
+        company_name: form.companyName.trim(),
+        business_email: form.businessEmail.trim(),
+        phone_number: form.phoneNumber.replace(/\D/g, ""),
+        hear_about_us: form.hearAboutUs.trim() || undefined,
+        message: form.message.trim() || undefined,
+        source_page: "/industries/digital-twin-for-cement/",
+      });
+
+      setStatus("success");
+      setForm(initialFormState);
+    } catch (err) {
+      setStatus("error");
+      setErrorMessage(
+        err instanceof Error
+          ? err.message
+          : "Something went wrong sending your request. Please try again."
+      );
+    }
+  };
+
   return (
-    <section id="talk-to-an-expert" className="bg-[#F1F5F9] py-24">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-12 px-6 lg:grid-cols-2">
+    <section id="talk-to-an-expert" className="bg-[#F1F5F9] py-10 sm:py-12 md:py-16 lg:py-20">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-4 sm:px-6 sm:gap-12 lg:grid-cols-2">
         <div>
-          <h2 className="text-[44px] font-semibold leading-tight">Let's talk digital twins</h2>
-          <p className="mt-6 text-[16px] leading-[1.8] text-[#3a4658]">
+          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-[40px] lg:text-[46px]">Let's talk digital twins</h2>
+          <p className="mt-5 text-base leading-relaxed text-[#3a4658] sm:mt-6 sm:text-lg sm:leading-[1.8]">
             V-Suite turns your cement plant into a connected digital metaverse.
             Visualize operations through a real-time, up-to-date 3-D digital
             twin. Connect with us to learn how it works.
           </p>
-          <h3 className="mt-10 text-[20px] font-semibold">Visionaize a better world</h3>
-          <ul className="mt-6 space-y-4">
+          <h3 className="mt-8 text-xl font-semibold sm:mt-10 sm:text-2xl">Visionaize a better world</h3>
+          <ul className="mt-5 space-y-3 sm:mt-6 sm:space-y-4">
             {FORM_TOPICS.map((t) => (
-              <li key={t} className="flex items-start gap-3 text-[16px] text-[#0F1B2D]">
+              <li key={t} className="flex items-start gap-3 text-base text-[#0F1B2D] sm:text-lg">
                 <span
                   className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white"
                   style={{ background: "linear-gradient(135deg, #A6E04A 0%, #2E8DC5 100%)" }}
@@ -358,37 +543,126 @@ function TalkDigitalTwins() {
           </ul>
         </div>
 
-        <div className="rounded-lg bg-white p-8 shadow-md">
-          <h3 className="text-[24px] font-semibold text-[#2E8DC5]">Talk to an expert</h3>
-          <form className="mt-6 grid grid-cols-1 gap-4" onSubmit={(e) => e.preventDefault()}>
-            <Input placeholder="First name*" />
-            <Input placeholder="Last name*" />
-            <Input placeholder="Company name*" />
-            <Input placeholder="Business Email*" type="email" />
-            <Input placeholder="Phone number*" type="tel" />
-            <select className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-sm text-[#3a4658] focus:border-[#2E8DC5] focus:outline-none">
-              <option>How did you first hear about us?</option>
-              <option>Web Search</option>
-              <option>LinkedIn</option>
-              <option>Industry Event</option>
-              <option>Referral</option>
-              <option>Other</option>
+        <div className="rounded-lg bg-white p-6 shadow-md sm:p-8">
+          <h3 className="text-xl font-semibold text-[#2E8DC5] sm:text-2xl md:text-[26px]">Talk to an expert</h3>
+          <form onSubmit={handleSubmit} noValidate className="mt-6 grid grid-cols-1 gap-4">
+            <div>
+              <input
+                type="text"
+                placeholder="First name*"
+                value={form.firstName}
+                onChange={handleChange("firstName")}
+                aria-invalid={!!errors.firstName}
+                maxLength={100}
+                className={fieldClass(!!errors.firstName)}
+              />
+              {errors.firstName && <FieldError message={errors.firstName} />}
+            </div>
+
+            <div>
+              <input
+                type="text"
+                placeholder="Last name*"
+                value={form.lastName}
+                onChange={handleChange("lastName")}
+                aria-invalid={!!errors.lastName}
+                maxLength={100}
+                className={fieldClass(!!errors.lastName)}
+              />
+              {errors.lastName && <FieldError message={errors.lastName} />}
+            </div>
+
+            <div>
+              <input
+                type="text"
+                placeholder="Company name*"
+                value={form.companyName}
+                onChange={handleChange("companyName")}
+                aria-invalid={!!errors.companyName}
+                maxLength={150}
+                className={fieldClass(!!errors.companyName)}
+              />
+              {errors.companyName && <FieldError message={errors.companyName} />}
+            </div>
+
+            <div>
+              <input
+                type="email"
+                placeholder="Business Email*"
+                value={form.businessEmail}
+                onChange={handleChange("businessEmail")}
+                aria-invalid={!!errors.businessEmail}
+                className={fieldClass(!!errors.businessEmail)}
+              />
+              {errors.businessEmail && <FieldError message={errors.businessEmail} />}
+            </div>
+
+            <div>
+              <input
+                type="tel"
+                placeholder="Phone number*"
+                value={form.phoneNumber}
+                onChange={handlePhoneChange}
+                aria-invalid={!!errors.phoneNumber}
+                inputMode="numeric"
+                maxLength={10}
+                className={fieldClass(!!errors.phoneNumber)}
+              />
+              {errors.phoneNumber && <FieldError message={errors.phoneNumber} />}
+            </div>
+
+            <select
+              value={form.hearAboutUs}
+              onChange={handleChange("hearAboutUs")}
+              className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-base text-[#3a4658] focus:border-[#2E8DC5] focus:outline-none"
+            >
+              <option value="">How did you first hear about us?</option>
+              {HEAR_ABOUT_US_OPTIONS.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
             </select>
-            <textarea
-              rows={4}
-              placeholder="Message"
-              className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-sm text-[#3a4658] focus:border-[#2E8DC5] focus:outline-none"
-            />
+
+            <div>
+              <textarea
+                rows={4}
+                placeholder="Message"
+                value={form.message}
+                onChange={handleChange("message")}
+                aria-invalid={!!errors.message}
+                maxLength={MESSAGE_MAX_LENGTH}
+                className={fieldClass(!!errors.message)}
+              />
+              <div className="mt-1 flex items-center justify-between">
+                {errors.message ? <FieldError message={errors.message} /> : <span />}
+                <span className="text-sm text-[#64748B]">
+                  {form.message.length}/{MESSAGE_MAX_LENGTH}
+                </span>
+              </div>
+            </div>
+
             <button
               type="submit"
-              className="mt-2 inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg"
+              disabled={status === "submitting"}
+              className="mt-2 inline-flex items-center justify-center rounded-full px-7 py-3.5 text-base font-semibold text-white shadow-md transition hover:shadow-lg disabled:opacity-60"
               style={{
                 background: "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
               }}
             >
-              Send request
+              {status === "submitting" ? "Sending…" : "Send request"}
             </button>
-            <p className="text-center text-xs text-[#64748B]">We generally respond within 24 hours</p>
+
+            {status === "success" && (
+              <p className="text-center text-base text-green-600">
+                Thanks! A Digital Twin expert will be in touch shortly.
+              </p>
+            )}
+            {status === "error" && errorMessage && (
+              <p className="text-center text-base text-red-600">{errorMessage}</p>
+            )}
+
+            <p className="text-center text-sm text-[#64748B]">We generally respond within 24 hours</p>
           </form>
         </div>
       </div>
@@ -396,41 +670,31 @@ function TalkDigitalTwins() {
   );
 }
 
-function Input(props: React.InputHTMLAttributes<HTMLInputElement>) {
-  return (
-    <input
-      {...props}
-      className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-sm text-[#3a4658] placeholder:text-[#94A3B8] focus:border-[#2E8DC5] focus:outline-none"
-    />
-  );
-}
-
 function Whitepaper() {
   return (
-    <section className="bg-white py-24">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-16 px-6 lg:grid-cols-2">
+    <section className="bg-white py-10 sm:py-12 md:py-16 lg:py-20">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 px-4 sm:px-6 sm:gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="flex justify-center">
           <img
             src="https://visionaize.com/wp-content/uploads/2022/07/Rectangle-425-6.png"
             alt="The Industrial Metaverse whitepaper"
-            className="w-full max-w-[460px] shadow-xl"
+            className="w-full max-w-[380px] shadow-xl sm:max-w-[460px]"
             loading="lazy"
           />
         </div>
         <div>
-          <h2 className="text-[44px] font-semibold leading-tight">
+          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-[40px] lg:text-[46px]">
             Experience data in The Industrial Metaverse
           </h2>
-          <p className="mt-6 text-[16px] leading-[1.8] text-[#3a4658]">
+          <p className="mt-5 text-base leading-relaxed text-[#3a4658] sm:mt-6 sm:text-lg sm:leading-[1.8]">
             With the emergence of Industry 4.0 and IIoT sensors, data overload
             is a common challenge. Explore how 3D digital twin technology can
             turn the data deluge into a competitive advantage.
           </p>
           <a
-            href="https://visionaize.com/the-industrial-metaverse/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center rounded-full border border-[#0F1B2D] px-7 py-3 text-sm font-semibold text-[#0F1B2D] transition hover:bg-[#0F1B2D] hover:text-white"
+            href="/theindustrialmetaverse"
+             rel="noopener noreferrer"
+            className="mt-7 inline-flex items-center rounded-full border border-[#0F1B2D] px-6 py-3 text-base font-semibold text-[#0F1B2D] transition hover:bg-[#0F1B2D] hover:text-white sm:mt-8 sm:px-7"
           >
             Explore how
           </a>
@@ -442,7 +706,7 @@ function Whitepaper() {
 
 function LetsConnect() {
   return (
-    <section className="relative overflow-hidden bg-[#0F1B2D] py-24">
+    <section className="relative overflow-hidden bg-[#0F1B2D] py-10 sm:py-12 md:py-16 lg:py-20">
       <svg
         className="pointer-events-none absolute right-0 top-0 h-full w-2/3 opacity-50"
         viewBox="0 0 800 400"
@@ -458,14 +722,14 @@ function LetsConnect() {
           </linearGradient>
         </defs>
       </svg>
-      <div className="relative mx-auto max-w-[1280px] px-6">
-        <h2 className="text-[64px] font-semibold leading-[1.05] text-white">Let's Connect</h2>
-        <p className="mt-6 max-w-[520px] text-[18px] leading-relaxed text-white/80">
+      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6">
+        <h2 className="text-4xl font-semibold leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-[68px]">Let's Connect</h2>
+        <p className="mt-5 max-w-[520px] text-base leading-relaxed text-white/80 sm:mt-6 sm:text-lg md:text-xl">
           Learn how Visionaize can stabilize the kiln and accelerate cement decarbonization
         </p>
         <Link
           to="/contact"
-          className="mt-10 inline-flex items-center rounded-full px-8 py-3.5 text-sm font-semibold text-white shadow-md transition hover:shadow-lg"
+          className="mt-8 inline-flex items-center rounded-full px-7 py-3.5 text-base font-semibold text-white shadow-md transition hover:shadow-lg sm:mt-10 sm:px-8"
           style={{
             background: "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
           }}

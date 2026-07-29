@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/theindustrialmetaverse")({
   head: () => ({
@@ -17,6 +18,26 @@ export const Route = createFileRoute("/theindustrialmetaverse")({
   component: IndustrialMetaversePage,
 });
 
+const FREE_EMAIL_DOMAINS = new Set([
+  "gmail.com",
+  "yahoo.com",
+  "hotmail.com",
+  "outlook.com",
+  "live.com",
+  "aol.com",
+  "icloud.com",
+  "me.com",
+  "mail.com",
+  "protonmail.com",
+  "proton.me",
+  "yandex.com",
+  "gmx.com",
+  "zoho.com",
+  "rediffmail.com",
+]);
+
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 interface FormState {
   firstName: string;
   lastName: string;
@@ -25,38 +46,98 @@ interface FormState {
   contactMe: boolean;
 }
 
-function MetaverseHero() {
-  const [form, setForm] = useState<FormState>({
-    firstName: "",
-    lastName: "",
-    company: "",
-    email: "",
-    contactMe: false,
-  });
-  const [submitted, setSubmitted] = useState(false);
+type FormErrors = Partial<Record<Exclude<keyof FormState, "contactMe">, string>>;
 
-  function handleSubmit(e: React.FormEvent) {
+const initialState: FormState = {
+  firstName: "",
+  lastName: "",
+  company: "",
+  email: "",
+  contactMe: false,
+};
+
+function validate(form: FormState): FormErrors {
+  const errors: FormErrors = {};
+
+  if (!form.firstName.trim()) errors.firstName = "First name is required";
+  if (!form.lastName.trim()) errors.lastName = "Last name is required";
+  if (!form.company.trim()) errors.company = "Company name is required";
+
+  if (!form.email.trim()) {
+    errors.email = "Business email is required";
+  } else if (!EMAIL_REGEX.test(form.email.trim())) {
+    errors.email = "Enter a valid email address";
+  } else {
+    const domain = form.email.trim().split("@")[1]?.toLowerCase();
+    if (domain && FREE_EMAIL_DOMAINS.has(domain)) {
+      errors.email = "Please use your business email, not a personal one (e.g. Gmail, Yahoo)";
+    }
+  }
+
+  return errors;
+}
+
+function MetaverseHero() {
+  const [form, setForm] = useState<FormState>(initialState);
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleChange =
+    (field: keyof Omit<FormState, "contactMe">) =>
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      const value = e.target.value;
+      setForm((prev) => ({ ...prev, [field]: value }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
+    };
+
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Wire this up to your actual lead-capture endpoint (e.g. api.submitContact
-    // or a dedicated whitepaper-download handler) when the backend is ready.
-    setSubmitted(true);
+
+    const validationErrors = validate(form);
+    if (Object.keys(validationErrors).length > 0) {
+      setErrors(validationErrors);
+      setStatus("err");
+      setErrorMsg("Please fix the highlighted fields below.");
+      return;
+    }
+
+    setStatus("sending");
+    setErrorMsg("");
+    setErrors({});
+
+    try {
+      await api.submitMetaverseWhitepaper({
+        first_name: form.firstName.trim(),
+        last_name: form.lastName.trim(),
+        company: form.company.trim(),
+        email: form.email.trim(),
+        contact_me: form.contactMe,
+        source_page: "/theindustrialmetaverse",
+      });
+      setStatus("ok");
+      setForm(initialState);
+    } catch (err) {
+      setStatus("err");
+      setErrorMsg(err instanceof Error ? err.message : "Unable to submit. Please try again.");
+    }
   }
 
   return (
     <section className="bg-[#f3f5f7]">
-      <div className="mx-auto max-w-8xl px-6 pt-2 pb-4 md:pt-10 md:pb-8">
+      <div className="mx-auto max-w-6xl px-4 pt-2 pb-4 sm:px-6 md:pt-10 md:pb-8">
         <div className="grid gap-9 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:items-center">
           {/* Left: headline + copy */}
           <div>
-            <h1 className="text-3xl font-bold leading-tight text-brand-navy md:text-4xl">
+            <h1 className="text-3xl font-bold leading-tight text-brand-navy sm:text-4xl md:text-4xl">
               A deep dive into the industrial metaverse
             </h1>
 
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-brand-ink/70">
+            <p className="mt-6 max-w-xl text-sm leading-relaxed text-brand-ink/70 sm:text-base">
               A data deluge is underway in heavy industrial sectors, thanks to the proliferation
               of IIoT sensors and the adoption of Industry 4.0.
             </p>
-            <p className="mt-4 max-w-xl text-base leading-relaxed text-brand-ink/70">
+            <p className="mt-4 max-w-xl text-sm leading-relaxed text-brand-ink/70 sm:text-base">
               Learn how to harness the power of data with 3D Digital Twin technology for
               Enterprise Asset Management (EAM).
             </p>
@@ -65,8 +146,8 @@ function MetaverseHero() {
               Welcome to the Industrial Metaverse.
             </p>
 
-            <a
-              href="#whitepaper-form"
+            
+            <a  href="#whitepaper-form"
               className="mt-8 inline-flex items-center gap-3 group"
             >
               <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-white shadow-md transition group-hover:shadow-lg">
@@ -90,84 +171,105 @@ function MetaverseHero() {
             </a>
           </div>
 
-          {/* Right: tilted mockup with the form card overlapping its right
-              edge, vertically centered — same layout pattern as the
-              Turnarounds page. Uses relative/absolute positioning within a
-              fixed-height wrapper so it stays predictable across
-              breakpoints. */}
-          <div className="relative mx-auto w-full max-w-2xl py-6 lg:mx-0 lg:py-10">
-            <div className="mr-auto ml-0 w-[68%] -rotate-6 overflow-hidden rounded-md sm:w-[58%] lg:w-[52%] lg:-translate-x-4">
+          {/* Right: mockup + form. On mobile/tablet these stack normally in
+              document flow (image, then form below it) so the form never
+              overflows a container sized only for the image. At lg and up,
+              where the 2-column grid gives room, the form overlaps the
+              image's right edge and is vertically centered on it. */}
+          <div className="mx-auto w-full max-w-2xl py-6 lg:relative lg:py-10">
+          <div className="mx-auto w-[78%] -rotate-6 sm:w-[60%] lg:mr-auto lg:ml-0 lg:w-[52%] lg:-translate-x-4">
               <img
                 src="https://visionaize.in/wp-content/uploads/2022/07/IndustrialMetaverse-Cover-Mockup-1-1.png"
                 alt="The Industrial Metaverse — whitepaper cover"
-                className="aspect-[3/4] w-full object-cover"
+                className="w-full rounded-md object-contain "
                 loading="eager"
               />
             </div>
 
             <div
               id="whitepaper-form"
-              className="absolute right-0 top-1/2 z-10 w-[88%] -translate-y-1/2 rounded-2xl bg-white p-6 shadow-2xl sm:w-[62%] sm:p-8 lg:w-[58%]"
+              className="relative z-10 mx-auto mt-8 w-full max-w-md rounded-2xl bg-white p-6 shadow-2xl sm:p-8 lg:absolute lg:right-0 lg:top-1/2 lg:mt-0 lg:w-[58%] lg:max-w-none lg:-translate-y-1/2"
             >
               <h2 className="text-xl font-bold text-brand-navy md:text-2xl">
                 Get the white paper
               </h2>
 
-              {submitted ? (
+              {status === "ok" ? (
                 <div className="mt-6 rounded-lg bg-brand-mist/60 p-6 text-brand-ink/80">
-                  Thanks! Your whitepaper access request has been received.
+                  Thanks! Your whitepaper access request has been received — check your
+                  inbox for a confirmation email.
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="mt-6 space-y-4">
-                  <input
-                    type="text"
-                    required
-                    placeholder="First name*"
-                    value={form.firstName}
-                    onChange={(e) => setForm((f) => ({ ...f, firstName: e.target.value }))}
-                    className="w-full rounded-md border border-brand-navy/20 px-4 py-3 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
-                  />
-                  <input
-                    type="text"
-                    required
-                    placeholder="Last name*"
-                    value={form.lastName}
-                    onChange={(e) => setForm((f) => ({ ...f, lastName: e.target.value }))}
-                    className="w-full rounded-md border border-brand-navy/20 px-4 py-3 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
-                  />
-                  <input
-                    type="text"
-                    required
-                    placeholder="Company name*"
-                    value={form.company}
-                    onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))}
-                    className="w-full rounded-md border border-brand-navy/20 px-4 py-3 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
-                  />
-                  <input
-                    type="email"
-                    required
-                    placeholder="Business Email*"
-                    value={form.email}
-                    onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                    className="w-full rounded-md border border-brand-navy/20 px-4 py-3 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
-                  />
+                <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="First name*"
+                      value={form.firstName}
+                      onChange={handleChange("firstName")}
+                      aria-invalid={!!errors.firstName}
+                      className={fieldClass(!!errors.firstName)}
+                    />
+                    {errors.firstName && <FieldError message={errors.firstName} />}
+                  </div>
+
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Last name*"
+                      value={form.lastName}
+                      onChange={handleChange("lastName")}
+                      aria-invalid={!!errors.lastName}
+                      className={fieldClass(!!errors.lastName)}
+                    />
+                    {errors.lastName && <FieldError message={errors.lastName} />}
+                  </div>
+
+                  <div>
+                    <input
+                      type="text"
+                      placeholder="Company name*"
+                      value={form.company}
+                      onChange={handleChange("company")}
+                      aria-invalid={!!errors.company}
+                      className={fieldClass(!!errors.company)}
+                    />
+                    {errors.company && <FieldError message={errors.company} />}
+                  </div>
+
+                  <div>
+                    <input
+                      type="email"
+                      placeholder="Business Email*"
+                      value={form.email}
+                      onChange={handleChange("email")}
+                      aria-invalid={!!errors.email}
+                      className={fieldClass(!!errors.email)}
+                    />
+                    {errors.email && <FieldError message={errors.email} />}
+                  </div>
 
                   <label className="flex items-start gap-3 pt-1 text-sm text-brand-ink/70">
                     <input
                       type="checkbox"
                       checked={form.contactMe}
                       onChange={(e) => setForm((f) => ({ ...f, contactMe: e.target.checked }))}
-                      className="mt-0.5 h-4 w-4 rounded border-brand-navy/30"
+                      className="mt-0.5 h-4 w-4 shrink-0 rounded border-brand-navy/30"
                     />
                     Please have a Visionaize Digital Twin expert contact me
                   </label>
 
                   <button
                     type="submit"
-                    className="mt-2 w-full rounded-full bg-gradient-to-r from-brand-lime to-brand-blue py-4 text-base font-semibold text-white shadow-sm transition hover:brightness-95"
+                    disabled={status === "sending"}
+                    className="mt-2 w-full rounded-full bg-gradient-to-r from-brand-lime to-brand-blue py-4 text-base font-semibold text-white shadow-sm transition hover:brightness-95 disabled:opacity-60"
                   >
-                    Access Now
+                    {status === "sending" ? "Sending…" : "Access Now"}
                   </button>
+
+                  {status === "err" && errorMsg && (
+                    <p className="text-sm text-red-600">{errorMsg}</p>
+                  )}
                 </form>
               )}
             </div>
@@ -178,13 +280,27 @@ function MetaverseHero() {
   );
 }
 
+function fieldClass(hasError: boolean) {
+  return [
+    "w-full rounded-md border px-4 py-3 text-brand-ink placeholder:text-brand-ink/50",
+    "focus:outline-none focus:ring-1",
+    hasError
+      ? "border-red-400 focus:border-red-400 focus:ring-red-400"
+      : "border-brand-navy/20 focus:border-brand-blue focus:ring-brand-blue",
+  ].join(" ");
+}
+
+function FieldError({ message }: { message: string }) {
+  return <p className="mt-1 text-xs text-red-600">{message}</p>;
+}
+
 function ProblemSection() {
   return (
     <section className="bg-[#f3f5f7]">
-      <div className="mx-auto max-w-5xl px-6 pt-2 pb-10 md:pt-4 md:pb-14">
+      <div className="mx-auto max-w-6xl px-4 pt-2 pb-10 sm:px-6 md:pt-4 md:pb-14">
         <h2 className="text-2xl font-bold text-brand-navy md:text-3xl">Problem</h2>
 
-        <div className="mt-6 space-y-6 text-base leading-relaxed text-brand-ink/80 md:text-lg">
+        <div className="mt-6 space-y-6 text-sm leading-relaxed text-brand-ink/80 sm:text-base md:text-lg">
           <p>
             As the industrial world moves toward the "autonomous factory" and Industry 4.0,
             modernization of existing facilities requires the ability to process and
@@ -221,13 +337,6 @@ function ProblemSection() {
             operational efficiencies and improving safety.
           </p>
         </div>
-
-        {/* <a
-          href="#whitepaper-form"
-          className="mt-8 inline-block text-base font-bold text-brand-blue hover:underline"
-        >
-          Get the White Paper &gt;&gt;
-        </a> */}
       </div>
     </section>
   );
@@ -236,13 +345,13 @@ function ProblemSection() {
 function DigitalTwinCTA() {
   return (
     <section className="bg-gradient-to-r from-brand-lime via-teal-500 to-brand-blue">
-      <div className="mx-auto max-w-5xl px-6 py-16 text-center md:py-20">
-        <h2 className="text-3xl font-bold leading-tight text-white md:text-4xl">
+      <div className="mx-auto max-w-5xl px-4 py-14 text-center sm:px-6 md:py-20">
+        <h2 className="text-2xl font-bold leading-tight text-white sm:text-3xl md:text-4xl">
           3D Digital Twins provide a framework to address this challenge. Find out how.
         </h2>
 
-        <a
-          href="#whitepaper-form"
+        
+        <a  href="#whitepaper-form"
           className="mt-8 inline-flex items-center rounded-full bg-white px-8 py-4 text-base font-bold text-brand-ink shadow-md transition hover:brightness-95"
         >
           Download the white paper

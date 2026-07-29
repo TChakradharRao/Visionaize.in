@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SolutionPage } from "@/components/site/SolutionPage";
 import { getSeedContentItem } from "@/lib/seed-content";
 
@@ -84,18 +84,26 @@ function DecarbonizationPage() {
         {
           q: "What are the problems that DecarbAI solve?",
           a: [
-            "DecarbAI addresses the lack of real-time emissions quantification, source identification, and reporting — challenges driven by evolving regulations, sparse sensor coverage and the dynamic nature of plant emissions.",
+            "Mounting expectations from investors, regulators, customers, and various stakeholders regarding environmental, social, and governance matters, decarbonization has emerged as a central concern for companies spanning heavy industries. Fortunately, Visionaize DecarbAI offers a transformative solution to address these challenges.",
           ],
         },
         {
           q: "What makes DecarbAI unique?",
           a: [
-            "DecarbAI covers scope 1, 2 and 3 emissions with regulatory-approved methodologies, GenAI-based recommendations, and tight integration with operations data to drive measurable reductions.",
+            "Some data tools are built by data scientists with no practical domain expertise in the industries being served. Visionaize’s DecarbAI solution is different, in that it is designed by those who are rooted in data science and have decades of experience in heavy industries.  The development of the solutions’s  innovative monitoring and machine learning logic have been steered by this hands on industry experience.  ",
           ],
         },
         {
           q: "How can I learn more about DecarbAI?",
-          a: ["Connect with a Visionaize sustainability specialist for a demo and assessment."],
+          a: [
+            <>
+              To learn more about DecarbAI and its capabilities, please{" "}
+              <Link to="/contact" className="text-blue-600 no-underline hover:no-underline">
+                connect with a product expert
+              </Link>
+              .
+            </>,
+          ],
         },
       ]}
       faqCtaLabel="Request a demo"

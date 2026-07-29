@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ArrowRight, ChevronLeft, ChevronRight, Play } from "lucide-react";
@@ -94,7 +94,7 @@ const PLATFORM_CARDS = [
     link: "Discover VIZI CoPilot",
     href: "/platform/vizi-copilot-gen-ai",
     color: "#0A7BC2",
-    img: "https://visionaize.com/wp-content/uploads/2024/10/Vizi-Copilot-Chat-Image-1-1-300x189.png",
+    img: "https://visionaize.in/wp-content/uploads/2024/10/Vizi-Copilot-Chat-Image-1-1-768x484.png",
   },
   {
     title: "Signal Miner",
@@ -267,7 +267,7 @@ function Hero() {
   }, []);
 
   return (
-    <section className="relative overflow-hidden bg-black min-h-[480px] sm:min-h-[560px] md:min-h-[620px]">
+    <section className="relative overflow-hidden bg-black min-h-[420px] sm:min-h-[520px] md:min-h-[600px] lg:min-h-[640px]">
       {/* Background video: object-cover keeps it filling the section edge-to-edge
           at every breakpoint, cropping the sides/top rather than letterboxing */}
       <video
@@ -282,15 +282,15 @@ function Hero() {
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" aria-hidden />
 
-      <div className="relative mx-auto flex min-h-[480px] max-w-7xl flex-col justify-end px-4 pb-10 sm:min-h-[560px] sm:px-6 sm:pb-16 md:min-h-[620px] md:grid md:grid-cols-12 md:items-end">
+      <div className="relative mx-auto flex min-h-[420px] max-w-7xl flex-col justify-end px-4 pb-8 sm:min-h-[520px] sm:px-6 sm:pb-14 md:min-h-[600px] md:grid md:grid-cols-12 md:items-end md:pb-16 lg:min-h-[640px]">
         <div className="md:col-span-9">
           {/* Rotating keyword band, flush to viewport left edge on the design.
               Sizing steps down through the breakpoints instead of using a
               fixed 640px min-width, so it no longer forces horizontal scroll
               on small phones. */}
-          <div className="relative -ml-4 translate-y-8 sm:-ml-6 sm:translate-y-12 md:-ml-12 md:translate-y-16">
+          <div className="relative -ml-4 translate-y-6 sm:-ml-6 sm:translate-y-10 md:-ml-12 md:translate-y-14">
             <div
-              className="relative inline-flex max-w-[92vw] items-center pl-4 pr-10 py-3 text-base font-bold tracking-wide text-white shadow-xl sm:max-w-none sm:pl-8 sm:pr-16 sm:py-4 sm:text-xl md:pl-16 md:pr-20 md:py-6 md:text-2xl lg:text-4xl"
+              className="relative inline-flex max-w-[92vw] items-center pl-4 pr-10 py-2.5 text-sm font-bold tracking-wide text-white shadow-xl sm:pl-8 sm:pr-16 sm:py-3.5 sm:text-lg md:max-w-none md:pl-16 md:pr-20 md:py-5 md:text-2xl lg:py-6 lg:text-3xl"
               style={{
                 background:
                   "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 35%, #3EA0A8 70%, #6FC7E0 100%)",
@@ -310,35 +310,35 @@ function Hero() {
           {/* Product pills: below md, hover-to-expand doesn't work on touch,
               so this renders as a plain horizontal row of icon links instead
               of the absolutely-positioned expanding column used on desktop. */}
-          <div className="mt-6 flex flex-wrap gap-3 sm:mt-8 md:hidden">
+          <div className="mt-5 flex flex-wrap gap-2.5 sm:mt-7 sm:gap-3 md:hidden">
             {PRODUCT_PILLS.map((p) => (
               <Link
                 key={p.label}
                 to={p.href}
                 aria-label={p.label}
-                className="flex h-11 w-11 items-center justify-center rounded-full shadow-lg sm:h-12 sm:w-12"
+                className="flex h-10 w-10 items-center justify-center rounded-full shadow-lg sm:h-12 sm:w-12"
                 style={{ background: p.color }}
               >
-                <img src={p.icon} alt="" className="h-6 w-6 object-contain" />
+                <img src={p.icon} alt="" className="h-5 w-5 object-contain sm:h-6 sm:w-6" />
               </Link>
             ))}
           </div>
         </div>
 
         {/* Right rail product pills — desktop only (md and up) */}
-        <div className="absolute right-4 top-24 z-20 hidden flex-col gap-5 md:right-8 md:top-28 md:flex">
+        <div className="absolute right-4 top-20 z-20 hidden flex-col gap-4 md:right-6 md:top-24 md:flex lg:right-8 lg:top-28 lg:gap-5">
           {PRODUCT_PILLS.map((p) => (
             <Link
               key={p.label}
               to={p.href}
-              className="group relative flex h-16 w-16 self-end items-center overflow-hidden rounded-full transition-all duration-500 ease-in-out hover:w-[250px]"
+              className="group relative flex h-14 w-14 self-end items-center overflow-hidden rounded-full transition-all duration-500 ease-in-out hover:w-[230px] lg:h-16 lg:w-16 lg:hover:w-[250px]"
               style={{ background: p.color }}
             >
-              <div className="absolute left-0 top-0 flex h-16 w-16 items-center justify-center rounded-full">
-                <img src={p.icon} alt={p.label} className="h-8 w-8 object-contain" />
+              <div className="absolute left-0 top-0 flex h-14 w-14 items-center justify-center rounded-full lg:h-16 lg:w-16">
+                <img src={p.icon} alt={p.label} className="h-7 w-7 object-contain lg:h-8 lg:w-8" />
               </div>
 
-              <span className="ml-20 whitespace-nowrap text-lg font-semibold text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
+              <span className="ml-[72px] whitespace-nowrap text-base font-semibold text-white opacity-0 transition-all duration-300 group-hover:opacity-100 lg:ml-20 lg:text-lg">
                 {p.label}
               </span>
             </Link>
@@ -357,26 +357,26 @@ function Hero() {
 /* ---------- Intro + stats ---------- */
 function IntroAndStats() {
   return (
-    <section className="bg-white pb-12 pt-10 md:pb-0 md:pt-0">
-      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 sm:gap-10 md:grid-cols-[1.2fr_1fr] md:gap-16">
+    <section className="bg-white pb-10 pt-8 sm:pb-12 sm:pt-10 md:pb-0 md:pt-0">
+      <div className="mx-auto grid max-w-7xl items-center gap-6 px-4 sm:gap-10 sm:px-6 md:grid-cols-[1.2fr_1fr] md:gap-12 lg:gap-16">
         {/* Image column: overflow-hidden contains the intentional "bleed"
             width used at md/lg so it can't cause horizontal scrolling */}
         <div className="flex justify-center overflow-hidden md:justify-start">
           <img
             src="https://visionaize.com/wp-content/uploads/2024/11/Group-1000007065.png"
             alt="Visionaize 3D Digital Twin & Smart Apps"
-            className="h-[260px] w-full max-w-none object-contain sm:h-[360px] md:h-[500px] md:w-[150%] lg:h-[650px] lg:w-[190%]"
+            className="h-[220px] w-full max-w-none object-contain sm:h-[340px] md:h-[460px] md:w-[150%] lg:h-[600px] lg:w-[190%]"
           />
         </div>
 
         {/* Text column */}
         <div className="px-2 sm:px-0">
-          <h2 className="text-xl font-semibold leading-snug text-brand-navy sm:text-2xl md:text-[32px]">
+          <h2 className="text-xl font-semibold leading-snug text-brand-navy sm:text-2xl md:text-[28px] lg:text-[32px]">
             Visionaize's 3D Digital Twin &amp; Smart Apps Enable Real-Time Monitoring,
             Optimization, and Prediction for Heavy Industry
           </h2>
 
-          <ul className="mt-6 space-y-4 sm:mt-8">
+          <ul className="mt-5 space-y-3 sm:mt-8 sm:space-y-4">
             {STATS.map((s, index) => (
               <li
                 key={s.label}
@@ -388,11 +388,11 @@ function IntroAndStats() {
                 />
 
                 {s.prefix && (
-                  <span className="text-sm text-brand-ink/70">{s.prefix}</span>
+                  <span className="text-xs text-brand-ink/70 sm:text-sm">{s.prefix}</span>
                 )}
 
                 <span
-                  className="animate-percentage text-lg font-bold sm:text-xl"
+                  className="animate-percentage text-base font-bold sm:text-lg md:text-xl"
                   style={{
                     color: s.color,
                     animationDelay: `${index * 0.2}s`,
@@ -414,20 +414,20 @@ function IntroAndStats() {
 /* ---------- Remote Plant Access cards ---------- */
 function RemotePlantAccess() {
   return (
-    <section className="bg-[#E6F4FB] py-14 sm:py-20">
+    <section className="bg-[#E6F4FB] py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Remote Plant Access - Be There From Anywhere
         </h2>
 
-        <div className="mt-10 grid gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-5 sm:mt-12 sm:grid-cols-2 sm:gap-6 md:mt-14 lg:grid-cols-3 lg:gap-8">
           {PLATFORM_CARDS.map((c) => (
             <article
               key={c.title}
               className="group relative flex flex-col overflow-hidden rounded-md bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-lg"
             >
-              <div className="p-6 pb-0">
-                <div className="mb-5 aspect-[16/10] overflow-hidden rounded">
+              <div className="p-5 pb-0 sm:p-6">
+                <div className="mb-4 aspect-[16/10] overflow-hidden rounded sm:mb-5">
                   <img
                     src={c.img}
                     alt={c.title}
@@ -440,7 +440,7 @@ function RemotePlantAccess() {
                   />
                 </div>
                 <h3
-                  className="mt-4 bg-clip-text text-xl font-bold leading-tight text-transparent sm:text-[24px]"
+                  className="mt-3 bg-clip-text text-lg font-bold leading-tight text-transparent sm:mt-4 sm:text-xl md:text-[22px]"
                   style={{
                     backgroundImage:
                       "linear-gradient(90deg, #8CC63F 0%, #39B54A 25%, #28A9A2 55%, #1E88E5 100%)",
@@ -448,13 +448,13 @@ function RemotePlantAccess() {
                 >
                   {c.title}
                 </h3>
-                <p className="mt-3 text-base leading-relaxed text-brand-ink/80">{c.body}</p>
+                <p className="mt-3 text-sm leading-relaxed text-brand-ink/80 sm:text-base">{c.body}</p>
               </div>
 
               {/* spacer pushes link + accent bar to bottom, keeping card heights aligned */}
               <div className="flex-1" />
 
-              <div className="px-6 pb-5 pt-5">
+              <div className="px-5 pb-5 pt-5 sm:px-6">
                 <Link
                   to={c.href}
                   className="inline-flex items-center gap-2 text-sm font-semibold text-brand-blue hover:text-brand-navy"
@@ -483,9 +483,9 @@ function RemotePlantAccess() {
 function CaseStudyCarousel() {
   const [idx, setIdx] = useState(0);
   const [tab, setTab] = useState<"Challenge" | "Solution" | "Results">("Challenge");
-  // direction drives which way the slide-in animation comes from:
-  // 1 = next (slides in from the right), -1 = prev (slides in from the left)
   const [direction, setDirection] = useState<1 | -1>(1);
+
+  const AUTO_SLIDE_MS = 6000;
 
   const next = () => {
     setDirection(1);
@@ -497,10 +497,22 @@ function CaseStudyCarousel() {
     setIdx((x) => (x - 1 + CASE_STUDIES.length) % CASE_STUDIES.length);
     setTab("Challenge");
   };
+
+  // re-runs every time idx changes (manual click or auto-advance),
+  // so the 6s countdown always restarts from a fresh interaction
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setDirection(1);
+      setIdx((x) => (x + 1) % CASE_STUDIES.length);
+      setTab("Challenge");
+    }, AUTO_SLIDE_MS);
+    return () => clearInterval(timer);
+  }, [idx]);
+
   const cs = CASE_STUDIES[idx];
 
   return (
-    <section className="bg-white py-14 sm:py-20">
+    <section className="bg-white py-12 sm:py-16 md:py-20 lg:py-24">
       <style>{`
         @keyframes csSlideInRight {
           from { transform: translateX(48px); opacity: 0; }
@@ -519,10 +531,7 @@ function CaseStudyCarousel() {
           Demonstrated Success in Oil &amp; Gas, Manufacturing, and Power Industries
         </h2>
 
-        <div className="relative mt-10 sm:mt-14">
-          {/* Arrows sit just inside the safe area on mobile (left-0/right-0)
-              and step outward on larger screens, so they never overlap the
-              page's own edge padding or get clipped off-screen. */}
+        <div className="relative mt-8 sm:mt-12 md:mt-14">
           <button
             onClick={prev}
             aria-label="Previous case study"
@@ -538,15 +547,10 @@ function CaseStudyCarousel() {
             <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
           </button>
 
-          {/* overflow-hidden clips the slide motion; it's scoped to just this
-              inner wrapper so it doesn't clip the arrow buttons positioned
-              outside the grid above */}
           <div className="overflow-hidden">
-            {/* key={idx} forces React to remount this block on every case-study
-                change, which restarts the CSS animation each time */}
             <div
               key={idx}
-              className={`grid items-start gap-8 px-8 sm:gap-10 sm:px-10 md:grid-cols-2 md:px-6 ${
+              className={`grid items-start gap-6 px-8 sm:gap-10 sm:px-10 md:grid-cols-2 md:gap-8 md:px-6 lg:gap-10 ${
                 direction === 1 ? "cs-slide-right" : "cs-slide-left"
               }`}
             >
@@ -554,16 +558,16 @@ function CaseStudyCarousel() {
                 <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-lime">
                   CASE STUDY
                 </p>
-                <h3 className="mt-3 text-xl font-bold text-brand-navy sm:text-2xl md:text-3xl">
+                <h3 className="mt-3 text-lg font-bold text-brand-navy sm:text-2xl md:text-[28px]">
                   {cs.title}
                 </h3>
 
-                <div className="mt-6 flex gap-4 overflow-x-auto border-b border-brand-ink/10 sm:mt-8 sm:gap-6">
+                <div className="mt-5 flex gap-4 overflow-x-auto border-b border-brand-ink/10 sm:mt-8 sm:gap-6">
                   {(["Challenge", "Solution", "Results"] as const).map((t) => (
                     <button
                       key={t}
                       onClick={() => setTab(t)}
-                      className={`relative -mb-px whitespace-nowrap pb-3 text-sm font-semibold transition ${
+                      className={`relative -mb-px whitespace-nowrap pb-3 text-sm font-semibold transition sm:text-base ${
                         tab === t ? "text-brand-blue" : "text-brand-ink/55 hover:text-brand-ink"
                       }`}
                     >
@@ -575,7 +579,7 @@ function CaseStudyCarousel() {
                   ))}
                 </div>
 
-                <div className="mt-6 rounded-md border border-brand-ink/10 bg-white p-4 text-base leading-7 text-brand-ink/85 sm:p-6 sm:leading-8">
+                <div className="mt-5 rounded-md border border-brand-ink/10 bg-white p-4 text-sm leading-relaxed text-brand-ink/85 sm:mt-6 sm:p-6 sm:text-base sm:leading-7 lg:leading-8">
                   {cs.tabs[tab]}
                 </div>
               </div>
@@ -599,7 +603,6 @@ function CaseStudyCarousel() {
     </section>
   );
 }
-
 /* ---------- Testimonial slider on navy with decorative arcs ---------- */
 function TestimonialSlider() {
   const [i, setI] = useState(0);
@@ -612,10 +615,10 @@ function TestimonialSlider() {
 
   const t = TESTIMONIALS[i];
   return (
-    <section className="relative overflow-hidden bg-[#0F2237] pb-8 pt-16 text-white sm:pt-24">
+    <section className="relative overflow-hidden bg-[#0F2237] pb-6 pt-12 text-white sm:pb-8 sm:pt-20 md:pt-24">
       {/* decorative arcs */}
       <svg
-        className="pointer-events-none absolute -bottom-32 -right-32 h-[340px] w-[340px] opacity-70 sm:h-[420px] sm:w-[420px] md:h-[520px] md:w-[520px]"
+        className="pointer-events-none absolute -bottom-32 -right-32 h-[280px] w-[280px] opacity-70 sm:h-[380px] sm:w-[380px] md:h-[460px] md:w-[460px] lg:h-[520px] lg:w-[520px]"
         viewBox="0 0 500 500"
         fill="none"
       >
@@ -624,23 +627,23 @@ function TestimonialSlider() {
         <circle cx="250" cy="250" r="160" stroke="#2E8DC5" strokeWidth="1.5" />
       </svg>
 
-      <div className="relative mx-auto max-w-5xl px-4 pb-24 text-center sm:px-6 sm:pb-32">
+      <div className="relative mx-auto max-w-5xl px-4 pb-20 text-center sm:px-6 sm:pb-28 md:pb-32">
         <h2
-          className="mb-10 bg-gradient-to-r from-[#A6E04A] via-[#3EA0A8] to-[#2E8DC5] bg-clip-text text-center text-2xl font-bold text-transparent drop-shadow-sm sm:mb-12 sm:text-3xl md:text-4xl"
+          className="mb-8 bg-gradient-to-r from-[#A6E04A] via-[#3EA0A8] to-[#2E8DC5] bg-clip-text text-center text-2xl font-bold text-transparent drop-shadow-sm sm:mb-12 sm:text-3xl md:text-4xl"
         >
           Trusted by Global Industry Leaders
         </h2>
 
-        <div className="flex items-center gap-3 sm:gap-6">
+        <div className="flex items-center gap-2 sm:gap-6">
           <button
             onClick={prev}
             aria-label="Previous"
             className="flex-none rounded-full p-1.5 text-white/60 hover:bg-white/10 hover:text-white sm:p-2"
           >
-            <ChevronLeft className="h-6 w-6 sm:h-7 sm:w-7" />
+            <ChevronLeft className="h-5 w-5 sm:h-7 sm:w-7" />
           </button>
           <div className="flex-1">
-            <p className="text-balance text-base font-medium leading-relaxed text-white sm:text-xl md:text-2xl">
+            <p className="text-balance text-sm font-medium leading-relaxed text-white sm:text-xl md:text-2xl">
               &ldquo;{t.quote}&rdquo;
             </p>
           </div>
@@ -649,7 +652,7 @@ function TestimonialSlider() {
             aria-label="Next"
             className="flex-none rounded-full p-1.5 text-white/60 hover:bg-white/10 hover:text-white sm:p-2"
           >
-            <ChevronRight className="h-6 w-6 sm:h-7 sm:w-7" />
+            <ChevronRight className="h-5 w-5 sm:h-7 sm:w-7" />
           </button>
         </div>
       </div>
@@ -702,31 +705,31 @@ function NavyPartners() {
 /* ---------- Improve Operations with icons ---------- */
 function ImproveOps() {
   return (
-    <section className="bg-white py-14 sm:py-20">
+    <section className="bg-white py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
         <h2 className="text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Improve Your Operations Today
         </h2>
-        <div className="mt-10 grid gap-10 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-8 sm:mt-12 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3">
           {IMPROVE_STEPS.map((s) => (
             <div key={s.title} className="flex flex-col items-center">
               <img
                 src={s.icon}
                 alt=""
-                className="mb-5 h-14 w-14 object-contain"
+                className="mb-4 h-12 w-12 object-contain sm:mb-5 sm:h-14 sm:w-14"
                 onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
               />
-              <h3 className="text-xl font-bold text-brand-navy sm:text-2xl">{s.title}</h3>
-              <p className="mt-3 max-w-xs text-base leading-relaxed text-brand-ink/75 sm:text-lg">
+              <h3 className="text-lg font-bold text-brand-navy sm:text-xl md:text-2xl">{s.title}</h3>
+              <p className="mt-3 max-w-xs text-sm leading-relaxed text-brand-ink/75 sm:text-base md:text-lg">
                 {s.body}
               </p>
             </div>
           ))}
         </div>
-        <div className="mt-10 sm:mt-12">
+        <div className="mt-8 sm:mt-12">
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-md transition hover:shadow-lg sm:px-9 sm:py-4"
+            className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg sm:px-9 sm:py-4"
             style={{
               background: "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
             }}
@@ -742,8 +745,8 @@ function ImproveOps() {
 /* ---------- Reactive to Predictive (video) ---------- */
 function ReactiveToPredictive() {
   return (
-    <section className="bg-[#D6ECF7] py-14 sm:py-20">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 sm:gap-10 md:grid-cols-2 md:items-center">
+    <section className="bg-[#D6ECF7] py-12 sm:py-16 md:py-20 lg:py-24">
+      <div className="mx-auto grid max-w-7xl gap-6 px-4 sm:gap-10 sm:px-6 md:grid-cols-2 md:items-center md:gap-12">
         {/* aspect-video keeps a correct 16:9 box at every width, so the
             player never gets cropped or stretched on small screens */}
         <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-brand-navy shadow-xl">
@@ -759,7 +762,7 @@ function ReactiveToPredictive() {
           <h2 className="text-2xl font-bold leading-tight text-brand-navy sm:text-3xl md:text-4xl">
             Transform Operations from Reactive to Predictive
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-brand-ink/80 sm:mt-5 sm:text-lg">
+          <p className="mt-4 text-sm leading-relaxed text-brand-ink/80 sm:mt-5 sm:text-lg">
             Minimize unpredictability, manual reporting, and data analysis tasks by leveraging
             real-time data to enhance industrial intelligence across your plant. Improve remote
             performance monitoring, predictive maintenance, process performance forecasting,
@@ -774,20 +777,20 @@ function ReactiveToPredictive() {
 /* ---------- Innovating Together (whitepaper + partner logos) ---------- */
 function InnovatingTogether() {
   return (
-    <section className="bg-white py-14 sm:py-20">
+    <section className="bg-white py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Innovating Together with Our Valued Partners
         </h2>
 
-        <div className="mt-10 grid items-center gap-10 sm:mt-14 sm:gap-12 md:grid-cols-2">
+        <div className="mt-8 grid items-center gap-8 sm:mt-12 sm:gap-12 md:grid-cols-2 md:mt-14">
           <div>
             <h3 className="text-xl font-bold leading-tight text-brand-navy sm:text-2xl md:text-3xl">
               Turnarounds that Reduce
               <br />
               Costs by More Than 10%
             </h3>
-            <p className="mt-5 text-base leading-relaxed text-brand-ink/80 sm:mt-6 sm:text-lg">
+            <p className="mt-4 text-sm leading-relaxed text-brand-ink/80 sm:mt-6 sm:text-lg">
               A collaboration between PwC and Visionaize, this whitepaper delves deeply into a
               modern approach to Turnarounds that enables operators to maximize productivity and
               significantly reduce downtime.
@@ -796,7 +799,7 @@ function InnovatingTogether() {
               href="https://visionaize.com/re-inventing-turnarounds-in-the-metaverse/"
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-6 inline-flex items-center gap-2 rounded-full px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg sm:mt-8 sm:px-8 sm:py-3.5"
+              className="mt-6 inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:shadow-lg sm:mt-8 sm:px-8 sm:py-3.5"
               style={{
                 background: "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
               }}
@@ -818,13 +821,13 @@ function InnovatingTogether() {
           </div>
         </div>
 
-        <div className="mt-12 grid grid-cols-2 items-center gap-8 sm:mt-16 sm:gap-10 md:grid-cols-5">
+        <div className="mt-10 grid grid-cols-2 items-center gap-6 sm:mt-16 sm:gap-10 md:grid-cols-5">
           {LIGHT_PARTNERS.map((p) => (
             <div key={p.name} className="flex items-center justify-center">
               <img
                 src={p.logo}
                 alt={p.name}
-                className="h-10 max-w-[180px] md:h-12"
+                className="h-9 max-w-[150px] sm:h-10 sm:max-w-[180px] md:h-12"
                 onError={(e) => {
                   const img = e.target as HTMLImageElement;
                   img.outerHTML = `<span class="text-brand-ink/50 text-lg font-semibold tracking-wide">${p.name}</span>`;
@@ -842,13 +845,13 @@ function InnovatingTogether() {
 /* ---------- Blog grid ---------- */
 function BlogSection() {
   return (
-    <section className="bg-white pb-14 sm:pb-20">
+    <section className="bg-white pb-12 sm:pb-16 md:pb-20 lg:pb-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Explore Our Latest Articles
         </h2>
 
-        <div className="mt-10 grid gap-6 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid gap-6 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {BLOG_POSTS.map((p) => (
             <article key={p.title} className="group flex flex-col pb-5">
               <div className="aspect-[16/10] overflow-hidden rounded">
@@ -863,10 +866,10 @@ function BlogSection() {
                   loading="lazy"
                 />
               </div>
-              <h3 className="mt-5 text-lg font-bold leading-snug text-brand-navy sm:text-xl">
+              <h3 className="mt-4 text-lg font-bold leading-snug text-brand-navy sm:mt-5 sm:text-xl">
                 {p.title}
               </h3>
-              <p className="mt-3 flex-1 text-base leading-relaxed text-brand-ink/75 sm:text-lg">
+              <p className="mt-3 flex-1 text-sm leading-relaxed text-brand-ink/75 sm:text-base md:text-lg">
                 {p.excerpt}
               </p>
               <Link
@@ -893,26 +896,26 @@ function BlogSection() {
 
 function Certifications() {
   return (
-    <section className="bg-white py-14 sm:py-20">
+    <section className="bg-white py-12 sm:py-16 md:py-20 lg:py-24">
       <div className="mx-auto max-w-6xl px-4 text-center sm:px-6">
         <h2 className="text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Our Certifications &amp; Compliance
         </h2>
 
-        <div className="mt-10 grid gap-8 sm:mt-12 sm:grid-cols-2 sm:gap-10 md:place-items-center">
+        <div className="mt-8 grid gap-6 sm:mt-12 sm:grid-cols-2 sm:gap-10 md:place-items-center">
           {CERTIFICATIONS.map((c) => (
             <img
               key={c.title}
               src={c.img}
               alt={c.title}
-              className="h-auto w-full max-w-xs object-contain shadow-md sm:max-w-sm"
+              className="h-auto w-full max-w-[260px] object-contain shadow-md sm:max-w-sm"
               loading="lazy"
               onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
             />
           ))}
         </div>
 
-        <p className="mt-8 text-base font-bold text-brand-ink/90 sm:mt-10 sm:text-lg">
+        <p className="mt-6 text-sm font-bold text-brand-ink/90 sm:mt-10 sm:text-lg">
           Visionaize Technologies is certified for quality management and information
           security standards.
         </p>
@@ -920,34 +923,3 @@ function Certifications() {
     </section>
   );
 }
-
-// /* ---------- Let's Connect CTA ---------- */
-// function LetsConnect() {
-//   return (
-//     <section className="relative overflow-hidden bg-white py-24">
-//       {/* decorative arcs in bottom-right */}
-//       <svg
-//         className="pointer-events-none absolute -bottom-40 -right-40 h-[600px] w-[600px] opacity-50"
-//         viewBox="0 0 600 600"
-//         fill="none"
-//       >
-//         <circle cx="300" cy="300" r="290" stroke="#A6E04A" strokeWidth="1.5" />
-//         <circle cx="300" cy="300" r="240" stroke="#3EA0A8" strokeWidth="1.5" />
-//         <circle cx="300" cy="300" r="190" stroke="#2E8DC5" strokeWidth="1.5" />
-//       </svg>
-
-//       <div className="relative mx-auto max-w-7xl px-6">
-//         <h2 className="text-5xl font-bold text-brand-navy md:text-6xl">Let's Connect</h2>
-//         <p className="mt-6 max-w-md text-base text-brand-ink/80">
-//           Learn how Visionaize can reduce downtime and increase productivity
-//         </p>
-//         <Link
-//           to="/contact"
-//           className="mt-8 inline-flex items-center rounded-full bg-brand-navy px-8 py-3.5 text-sm font-semibold text-white transition hover:bg-brand-blue"
-//         >
-//           Talk to an expert
-//         </Link>
-//       </div>
-//     </section>
-//   );
-// }

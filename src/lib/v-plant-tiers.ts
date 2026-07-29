@@ -20,7 +20,7 @@ export const TIERS: Tier[] = [
       "Leverage 3D scans and images",
       "Use light data integration",
     ],
-    shot: "https://visionaize.com/wp-content/uploads/2024/05/V-Plant_Explorer-1536x798.png",
+    shot: "https://visionaize.in/wp-content/uploads/2024/05/side-by-side-desktop-left-v-plant-explorer.png",
     short:
       "Start fast and dip your toes into the Digital Twin waters with V-Plant Explorer – an entry-level foray into asset visualization that can scale as needed.",
   },
@@ -35,7 +35,7 @@ export const TIERS: Tier[] = [
       "Use deeper data integrations",
       "Scale operational use cases across the plant",
     ],
-    shot: "https://visionaize.com/wp-content/uploads/2024/05/V-Plant_Pro-1536x792.png",
+    shot: "https://visionaize.in/wp-content/uploads/2024/05/side-by-side-desktop-right-1-copy-1.png",
     short:
       "For those that want to scale Digital Twin functionality and operationalize their 3D models. Offers Asset virtualization approaches for both speed and precision.",
   },
@@ -50,7 +50,7 @@ export const TIERS: Tier[] = [
       "Leverage Model Management of Change (MMOC)",
       "Scale operational use cases across the plant",
     ],
-    shot: "https://visionaize.com/wp-content/uploads/2024/05/V-Plant_360.png",
+    shot: "http://visionaize.in/wp-content/uploads/2024/05/side-by-side-desktop-left-v-plant-360.png",
     short:
       "For those looking for full Digital Transformation, with all available functionality and deep data integrations. Best option for those ready to apply Digital Twin technology across the plant.",
   },
