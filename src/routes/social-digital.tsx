@@ -9,15 +9,15 @@ export const Route = createFileRoute("/social-digital")({
 
 const SLIDES = [
   {
-    image: "https://visionaize.com/wp-content/uploads/2022/04/eco-bg-min.jpg",
+    image: "/social-digital/eco-bg-min.jpg",
     text: "Your Partner in Progress, Accelerating Progress Towards a Better Future",
   },
   {
-    image: "https://visionaize.in/wp-content/uploads/2025/03/Group-1-1-min-1-1.png",
+    image: "/social-digital/Group-1-1-min-1-1.png",
     text: "Sustainability, digital trust and society's well-being",
   },
   {
-    image: "https://visionaize.in/wp-content/uploads/2025/03/plant-hands-ai-generated-min-4.jpg",
+    image: "/social-digital/plant-hands-ai-generated-min-4.jpg",
     text: "Agents of positive change, we partner to address complex challenges",
   },
 ];
@@ -27,15 +27,15 @@ const AUTOPLAY_MS = 6000;
 const PILLARS = [
   {
     title: "We create social\nimpact",
-    icon: "https://visionaize.in/wp-content/uploads/2025/03/Mask-group-86.png",
+    icon: "/social-digital/Mask-group-86.png",
   },
   {
     title: "We support\ndevelopmental\ninitiatives",
-    icon: "https://visionaize.in/wp-content/uploads/2025/03/Mask-group-87.png",
+    icon: "/social-digital/Mask-group-87.png",
   },
   {
     title: "We enable\nsustainable action",
-    icon: "https://visionaize.in/wp-content/uploads/2025/03/Mask-group-88.png",
+    icon: "/social-digital/Mask-group-88.png",
   },
 ];
 
@@ -44,28 +44,28 @@ const IMPACT_WORDS = ["Excellence", "Innovation", "Impact"];
 const SERVICES = [
   {
     title: "Sustainability,\nClimate Change & ESG",
-    icon: "https://visionaize.com/wp-content/uploads/2025/03/Mask-group-89.png",
+    icon: "/social-digital/Mask-group-89.png",
     backColor: "#1ea7e1",
     backText:
       "We provide advisory support in implementing sustainability and ESG best practices across businesses by way of analysing.",
   },
   {
     title: "Development Sector Advisory",
-    icon: "https://visionaize.com/wp-content/uploads/2025/03/Mask-group-90.png",
+    icon: "/social-digital/Mask-group-90.png",
     backColor: "#8bc53f",
     backText:
       "We understand the development sector from within and our specialised advisory function supports businesses on the ground.",
   },
   {
     title: "Governance & Risk Advisory",
-    icon: "https://visionaize.com/wp-content/uploads/2025/03/Mask-group-91.png",
+    icon: "/social-digital/Mask-group-91.png",
     backColor: "#8bc53f",
     backText:
       "We help clients to address various regulatory compliances and support them in their journey towards better governance.",
   },
   {
     title: "Business Support\nServices",
-    icon: "https://visionaize.com/wp-content/uploads/2025/03/Mask-group-94.png",
+    icon: "/social-digital/Mask-group-94.png",
     backColor: "#1ea7e1",
     backText:
       "Provides strategic & operational solutions for market entry, public affairs, public policy & advocacy, strategic.",
@@ -369,7 +369,7 @@ function SocialDigitalPage() {
           className="relative h-[400px] w-full bg-cover bg-center sm:h-[500px]"
           style={{
             backgroundImage:
-              "url(https://visionaize.in/wp-content/uploads/2025/03/big-rice-field-morning-thailand-min-scaled.jpg)",
+              "url(/social-digital/big-rice-field-morning-thailand-min-scaled.jpg)",
           }}
         >
           <div className="absolute inset-0 bg-black/5" />
@@ -482,7 +482,7 @@ function SocialDigitalPage() {
                
               />
               <img
-                src="https://visionaize.in/wp-content/uploads/2025/03/Group-1000007609.png"
+                src="/social-digital/Group-1000007609.png"
                 alt="Solar panels in a green field"
                 className="relative z-10 h-auto w-full shadow-xl"
               />

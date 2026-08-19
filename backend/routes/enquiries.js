@@ -31,7 +31,7 @@ router.get("/", requireAuth, async (req, res) => {
     const whereClause = where.length ? `WHERE ${where.join(' AND ')}` : '';
 
     // total count
-    const countRes = await pool.query(`SELECT COUNT(*) AS cnt FROM visionaize.contact_submissions ${whereClause}`, params);
+    const countRes = await pool.query(`SELECT COUNT(*) AS cnt FROM public.contact_submissions ${whereClause}`, params);
     const total = parseInt(countRes.rows[0].cnt, 10) || 0;
 
     // pagination
@@ -41,7 +41,7 @@ router.get("/", requireAuth, async (req, res) => {
 
     const itemsRes = await pool.query(
       `SELECT id, name, email, company, phone, message, source_page, payload, ip, user_agent, created_at, handled_at
-         FROM visionaize.contact_submissions
+         FROM public.contact_submissions
         ${whereClause}
         ORDER BY created_at DESC
         LIMIT $${params.length - 1} OFFSET $${params.length}`,

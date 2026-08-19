@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { ChevronLeft, ChevronRight, Check } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-field";
 // Adjust this import path to wherever your api.ts actually lives.
 import { api, type CompanyLeadFormSubmission } from "@/lib/api";
 
@@ -64,22 +65,22 @@ const AI_STEPS_IN = [
 
 const KEY_BENEFITS = [
   {
-    icon: "https://visionaize.in/wp-content/uploads/2025/12/Mask-group-45.svg",
+    icon: "/Sugar & Bioethanol Production/Mask-group-45.svg",
     title: "Maximize Sugar Recovery",
     body: "Improve sucrose extraction efficiency with real-time process intelligence that minimizes losses across milling, clarification, and crystallization.",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2025/12/Mask-group-46.svg",
+    icon: "/Sugar & Bioethanol Production/Mask-group-46.svg",
     title: "Higher Cane throughput, Improved Yields",
     body: "Focusing on KPIs, minimizing Pol Percent in Bagasse, Moisture percent in Bagasse and maximizing Mixed Juice Brix.",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2025/12/Mask-group-47.svg",
+    icon: "/Sugar & Bioethanol Production/Mask-group-47.svg",
     title: "Stabilize Fermentation & Boost Ethanol Yield",
     body: "Predict inhibitors, control critical parameters, and prevent batch variability with AI models tuned for continuous, high-yield ethanol production.",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2025/12/Mask-group-48.svg",
+    icon: "/Sugar & Bioethanol Production/Mask-group-48.svg",
     title: "Lower Energy Use Across the Plant",
     body: "Optimize steam, power, and heat balance dynamically to reduce fuel costs and improve turbine, boiler, and evaporator performance.",
   },
@@ -133,7 +134,7 @@ const LOSS_CARDS = [
 const CASE_STUDIES = [
   {
     title: "AI-Based Fermentation Optimization for Ethanol Plants",
-    image: "https://visionaize.in/wp-content/uploads/2025/12/61645814622.png",
+    image: "/Sugar & Bioethanol Production/61645814622.png",
     tabs: {
       Challenge:
         "Fermentation relies heavily on manual dosing, offline lab measurements, and long 50-60 hour batch cycles. Lack of real-time visibility into pH, gravity, and sugar levels leads to inconsistent yield, delayed corrective action, and difficulty planning distillation schedules. Variability in process conditions impacts ethanol purity and overall batch efficiency.",
@@ -145,7 +146,7 @@ const CASE_STUDIES = [
   },
   {
     title: "AI-Driven Yield & Energy Optimization in Sugar Mills",
-    image: "https://visionaize.in/wp-content/uploads/2025/12/dsc-5312-rz-03-1e-ret-1-1.jpg",
+    image: "/Sugar & Bioethanol Production/dsc-5312-rz-03-1e-ret-1-1.jpg",
     tabs: {
       Challenge:
         "Sugar mills operate in highly variable conditions due to seasonal cane quality, geographic sourcing, and siloed process data. Operators struggle to consistently maximize extraction, reduce Pol and moisture in bagasse, manage steam usage, and maintain plant stability. These inefficiencies impact yield, energy cost, and overall mill profitability.",
@@ -157,7 +158,7 @@ const CASE_STUDIES = [
   },
   {
     title: "Revenue Growth Through KPI & Process Optimization",
-    image: "https://visionaize.in/wp-content/uploads/2025/12/sugar4.jpg",
+    image: "/Sugar & Bioethanol Production/sugar4.jpg",
     tabs: {
       Challenge:
         "Sugar mills struggle with fragmented data, manual KPI tracking and inconsistent process control across milling, juice clarification, crystallization and recovery units. Variability in key parameters leads to avoidable losses, off-spec production and missed revenue opportunities, with no real-time insight into where performance is slipping.",
@@ -236,7 +237,7 @@ function Hero() {
       className="relative w-full bg-cover bg-no-repeat"
       style={{
         backgroundImage:
-          "url('https://visionaize.in/wp-content/uploads/2025/12/wmremove-transformed.webp')",
+          "url('/Sugar & Bioethanol Production/wmremove-transformed.webp')",
         backgroundPosition: "center",
       }}
     >
@@ -296,7 +297,7 @@ function AchievableResults() {
     <section className="bg-white py-14 sm:py-16 md:py-20">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         <img
-          src="https://visionaize.in/wp-content/uploads/2026/01/image-165.svg"
+          src="/Sugar & Bioethanol Production/image-165.svg"
           alt="Achievable Results: AI Digital Twin outcomes including 10-25% energy savings, 3-15% higher sugar and ethanol yield, 5-15% revenue growth, up to 30% less downtime, 12-18% recovery improvement, up to 35% cost downtime, 8-12% reduction in steam losses, better resource efficiency, virtual plants scenarios, and 10-20% ROI"
           className="h-auto w-full object-contain"
           loading="lazy"
@@ -543,7 +544,7 @@ function AIStepsIn() {
         <div className="grid grid-cols-1 gap-8 sm:gap-9 md:grid-cols-[32%_1fr] md:items-start md:gap-8 lg:grid-cols-[30%_1fr] lg:gap-12 xl:grid-cols-[28%_1fr] xl:gap-16">
           <div className="mx-auto w-full max-w-sm overflow-hidden rounded-lg shadow-lg sm:max-w-md md:mx-0 md:max-w-none">
             <img
-              src="https://visionaize.in/wp-content/uploads/2025/12/c06430575da893e1ed5dfacb9ddebfb8.webp"
+              src="/Sugar & Bioethanol Production/c06430575da893e1ed5dfacb9ddebfb8.webp"
               alt="Sugar mill and bioethanol plant processing towers at dusk"
               className="h-72 w-full object-cover sm:h-96 md:h-full md:min-h-[420px] lg:min-h-[500px] xl:min-h-[580px]"
               loading="lazy"
@@ -595,7 +596,7 @@ function AIStepsIn() {
 
           <div className="overflow-hidden rounded-lg shadow-lg">
             <img
-              src="https://visionaize.in/wp-content/uploads/2025/12/sugar3-1024x687.jpg"
+              src="/Sugar & Bioethanol Production/sugar3-1024x687.jpg"
               alt="Aerial view of a sugar and bioethanol processing plant at sunset"
               className="aspect-[16/9] w-full object-cover"
               loading="lazy"

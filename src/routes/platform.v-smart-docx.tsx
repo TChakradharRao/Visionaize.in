@@ -25,11 +25,15 @@ export const Route = createFileRoute("/platform/v-smart-docx")({
 });
 
 const HERO_IMG =
-  "https://visionaize.com/wp-content/uploads/2024/05/P-and-I-D-document-digitized-2.png";
+  "/v-smart-docx/P-and-I-D-document-digitized-2.png";
 const USECASE1_IMG =
-  "https://visionaize.com/wp-content/uploads/2024/05/side-by-side-desktop-left-copy-3.png";
+  "/v-smart-docx/side-by-side-desktop-left-copy-3.png";
+const USECASE1_IMG_MOBILE =
+  "/v-smart-docx/Group-598.png";
 const USECASE2_IMG =
-  "https://visionaize.com/wp-content/uploads/2024/05/side-by-side-desktop-right-1-copy.png";
+  "/v-smart-docx/side-by-side-desktop-right-1-copy.png";
+const USECASE2_IMG_MOBILE =
+  "/v-smart-docx/Group-598-1.png";
 
 const CAPABILITIES = [
   {
@@ -114,27 +118,27 @@ function VSmartDocXPage() {
       <main className="bg-white text-brand-ink">
       {/* HERO */}
   <section className="relative overflow-hidden bg-white">
-  <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 pb-20 pt-8 lg:grid-cols-2 lg:pb-28 lg:pt-10">
+  <div className="mx-auto grid max-w-7xl items-center gap-8 px-6 pb-14 pt-10 lg:grid-cols-[5fr_7fr] lg:gap-10 lg:pb-16 lg:pt-12">
     <div>
-      <h1 className="text-[42px] font-medium leading-[1.25] tracking-tight lg:text-[40px]">
+      <h1 className="text-[26px] font-normal leading-[1.35] tracking-tight lg:text-[34px]">
         <span className="bg-gradient-to-r from-[#8DC73F] to-[#21B8B0] bg-clip-text text-transparent">
           Get thousands of person hours back, by digitizing your P&amp;IDs
         </span>
       </h1>
 
-      <p className="mt-8 max-w-xl text-lg leading-relaxed text-brand-ink/80">
+      <p className="mt-6 max-w-xl text-xl font-normal leading-relaxed text-brand-ink/80">
         Convert static P&amp;ID documents into AI-powered tools that speed up
         understanding of how the pieces and parts of the plant work together.
       </p>
 
-      <p className="mt-5 max-w-xl text-lg leading-relaxed text-brand-ink/80">
+      <p className="mt-4 max-w-xl text-xl font-normal leading-relaxed text-brand-ink/80">
         V-Smart DocX completely transforms how Operations and Maintenance
         teams work with P&amp;IDs, creating massive time efficiencies. Connect
         with us to see how V-Smart DocX makes Asset Performance Management
         more efficient.
       </p>
 
-      <div className="mt-10">
+      <div className="mt-7">
         <Link
           to="/contact"
           className="inline-flex items-center rounded-full px-8 py-4 text-base font-semibold text-white shadow-md"
@@ -148,32 +152,32 @@ function VSmartDocXPage() {
       </div>
     </div>
 
-    <div className="relative">
-      <img
-        src={HERO_IMG}
-        alt="V-Smart DocX P&ID digitized in a laptop"
-        width={1400}
-        height={700}
-        className="w-full h-auto"
-        loading="eager"
-      />
-    </div>
+    <div className="relative p-4 sm:p-6 md:p-8 lg:p-10 lg:-mr-10 lg:scale-105">
+  <img
+    src={HERO_IMG}
+    alt="V-Smart DocX P&ID digitized in a laptop"
+    width={1400}
+    height={700}
+    className="w-full h-auto"
+    loading="eager"
+  />
+</div>
   </div>
 </section>
 
       {/* KEY CAPABILITIES */}
-     <section className="bg-[#DDEEF7] py-24">
+     <section className="bg-[#DDEEF7] py-16">
   <div className="mx-auto max-w-7xl px-6">
     <h2 className="text-center text-[40px] font-semibold text-brand-navy lg:text-[40px]">
       Key Capabilities
     </h2>
-    <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {CAPABILITIES.map((c) => (
         <article
           key={c.title}
           className="rounded-md bg-[#EAF4FB] p-7"
         >
-          <h3 className="text-lg font-bold leading-snug text-brand-navy">
+          <h3 className="text-xl font-bold leading-snug text-brand-navy">
             {c.title}
           </h3>
           <ul className="mt-5 space-y-3 border-l-4 pl-5" style={{
@@ -182,7 +186,7 @@ function VSmartDocXPage() {
             {c.bullets.map((b) => (
               <li
                 key={b}
-                className="list-disc text-[18px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60"
+                className="list-disc text-[20px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60"
                 style={{ marginLeft: "1rem" }}
               >
                 {b}
@@ -197,30 +201,44 @@ function VSmartDocXPage() {
 
 
       {/* FLEXIBLE USE CASES */}
-<section className="py-24">
+<section className="py-16">
   <div className="mx-auto max-w-7xl px-6">
     <h2 className="text-center font-display text-[44px] font-semibold text-brand-navy lg:text-[56px]">
       Flexible Use Cases
     </h2>
 
     {/* Use case 1 */}
-    <div className="mt-16 grid items-center gap-0 lg:grid-cols-2">
-      <div className="w-full h-full overflow-hidden rounded-2xl">
-        <img
-          src={USECASE1_IMG}
-          alt="Explore P&IDs with greater efficiency"
-          className="h-full w-full object-cover object-left scale-[1.35]"
-          loading="lazy"
-        />
-      </div>
+    <div className="mt-12 grid items-center gap-8 lg:gap-0 lg:grid-cols-2">
+     <div
+       className="w-full overflow-hidden rounded-2xl lg:aspect-[1440/1192]"
+     >
+  {/* Mobile / tablet only: dedicated image, hidden at lg and up */}
+  <div className="lg:hidden">
+    <img
+      src={USECASE1_IMG_MOBILE}
+      alt="Explore P&IDs with greater efficiency"
+      className="w-full h-auto object-contain"
+      loading="lazy"
+    />
+  </div>
+  {/* Desktop (lg and up): same crop treatment as use case 2's image */}
+  <div className="hidden h-full w-full lg:block">
+    <img
+      src={USECASE1_IMG}
+      alt="Explore P&IDs with greater efficiency"
+      className="h-full w-full object-cover object-left"
+      loading="lazy"
+    />
+  </div>
+</div>
       <div>
         <h3 className="font-display text-4xl font-semibold text-brand-navy lg:text-4xl">
           Explore P&amp;IDs with greater efficiency
         </h3>
-        <p className="mt-6 font-semibold text-brand-ink">
+        <p className="mt-5 text-xl font-semibold text-brand-ink">
           Use as a standalone product without dependencies on a 3D model
         </p>
-        <ul className="mt-5 list-disc space-y-3 pl-6 text-[17px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60">
+        <ul className="mt-4 list-disc space-y-3 pl-6 text-xl leading-relaxed text-brand-ink/80 marker:text-brand-ink/60">
           <li>Extract metadata and tags and symbols from your P&amp;IDs.</li>
           <li>
             Reduce operational risks by maintaining a high level of data
@@ -240,17 +258,17 @@ function VSmartDocXPage() {
     </div>
 
     {/* Use case 2 */}
-    <div className="mt-24 grid items-stretch gap-0 lg:grid-cols-2">
+    <div className="mt-16 grid items-stretch gap-8 lg:gap-0 lg:grid-cols-2">
       <div className="lg:order-1 flex flex-col justify-center">
         <h3 className="font-display text-4xl font-semibold text-brand-navy lg:text-4xl">
           Integrate P&amp;IDs with
           <br />
           3D visualization
         </h3>
-        <p className="mt-6 font-semibold text-brand-ink">
+        <p className="mt-5 text-xl font-bold text-brand-ink">
           Move quickly from static 2D to immersive 3D
         </p>
-        <ul className="mt-5 list-disc space-y-3 pl-6 text-[17px] leading-relaxed text-brand-ink/80 marker:text-brand-ink/60">
+        <ul className="mt-4 list-disc space-y-3 pl-6 text-xl leading-relaxed text-brand-ink/80 marker:text-brand-ink/60">
           <li>Generate intelligence into 3D models from P&amp;IDs.</li>
           <li>Zero in on specific equipment with greater efficiency.</li>
           <li>Make quicker sense of the entire plant and interrelated parts.</li>
@@ -262,28 +280,39 @@ function VSmartDocXPage() {
         </ul>
       </div>
  <div
-  className="w-full overflow-hidden rounded-2xl lg:order-2"
-  style={{ aspectRatio: "1440 / 1192" }}
->
-  <img
-    src="https://visionaize.com/wp-content/uploads/2024/05/side-by-side-desktop-right-1-copy.png"
-    alt="Integrate P&IDs with 3D visualization"
-    className="h-full w-full object-cover object-right"
-    loading="lazy"
-  />
+   className="w-full overflow-hidden rounded-2xl lg:order-2 lg:aspect-[1440/1192]"
+ >
+  {/* Mobile / tablet only: dedicated image, hidden at lg and up */}
+  <div className="lg:hidden">
+    <img
+      src={USECASE2_IMG_MOBILE}
+      alt="Integrate P&IDs with 3D visualization"
+      className="w-full h-auto object-contain"
+      loading="lazy"
+    />
+  </div>
+  {/* Desktop (lg and up): same crop treatment as use case 1's image */}
+  <div className="hidden h-full w-full lg:block">
+    <img
+      src={USECASE2_IMG}
+      alt="Integrate P&IDs with 3D visualization"
+      className="h-full w-full object-cover object-right"
+      loading="lazy"
+    />
+  </div>
 </div>
     </div>
   </div>
 </section>
       {/* GREEN CTA BAND */}
       <section className="bg-[#A4D233]">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 px-6 py-14 sm:flex-row">
-          <p className="font-display text-2xl font-semibold text-brand-navy lg:text-3xl">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-4 px-6 py-10 lg:flex-row lg:gap-8 lg:py-12">
+          <p className="text-center font-display text-2xl font-semibold text-brand-navy lg:text-3xl">
             See V-Smart DocX in action!
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center rounded-full bg-white px-8 py-4 text-base font-semibold text-brand-navy shadow transition hover:bg-white/90"
+            className="inline-flex items-center rounded-full bg-white px-8 py-4 text-base font-semibold text-[#088FD1] shadow transition hover:bg-white/90"
           >
             Request a Demo
           </Link>
@@ -291,71 +320,103 @@ function VSmartDocXPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-24">
-        <div className="mx-auto max-w-5xl px-6">
-          <h2 className="font-display text-3xl font-semibold text-brand-navy lg:text-4xl">
-            Learn More about V-Smart DocX
-          </h2>
-          <div className="mt-10 space-y-4">
-            {FAQS.map((f, i) => (
-              <FAQItem key={f.q} item={f} defaultOpen={i === 0} />
-            ))}
-          </div>
-          <div className="mt-12 text-center">
-            <p className="text-lg text-brand-ink/80">
-              Curious about more details and use cases for V-Smart DocX?
-            </p>
-            <p className="mt-2 text-lg text-brand-ink/80">
-              Reach out to our team to schedule a meeting.
-            </p>
-            <Link
-              to="/contact"
-              className="mt-8 inline-flex items-center rounded-full bg-gradient-to-r from-[#8DC73F] via-[#21B8B0] to-[#1F88C8] px-10 py-4 text-base font-semibold text-white shadow-lg shadow-black/10 transition hover:opacity-95"
-            >
-              Contact Sales
-            </Link>
-          </div>
-        </div>
-      </section>
+      <section className="bg-white py-14">
+  <div className="mx-auto max-w-7xl px-8 lg:px-10">
+
+    {/* Heading */}
+    <h2 className="mb-8 text-[28px] md:text-[34px] font-normal leading-tight tracking-[-0.02em] text-[#0B1220]">
+      Learn More about V-Smart DocX
+    </h2>
+
+    {/* FAQ */}
+    <FAQAccordion faqs={FAQS} />
+
+    {/* Bottom CTA */}
+    <div className="mt-14 flex flex-col items-center text-center">
+      <p className="max-w-3xl text-[22px] leading-8 text-[#6B7280]">
+        Curious about more details and use cases for V-Smart DocX?
+      </p>
+
+      <p className="mt-2 max-w-3xl text-[22px] leading-8 text-[#6B7280]">
+        Reach out to our team to schedule a meeting.
+      </p>
+
+      <Link
+        to="/contact"
+        className="mt-8 inline-flex items-center justify-center rounded-full
+                   bg-gradient-to-r
+                   from-[#8DC73F]
+                   via-[#21B8B0]
+                   to-[#1F88C8]
+                   px-10 py-4
+                   text-lg
+                   font-semibold
+                   text-white
+                   shadow-lg
+                   transition-all
+                   duration-300
+                   hover:scale-105
+                   hover:shadow-xl"
+      >
+        Contact Sales
+      </Link>
+    </div>
+
+  </div>
+</section>
     </main>
       <Footer />
     </>
   );
 }
+function FAQAccordion({ faqs }: { faqs: { q: string; a: string }[] }) {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <div className="divide-y divide-gray-200">
+      {faqs.map((f, i) => (
+        <FAQItem
+          key={f.q}
+          item={f}
+          open={openIndex === i}
+          onToggle={() => setOpenIndex((current) => (current === i ? null : i))}
+        />
+      ))}
+    </div>
+  );
+}
 
 function FAQItem({
   item,
-  defaultOpen,
+  open,
+  onToggle,
 }: {
   item: { q: string; a: string };
-  defaultOpen?: boolean;
+  open: boolean;
+  onToggle: () => void;
 }) {
-  const [open, setOpen] = useState(!!defaultOpen);
   return (
-    <div className="border-b border-brand-ink/10 pb-4">
+    <div>
       <button
         type="button"
-        onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center gap-4 py-3 text-left"
+        onClick={onToggle}
+        className={`flex w-full items-center gap-4 py-4 text-left ${
+          open ? "border-b border-brand-ink/15" : ""
+        }`}
         aria-expanded={open}
       >
         <span
-          className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xl font-semibold transition ${
-            open ? "text-brand-navy" : "text-brand-navy"
-          }`}
+          className="flex h-5 w-5 shrink-0 items-center justify-center text-xl font-bold leading-none text-brand-ink"
           aria-hidden
         >
           {open ? "−" : "+"}
         </span>
-        <span className="flex-1 font-display text-lg font-semibold text-brand-navy">
-          {item.q}
-        </span>
-        <ChevronDown
-          className={`h-5 w-5 text-brand-navy/60 transition ${open ? "rotate-180" : ""}`}
-        />
+        <span className="text-lg md:text-xl font-semibold text-[#0B1220]">
+  {item.q}
+</span>
       </button>
       {open && (
-        <div className="pl-10 pr-4 pb-2 text-[18px] leading-relaxed text-brand-ink/80">
+        <div className="py-5 pl-9 pr-4 text-lg md:text-xl leading-relaxed text-brand-ink/60">
           {item.a}
         </div>
       )}

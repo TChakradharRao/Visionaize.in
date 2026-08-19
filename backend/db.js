@@ -9,18 +9,18 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL });
 
 pool.on("connect", (client) => {
   client
-    .query("SET search_path TO visionaize, public")
+    .query("SET search_path TO public")
     .catch((err) => console.error("Failed to set search_path:", err));
 });
 
 async function ensureUsersRoleConstraint() {
   const client = await pool.connect();
   try {
-    await client.query("SET search_path TO visionaize, public");
+    await client.query("SET search_path TO public");
     const { rows } = await client.query(`
       SELECT conname, pg_get_constraintdef(oid) AS definition
       FROM pg_constraint
-      WHERE conrelid = 'visionaize.users'::regclass
+      WHERE conrelid = 'public.users'::regclass
         AND contype = 'c'
         AND conname = 'users_role_check'
     `);
@@ -36,9 +36,9 @@ async function ensureUsersRoleConstraint() {
     }
 
     await client.query(`
-      ALTER TABLE visionaize.users
+      ALTER TABLE public.users
       DROP CONSTRAINT IF EXISTS users_role_check;
-      ALTER TABLE visionaize.users
+      ALTER TABLE public.users
       ADD CONSTRAINT users_role_check CHECK (role IN ('admin','editor','viewer'));
     `);
     console.log("Updated users role constraint to allow the 'viewer' role.");

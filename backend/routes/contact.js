@@ -7,13 +7,117 @@ const fs = require("fs");
 
 const router = express.Router();
 
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-    },
-});
+const smtpTransporter = process.env.MAIL_PROVIDER === "smtp" || (!process.env.MICROSOFT_TENANT_ID && !process.env.MICROSOFT_CLIENT_ID && !process.env.MICROSOFT_CLIENT_SECRET)
+    ? nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+            user: process.env.EMAIL_USER,
+            pass: process.env.EMAIL_PASS,
+        },
+    })
+    : null;
+
+async function getMicrosoftGraphAccessToken() {
+    const tenantId = process.env.MICROSOFT_TENANT_ID;
+    const clientId = process.env.MICROSOFT_CLIENT_ID;
+    const clientSecret = process.env.MICROSOFT_CLIENT_SECRET;
+
+    if (!tenantId || !clientId || !clientSecret) {
+        throw new Error("Missing Microsoft Graph credentials. Set MICROSOFT_TENANT_ID, MICROSOFT_CLIENT_ID, and MICROSOFT_CLIENT_SECRET.");
+    }
+
+    const response = await fetch(`https://login.microsoftonline.com/${tenantId}/oauth2/v2.0/token`, {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams({
+            client_id: clientId,
+            client_secret: clientSecret,
+            scope: "https://graph.microsoft.com/.default",
+            grant_type: "client_credentials",
+        }),
+    });
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Microsoft Graph token request failed: ${response.status} ${errorText}`);
+    }
+
+    const tokenData = await response.json();
+    if (!tokenData || !tokenData.access_token) {
+        throw new Error("Microsoft Graph token response did not include an access token.");
+    }
+
+    return tokenData.access_token;
+}
+
+function buildGraphAttachments(attachments) {
+    if (!Array.isArray(attachments) || !attachments.length) return [];
+
+    return attachments.map((attachment) => {
+        let contentBytes = attachment.contentBytes || "";
+
+        if (!contentBytes && attachment.path) {
+            if (/^https?:\/\//i.test(attachment.path)) {
+                throw new Error(`Remote attachment URLs are not supported by the Microsoft Graph mail transport: ${attachment.path}`);
+            }
+            contentBytes = fs.readFileSync(attachment.path, { encoding: "base64" });
+        }
+
+        return {
+            "@odata.type": "#microsoft.graph.fileAttachment",
+            name: attachment.filename || attachment.name || "attachment",
+            contentType: attachment.contentType || "application/octet-stream",
+            contentBytes,
+        };
+    });
+}
+
+async function sendMail(message) {
+    const fromAddress = message.from || process.env.EMAIL_USER || process.env.MAIL_FROM;
+    const mailPayload = { ...message, from: fromAddress };
+
+    if (smtpTransporter) {
+        return smtpTransporter.sendMail(mailPayload);
+    }
+
+    const accessToken = await getMicrosoftGraphAccessToken();
+    const recipients = Array.isArray(mailPayload.to) ? mailPayload.to : [mailPayload.to];
+    const mailbox = process.env.MICROSOFT_MAILBOX || fromAddress;
+
+    const graphPayload = {
+        message: {
+            subject: mailPayload.subject,
+            body: {
+                contentType: mailPayload.html ? "HTML" : "Text",
+                content: mailPayload.html || mailPayload.text || "",
+            },
+            toRecipients: recipients.map((recipient) => ({ emailAddress: { address: recipient } })),
+            from: { emailAddress: { address: fromAddress } },
+        },
+        saveToSentItems: true,
+    };
+
+    if (mailPayload.attachments && mailPayload.attachments.length) {
+        graphPayload.message.attachments = buildGraphAttachments(mailPayload.attachments);
+    }
+
+    const response = await fetch(`https://graph.microsoft.com/v1.0/users/${encodeURIComponent(mailbox)}/sendMail`, {
+        method: "POST",
+        headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(graphPayload),
+    });
+
+    if (!response.ok) {
+        const errorText = await response.text();
+        const message = response.status === 403
+            ? `Microsoft Graph sendMail failed: ${response.status} ${errorText}. Grant the app the Mail.Send application permission with admin consent and assign Send As / Send on behalf permissions to mailbox ${mailbox}.`
+            : `Microsoft Graph sendMail failed: ${response.status} ${errorText}`;
+        throw new Error(message);
+    }
+}
 
 // Postgres pool using DATABASE_URL from backend/.env
 const pool = new Pool({ connectionString: process.env.DATABASE_URL });
@@ -47,33 +151,152 @@ async function processSubmission(req, res, emailSubjectTitle) {
 
         // Remove duplicated data from nested `payload` if it only repeats top-level fields.
         // We'll store and display only the extra keys so the email and DB don't repeat name/email/etc.
+        // const primaryKeys = new Set(["name", "email", "company", "phone", "message", "source_page", "form_id"]);
+        // let filteredExtras = {};
+        // if (rest && typeof rest === 'object') {
+        //     // If client sent a `payload` object, prefer its extra keys
+        //     if (rest.payload && typeof rest.payload === 'object' && !Array.isArray(rest.payload)) {
+        //         const p = rest.payload;
+        //         // Include only keys from payload that are not identical duplicates of top-level fields
+        //         Object.entries(p).forEach(([k, v]) => {
+        //             if (!primaryKeys.has(k)) {
+        //                 filteredExtras[k] = v;
+        //             }
+        //         });
+        //     }
+        //     // Also include any other keys in rest that are not primary keys and not the payload wrapper
+        //     Object.entries(rest).forEach(([k, v]) => {
+        //         if (k === 'payload') return;
+        //         if (!primaryKeys.has(k)) filteredExtras[k] = v;
+        //     });
+        // }
+        const aliasMap = {
+            first_name: 'name',
+            last_name: 'name',
+            full_name: 'name',
+            fullname: 'name',
+            company_name: 'company',
+            business_email: 'email',
+            work_email: 'email',
+            phone_number: 'phone',
+            contact_number: 'phone',
+            mobile: 'phone',
+            mobile_number: 'phone',
+        };
+
         const primaryKeys = new Set(["name", "email", "company", "phone", "message", "source_page", "form_id"]);
-        let filteredExtras = {};
-        if (rest && typeof rest === 'object') {
-            // If client sent a `payload` object, prefer its extra keys
-            if (rest.payload && typeof rest.payload === 'object' && !Array.isArray(rest.payload)) {
-                const p = rest.payload;
-                // Include only keys from payload that are not identical duplicates of top-level fields
-                Object.entries(p).forEach(([k, v]) => {
-                    if (!primaryKeys.has(k)) {
-                        filteredExtras[k] = v;
-                    }
-                });
+
+        function sanitizeFieldValue(value) {
+            if (value === null || value === undefined) return null;
+            if (typeof value === 'string') {
+                const trimmed = value.trim();
+                return trimmed || null;
             }
-            // Also include any other keys in rest that are not primary keys and not the payload wrapper
-            Object.entries(rest).forEach(([k, v]) => {
-                if (k === 'payload') return;
-                if (!primaryKeys.has(k)) filteredExtras[k] = v;
+            return value;
+        }
+
+        function normalizeValue(value) {
+            if (typeof value === 'string') {
+                return value.trim().replace(/\s+/g, ' ').toLowerCase();
+            }
+            return value;
+        }
+
+        const safeName = sanitizeFieldValue(name);
+        const safeEmail = sanitizeFieldValue(email);
+        const safeCompany = sanitizeFieldValue(company);
+        const safePhone = sanitizeFieldValue(phone);
+        const safeMessage = sanitizeFieldValue(message);
+        const safeSourcePage = sanitizeFieldValue(source_page || form_id || null);
+
+        const topValuesNormalized = {
+            name: normalizeValue(safeName),
+            email: normalizeValue(safeEmail),
+            company: normalizeValue(safeCompany),
+            phone: normalizeValue(safePhone),
+            message: normalizeValue(safeMessage),
+            source_page: normalizeValue(safeSourcePage),
+        };
+
+        const rawPayload = rest && typeof rest === 'object' && rest.payload && typeof rest.payload === 'object' && !Array.isArray(rest.payload)
+            ? rest.payload
+            : null;
+
+        const filteredExtras = {};
+        const aliasValues = { name: null, email: null, company: null, phone: null };
+
+        function recordAliasValue(key, value) {
+            const normalizedKey = String(key).toLowerCase();
+            const target = aliasMap[normalizedKey];
+            if (!target) return;
+            const sanitized = sanitizeFieldValue(value);
+            if (!sanitized) return;
+            if (!aliasValues[target]) aliasValues[target] = sanitized;
+        }
+
+        function isDuplicateTopLevel(key, value) {
+            const normalizedKey = String(key).toLowerCase();
+            const normalizedValue = normalizeValue(value);
+            if (normalizedValue === null || normalizedValue === undefined || normalizedValue === '') return true;
+            if (primaryKeys.has(normalizedKey)) {
+                return normalizedValue === topValuesNormalized[normalizedKey];
+            }
+            if (aliasMap[normalizedKey]) {
+                return normalizedValue === topValuesNormalized[aliasMap[normalizedKey]];
+            }
+            return false;
+        }
+
+        if (rawPayload) {
+            Object.entries(rawPayload).forEach(([k, v]) => {
+                const normalizedKey = String(k).toLowerCase();
+                if (aliasMap[normalizedKey]) {
+                    recordAliasValue(normalizedKey, v);
+                    return;
+                }
+                if (primaryKeys.has(normalizedKey)) return;
+                if (v === undefined || v === null) return;
+                if (typeof v === 'string' && !v.trim()) return;
+                if (isDuplicateTopLevel(normalizedKey, v)) return;
+                filteredExtras[k] = v;
             });
         }
 
+        Object.entries(rest).forEach(([k, v]) => {
+            if (k === 'payload') return;
+            const normalizedKey = String(k).toLowerCase();
+            if (aliasMap[normalizedKey]) {
+                recordAliasValue(normalizedKey, v);
+                return;
+            }
+            if (primaryKeys.has(normalizedKey)) return;
+            if (v === undefined || v === null) return;
+            if (typeof v === 'string' && !v.trim()) return;
+            if (isDuplicateTopLevel(normalizedKey, v)) return;
+            filteredExtras[k] = v;
+        });
+
+        const resolvedName = safeName || aliasValues.name;
+        const resolvedEmail = safeEmail || aliasValues.email;
+        const resolvedCompany = safeCompany || aliasValues.company;
+        const resolvedPhone = safePhone || aliasValues.phone;
+        const resolvedSourcePage = safeSourcePage;
+
         if (!process.env.NODE_ENV || process.env.NODE_ENV !== 'production') {
-            console.log(`/api/public contact endpoint received body for ${emailSubjectTitle}:`, JSON.stringify(req.body));
+            console.log(`/api/public contact endpoint received submission for ${emailSubjectTitle}:`, JSON.stringify({
+                name: resolvedName,
+                email: resolvedEmail,
+                company: resolvedCompany,
+                phone: resolvedPhone,
+                message,
+                source_page: resolvedSourcePage || form_id || null,
+                payload: filteredExtras,
+            }));
         }
 
         const missing = [];
-        if (!name) missing.push('name');
-        if (!email) missing.push('email');
+        if (!resolvedName) missing.push('name');
+        if (!resolvedEmail) missing.push('email');
         if (!message) missing.push('message');
         if (missing.length) {
             console.warn('Contact submission missing required fields:', missing);
@@ -83,15 +306,15 @@ async function processSubmission(req, res, emailSubjectTitle) {
         let dbInserted = false;
         try {
             const result = await pool.query(
-                `INSERT INTO visionaize.contact_submissions (name, email, company, phone, message, source_page, payload, ip, user_agent)
+                `INSERT INTO public.contact_submissions (name, email, company, phone, message, source_page, payload, ip, user_agent)
                  VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING id`,
                 [
-                    name || null,
-                    email || null,
-                    company || null,
-                    phone || null,
+                    resolvedName || null,
+                    resolvedEmail || null,
+                    resolvedCompany || null,
+                    resolvedPhone || null,
                     message || null,
-                    source_page || form_id || null,
+                    resolvedSourcePage || form_id || null,
                     filteredExtras && Object.keys(filteredExtras).length ? filteredExtras : {},
                     req.ip,
                     req.headers["user-agent"] || null,
@@ -149,19 +372,19 @@ async function processSubmission(req, res, emailSubjectTitle) {
                                 <tbody>
                                     <tr>
                                         <td style="border:1px solid #333;padding:8px;font-weight:600;width:160px;background:#f7fafc">Name</td>
-                                        <td style="border:1px solid #333;padding:8px;word-break:break-word;white-space:normal;background:#ffffff">${escapeHtml(name)}</td>
+                                        <td style="border:1px solid #333;padding:8px;word-break:break-word;white-space:normal;background:#ffffff">${escapeHtml(resolvedName)}</td>
                                     </tr>
                                     <tr>
                                         <td style="border:1px solid #333;padding:8px;font-weight:600;background:#f7fafc">Email</td>
-                                        <td style="border:1px solid #333;padding:8px;word-break:break-word;white-space:normal;background:#ffffff">${escapeHtml(email)}</td>
+                                        <td style="border:1px solid #333;padding:8px;word-break:break-word;white-space:normal;background:#ffffff">${escapeHtml(resolvedEmail)}</td>
                                     </tr>
                                     <tr>
                                         <td style="border:1px solid #333;padding:8px;font-weight:600;background:#f7fafc">Company</td>
-                                        <td style="border:1px solid #333;padding:8px;word-break:break-word;white-space:normal;background:#ffffff">${escapeHtml(company)}</td>
+                                        <td style="border:1px solid #333;padding:8px;word-break:break-word;white-space:normal;background:#ffffff">${escapeHtml(resolvedCompany)}</td>
                                     </tr>
                                     <tr>
                                         <td style="border:1px solid #333;padding:8px;font-weight:600;background:#f7fafc">Phone</td>
-                                        <td style="border:1px solid #333;padding:8px;word-break:break-word;white-space:normal;background:#ffffff">${escapeHtml(phone)}</td>
+                                        <td style="border:1px solid #333;padding:8px;word-break:break-word;white-space:normal;background:#ffffff">${escapeHtml(resolvedPhone)}</td>
                                     </tr>
                                     <tr>
                                         <td style="border:1px solid #333;padding:8px;font-weight:600;vertical-align:top;background:#f7fafc">Message</td>
@@ -169,7 +392,7 @@ async function processSubmission(req, res, emailSubjectTitle) {
                                     </tr>
                                     <tr>
                                         <td style="border:1px solid #333;padding:8px;font-weight:600;background:#f7fafc">Source</td>
-                                        <td style="border:1px solid #333;padding:8px;word-break:break-word;white-space:normal;background:#ffffff">${escapeHtml(source_page || form_id || '')}</td>
+                                        <td style="border:1px solid #333;padding:8px;word-break:break-word;white-space:normal;background:#ffffff">${escapeHtml(resolvedSourcePage || '')}</td>
                                     </tr>
                                     ${renderKeyValueRows(filteredExtras)}
                                 </tbody>
@@ -178,7 +401,7 @@ async function processSubmission(req, res, emailSubjectTitle) {
                 `;
 
         try {
-            await transporter.sendMail({
+            await sendMail({
                 from: process.env.EMAIL_USER,
                 to: process.env.TO_EMAIL,
                 subject,
@@ -210,7 +433,7 @@ async function processSubmission(req, res, emailSubjectTitle) {
             if (attachments.length) userMail.attachments = attachments;
 
             try {
-                await transporter.sendMail(userMail);
+                await sendMail(userMail);
             } catch (userMailErr) {
                 console.error('Failed to send whitepaper to user email (backend):', userMailErr && userMailErr.message ? userMailErr.message : userMailErr);
             }
@@ -240,7 +463,7 @@ module.exports = router;
 if (!process.env.NODE_ENV || process.env.NODE_ENV !== 'production') {
     router.get('/recent', async (req, res) => {
         try {
-            const result = await pool.query('SELECT id, name, email, company, phone, message, source_page, payload, created_at FROM visionaize.contact_submissions ORDER BY created_at DESC LIMIT 10');
+            const result = await pool.query('SELECT id, name, email, company, phone, message, source_page, payload, created_at FROM public.contact_submissions ORDER BY created_at DESC LIMIT 10');
             res.json({ success: true, items: result.rows });
         } catch (err) {
             console.error('Failed to fetch recent submissions (backend):', err && err.message ? err.message : err);

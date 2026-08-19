@@ -22,19 +22,19 @@ export const Route = createFileRoute("/platform/vizi-copilot-gen-ai")({
       {
         property: "og:image",
         content:
-          "https://visionaize.com/wp-content/uploads/2024/08/Gen-AI-image-ver-3.0-1024x683.png",
+          "/vizi-copilot-gen-ai/Gen-AI-image-ver-3.0-1024x683.png",
       },
     ],
   }),
   component: ViziCopilotPage,
 });
 
-const WP = "https://visionaize.com/wp-content/uploads";
+const WP = "/vizi-copilot-gen-ai";
 
 /* ---------- helpers ---------- */
 const ViziMark = () => (
   <img
-    src={`${WP}/2025/08/Visionaize_logo_without_text.png`}
+    src={`${WP}/Visionaize_logo_without_text.png`}
     alt=""
     className="inline-block h-[0.9em] w-auto align-[-0.12em] mx-1"
   />
@@ -60,9 +60,14 @@ function renderWithVizi(text: string) {
   );
 }
 
+// NOTE: className is the *only* source of font size for this heading —
+// callers must always pass a full responsive size scale (e.g.
+// "text-2xl sm:text-3xl md:text-4xl lg:text-[44px]"). This avoids stacking
+// a default size class underneath a caller-provided override, which is
+// unreliable in Tailwind.
 const GradHeading = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
   <h1
-    className={`text-[40px] md:text-[52px] leading-[1.15] font-semibold bg-gradient-to-r from-[#7BC242] via-[#3FB6A8] to-[#1F9CD8] bg-clip-text text-transparent ${className}`}
+    className={`leading-[1.15] font-semibold bg-gradient-to-r from-[#7BC242] via-[#3FB6A8] to-[#1F9CD8] bg-clip-text text-transparent ${className}`}
   >
     {children}
   </h1>
@@ -71,7 +76,7 @@ const GradHeading = ({ children, className = "" }: { children: React.ReactNode; 
 const PrimaryCTA = ({ children }: { children: React.ReactNode }) => (
   
   <a  href="/contact"
-    className="inline-flex items-center justify-center rounded-full px-8 py-3.5 text-base font-semibold text-white shadow-md transition hover:opacity-95"
+    className="inline-flex items-center justify-center rounded-full px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold text-white shadow-md transition hover:opacity-95"
     style={{
       background:
         "linear-gradient(90deg,#7BC242 0%,#3FB6A8 50%,#1F9CD8 100%)",
@@ -84,7 +89,7 @@ const PrimaryCTA = ({ children }: { children: React.ReactNode }) => (
 const GhostCTA = ({ children }: { children: React.ReactNode }) => (
   
    <a href="/vizi-copilot-gen-ai-demo-link"
-    className="inline-flex items-center justify-center rounded-full border border-brand-navy/80 px-8 py-3.5 text-base font-semibold text-brand-navy "
+    className="inline-flex items-center justify-center rounded-full border border-brand-navy/80 px-6 sm:px-8 py-3 sm:py-3.5 text-sm sm:text-base font-semibold text-brand-navy"
   >
     {children}
   </a>
@@ -92,14 +97,14 @@ const GhostCTA = ({ children }: { children: React.ReactNode }) => (
 
 /* ---------- data ---------- */
 const PILLARS = [
-  { icon: `${WP}/2024/08/Mask-group-33.svg`, label: "Leverage Existing Data and\nDocuments For Instant Insights" },
-  { icon: `${WP}/2024/08/Mask-group-34.svg`, label: "Receive Actionable\nRecommendations" },
-  { icon: `${WP}/2024/08/Mask-group-35.svg`, label: "Improve Operational\nEfficiency" },
+  { icon: `${WP}/Mask-group-33.svg`, label: "Leverage Existing Data and\nDocuments For Instant Insights" },
+  { icon: `${WP}/Mask-group-34.svg`, label: "Receive Actionable\nRecommendations" },
+  { icon: `${WP}/Mask-group-35.svg`, label: "Improve Operational\nEfficiency" },
 ];
 
 const EMBEDDED = {
   title: "Embedded CoPilots within our AI and 3D Digital Twin Applications",
-  image: `${WP}/2024/06/RPM-1.jpeg`,
+  image: `${WP}/RPM-1.jpeg`,
   intro:
     "Our applications, embedded with VIZI CoPilot, provide prescriptive, action-oriented problem-solving capabilities through root cause analysis, actionable recommendations, and workflows.",
   bullets: [
@@ -112,7 +117,7 @@ const EMBEDDED = {
 
 const STANDALONE = {
   title: "Standalone CoPilots for O&M, Safety, and Capital Projects:",
-  image: `${WP}/2024/06/Inspector.jpeg`,
+  image: `${WP}/Inspector.jpeg`,
   intro:
     "Our VIZI CoPilots are designed to support a variety of standalone Gen AI operations and maintenance (O&M), safety, and capital project use cases, including:",
   bullets: [
@@ -179,23 +184,23 @@ function ViziCopilotPage() {
       <Header />
       <main className="bg-white">
         {/* HERO */}
-        <section className="mx-auto max-w-7xl px-6 pt-10 pb-14">
-          <div className="grid items-center gap-12 lg:grid-cols-2">
+        <section className="mx-auto max-w-7xl px-4 sm:px-6 pt-8 sm:pt-10 pb-10 sm:pb-14">
+          <div className="grid items-center gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12">
             <div>
-              <GradHeading className="text-3xl lg:text-4xl">
+              <GradHeading className="text-2xl sm:text-3xl md:text-4xl lg:text-[44px]">
                 VIZI <ViziMark /> CoPilot Gen AI Delivers Precise, Rapid Responses, Improving Operational Efficiency
               </GradHeading>
-              <p className="mt-7 max-w-xl text-[17px] leading-relaxed text-brand-ink/80">
+              <p className="mt-5 sm:mt-7 max-w-xl text-[15px] sm:text-base md:text-[17px] leading-relaxed text-brand-ink/80">
                 VIZI <ViziMark /> CoPilot is redefining how facilities operate by delivering precise, rapid responses to complex queries and challenges. This innovative technology streamlines decision-making processes, providing accurate insights in real time from unstructured data and documents, which enables organizations to optimize operations, and drive productivity.
               </p>
-              <div className="mt-9 flex flex-wrap items-center gap-4">
+              <div className="mt-7 sm:mt-9 flex flex-wrap items-center gap-3 sm:gap-4">
                 <PrimaryCTA>Talk to an expert</PrimaryCTA>
                 <GhostCTA>Access demo</GhostCTA>
               </div>
             </div>
             <div>
               <img
-                src={`${WP}/2024/08/Gen-AI-image-ver-3.0-1024x683.png`}
+                src={`${WP}/Gen-AI-image-ver-3.0-1024x683.png`}
                 alt="VIZI CoPilot Gen AI"
                 className="w-full rounded-lg shadow-2xl"
               />
@@ -204,12 +209,12 @@ function ViziCopilotPage() {
         </section>
 
         {/* PILLARS NAVY BAND */}
-        <section className="bg-brand-navy py-12">
-          <div className="mx-auto grid max-w-6xl gap-12 px-6 md:grid-cols-3">
+        <section className="bg-brand-navy py-10 sm:py-12">
+          <div className="mx-auto grid max-w-6xl gap-8 sm:gap-10 md:gap-12 px-4 sm:px-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
             {PILLARS.map((p) => (
               <div key={p.label} className="flex flex-col items-center text-center">
-                <img src={p.icon} alt="" className="h-16 w-16" />
-                <h3 className="mt-6 whitespace-pre-line text-[20px] font-medium leading-snug text-white">
+                <img src={p.icon} alt="" className="h-14 w-14 sm:h-16 sm:w-16" />
+                <h3 className="mt-4 sm:mt-6 whitespace-pre-line text-lg sm:text-xl font-medium leading-snug text-white">
                   {p.label}
                 </h3>
               </div>
@@ -218,29 +223,29 @@ function ViziCopilotPage() {
         </section>
 
         {/* FLEXIBILITY SECTION */}
-        <section className="bg-[#F5F7F9] py-14">
-          <div className="mx-auto max-w-7xl px-6">
-            <h2 className="mx-auto max-w-6xl text-center text-[25px] md:text-[35px] leading-tight font-light text-brand-navy">
+        <section className="bg-[#F5F7F9] py-10 sm:py-14">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6">
+            <h2 className="mx-auto max-w-6xl text-center text-xl sm:text-2xl md:text-3xl lg:text-[35px] leading-tight font-light text-brand-navy">
               VIZI <ViziMark /> CoPilot Offers Flexibility By Operating Either Standalone or Embedded Within Other Solutions to Drive Operational Excellence.
             </h2>
 
-            <div className="mt-10 grid gap-8 lg:grid-cols-2">
+            <div className="mt-8 sm:mt-10 grid gap-6 sm:gap-8 lg:grid-cols-2">
               {[EMBEDDED, STANDALONE].map((card) => (
                 <div
                   key={card.title}
                   className="overflow-hidden rounded-2xl bg-white shadow-md ring-1 ring-black/5"
                 >
-                  <img src={card.image} alt="" className="h-72 w-full object-cover" />
-                  <div className="p-8">
-                    <h3 className="text-[26px] leading-snug text-brand-navy">
+                  <img src={card.image} alt="" className="h-48 sm:h-60 lg:h-72 w-full object-cover" />
+                  <div className="p-5 sm:p-6 md:p-8">
+                    <h3 className="text-xl sm:text-2xl md:text-[26px] leading-snug text-brand-navy">
                       {card.title}
                     </h3>
-                    <p className="mt-5 text-[17px] leading-relaxed text-brand-ink/80">
+                    <p className="mt-4 sm:mt-5 text-[15px] sm:text-base md:text-[17px] leading-relaxed text-brand-ink/80">
                       {renderWithVizi(card.intro)}
                     </p>
-                    <ul className="mt-5 space-y-4">
+                    <ul className="mt-4 sm:mt-5 space-y-3 sm:space-y-4">
                       {card.bullets.map(([k, v]) => (
-                        <li key={k} className="flex gap-3 text-[16px] leading-relaxed text-brand-ink/90">
+                        <li key={k} className="flex gap-3 text-[15px] sm:text-base leading-relaxed text-brand-ink/90">
                           <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-ink/60" />
                           <span>
                             <strong className="font-semibold text-brand-navy">{k}</strong>: {renderWithVizi(v)}
@@ -256,11 +261,11 @@ function ViziCopilotPage() {
         </section>
 
         {/* LIME STATS BAND */}
-        <section className="bg-[#A4D233] py-6">
-          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-12 gap-y-3 px-6 text-center text-[20px] md:text-[22px] font-medium text-brand-navy">
+        <section className="bg-[#A4D233] py-5 sm:py-6">
+          <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-x-6 sm:gap-x-12 gap-y-3 px-4 sm:px-6 text-center text-base sm:text-lg md:text-xl lg:text-[22px] font-medium text-brand-navy">
             {["Operational Efficiency Improvement > 20%", "Productivity Gain > 25%", "Payback Period < 6 months"].map((s) => (
-              <span key={s} className="inline-flex items-center gap-3">
-                <span className="h-2.5 w-2.5 rounded-full bg-[#1F9CD8]" />
+              <span key={s} className="inline-flex items-center gap-2 sm:gap-3">
+                <span className="h-2 w-2 sm:h-2.5 sm:w-2.5 shrink-0 rounded-full bg-[#1F9CD8]" />
                 {s}
               </span>
             ))}
@@ -268,15 +273,15 @@ function ViziCopilotPage() {
         </section>
 
         {/* TRANSFORM SECTION */}
-        <section className="bg-[#F5F7F9] py-14">
-          <div className="mx-auto grid max-w-7xl items-center gap-12 px-6 lg:grid-cols-2">
+        <section className="bg-[#F5F7F9] py-10 sm:py-14">
+          <div className="mx-auto grid max-w-7xl items-center gap-8 sm:gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12">
             <div>
-              <GradHeading className="!text-[22px] md:!text-[36px]">
+              <GradHeading className="text-xl sm:text-2xl md:text-3xl lg:text-[36px]">
                 With VIZI <ViziMark /> CoPilot You Can Transform Your Operations Today
               </GradHeading>
-              <ul className="mt-8 space-y-5">
+              <ul className="mt-6 sm:mt-8 space-y-4 sm:space-y-5">
                 {TRANSFORM_BULLETS.map(([k, v]) => (
-                  <li key={k} className="flex gap-3 text-[18px] leading-relaxed text-brand-ink/80">
+                  <li key={k} className="flex gap-3 text-[15px] sm:text-base md:text-lg leading-relaxed text-brand-ink/80">
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-ink/60" />
                     <span>
                       <strong className="font-semibold text-brand-navy">{k}</strong>: {v}
@@ -287,21 +292,21 @@ function ViziCopilotPage() {
             </div>
             <div>
               <img
-                src={`${WP}/2024/08/Vizi-Copilot-Chat-Image.png`}
+                src={`${WP}/Vizi-Copilot-Chat-Image.png`}
                 alt="VIZI CoPilot chat"
-                className="w-full h-[420px] md:h-[520px] object-contain rounded-xl shadow-xl ring-1 ring-black/5"
+                className="w-full h-[260px] sm:h-[340px] md:h-[420px] lg:h-[520px] object-contain rounded-xl shadow-xl ring-1 ring-black/5"
               />
             </div>
           </div>
         </section>
 
         {/* FAQ */}
-        <section className="bg-white py-14">
-          <div className="mx-auto max-w-5xl px-6">
-            <h3 className="text-[28px] md:text-[34px] font-semibold text-brand-navy">
+        <section className="bg-white py-10 sm:py-14">
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <h3 className="text-2xl sm:text-[28px] md:text-[34px] font-semibold text-brand-navy">
               Learn More about VIZI <ViziMark /> CoPilot Gen AI
             </h3>
-            <div className="mt-10 divide-y divide-black/10 border-y border-black/10">
+            <div className="mt-8 sm:mt-10 divide-y divide-black/10 border-y border-black/10">
               {FAQS.map((f, i) => (
                 <FaqRow
                   key={f.q}
@@ -311,7 +316,7 @@ function ViziCopilotPage() {
                 />
               ))}
             </div>
-            <div className="mt-12 flex justify-center">
+            <div className="mt-10 sm:mt-12 flex justify-center">
               <PrimaryCTA>
                 Speak to a VIZI <ViziMark /> CoPilot Expert Today
               </PrimaryCTA>
@@ -334,19 +339,19 @@ function FaqRow({
   onToggle: () => void;
 }) {
   return (
-    <div className="py-5">
+    <div className="py-4 sm:py-5">
       <button
         type="button"
         onClick={onToggle}
-        className="flex w-full items-start gap-4 text-left"
+        className="flex w-full items-start gap-3 sm:gap-4 text-left"
       >
-        <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-brand-navy text-white">
-          {isOpen ? <Minus className="h-3.5 w-3.5" /> : <Plus className="h-3.5 w-3.5" />}
+        <span className="mt-1 flex h-5 w-5 sm:h-6 sm:w-6 shrink-0 items-center justify-center rounded-full bg-brand-navy text-white">
+          {isOpen ? <Minus className="h-3 w-3 sm:h-3.5 sm:w-3.5" /> : <Plus className="h-3 w-3 sm:h-3.5 sm:w-3.5" />}
         </span>
-        <span className="text-[17px] font-medium text-brand-navy">{renderWithVizi(faq.q)}</span>
+        <span className="text-[15px] sm:text-base md:text-[17px] font-medium text-brand-navy">{renderWithVizi(faq.q)}</span>
       </button>
       {isOpen && (
-        <div className="mt-3 pl-10 text-[15px] leading-relaxed text-brand-ink/80">
+        <div className="mt-3 pl-8 sm:pl-10 text-sm sm:text-[15px] md:text-base leading-relaxed text-brand-ink/80">
           {Array.isArray(faq.a) ? (
             <ul className="list-disc space-y-2 pl-5">
               {faq.a.map((line, idx) => (

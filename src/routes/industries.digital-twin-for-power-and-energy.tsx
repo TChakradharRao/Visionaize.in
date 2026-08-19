@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-field";
 import { getSeedContentItem } from "@/lib/seed-content";
 import { api } from "@/lib/api";
 
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/industries/digital-twin-for-power-and-ene
       {
         property: "og:image",
         content:
-          "https://visionaize.com/wp-content/uploads/2022/07/iStock-1369468534-1024x683-1.jpg",
+          "",
       },
     ],
   }),
@@ -34,7 +35,7 @@ const seedItem = getSeedContentItem("page", "digital-twin-for-power-and-energy")
 const seedSections = seedItem?.content_json?.sections ?? [];
 
 const FALLBACK_HERO_IMAGE =
-  "https://visionaize.in/wp-content/uploads/2026/05/ChatGPT-Image-May-14-2026-02_53_14-PM-1.svg";
+  "/digital-twin-for-power-and-energy/ChatGPT-Image-May-14-2026-02_53_14-PM-1.svg";
 
 // Hero section — match by the actual banner heading, not array position
 const heroSection = seedSections.find(
@@ -66,17 +67,17 @@ const PILLARS = [
   {
     title: "Smart Planning",
     body: "Real-time insights for optimized plant decisions",
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Mask-group.svg",
+    icon: "/digital-twin-for-power-and-energy/Mask-group.svg",
   },
   {
     title: "Efficient Operations",
     body: "Boost reliability, productivity, and energy efficiency",
-    icon: "https://visionaize.in/wp-content/uploads/2022/05/Group-3.svg",
+    icon: "/digital-twin-for-power-and-energy/Group-3.svg",
   },
   {
     title: "Failure Prevention",
     body: "AI-powered real-time alerts for early issue detection and faster response",
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Mask-group-1.svg",
+    icon: "/digital-twin-for-power-and-energy/Mask-group-1.svg",
   },
 ];
 
@@ -97,22 +98,22 @@ const solutionPoints = [
 
 const businessImpact = [
   {
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Mask-group-7.svg",
+    icon: "/digital-twin-for-power-and-energy/Mask-group-7.svg",
     stat: "50–60%",
     label: "Reduction in Financial Losses",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Mask-group-3.svg",
+    icon: "/digital-twin-for-power-and-energy/Mask-group-3.svg",
     stat: "₹80 Cr+",
     label: "Annual Savings",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Mask-group-4.svg",
+    icon: "/digital-twin-for-power-and-energy/Mask-group-4.svg",
     stat: "6–9",
     label: "Month Payback Period",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Mask-group-5.svg",
+    icon: "/digital-twin-for-power-and-energy/Mask-group-5.svg",
     stat: "10X",
     label: "Up to ROI",
   },
@@ -120,27 +121,27 @@ const businessImpact = [
 
 const keyCapabilities = [
   {
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Group-1410138691-1.svg",
+    icon: "/digital-twin-for-power-and-energy/Group-1410138691-1.svg",
     title: "Predictive Maintenance",
     body: "Detect anomalies early using AI and real-time data to prevent costly breakdowns and extend asset life.",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Group-1410138692.svg",
+    icon: "/digital-twin-for-power-and-energy/Group-1410138692.svg",
     title: "Remote Operations & Monitoring",
     body: "Reduce field visits with virtual inspections and centralized monitoring.",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Group-1410138693.svg",
+    icon: "/digital-twin-for-power-and-energy/Group-1410138693.svg",
     title: "Grid Reliability & Performance Optimization",
     body: "Gain a complete view of grid performance and ensure uninterrupted power delivery.",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Group-1410138694.svg",
+    icon: "/digital-twin-for-power-and-energy/Group-1410138694.svg",
     title: "Data Contextualization in 3D",
     body: "Convert fragmented data into actionable insights through intuitive visualization.",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/Group-1410138695.svg",
+    icon: "/digital-twin-for-power-and-energy/Group-1410138695.svg",
     title: "AI Powered Decision Support",
     body: "Empower teams with faster, smarter decision-making using advanced analytics.",
   },
@@ -149,8 +150,8 @@ const keyCapabilities = [
 const useCases = [
   {
     image:
-      "https://visionaize.in/wp-content/uploads/2026/05/Torrefactie-fabriek-Perpetual_Next2-1536x1024-1-1.jpg",
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/image-142.svg",
+      "/digital-twin-for-power-and-energy/Torrefactie-fabriek-Perpetual_Next2-1536x1024-1-1.jpg",
+    icon: "/digital-twin-for-power-and-energy/image-142.svg",
     iconBg: "#2E8DC5",
     title: "Power Generation",
     points: [
@@ -159,8 +160,8 @@ const useCases = [
     ],
   },
   {
-    image: "https://visionaize.in/wp-content/uploads/2026/05/energy-power.jpg",
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/image-143.svg",
+    image: "/digital-twin-for-power-and-energy/energy-power.jpg",
+    icon: "/digital-twin-for-power-and-energy/image-143.svg",
     iconBg: "#0F6B5C",
     title: "Transmission & Distribution",
     points: [
@@ -170,8 +171,8 @@ const useCases = [
   },
   {
     image:
-      "https://visionaize.in/wp-content/uploads/2026/05/Untitled-683-%C3%97-1024px-1024-%C3%97-683px-2023-07-12T154605.688.jpg",
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/image-144.svg",
+      "/digital-twin-for-power-and-energy/Untitled-683-%C3%97-1024px-1024-%C3%97-683px-2023-07-12T154605.688.jpg",
+    icon: "/digital-twin-for-power-and-energy/image-144.svg",
     iconBg: "#8DC63F",
     title: "Renewables & Energy Transition",
     points: [
@@ -181,8 +182,8 @@ const useCases = [
   },
   {
     image:
-      "https://visionaize.in/wp-content/uploads/2026/05/360_F_1574567161_MigKoY8EY0jFpdNz4gNzISWGev3HhrFb.jpg",
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/image-145.svg",
+      "/digital-twin-for-power-and-energy/360_F_1574567161_MigKoY8EY0jFpdNz4gNzISWGev3HhrFb.jpg",
+    icon: "/digital-twin-for-power-and-energy/image-145.svg",
     iconBg: "#7B4FE0",
     title: "Maintenance & Asset Management",
     points: [
@@ -192,8 +193,8 @@ const useCases = [
   },
   {
     image:
-      "https://visionaize.in/wp-content/uploads/2026/05/futuristic-logistics-center-automated-precision_153608-19355.jpg",
-    icon: "https://visionaize.in/wp-content/uploads/2026/05/1843544-1.svg",
+      "/digital-twin-for-power-and-energy/futuristic-logistics-center-automated-precision_153608-19355.jpg",
+    icon: "/digital-twin-for-power-and-energy/1843544-1.svg",
     iconBg: "#E0851F",
     title: "Boiler Thermal Stress Prediction",
     points: [
@@ -208,7 +209,7 @@ const CASE_STUDIES = [
     label: "CASE STUDY (01 of 03)",
     title: "AI-Based Condenser Back Pressure Optimization in Thermal Power Plant",
     image:
-      "https://visionaize.in/wp-content/uploads/2026/05/image-1-1.png",
+      "/digital-twin-for-power-and-energy/image-1-1.png",
     tabs: {
       Challenge:
         "Power plants face high condenser back pressure due to fluctuating loads and seasonal variations, leading to poor heat rate, increased fuel consumption, and reduced efficiency. Even small deviations can cause significant financial losses.",
@@ -221,7 +222,7 @@ const CASE_STUDIES = [
   {
     label: "CASE STUDY (02 of 03)",
     title: "AI-Based Boiler Combustion Optimization for Efficiency & Emission Control",
-    image: "https://visionaize.in/wp-content/uploads/2026/05/image.png",
+    image: "/digital-twin-for-power-and-energy/image.png",
     tabs: {
       Challenge:
         "Traditional combustion systems fail to adapt to dynamic operating conditions, leading to inefficient fuel usage, high emissions (NOx, CO), and unstable steam temperatures.",
@@ -235,7 +236,7 @@ const CASE_STUDIES = [
     label: "CASE STUDY (03 of 03)",
     title: "AI-Based Thermal Stress & Asset Life Prediction for Boilers",
     image:
-      "https://visionaize.in/wp-content/uploads/2026/05/Steam-Condenser-_-Shell-and-Tube-Condenser-for-Power-Plants-and____.png",
+      "/digital-twin-for-power-and-energy/Steam-Condenser-_-Shell-and-Tube-Condenser-for-Power-Plants-and____.png",
     tabs: {
       Challenge:
         "Frequent load cycling and flexible operations cause thermal fatigue and creep stress in boiler components, increasing the risk of failures and reducing asset life.",
@@ -257,7 +258,7 @@ const learnPoints = [
 
 function PowerEnergyPage() {
   return (
-    <div className="min-h-screen bg-white text-[#0F1B2D]">
+    <div className="min-h-screen overflow-x-hidden bg-white text-[#0F1B2D]">
       <Header />
       <Hero />
       <Pillars />
@@ -279,16 +280,16 @@ function PowerEnergyPage() {
 function Hero() {
   return (
     <section
-      className="relative min-h-[500px] w-full bg-cover bg-center py-10 sm:min-h-[560px] sm:py-16 lg:h-[640px] lg:py-0"
+      className="relative min-h-[380px] w-full bg-cover bg-center bg-no-repeat py-8 sm:min-h-[560px] sm:py-16 lg:h-[640px] lg:py-0"
       style={{
         backgroundImage: `url('${heroImage}')`,
       }}
     >
       <div className="absolute inset-0 bg-black/20" />
       <div className="relative mx-auto flex h-full max-w-[1280px] items-center px-4 sm:px-6">
-        <div className="w-full max-w-[570px] bg-white p-5 sm:p-10 lg:p-12">
+        <div className="w-full max-w-[570px] bg-white p-4 sm:p-10 lg:p-12">
           <h1
-            className="text-[22px] font-light leading-[1.15] tracking-tight sm:text-[30px] lg:text-[32px] lg:leading-[1.05]"
+            className="text-[20px] font-light leading-[1.2] tracking-tight sm:text-[30px] lg:text-[32px] lg:leading-[1.05]"
             style={{
               background:
                 "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
@@ -300,13 +301,13 @@ function Hero() {
             Reimagine Power & Energy Operations with 3D Digital Twins
           </h1>
           {heroParagraphs.map((paragraph, index) => (
-            <p key={index} className="mt-4 text-sm leading-relaxed text-[#0F1B2D] sm:mt-6 sm:text-[18px]">
+            <p key={index} className="mt-3 text-sm leading-relaxed text-[#0F1B2D] sm:mt-6 sm:text-[18px]">
               {paragraph}
             </p>
           ))}
          <Link
   to="/power-industry-whitepaper"
-  className="mt-5 inline-flex items-center rounded-full px-5 py-3 text-xs font-semibold text-white transition-opacity hover:opacity-90 sm:mt-8 sm:px-8 sm:py-4 sm:text-[15px]"
+  className="mt-4 inline-flex items-center rounded-full px-5 py-2.5 text-xs font-semibold text-white transition-opacity hover:opacity-90 sm:mt-8 sm:px-8 sm:py-4 sm:text-[15px]"
   style={{
     background: "linear-gradient(90deg, #8DC63F 0%, #2E8DC5 100%)",
   }}
@@ -321,12 +322,12 @@ function Hero() {
 
 function Pillars() {
   return (
-    <section className="bg-[#0F1B2D] py-12 sm:py-20">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-4 sm:gap-12 sm:px-6 md:grid-cols-3">
+    <section className="bg-[#0F1B2D] py-10 sm:py-20">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-8 px-4 sm:gap-12 sm:px-6 md:grid-cols-3">
         {PILLARS.map((p) => (
           <div key={p.title} className="flex flex-col items-center text-center">
-            <img src={p.icon} alt="" className="h-14 w-14 sm:h-16 sm:w-16 lg:h-20 lg:w-20" loading="lazy" />
-            <h3 className="mt-5 text-lg font-semibold text-white sm:mt-6 sm:text-[24px]">{p.title}</h3>
+            <img src={p.icon} alt="" className="h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20" loading="lazy" />
+            <h3 className="mt-4 text-lg font-semibold text-white sm:mt-6 sm:text-[24px]">{p.title}</h3>
             <p className="mt-3 max-w-[280px] text-sm leading-relaxed text-white/80 sm:mt-4 sm:text-[17px]">
               {p.body}
             </p>
@@ -363,22 +364,22 @@ function CheckItem({ text }: { text: string }) {
 
 function ChallengeSolution() {
   return (
-    <section className="bg-white py-14 sm:py-24">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-10 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[1fr_1.1fr_1fr]">
+    <section className="bg-white py-12 sm:py-24">
+      <div className="mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-8 px-4 sm:gap-12 sm:px-6 lg:grid-cols-[1fr_1.1fr_1fr]">
         {/* Industry Challenge */}
         <div>
           <p className="text-xs font-semibold tracking-wide text-[#2E8DC5]">
             INDUSTRY CHALLENGE
           </p>
-          <h2 className="mt-3 text-xl font-bold leading-tight text-[#0F1B2D] sm:text-[28px]">
+          <h2 className="mt-3 text-lg font-bold leading-tight text-[#0F1B2D] sm:text-[28px]">
             The Power &amp; Energy Industry is at a Turning Point
           </h2>
-          <p className="mt-5 text-sm leading-[1.8] text-[#3a4658] sm:text-[16px]">
+          <p className="mt-4 text-sm leading-[1.8] text-[#3a4658] sm:mt-5 sm:text-[16px]">
             Utilities today are under constant pressure to deliver reliable,
             sustainable, and cost efficient energy while managing increasingly
             complex infrastructure.
           </p>
-          <p className="mt-6 text-base font-semibold text-[#0F1B2D]">
+          <p className="mt-5 text-base font-semibold text-[#0F1B2D] sm:mt-6">
             Key challenges include:
           </p>
           <ul className="mt-4 space-y-3">
@@ -391,9 +392,9 @@ function ChallengeSolution() {
         {/* Center diagram */}
         <div className="order-first flex justify-center lg:order-none">
           <img
-            src="https://visionaize.in/wp-content/uploads/2026/05/Group-1410138697.svg"
+            src="/digital-twin-for-power-and-energy/Group-1410138697.svg"
             alt="Power and energy ecosystem: generation, transmission, distribution, substations, SCADA/GIS enterprise systems, renewables"
-            className="w-full max-w-[280px] sm:max-w-[400px] lg:max-w-[460px]"
+            className="w-full max-w-[220px] sm:max-w-[400px] lg:max-w-[460px]"
             loading="lazy"
           />
         </div>
@@ -403,16 +404,16 @@ function ChallengeSolution() {
           <p className="text-xs font-semibold tracking-wide text-[#2E8DC5]">
             SOLUTION
           </p>
-          <h2 className="mt-3 text-xl font-bold leading-tight text-[#0F1B2D] sm:text-[28px]">
+          <h2 className="mt-3 text-lg font-bold leading-tight text-[#0F1B2D] sm:text-[28px]">
             A Unified Digital Twin for Power &amp; Energy Assets
           </h2>
-          <p className="mt-5 text-sm leading-[1.8] text-[#3a4658] sm:text-[16px]">
+          <p className="mt-4 text-sm leading-[1.8] text-[#3a4658] sm:mt-5 sm:text-[16px]">
             Visionaize brings your entire power ecosystem into a single,
             intelligent 3D digital twin environment. From turbines and
             substations to transmission networks, visualize and interact with
             your assets in real time.
           </p>
-          <p className="mt-6 text-base font-semibold text-[#0F1B2D]">
+          <p className="mt-5 text-base font-semibold text-[#0F1B2D] sm:mt-6">
             What Makes It Powerful
           </p>
           <ul className="mt-4 space-y-3">
@@ -428,23 +429,23 @@ function ChallengeSolution() {
 
 function BusinessImpact() {
   return (
-    <section className="bg-white pb-14 pt-0 sm:pb-20">
+    <section className="bg-white pb-12 pt-0 sm:pb-20">
       <div className="mx-auto max-w-[1040px] px-4 sm:px-6">
-        <h2 className="text-center text-2xl font-normal text-[#0F1B2D] sm:text-[36px] lg:text-[42px]">
+        <h2 className="text-center text-xl font-normal text-[#0F1B2D] sm:text-[36px] lg:text-[42px]">
           Business Impact
         </h2>
 
-        <div className="mt-8 grid grid-cols-1 gap-5 sm:mt-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-7 grid grid-cols-2 gap-4 sm:mt-10 sm:gap-5 md:grid-cols-4">
           {businessImpact.map((item) => (
             <div
               key={item.label}
-              className="flex flex-col items-center rounded-2xl border border-[#E5E9EF] p-6 text-center shadow-sm"
+              className="flex flex-col items-center rounded-2xl border border-[#E5E9EF] p-4 text-center shadow-sm sm:p-6"
             >
-              <img src={item.icon} alt="" className="h-12 w-12 sm:h-14 sm:w-14 lg:h-16 lg:w-16" loading="lazy" />
-              <p className="mt-4 text-2xl font-bold text-[#2E8DC5] sm:text-[32px]">
+              <img src={item.icon} alt="" className="h-10 w-10 sm:h-14 sm:w-14 lg:h-16 lg:w-16" loading="lazy" />
+              <p className="mt-3 text-xl font-bold text-[#2E8DC5] sm:mt-4 sm:text-[32px]">
                 {item.stat}
               </p>
-              <p className="mt-2 text-sm font-semibold text-[#1A2733] sm:text-[15px]">
+              <p className="mt-2 text-xs font-semibold text-[#1A2733] sm:text-[15px]">
                 {item.label}
               </p>
             </div>
@@ -455,32 +456,31 @@ function BusinessImpact() {
   );
 }
 
-
 function KeyCapabilities() {
   return (
     <section className="bg-[#8DC63F] pt-5">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
-        <h2 className="text-center text-2xl font-semibold text-white sm:text-[34px] lg:text-[40px]">
+        <h2 className="text-center text-xl font-semibold text-white sm:text-[34px] lg:text-[40px]">
           Key Capabilities
         </h2>
       </div>
 
-      <div className="mt-8 bg-white">
-        <div className="mx-auto grid max-w-[1400px] grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mt-7 bg-white sm:mt-8">
+        <div className="mx-auto grid max-w-[1400px] grid-cols-1 lg:grid-cols-5">
           {keyCapabilities.map((item, index) => (
             <div
               key={item.title}
-              className={`flex flex-col items-center border-b border-[#E5E9EF] px-6 py-10 text-center last:border-b-0 sm:px-8 sm:py-12 lg:border-b-0 ${
+              className={`flex flex-col items-center border-b border-[#E5E9EF] px-6 py-8 text-center last:border-b-0 sm:px-8 sm:py-12 lg:border-b-0 ${
                 index !== keyCapabilities.length - 1
                   ? "lg:border-r lg:border-[#E5E9EF]"
                   : ""
               }`}
             >
-              <img src={item.icon} alt="" className="h-14 w-14 sm:h-16 sm:w-16 lg:h-20 lg:w-20" loading="lazy" />
-              <h3 className="mt-5 text-base font-bold leading-snug text-[#0F1B2D] sm:text-[17px]">
+              <img src={item.icon} alt="" className="h-12 w-12 sm:h-16 sm:w-16 lg:h-20 lg:w-20" loading="lazy" />
+              <h3 className="mt-4 text-base font-bold leading-snug text-[#0F1B2D] sm:mt-5 sm:text-[17px]">
                 {item.title}
               </h3>
-              <p className="mt-4 text-sm leading-relaxed text-[#3a4658] sm:text-[15px]">
+              <p className="mt-3 text-sm leading-relaxed text-[#3a4658] sm:mt-4 sm:text-[15px]">
                 {item.body}
               </p>
             </div>
@@ -488,20 +488,20 @@ function KeyCapabilities() {
         </div>
       </div>
 
-      <div className="h-10 sm:h-16" />
+      <div className="h-8 sm:h-16" />
     </section>
   );
 }
 
 function UseCases() {
   return (
-    <section className="bg-white py-14 sm:py-20">
+    <section className="bg-white py-12 sm:py-20">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6">
-        <h2 className="text-center text-2xl font-normal text-[#0F1B2D] sm:text-[36px] lg:text-[42px]">
+        <h2 className="text-center text-xl font-normal text-[#0F1B2D] sm:text-[36px] lg:text-[42px]">
           Use Cases
         </h2>
 
-        <div className="mt-8 grid grid-cols-1 gap-6 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+     <div className="mt-7 grid grid-cols-1 gap-6 sm:mt-12 lg:grid-cols-3 xl:grid-cols-5">
           {useCases.map((item) => (
             <div
               key={item.title}
@@ -547,14 +547,14 @@ function UseCases() {
 
 function ConnectBanner() {
   return (
-    <section className="bg-[#1591D8] py-8">
-      <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-center gap-5 px-4 text-center sm:gap-6 sm:px-6 sm:flex-row">
-        <h2 className="text-lg font-semibold text-white sm:text-[26px]">
+    <section className="bg-[#1591D8] py-7 sm:py-8">
+      <div className="mx-auto flex max-w-[1280px] flex-col items-center justify-center gap-4 px-4 text-center sm:gap-6 sm:px-6 sm:flex-row">
+        <h2 className="text-base font-semibold text-white sm:text-[26px]">
           Connect with a Digital Twin specialist
         </h2>
         
           <a href="#connect"
-          className="flex-shrink-0 rounded-full bg-white px-6 py-3 text-xs font-bold text-[#1591D8] transition-opacity hover:opacity-90 sm:px-8 sm:py-4 sm:text-[15px]"
+          className="flex-shrink-0 rounded-full bg-white px-5 py-2.5 text-xs font-bold text-[#1591D8] transition-opacity hover:opacity-90 sm:px-8 sm:py-4 sm:text-[15px]"
         >
           Connect with us
         </a>
@@ -582,7 +582,7 @@ function CaseStudyCarousel() {
   };
 
   return (
-    <section className="relative bg-white py-14 sm:py-20">
+    <section className="relative bg-white py-12 sm:py-20">
       <div className="mx-auto max-w-[1400px] px-4 sm:px-6 lg:px-12">
         {/* Prev arrow */}
         <button
@@ -624,12 +624,12 @@ function CaseStudyCarousel() {
             <p className="text-xs font-bold tracking-wide text-[#8DC63F]">
               {current.label}
             </p>
-            <h2 className="mt-3 text-xl font-bold leading-tight text-[#0F1B2D] sm:text-[30px] lg:text-[34px]">
+            <h2 className="mt-3 text-lg font-bold leading-tight text-[#0F1B2D] sm:text-[30px] lg:text-[34px]">
               {current.title}
             </h2>
 
-            <div className="mt-6 rounded-md border border-[#E5E9EF] sm:mt-8">
-              <div className="flex gap-4 overflow-x-auto border-b border-[#E5E9EF] px-4 pt-6 sm:gap-8 sm:px-6">
+            <div className="mt-5 rounded-md border border-[#E5E9EF] sm:mt-8">
+              <div className="flex gap-4 overflow-x-auto border-b border-[#E5E9EF] px-4 pt-5 sm:gap-8 sm:px-6 sm:pt-6">
                 {tabNames.map((tab) => (
                   <button
                     key={tab}
@@ -645,14 +645,14 @@ function CaseStudyCarousel() {
                 ))}
               </div>
 
-              <div className="px-4 pb-8 pt-6 sm:px-6">
+              <div className="px-4 pb-6 pt-5 sm:px-6 sm:pb-8 sm:pt-6">
                 <p className="max-w-[500px] text-sm leading-[1.8] text-[#3a4658] sm:text-[16px]">
                   {current.tabs[activeTab]}
                 </p>
 
                 
-                <a  href="#read-more"
-                  className="mt-8 inline-flex items-center rounded-full px-6 py-3 text-xs font-semibold text-white shadow-md transition hover:shadow-lg sm:px-8 sm:py-3.5 sm:text-[15px]"
+                <a  href="/power-industry-case-study"
+                  className="mt-6 inline-flex items-center rounded-full px-6 py-2.5 text-xs font-semibold text-white shadow-md transition hover:shadow-lg sm:mt-8 sm:px-8 sm:py-3.5 sm:text-[15px]"
                   style={{
                     background:
                       "linear-gradient(90deg, #8DC63F 0%, #2E8DC5 100%)",
@@ -669,18 +669,18 @@ function CaseStudyCarousel() {
             <img
               src={current.image}
               alt={current.title}
-              className="h-[220px] w-full object-cover sm:h-[340px] lg:h-[420px]"
+              className="h-[200px] w-full object-cover sm:h-[340px] lg:h-[420px]"
               loading="lazy"
             />
           </div>
         </div>
 
         {/* Mobile arrows */}
-        <div className="mt-8 flex justify-center gap-6 lg:hidden">
+        <div className="mt-7 flex justify-center gap-6 sm:mt-8 lg:hidden">
           <button
             onClick={() => goTo(activeSlide - 1)}
             aria-label="Previous case study"
-            className="text-[#2E8DC5]"
+            className="flex h-10 w-10 items-center justify-center text-[#2E8DC5]"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -695,7 +695,7 @@ function CaseStudyCarousel() {
           <button
             onClick={() => goTo(activeSlide + 1)}
             aria-label="Next case study"
-            className="text-[#2E8DC5]"
+            className="flex h-10 w-10 items-center justify-center text-[#2E8DC5]"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path
@@ -715,19 +715,19 @@ function CaseStudyCarousel() {
 
 function GridReimagined() {
   return (
-    <section className="relative overflow-hidden bg-white pb-14 pt-4 sm:pb-20">
+    <section className="relative overflow-hidden bg-white pb-12 pt-4 sm:pb-20">
       {/* Decorative quote-mark background image: large, right side, vertically centered on the quote */}
       <div
         className="pointer-events-none absolute right-0 top-1/3 hidden h-[400px] w-[800px] -translate-y-1/2 bg-contain bg-right bg-no-repeat opacity-90 lg:block"
         style={{
           backgroundImage:
-            "url('https://visionaize.in/wp-content/uploads/2022/05/home-quote-min.png')",
+            "url('/digital-twin-for-power-and-energy/home-quote-min.png')",
         }}
         aria-hidden="true"
       />
       <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6">
         <div className="relative max-w-[900px]">
-          <blockquote className="text-base font-medium leading-[1.5] text-[#0F1B2D] sm:text-[22px] lg:text-[24px] lg:leading-[1.35]">
+          <blockquote className="text-sm font-medium leading-[1.6] text-[#0F1B2D] sm:text-[22px] lg:text-[24px] lg:leading-[1.35]">
             &ldquo;It is astounding how this platform is able to integrate data
             from complex systems like SCADA, AMI Meter, and GIS Systems to
             provide accurate 3D visualizations. I see a tremendous
@@ -735,7 +735,7 @@ function GridReimagined() {
             to doing inspection and maintenance the way we did&rdquo;
           </blockquote>
 
-          <div className="mt-8">
+          <div className="mt-6 sm:mt-8">
             <p className="text-sm font-semibold text-[#0F1B2D] sm:text-[18px]">
               Bill Andrew
             </p>
@@ -925,26 +925,26 @@ function TalkToExpert() {
   };
 
   return (
-    <section className="relative z-10 my-12 bg-[#0F1B2D] py-12 sm:my-16 sm:py-16">
+    <section className="relative z-10 my-10 bg-[#0F1B2D] py-10 sm:my-16 sm:py-16">
       <div className="mx-auto grid max-w-[1440px] grid-cols-1 items-stretch lg:grid-cols-2">
         {/* Left: dark panel */}
-        <div className="flex flex-col justify-center px-4 py-10 sm:px-8 sm:py-16 lg:px-20">
-          <h2 className="text-2xl font-normal text-white sm:text-[36px] lg:text-[42px]">
+        <div className="flex flex-col justify-center px-4 py-8 sm:px-8 sm:py-16 lg:px-20">
+          <h2 className="text-xl font-normal text-white sm:text-[36px] lg:text-[42px]">
             Let&rsquo;s talk digital twins
           </h2>
 
-          <p className="mt-5 max-w-[560px] text-sm leading-[1.8] text-white/70 sm:mt-6 sm:text-[18px]">
+          <p className="mt-4 max-w-[560px] text-sm leading-[1.8] text-white/70 sm:mt-6 sm:text-[18px]">
             Visionaize V-Plant creates a 3D view of your power grid or
             generation plans, enabling an immersive visualization experience
             of power generation, transmission and distribution assets in an
             intelligent, 3D digital twin.
           </p>
 
-          <h3 className="mt-8 text-lg font-semibold text-white sm:mt-14 sm:text-[26px]">
+          <h3 className="mt-7 text-base font-semibold text-white sm:mt-14 sm:text-[26px]">
             Learn how Visionaize can:
           </h3>
 
-          <ul className="mt-6 space-y-4 sm:space-y-5">
+          <ul className="mt-5 space-y-3 sm:mt-6 sm:space-y-5">
             {learnPoints.map((point) => (
               <li key={point} className="flex items-center gap-4">
                 <span
@@ -971,22 +971,21 @@ function TalkToExpert() {
         </div>
 
         {/* Right: white form panel */}
-        <div className="mx-auto flex w-full max-w-[440px] flex-col items-center bg-white px-4 py-10 sm:px-8 sm:py-16">
+        <div className="mx-auto flex w-full max-w-[440px] flex-col items-center bg-white px-4 py-8 sm:px-8 sm:py-16">
           <div className="w-full">
-            <h2 className="text-2xl font-normal text-[#0F1B2D] sm:text-[36px]">
+            <h2 className="text-xl font-normal text-[#0F1B2D] sm:text-[36px]">
               Talk to an expert
             </h2>
 
             {status === "success" ? (
-              <div className="mt-8 rounded-md bg-[#EEF7E7] p-6 text-[#0F1B2D]">
+              <div className="mt-6 rounded-md bg-[#EEF7E7] p-6 text-[#0F1B2D] sm:mt-8">
                 Thanks! A Visionaize Digital Twin expert will be in touch shortly.
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4 sm:mt-10 sm:space-y-5">
+              <form onSubmit={handleSubmit} noValidate className="mt-5 space-y-4 sm:mt-10 sm:space-y-5">
                 <div>
-                  <input
-                    type="text"
-                    placeholder="First name*"
+                  <FloatingInput
+                    label="First name*"
                     value={form.firstName}
                     onChange={handleChange("firstName")}
                     aria-invalid={!!errors.firstName}
@@ -997,9 +996,8 @@ function TalkToExpert() {
                 </div>
 
                 <div>
-                  <input
-                    type="text"
-                    placeholder="Last name*"
+                  <FloatingInput
+                    label="Last name*"
                     value={form.lastName}
                     onChange={handleChange("lastName")}
                     aria-invalid={!!errors.lastName}
@@ -1010,9 +1008,8 @@ function TalkToExpert() {
                 </div>
 
                 <div>
-                  <input
-                    type="text"
-                    placeholder="Company name*"
+                  <FloatingInput
+                    label="Company name*"
                     value={form.companyName}
                     onChange={handleChange("companyName")}
                     aria-invalid={!!errors.companyName}
@@ -1023,9 +1020,9 @@ function TalkToExpert() {
                 </div>
 
                 <div>
-                  <input
+                  <FloatingInput
+                    label="Business Email*"
                     type="email"
-                    placeholder="Business Email*"
                     value={form.businessEmail}
                     onChange={handleChange("businessEmail")}
                     aria-invalid={!!errors.businessEmail}
@@ -1035,9 +1032,9 @@ function TalkToExpert() {
                 </div>
 
                 <div>
-                  <input
+                  <FloatingInput
+                    label="Phone number*"
                     type="tel"
-                    placeholder="Phone number*"
                     value={form.phoneNumber}
                     onChange={handlePhoneChange}
                     aria-invalid={!!errors.phoneNumber}
@@ -1062,14 +1059,14 @@ function TalkToExpert() {
                 </select>
 
                 <div>
-                  <textarea
-                    placeholder="Message"
+                  <FloatingTextarea
+                    label="Message"
                     rows={4}
                     value={form.message}
                     onChange={handleChange("message")}
                     aria-invalid={!!errors.message}
                     maxLength={TALK_MESSAGE_MAX_LENGTH}
-                    className={`resize-none ${talkFieldClass(!!errors.message)}`}
+                    className={talkFieldClass(!!errors.message)}
                   />
                   <div className="mt-1 flex items-center justify-between">
                     {errors.message ? <TalkFieldError message={errors.message} /> : <span />}
@@ -1082,7 +1079,7 @@ function TalkToExpert() {
                 <button
                   type="submit"
                   disabled={status === "submitting"}
-                  className="w-full rounded-full py-4 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60"
+                  className="w-full rounded-full py-3.5 text-[15px] font-semibold text-white transition-opacity hover:opacity-90 disabled:opacity-60 sm:py-4"
                   style={{
                     background: "linear-gradient(90deg, #8DC63F 0%, #2E8DC5 100%)",
                   }}
@@ -1103,24 +1100,24 @@ function TalkToExpert() {
 }
 function Whitepaper() {
   return (
-    <section className="bg-white pb-14 pt-0 sm:pb-24">
+    <section className="bg-white pb-12 pt-0 sm:pb-24">
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-8 px-4 sm:gap-10 sm:px-6 lg:grid-cols-[420px_1fr] lg:gap-16">
         <div className="flex justify-center">
           <img
-            src="https://visionaize.in/wp-content/uploads/2026/05/Group-1171277152-1.png"
+            src="/digital-twin-for-power-and-energy/Group-1171277152-1.png"
             alt="The Digital Frontier of Indian Power: Orchestrating Efficiency through Agentic AI and Digital Twins — whitepaper cover"
-            className="w-full max-w-[240px] sm:max-w-[360px] lg:max-w-[420px]"
+            className="w-full max-w-[200px] sm:max-w-[360px] lg:max-w-[420px]"
             loading="lazy"
           />
         </div>
 
         <div>
-          <h2 className="text-xl font-semibold leading-tight text-[#0F1B2D] sm:text-[30px] lg:text-[34px]">
+          <h2 className="text-lg font-semibold leading-tight text-[#0F1B2D] sm:text-[30px] lg:text-[34px]">
             The Digital Frontier of Indian Power: Orchestrating Efficiency
             through Agentic AI and Digital Twins
           </h2>
 
-          <p className="mt-5 text-sm leading-[1.8] text-[#5a6472] sm:mt-6 sm:text-[17px]">
+          <p className="mt-4 text-sm leading-[1.8] text-[#5a6472] sm:mt-6 sm:text-[17px]">
             India&rsquo;s power sector is rapidly evolving with Agentic AI and
             Digital Twin technologies. This whitepaper explores how
             intelligent, real-time operations can improve efficiency, reduce
@@ -1130,7 +1127,7 @@ function Whitepaper() {
 
           
            <a href="#read-whitepaper"
-            className="mt-6 inline-flex items-center rounded-full border-2 border-[#0F1B2D] px-6 py-3 text-xs font-bold text-[#0F1B2D] transition-colors hover:bg-[#0F1B2D] hover:text-white sm:mt-10 sm:px-8 sm:py-4 sm:text-[15px]"
+            className="mt-5 inline-flex items-center rounded-full border-2 border-[#0F1B2D] px-6 py-2.5 text-xs font-bold text-[#0F1B2D] transition-colors hover:bg-[#0F1B2D] hover:text-white sm:mt-10 sm:px-8 sm:py-4 sm:text-[15px]"
           >
             Read the Whitepaper
           </a>

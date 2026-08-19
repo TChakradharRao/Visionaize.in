@@ -24,14 +24,10 @@ export const Route = createFileRoute("/platform/microsoft-fabric-expertise")({
   component: FabricPage,
 });
 
-const HERO_BG =
-  "https://visionaize.com/wp-content/uploads/2026/01/Group-1000007236-1.svg";
-const WHY_IMG =
-  "https://visionaize.com/wp-content/uploads/2026/01/Group-1000007239-1024x531.png";
-const ARCH_IMG =
-  "https://visionaize.com/wp-content/uploads/2026/01/Ecosystem-FABRIC-BLOCK-DIAGRAM.2-1024x576.jpg";
-const ENGAGEMENT_IMG =
-  "https://visionaize.com/wp-content/uploads/2026/01/Group-1000007263-1-1024x516.png";
+const HERO_BG = "/images/platform/microsoft-fabric/Group-1000007236-1.svg";
+const WHY_IMG = "/images/platform/microsoft-fabric/Group-1000007239-1024x531.png";
+const ARCH_IMG = "/images/platform/microsoft-fabric/Ecosystem-FABRIC-BLOCK-DIAGRAM.2-1024x576.jpg";
+const ENGAGEMENT_IMG = "/images/platform/microsoft-fabric/Group-1000007263-1-1024x516.png";
 
 const WHY_BULLETS = [
   ["OneLake", "A single, unified data lake for the entire organization"],

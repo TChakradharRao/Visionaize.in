@@ -1,12 +1,13 @@
+﻿/* eslint-disable prettier/prettier */
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { Zap, Target, BarChart3 } from "lucide-react";
+import { BarChart3, type LucideIcon } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { ArrowRight, ArrowUpRight, ArrowUp, Play, ChevronDown, ChevronLeft, ChevronRight, X } from "lucide-react";
 import { getSeedContentItem } from "@/lib/seed-content";
-import { TIERS } from "@/lib/v-plant-tiers";
-import { useState, useRef, useCallback, useEffect } from "react";
-
+import { useState, useRef, useCallback, useEffect, type PointerEvent } from "react";
 
 export const Route = createFileRoute("/platform/v-plant")({
   head: () => ({
@@ -15,7 +16,7 @@ export const Route = createFileRoute("/platform/v-plant")({
       {
         name: "description",
         content:
-          "V-Plant is the most connected and current 3D Digital Twin solution for industrial assets — from V-Plant Explorer to V-Plant Pro and V-Plant 360.",
+          "V-Plant is the most connected and current Digital Twin solution for industrial assets — from V-Plant Explorer to V-Plant Pro and V-Plant 360.",
       },
       {
         property: "og:title",
@@ -29,7 +30,7 @@ export const Route = createFileRoute("/platform/v-plant")({
       {
         property: "og:image",
         content:
-          "https://visionaize.com/wp-content/uploads/2024/02/image_27-removebg-preview.png",
+          "/V-Plant/image_27-removebg-preview.png",
       },
     ],
   }),
@@ -41,80 +42,100 @@ export const Route = createFileRoute("/platform/v-plant")({
 const seedItem = getSeedContentItem("page", "v-plant");
 const seedSections = seedItem?.content_json?.sections ?? [];
 const heroSection = seedSections[0];
-
-const heroParagraphs: string[] = heroSection?.paragraphs?.length
+const heroParagraphs = heroSection?.paragraphs?.length
   ? heroSection.paragraphs
   : [
       "Many Digital Twins look good, but the true power lies in the ability to stay in sync with its twin in the field. V-Plant has been built to be the most connected and current Digital Twin solution for industrial assets.",
     ];
+const heroImage = heroSection?.images[0]?.src ?? "/V-Plant/image-2.jpg";
 
-const heroImage = heroSection?.images[0]?.src ?? "https://visionaize.com/wp-content/uploads/2022/07/image-2.jpg";
-
-/**
- * Renders a hero paragraph string, converting the phrase "stay in sync"
- * into a styled Link to /solutions/maintain-and-sustain.
- * Works regardless of whether the text comes from the CMS seed content
- * or the hardcoded fallback above, since both are plain strings.
- */
-function renderHeroParagraph(text: string) {
-  const marker = "stay in sync";
-  const idx = text.indexOf(marker);
-  if (idx === -1) return text;
-
-  const before = text.slice(0, idx);
-  const after = text.slice(idx + marker.length);
-
-  return (
-    <>
-      {before}
-      <Link
-        to="/solutions/maintain-and-sustain"
-        className="!text-[#2563EB] !no-underline hover:!no-underline"
-        style={{ color: "#2563EB", textDecoration: "none" }}
-      >
-        {marker}
-      </Link>
-      {after}
-    </>
-  );
-}
+const TIERS = [
+  {
+    name: "V-Plant Explorer",
+    color: "#3EA0A8",
+    intro: "For owners & operators that want to:",
+    bullets: [
+      "Start simple before scaling",
+      "Realize fast time-to-value",
+      "Leverage 3D scans and images",
+      "Use light data integration",
+    ],
+    shot: "/V-Plant/side-by-side-desktop-left-v-plant-explorer.png",
+    mobileShot: "/V-Plant/Group-1000002873.png",
+    journeyShot: "/V-Plant/V-Plant_Explorer.png",
+    short:
+      "Start fast and dip your toes into the Digital Twin waters with V-Plant Explorer – an entry-level foray into asset visualization that can scale as needed.",
+  },
+  {
+    name: "V-Plant Pro",
+    color: "#5BAE7E",
+    intro: "For owners & operators that want to:",
+    bullets: [
+      "Integrate mesh and 3D modeling techniques",
+      "“Operationalize” rich 3D models",
+      "Use deeper data integrations",
+      "Scale operational use cases across the plant",
+    ],
+    shot: "/V-Plant/side-by-side-desktop-right-1-copy-1.png",
+    mobileShot: "/V-Plant/Group-1000002873-1.png",
+    journeyShot: "/V-Plant/V-Plant_Pro.png",
+    short:
+      "For those that want to scale Digital Twin functionality and operationalize their 3D models. Offers Asset virtualization approaches for both speed and precision.",
+  },
+  {
+    name: "V-Plant 360",
+    color: "#A6E04A",
+    intro: "For owners & operators that want to:",
+    bullets: [
+      "Manage all plant data",
+      "Tap advanced capabilities including VR",
+      "Leverage Model Management of Change (MMOC)",
+      "Scale operational use cases across the plant",
+    ],
+    shot: "/V-Plant/side-by-side-desktop-left-v-plant-360.png",
+    mobileShot: "/V-Plant/Group-1000002873-2.png",
+    journeyShot: "/V-Plant/V-Plant_360.png",
+    short:
+      "For those looking for full Digital Transformation, with all available functionality and deep data integrations. Best option for those ready to apply Digital Twin technology across the plant.",
+  },
+];
 
 const FEATURES = [
   {
     title: "Advanced Visualization",
     body: "3D Model available 24/7/365 Intuitive Data Driven",
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Group.png",
+    icon: "/V-Plant/Group.png",
   },
   {
     title: "Integration of Enterprise Data",
     body: "Contextualize data from real-time IIoT sensors, historical & enterprise systems of record",
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Group-1.png",
+    icon: "/V-Plant/Group-1.png",
   },
   {
     title: "Platform for Advanced Solutions",
     body: "Role-Based Work Packages for Enterprise Asset Management (EAM)",
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Group-2.png",
+    icon: "/V-Plant/Group-2.png",
   },
   {
     title: "VR, AR, AI & Simulations",
     body: "Rapid deployment Robust Model Management of Change (MMOC)",
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Group-3.png",
+    icon: "/V-Plant/Group-3.png",
   },
 ];
 
-const BENEFITS = [
+const BENEFITS: Array<{ icon: string | LucideIcon; title: string; body: string }> = [
   {
-    icon: "https://visionaize.in/wp-content/uploads/2022/05/Group-608-1.svg",
+    icon: "/V-Plant/Group-608-1.svg",
     title: "Reduce cost",
     body: "Reduce unnecessary and costly field visits by facilitating remote access to reliable data, via web and mobile applications.",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2022/05/Group-605-1.svg",
+    icon: "/V-Plant/Group-606-1.svg",
     title: "Drive better decisions",
     body: "Leverage our expertise in advanced data science and our ability to turn data into insights that power smarter decision making.",
   },
   {
-    icon: "https://visionaize.in/wp-content/uploads/2022/05/Group-601-1.svg",
+    icon: "/V-Plant/Group-605-1.svg",
     title: "Increase reliability",
     body: "Improve knowledge capture and information accuracy and dynamically generate operational plans.",
   },
@@ -126,52 +147,71 @@ const BENEFITS = [
 ];
 
 const PARTNERS = [
-  { name: "Partner", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-5.png" },
-  { name: "Partner", src: "https://visionaize.in/wp-content/uploads/2026/01/image-31.png" },
-  { name: "Partner", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-6.png" },
-  { name: "SABIC", src: "https://visionaize.in/wp-content/uploads/2022/05/sabic-logo-saudikayan_tcm1043-30158.png" },
-  { name: "Partner", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-517.png" },
-  { name: "Partner", src: "https://visionaize.in/wp-content/uploads/2022/05/Vector-4.png" },
-  { name: "Larsen & Toubro", src: "https://visionaize.in/wp-content/uploads/2026/01/Larsen__Toubro_Logo-1536x284.png" },
-  { name: "Partner", src: "https://visionaize.in/wp-content/uploads/2022/05/XMLID_1_.png" },
-  { name: "BP", src: "https://visionaize.in/wp-content/uploads/2022/05/bp-logo.png" },
-  { name: "Partner", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-482.png" },
-  { name: "Partner", src: "https://visionaize.in/wp-content/uploads/2022/05/image-33.png" },
+  { name: "Partner", src: "/V-Plant/Group-5.png" },
+  { name: "Partner", src: "/V-Plant/image-31.png" },
+  { name: "Partner", src: "/V-Plant/Group-6.png" },
+  { name: "SABIC", src: "/V-Plant/sabic-logo-saudikayan_tcm1043-30158.png" },
+  { name: "Partner", src: "/V-Plant/Vector-4.png" },
+  { name: "Partner", src: "/V-Plant/Vector-4.png" },
+  { name: "Larsen & Toubro", src: "/V-Plant/Larsen__Toubro_Logo-1536x284.png" },
+  { name: "Partner", src: "/V-Plant/XMLID_1_.png" },
+  { name: "BP", src: "/V-Plant/bp-logo.png" },
+  { name: "Partner", src: "/V-Plant/Group-482.png" },
+  { name: "Partner", src: "/V-Plant/image-33.png" },
 ];
+
+/* Label-based scroll anchors — index-aligned with TIERS.
+   Used by JourneyCards' "Explore Benefits" buttons, BuiltToScale's tier
+   sections, and the header nav hrefs (#v-plant-explorer, #v-plant-pro, #v-plant-360). */
+const TIER_ANCHORS = ["v-plant-explorer", "v-plant-pro", "v-plant-360"];
+
+function smoothScrollToElement(element: HTMLElement | null, duration = 650) {
+  if (!element) return;
+
+  const startY = window.scrollY;
+  const targetY = element.getBoundingClientRect().top + window.scrollY;
+  const distance = targetY - startY;
+  if (!distance) return;
+
+  const ease = (t: number) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
+  let startTime: number | null = null;
+
+  const step = (timestamp: number) => {
+    if (startTime === null) startTime = timestamp;
+    const progress = Math.min((timestamp - startTime) / duration, 1);
+    window.scrollTo(0, startY + distance * ease(progress));
+    if (progress < 1) requestAnimationFrame(step);
+  };
+
+  requestAnimationFrame(step);
+}
 
 const INTEGRATIONS = [
-  { name: "GE Vernova", src: "https://visionaize.in/wp-content/uploads/2024/04/GE_Vernova_logo-2.webp" },
-  { name: "Honeywell", src: "https://visionaize.in/wp-content/uploads/2022/05/1356px-Honeywell_logo.png" },
-  { name: "AWS S3", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-600.png" },
-  { name: "Microsoft", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-599.png" },
-  { name: "SAP", src: "https://visionaize.in/wp-content/uploads/2022/05/SAP_2011_logo.png" },
-  { name: "AspenTech", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-530.png" },
-  { name: "IBM", src: "https://visionaize.in/wp-content/uploads/2022/05/Vector-3.png" },
-  { name: "IBM Maximo", src: "https://visionaize.in/wp-content/uploads/2022/05/ibmmaximo-1.png" },
-  { name: "Oracle", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-528.png" },
-  { name: "OSIsoft", src: "https://visionaize.in/wp-content/uploads/2022/05/Group-529.png" },
+  { name: "GE Vernova", src: "/V-Plant/GE_Vernova_logo.png" },
+  { name: "Honeywell", src: "/V-Plant/1356px-Honeywell_logo.png" },
+  { name: "AWS S3", src: "/V-Plant/Group-600.png" },
+  { name: "Microsoft", src: "/V-Plant/Group-599.png" },
+  { name: "SAP", src: "/V-Plant/SAP_2011_logo.png" },
+  { name: "Aspentech", src: "/V-Plant/Vector-3.png" },
+  { name: "IBM Maximo", src: "/V-Plant/ibmmaximo-1.png" },
+  { name: "Oracle", src: "/V-Plant/Group-530.png" },
+  { name: "Documentum", src: "/V-Plant/Group-528.png" },
+  { name: "OSIsoft", src: "/V-Plant/Group-529.png" },
 ];
-
 /* ---------------- Page ---------------- */
 
 function VPlantPage() {
   useEffect(() => {
-    const scrollToHash = () => {
-      const hash = window.location.hash.replace("#", "");
-      if (!hash) return;
-      const el = document.getElementById(hash);
-      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    const t = setTimeout(scrollToHash, 100);
-    window.addEventListener("hashchange", scrollToHash);
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener("hashchange", scrollToHash);
-    };
+    const hash = window.location.hash.replace("#", "");
+    if (!hash) return;
+    // Wait a frame so the page has laid out before measuring scroll position
+    requestAnimationFrame(() => {
+      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
   }, []);
 
   return (
-    <div className="flex min-h-screen flex-col overflow-x-hidden bg-white">
+    <div className="flex min-h-screen flex-col bg-white overflow-x-hidden">
       <Header />
       <Hero />
       <Quote />
@@ -183,8 +223,8 @@ function VPlantPage() {
       <VideoBenefits />
       <GoodCompany />
       <CTA />
-      <Data />
-      <Integrations />
+       <Data/>
+       <Integrations />
       <Footer />
     </div>
   );
@@ -221,29 +261,24 @@ function Hero() {
 
   return (
     <section className="bg-white">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-8 sm:gap-10 sm:px-6 sm:py-10 md:grid-cols-2 md:items-center md:py-14">
-        <div>
-          <h1 className="text-3xl font-bold leading-[1.15] tracking-tight text-brand-navy sm:text-4xl md:text-5xl">
-            A 3D digital twin that's<br className="hidden sm:block" /> always in sync
+      <div className="mx-auto grid max-w-7xl gap-1 px-6 py-16 md:grid-cols-2 md:items-center md:py-20">
+        <div className="pr-8 tracking-[-0.02em] text-brand-navy md:pr-8 lg:pr-10">
+          <h1 className="text-3xl font-bold leading-[1.1] tracking-tight text-brand-navy md:text-4xl lg:text-5xl">
+            A 3D digital twin that's<br />always in sync
           </h1>
-          <p className="mt-5 max-w-md text-base leading-relaxed text-brand-ink/80 sm:mt-7 sm:text-lg">
+          <p className="mt-7 max-w-xl py-3 text-base text-lg leading-relaxed text-black/80">
             {renderHeroParagraph(heroParagraphs[0])}
           </p>
-          <div className="mt-7 flex flex-wrap items-center gap-3 sm:mt-9 sm:gap-4">
+          <div className="mt-9 flex flex-wrap items-center gap-1">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md sm:px-7 sm:py-3.5"
-              style={{
-                background:
-                  "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
-              }}
-            >
+              className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-lg font-bold text-white shadow-md motion-effects-layer">
               Talk to an expert
             </Link>
             <button
               type="button"
               onClick={() => setShowVideo(true)}
-              className="inline-flex items-center gap-3 rounded-full border border-brand-ink/15 bg-white px-5 py-3 text-sm font-semibold text-brand-navy hover:border-brand-ink/30 sm:px-6 sm:py-3.5"
+              className="inline-flex items-center gap-3 rounded-full border border-brand-ink/15 bg-white px-6 py-3.5 text-lg font-bold text-black hover:border-brand-ink/30"
             >
               Watch video
               <span className="flex h-7 w-7 items-center justify-center rounded-full bg-brand-navy text-white">
@@ -253,22 +288,20 @@ function Hero() {
           </div>
         </div>
 
-        {/* Before/after comparison slider */}
         <div
           ref={containerRef}
           onPointerDown={handlePointerDown}
           onPointerMove={handlePointerMove}
           onPointerUp={handlePointerUp}
           onPointerLeave={handlePointerUp}
-          className="relative aspect-[4/3] w-full touch-none select-none overflow-hidden rounded-md bg-brand-navy/5 sm:aspect-[16/9] md:aspect-[4/3]"
+          className="relative aspect-[16/9] w-full select-none overflow-hidden rounded-md bg-brand-navy/5 md:aspect-[4/3]"
         >
           <img
-            src="https://visionaize.com/wp-content/uploads/2022/07/image1.jpg"
+            src="/V-Plant/image1.jpg"
             alt="Field photograph of plant"
             draggable={false}
             className="absolute inset-0 h-full w-full object-cover"
           />
-
           <div
             className="absolute inset-0 h-full w-full overflow-hidden"
             style={{ clipPath: `inset(0 ${100 - sliderPos}% 0 0)` }}
@@ -280,14 +313,12 @@ function Hero() {
               className="h-full w-full object-cover"
             />
           </div>
-
           <div
             className="absolute inset-y-0 w-0.5 bg-white/90"
             style={{ left: `${sliderPos}%` }}
           />
-
           <div
-            className="absolute top-1/2 flex h-9 w-9 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full bg-white shadow-lg sm:h-10 sm:w-10"
+            className="absolute top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 cursor-ew-resize items-center justify-center rounded-full bg-white shadow-lg"
             style={{ left: `${sliderPos}%` }}
           >
             <span className="flex items-center text-brand-navy">
@@ -297,8 +328,6 @@ function Hero() {
           </div>
         </div>
       </div>
-
-      {/* Video modal */}
       {showVideo && (
         <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 px-4"
@@ -312,13 +341,13 @@ function Hero() {
               type="button"
               aria-label="Close video"
               onClick={() => setShowVideo(false)}
-              className="absolute -top-10 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20 sm:-top-12"
+              className="absolute -top-12 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-white transition hover:bg-white/20"
             >
               <X className="h-5 w-5" />
             </button>
             <div className="overflow-hidden rounded-md bg-black shadow-1xl">
               <video
-                src="https://visionaize.in/wp-content/uploads/2023/10/Converted-Visionaize-in-a-Minute-Oct-2023.mp4"
+                src="/V-Plant/Converted-Visionaize-in-a-Minute-Oct-2023.mp4"
                 className="w-full"
                 controls
                 autoPlay
@@ -330,245 +359,192 @@ function Hero() {
     </section>
   );
 }
-
 function Quote() {
   return (
-    <section className="relative overflow-hidden bg-[#0F2237] py-10 text-white sm:py-14">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute right-0 top-0 hidden h-full w-full md:block md:w-1/2"
-        style={{
-          backgroundImage:
-            "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "top right",
-          backgroundSize: "contain",
-          opacity: 0.5,
-        }}
-      />
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <p className="text-balance text-2xl font-light leading-tight tracking-tight sm:text-3xl md:text-5xl">
-          An hour in V-Plant is<br /> like 8 hours in the field
-        </p>
-        <p className="mt-6 text-sm font-semibold sm:mt-8">
-          <span style={{ color: "#A6E04A" }}>Top 5</span>{" "}
-          <span className="text-white/80">Global Oil &amp; Gas Company</span>
-        </p>
-      </div>
-    </section>
+   <section className="relative overflow-hidden bg-[#0F2237] py-24 text-white">
+  <div
+    aria-hidden
+    className="pointer-events-none absolute right-0 top-0 h-full w-full md:w-1/2"
+    style={{
+      backgroundImage:
+        "url('/V-Plant/Qbg-min.png')",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "bottom right",
+      backgroundSize: "contain",
+      opacity: 1,
+      width: "30%",
+    }}
+  />
+  <div
+    aria-hidden="true"
+    className="hidden md:block pointer-events-none absolute right-6 top-10 select-none text-[20rem] font-serif leading-none opacity-20"
+    style={{
+      WebkitTextFillColor: "transparent",
+      WebkitBackgroundClip: "text",
+    }}
+  >
+    V-PLANT
+  </div>
+  <div className="relative mx-auto max-w-7xl px-8">
+    <p className="text-balance text-3xl font-light leading-tight tracking-tight md:text-[68px] lg:text-[68px]" style={{ fontWeight: 200 }}>
+      An hour in V-Plant is<br />like 8 hours in the field
+    </p>
+    <p className="mt-8 text-sm font-semibold">
+      <span className="theme-multicolor-weight-400 text-2xl">Top 5 Global Oil &amp; Gas Company</span>
+    </p>
+  </div>
+</section>
   );
 }
-
 function JourneyCards() {
-  // Heights grow left -> right to visualize "scaling up" through the journey
-  const CARD_MIN_HEIGHTS = ["380px", "600px", "650px"];
-
   return (
-    <section className="relative overflow-hidden bg-[#DAEEF8] py-12 sm:py-16">
-      <style>{`
-        .journey-grid {
-          display: grid;
-          gap: 1.5rem;
-          grid-template-columns: 1fr;
-        }
-        @media (min-width: 768px) {
-          .journey-grid {
-            grid-template-columns: repeat(3, 1fr);
-            align-items: end;
-          }
-        }
-      `}</style>
-
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 hidden md:block"
-        style={{
-          backgroundImage: "url('https://visionaize.in/wp-content/uploads/2025/12/Arrows.png')",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "right center",
-          backgroundSize: "90% 120%",
-        }}
-      />
-
-      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-        <h2 className="text-center text-xl font-semibold text-brand-navy sm:text-2xl md:text-4xl">
-          Digital Twins for Every Stage of The Journey
-        </h2>
-
-        <div className="journey-grid relative mt-8 sm:mt-10">
-          {TIERS.map((t, i) => (
-            <article
-              key={t.name}
-              id={`journey-${t.slug}`}
-              className="relative flex scroll-mt-24 flex-col overflow-hidden bg-white px-5 pb-8 pt-8 shadow-md sm:px-7 sm:pb-10 sm:pt-10"
-              style={{ minHeight: CARD_MIN_HEIGHTS[i] ?? CARD_MIN_HEIGHTS[CARD_MIN_HEIGHTS.length - 1] }}
+<section id="journey-cards" className="relative overflow-hidden bg-[#DAEEF8] py-40">
+  <div
+    aria-hidden
+    className="pointer-events-none absolute inset-0"
+    style={{
+      backgroundImage: "url('/V-Plant/Arrows.png')",
+      backgroundRepeat: "no-repeat",
+      backgroundPosition: "bottom left",
+      backgroundSize: "96% 76%",
+    }}
+  />
+  <div className="relative mx-auto max-w-7xl px-6">
+    <h2 className="text-center text-4xl font-semibold text-brand-navy md:text-5xl pb-4">
+      Digital Twins for Every Stage of The Journey
+    </h2>
+    <div className="relative mt-14 grid gap-8 md:grid-cols-3">
+      {TIERS.map((t, idx) => (
+        <article
+          key={t.name}
+          className="relative flex flex-col overflow-hidden bg-white pb-10  shadow-md"
+          style={{ marginTop: `${2 - idx * 24}px` }}
+        >
+          <div className="mb-6 overflow-hidden rounded bg-[#DAEEF8]">
+            <img src={t.journeyShot ?? t.shot} alt={t.name} className="block aspect-[16/9] w-full object-cover" />
+          </div>
+        <div className="px-8">
+          <h3 className="text-2xl font-bold theme-multicolor-weight-900">
+            {t.name}
+          </h3>
+          <p className="mt-3 text-lg leading-relaxed text-black/80">{t.short}</p>
+          <div className="mt-auto pt-8">
+            <button
+              type="button"
+              id={`arrow-navigate-button-${idx}`}
+              className="arrow-navigate inline-flex items-center gap-3 text-lg font-semibold theme-multicolor-weight-400"
+              onClick={() => smoothScrollToElement(document.getElementById(TIER_ANCHORS[idx]))}
             >
-              <div className="mb-5 overflow-hidden rounded bg-[#DAEEF8] sm:mb-6">
-                <img src={t.shot} alt={t.name} className="block aspect-[16/9] w-full object-cover" />
-              </div>
-
-              <h3 className="text-xl font-bold sm:text-2xl" style={{ color: t.color }}>
-                {t.name}
-              </h3>
-              <p className="mt-3 text-base leading-relaxed text-brand-ink/80 sm:text-lg">{t.short}</p>
-
-              <div className="mt-auto pt-6 sm:pt-8">
-                
-               <a   href={`#v-plant-${t.slug}`}
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById(`v-plant-${t.slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
-                  }}
-                  className="inline-flex items-center gap-3 text-sm font-semibold sm:text-base"
-                  style={{ color: t.color }}
-                >
-                  <span className="flex h-10 w-10 flex-none items-center justify-center rounded-full bg-white shadow-[0_2px_10px_rgba(15,34,55,0.15)]">
-                    <svg width="16" height="14" viewBox="0 0 16 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M1 1 L15 1 L8 13 Z" fill="#000000" />
-                    </svg>
-                  </span>
-                  Explore Benefits
-                </a>
-              </div>
-
               <span
-                aria-hidden
-                className="absolute inset-x-0 bottom-0 h-2"
-                style={{ background: t.color }}
-              />
-            </article>
-          ))}
+                className="flex h-8 w-8 items-center justify-center rounded-full border-2"
+                style={{ borderColor: t.color }}
+              >
+                <ChevronDown className="h-4 w-4" style={{ color: t.color }} />
+              </span>
+              Explore Benefits
+            </button>
+          </div>
         </div>
-      </div>
-    </section>
+          <span
+            aria-hidden
+            className="absolute inset-x-0 bottom-0 h-2"
+            style={{ background: t.color }}
+          />
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
   );
 }
-
 function BuiltToScale() {
-  const IMAGE_POSITION = [
-    "left center",
-    "right center",
-    "left center",
-  ];
-
-  interface ThinArrowUpProps {
-    color: string;
-    style?: React.CSSProperties;
-    className?: string;
-  }
-
-  const ThinArrowUp = ({ color, style, className }: ThinArrowUpProps) => (
-    <svg
-      viewBox="0 0 24 28"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-      style={style}
-    >
-      <path
-        d="M12 26 L12 2 M4 10 L12 2 L20 10"
-        stroke={color}
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-
   return (
-    <section className="bg-white py-10 sm:py-14">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <style>{`
-          @keyframes floatUpDown {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-          }
-          .floaty {
-            animation: floatUpDown 2.2s ease-in-out infinite;
-          }
-        `}</style>
-
-        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
-          Digital Twin Technology Built to Scale
-        </h2>
-        <div className="mt-10 space-y-12 sm:mt-12 sm:space-y-14">
-          {TIERS.map((t, i) => {
-            const reverse = i % 2 === 1;
-            const objectPosition = IMAGE_POSITION[i] ?? "center";
-            return (
-              <div
-                key={t.name}
-                id={`v-plant-${t.slug}`}
-                className={`grid scroll-mt-24 items-center gap-10 sm:gap-12 md:grid-cols-2 md:gap-16 ${
-                  reverse ? "md:[&>*:first-child]:order-2" : ""
-                }`}
-              >
-                <div className="relative">
-                  <div className="relative mx-auto max-w-xl overflow-hidden rounded-xl bg-white">
-                    <div className="aspect-[4/3] w-full overflow-hidden">
-                      <img
-                        src={t.shot}
-                        alt={`${t.name} screenshot`}
-                        className="block h-full w-full object-cover"
-                        style={{ objectPosition }}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h3 className="text-2xl font-bold text-brand-navy sm:text-3xl md:text-4xl">{t.name}</h3>
-                    <button
-                      type="button"
-                      aria-label={`Back to ${t.name} card`}
-                      onClick={() =>
-                        document.getElementById(`journey-${t.slug}`)?.scrollIntoView({ behavior: "smooth", block: "start" })
-                      }
-                      className="flex-none rounded-full focus:outline-none focus-visible:ring-2 focus-visible:ring-brand-navy/40"
-                    >
-                      <ThinArrowUp
-                        color={t.color}
-                        className="floaty h-7 w-7 sm:h-9 sm:w-9"
-                        style={{ animationDelay: `${i * 0.2}s` }}
-                      />
-                    </button>
-                  </div>
-                  <p className="mt-4 text-base text-brand-ink/85 sm:mt-5 sm:text-lg">{t.intro}</p>
-                  <ul className="mt-4 space-y-2.5 sm:mt-5 sm:space-y-3">
-                    {t.bullets.map((b) => (
-                      <li key={b} className="flex gap-3 text-base text-brand-ink/85 sm:text-lg">
-                        <span
-                          aria-hidden
-                          className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full"
-                          style={{ background: t.color }}
-                        />
-                        <span>{b}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
+ <section className="bg-white py-20">
+  <div className="mx-auto max-w-7xl px-6">
+    <style>{`
+      @keyframes floatUpDown {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-6px); }
+      }
+      .floaty {
+        animation: floatUpDown 2.2s ease-in-out infinite;
+      }
+    `}</style>
+    <h2 className="text-center text-3xl font-semibold text-brand-navy md:text-5xl">
+      Digital Twin Technology Built to Scale
+    </h2>
+    <div className="mt-16 space-y-24">
+      {TIERS.map((t, i) => {
+        const reverse = i % 2 === 1;
+        return (
+          <div
+            key={t.name}
+            id={TIER_ANCHORS[i]}
+            className={`grid grid-cols-1 scroll-mt-24 items-center gap-12 md:grid-cols-2 ${
+              reverse ? "md:[&>*:first-child]:order-2" : ""
+            }`}
+          >
+            <div className="relative w-full">
+              <div className="w-full rounded-xl bg-white ">
+                <picture>
+                  <source media="(max-width: 1023px)" srcSet={t.mobileShot ?? t.shot} />
+                  <img
+                    src={t.shot}
+                    alt={`${t.name} screenshot`}
+                    className={`block w-full max-w-full justify-center relative ${reverse ? "md:right-[22rem]" : "md:left-[22.5rem]"} scale-100 md:w-[150%] lg:scale-[2.0] object-contain`}
+                  />
+                </picture>
               </div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
+            </div>
+            <div className={reverse ? "md:pr-8 pl-8 py-[38px]" : "md:pl-8 py-[38px]" }>
+             <div className="flex items-center gap-3">
+              <h3 className="text-4xl font-bold text-brand-navy">{t.name}</h3>
+              <button
+                type="button"
+                className="floaty inline-flex h-9 w-9 items-center justify-center bg-white"
+                style={{ animationDelay: `${i * 0.2}s` }}
+                onClick={() => smoothScrollToElement(document.getElementById("journey-cards"))}
+                aria-label="Back to Digital Twins for Every Stage of The Journey"
+              >
+                <ArrowUp className="h-5 w-5" style={{ color: t.color }} />
+              </button>
+            </div>
+              <p className="mt-5 text-xl text-brand-ink/85">{t.intro}</p>
+              <ul className="mt-5 space-y-3">
+                {t.bullets.map((b) => (
+                  <li key={b} className="flex gap-3 text-lg text-brand-navy/65">
+                    <span
+                      aria-hidden
+                      className="mt-2 inline-block h-1.5 w-1.5 flex-none rounded-full"
+                      style={{ background: t.color }}
+                    />
+                    <span>{b}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
   );
 }
 
 function Features() {
   return (
-    <section className="bg-white pb-10 pt-2 sm:pb-14">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
+    <section className="bg-white pb-16 pt-4">
+      <div className="mx-auto max-w-7xl px-6">
+        <h2 className="text-center text-3xl font-semibold text-brand-navy md:text-4xl">
           Features
         </h2>
-        <div className="mt-8 grid gap-8 text-center sm:mt-10 sm:grid-cols-2 sm:gap-8 lg:grid-cols-4 lg:gap-10">
+        <div className="mt-14 grid grid-cols-2 gap-10 text-center lg:grid-cols-4">
           {FEATURES.map((f) => (
-            <div key={f.title} className="flex flex-col items-center">
-              <img src={f.icon} alt="" className="h-14 w-auto object-contain sm:h-16" loading="lazy" />
-              <h3 className="mt-5 text-lg font-bold leading-snug text-brand-navy sm:mt-6 sm:text-2xl">{f.title}</h3>
-              <p className="mt-3 text-base leading-relaxed text-brand-ink/75 sm:mt-4 sm:text-lg">{f.body}</p>
+            <div key={f.title} className=" flex flex-col items-center">
+              <img src={f.icon} alt="" className="h-12 w-auto object-contain" loading="lazy" />
+              <h3 className="mt-6 text-3xl font-bold leading-snug text-brand-navy">{f.title}</h3>
+              <p className="mt-4 text-m leading-relaxed text-brand-ink/75">{f.body}</p>
             </div>
           ))}
         </div>
@@ -577,221 +553,226 @@ function Features() {
   );
 }
 
+function renderHeroParagraph(text: string) {
+  const pattern = /(stay in sync)/i;
+  if (pattern.test(text)) {
+    const parts = text.split(pattern);
+    return (
+      <>
+        {parts.map((part, i) =>
+          pattern.test(part) ? (
+            <Link
+              key={i}
+              to="/solutions/maintain-and-sustain/"
+              className="font-semibold"
+              style={{ color: "#088FD1" }}
+            >
+              {part}
+            </Link>
+          ) : (
+            <span key={i}>{part}</span>
+          )
+        )}
+      </>
+    );
+  }
+  return text;
+}
+
 function BusinessCaseBand() {
   return (
-    <section className="bg-[#A6E04A] py-7 sm:py-8 md:py-10">
-      <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-5 px-4 text-center sm:gap-8 sm:px-6 md:flex-row md:gap-14 md:text-left">
-        <p className="text-lg font-semibold text-brand-navy sm:text-xl md:text-2xl">
-          Building a case for a 3D Digital Twin
-        </p>
-        <Link
-          to="/contact"
-          className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-3.5 text-sm font-semibold text-brand-blue shadow-sm hover:bg-white/90 sm:px-9 sm:py-4 sm:text-base"
-        >
-          Build a business case
-        </Link>
-      </div>
-    </section>
+  <section className="bg-[#A6E04A] py-10 md:py-[3.75rem]">
+  <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-8 px-6 md:flex-row md:gap-14">
+    <p className="text-3xl font-semi text-brand-navy md:text-3xl">
+      Building a case for a 3D Digital Twin
+    </p>
+    <Link
+      to="/build-a-business-case"
+      className="inline-flex items-center gap-2 rounded-full bg-white px-9 py-4 text-lg font-bold text-brand-blue shadow-sm hover:bg-white/90"
+    >
+      Build a business case
+    </Link>
+  </div>
+</section>
   );
 }
 
 function Testimonial() {
   return (
-    <section
-      className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-12 sm:py-16"
-      style={{
-        backgroundImage: "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
-        backgroundPosition: "right bottom",
-        backgroundSize: "45% auto",
-      }}
-    >
-      <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
-        <blockquote className="max-w-2xl text-balance text-xl font-medium leading-snug text-brand-navy sm:text-2xl md:text-3xl">
-          During the early stages of an implementation, V-Plant helped the
-          inspection team find and solve a corrosion problem in 2 days. A similar
-          exercise required 2 weeks using a competitor's product.
-        </blockquote>
-        <p className="mt-8 text-sm font-semibold text-brand-ink/70 sm:mt-10">CHS, Inc.</p>
-      </div>
-    </section>
+<section
+  className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-32"
+  style={{
+    backgroundImage: "url('/V-Plant/Qbg-min.png')",
+    backgroundPosition: "right bottom",
+    backgroundSize: "45% auto",
+  }}
+>
+  <div className="relative mx-auto max-w-7xl px-6">
+    <blockquote className="max-w-2xl text-balance text-xl font-medium leading-snug text-brand-navy md:text-4xl">
+      During the early stages of an implementation, V-Plant helped the
+      inspection team find and solve a corrosion problem in 2 days. A similar
+      exercise required 2 weeks using a competitor's product.
+    </blockquote>
+    <p className="mt-10 text-sm font-semibold text-brand-ink/70">CHS, Inc.</p>
+  </div>
+</section>
   );
 }
 
 function VideoBenefits() {
   return (
-    <section className="bg-white py-10 sm:py-14">
-      <div className="mx-auto grid max-w-7xl items-start gap-10 px-4 sm:px-6 md:grid-cols-2 md:gap-12">
-        {/* Laptop mockup with video */}
-        <div className="relative mx-auto w-full max-w-xl">
-          <div className="relative rounded-t-xl border-x-4 border-t-4 border-brand-ink/15 bg-black sm:border-x-8 sm:border-t-8">
-            <video
-              src="https://visionaize.com/wp-content/uploads/2022/07/3Dtwinanimation.mp4"
-              className="block aspect-square w-full object-cover"
-              autoPlay
-              loop
-              muted
-              playsInline
-            />
-          </div>
-          <div className="mx-auto h-2 max-w-2xl rounded-b-2xl bg-brand-ink/15 sm:h-3" />
-        </div>
-
-        {/* Benefits */}
-        <div>
-          <h2 className="text-3xl font-bold text-brand-navy sm:text-4xl md:text-5xl">Benefits</h2>
-          <div className="mt-8 grid gap-x-8 gap-y-8 sm:mt-10 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-10">
-            {BENEFITS.map((b) => (
-              <div key={b.title}>
-                {typeof b.icon === "string" ? (
-                  <img src={b.icon} alt="" className="h-10 w-10" aria-hidden="true" />
-                ) : (
-                  <b.icon className="h-10 w-10 text-emerald-500" strokeWidth={1.5} />
-                )}
-                <h3 className="mt-3 text-lg font-bold text-brand-navy">{b.title}</h3>
-                <p className="mt-2 text-base leading-relaxed text-brand-ink/80 sm:text-lg">{b.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
+   <section className="bg-white py-20">
+  <div className="mx-auto grid grid-cols-1 max-w-7xl items-start gap-4 px-6 lg:grid-cols-2">
+    <div className="relative mx-auto w-full max-w-xl">
+      <div className="relative rounded-t-xl bg-black">
+        <video
+          src="/V-Plant/3Dtwinanimation.mp4"
+          className="block aspect-[3/3] w-full object-cover"
+          autoPlay
+          loop
+          muted
+          playsInline
+        />
       </div>
-    </section>
+      <div className="mx-auto h-3 max-w-2xl rounded-b-2xl bg-brand-ink/15" />
+    </div>
+    <div>
+      <h2 className="text-4xl font-bold text-brand-navy md:text-4xl">Benefits</h2>
+      <div className="mt-10 grid gap-x-10 gap-y-10 sm:grid-cols-2">
+       {BENEFITS.map((b) => (
+          <div key={b.title}>
+            {typeof b.icon === "string" ? (
+              <img src={b.icon} alt="" className="h-7 w-7" aria-hidden="true" loading="lazy" />
+            ) : (
+              <b.icon className="h-9 w-9 font-bold text-emerald-500" strokeWidth={1.5} />
+            )}
+            <h3 className="mt-3 text-xl font-bold text-brand-navy">{b.title}</h3>
+            <p className="mt-2 text-md leading-relaxed text-brand-ink/80">{b.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
   );
 }
 
 function GoodCompany() {
   return (
-    <section className="bg-white pb-10 pt-6 sm:pb-14">
-      <div className="mx-auto max-w-6xl px-4 sm:px-8">
-        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
-          We are in good company
-        </h2>
-        <div className="mt-10 flex flex-wrap justify-center gap-x-10 gap-y-10 sm:mt-14 sm:gap-x-14 sm:gap-y-14 md:gap-x-16">
-          {PARTNERS.map((p, i) => (
-            <>
-              <div
-                key={`${p.src}-${i}`}
-                className="flex w-[calc(50%-1.25rem)] items-center justify-center sm:w-[calc(33.333%-2.34rem)] md:w-auto"
-              >
-                <img
-                  src={p.src}
-                  alt={p.name}
-                  className="h-12 w-auto max-w-[130px] object-contain sm:h-16 sm:max-w-[150px] md:h-20 md:max-w-[170px]"
-                  loading="lazy"
-                />
-              </div>
-              {/* Force a line break after the 6th logo on md+ so row 1 = 6, row 2 = rest, both centered */}
-              {i === 5 && <div key="break" className="hidden w-full md:block" />}
-            </>
-          ))}
+ <section className="bg-white pb-[25px] pt-8">
+  <div className="mx-auto max-w-6xl px-8">
+    <h2 className="text-center text-4xl font-semibold text-brand-navy md:text-5xl">
+      We are in good company
+    </h2>
+    <div className="mt-[18px] grid grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-3 md:grid-cols-6">
+      {PARTNERS.map((p, index) => (
+        <div key={`${p.name}-${p.src}-${index}`} className="flex items-center justify-center">
+          <img
+            src={p.src}
+            alt={p.name}
+            className="h-20 w-auto lg:max-w-[180px] sm:max-w-[110px] object-contain lg:px-5"
+            loading="lazy"
+          />
         </div>
-      </div>
-    </section>
+      ))}
+    </div>
+  </div>
+</section>
   );
 }
 
 function CTA() {
   return (
-    <section
-      className="relative overflow-hidden bg-[#0F2237] bg-no-repeat py-12 sm:py-16"
-      style={{
-        backgroundImage:
-          "url('https://visionaize.in/wp-content/uploads/2022/05/footer-bg-2.png')",
-        backgroundPosition: "right center",
-        backgroundSize: "65% auto",
-      }}
-    >
-      <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 md:grid-cols-2 md:gap-16">
-        {/* Left copy */}
-        <div>
-          <h2 className="text-2xl font-semibold leading-tight text-white sm:text-3xl md:text-4xl">
-            Contextualize mountains of data with cutting edge technology
-          </h2>
-          <p className="mt-6 max-w-md text-base leading-relaxed text-white/70 sm:mt-8 sm:text-lg">
-            Reliable connectivity and data are critical drivers to successful
-            infrastructure management. Taking advantage of IIoT sensors requires
-            flexible methods to interact with real-time data.
-          </p>
+<section
+  className="relative overflow-hidden bg-[#0F2237] sm:py-8 bg-no-repeat py-48"
+  style={{
+    backgroundImage:
+      "url('/V-Plant/Group-526.png')",
+    backgroundPosition: "bottom center",
+    backgroundSize: "cover",
+  }}
+>
+  <div className="relative z-10 mx-auto grid max-w-7xl gap-24 px-2 md:grid-cols-2">
+    <div className="max-w-md pt-10 pb-32">
+      <h2 className="text-4xl font-semibold leading-tight text-white md:text-5xl">
+        Contextualize mountains of data with cutting edge technology
+      </h2>
+      <p className="mt-8 max-w-sm text-lg leading-relaxed text-white/90 sm:text-xl">
+        Reliable connectivity and data are critical drivers to successful
+        infrastructure management. Taking advantage of IIoT sensors requires
+        flexible methods to interact with real-time data.
+      </p>
+    </div>
+    <div className="flex items-start justify-center gap-12 pt-0 md:pt-28 md:justify-center relative lg:static bottom-0 md:bottom-32 lg:bottom-0">
+      {[
+        {
+          label: "Mobile",
+          src: "/V-Plant/image-36.png",
+        },
+        {
+          label: "Virtual Reality",
+          src: "/V-Plant/iStock-1148243718-1-2048x1365.jpg",
+        },
+        {
+          label: "Augmented Reality",
+          src: "/V-Plant/image-38.png",
+        },
+      ].map((item) => (
+        <div key={item.label} className="flex flex-col items-center gap-3">
+          <div className="h-24 w-24 overflow-hidden rounded-full bg-white sm:h-28 sm:w-28 md:h-32 md:w-32">
+            <img
+              src={item.src}
+              alt={item.label}
+              className={item.label === "Virtual Reality" ? "h-full w-full object-contain" : "h-full w-full object-cover"}
+            />
+          </div>
+          <span className="text-md font-medium text-white">{item.label}</span>
         </div>
-
-        {/* Right: circular image trio */}
-        <div className="flex flex-wrap items-center justify-center gap-8 pt-4 sm:gap-12 sm:pt-8 md:pt-10">
-          {[
-            {
-              label: "Mobile",
-              src: "https://visionaize.in/wp-content/uploads/2022/05/image-36.png",
-            },
-            {
-              label: "Virtual Reality",
-              src: "https://visionaize.in/wp-content/uploads/2022/11/iStock-1148243718-1-2048x1365.jpg",
-            },
-            {
-              label: "Augmented Reality",
-              src: "https://visionaize.in/wp-content/uploads/2022/05/image-38.png",
-            },
-          ].map((item) => (
-            <div key={item.label} className="flex flex-col items-center gap-3">
-              <div className="h-20 w-20 overflow-hidden rounded-full ring-4 ring-white/90 sm:h-24 sm:w-24 md:h-28 md:w-28">
-                <img
-                  src={item.src}
-                  alt={item.label}
-                  className="h-full w-full object-cover"
-                />
-              </div>
-              <span className="text-sm font-medium text-white">{item.label}</span>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+      ))}
+    </div>
+  </div>
+</section>
   );
 }
 
 function Data() {
   return (
-    <section
-      className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-12 sm:py-16"
-      style={{
-        backgroundImage: "url('https://visionaize.in/wp-content/uploads/2022/04/Qbg-min.png')",
-        backgroundPosition: "right bottom",
-        backgroundSize: "45% auto",
-      }}
-    >
-      <div className="relative mx-auto max-w-5xl px-4 sm:px-6">
-        <blockquote className="max-w-2xl text-balance text-xl font-medium leading-snug text-brand-navy sm:text-2xl md:text-3xl">
-          It is astounding how this platform is able to integrate data from complex systems like SCADA, AMI Meter, and GIS Systems to provide accurate 3D visualizations.
-        </blockquote>
-        <p className="mt-8 text-sm font-semibold text-brand-ink/70 sm:mt-10">
-          Bill Andrew, President, Delaware Electric Cooperative
-        </p>
-      </div>
-    </section>
+<section
+  className="relative overflow-hidden bg-[#F2F4F6] bg-no-repeat py-[38px]"
+  style={{
+    backgroundImage: "url('/V-Plant/Qbg-min.png')",
+    backgroundPosition: "right bottom",
+    backgroundSize: "45% auto",
+  }}
+>
+  <div className="relative mx-auto max-w-7xl px-6">
+    <blockquote className="max-w-3xl text-balance text-xl font-medium leading-snug text-brand-navy md:text-4xl">
+     It is astounding how this platform is able to integrate data from complex systems like SCADA, AMI Meter, and GIS Systems to provide accurate 3D visualizations.
+    </blockquote>
+    <p className="mt-10 text-xl font-semibold text-brand-ink/90">Bill Andrew, President, Delaware Electric Cooperative
+</p>
+  </div>
+</section>
   );
 }
 function Integrations() {
   return (
-    <section className="bg-white pb-12 pt-8 sm:pb-16 sm:pt-10">
-      <div className="mx-auto max-w-6xl px-4 sm:px-8">
-        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
+    <section className="bg-white pb-[30px] pt-20">
+      <div className="mx-auto max-w-6xl px-8">
+        <h2 className="text-center text-xl font-semibold text-brand-navy md:text-5xl mb-4">
           We integrate with<br />best-in-class technologies
         </h2>
-        <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-10 sm:mt-10 sm:grid-cols-3 sm:gap-x-8 sm:gap-y-14 md:grid-cols-5">
-          {INTEGRATIONS.map((p) => {
-            const isGEVernova = p.name === "GE Vernova";
-            return (
-              <div key={p.name} className="flex items-center justify-center">
-                <img
-                  src={p.src}
-                  alt={p.name}
-                  className={
-                    isGEVernova
-                      ? "h-24 w-auto max-w-[220px] object-contain sm:h-32 sm:max-w-[280px]"
-                      : "h-14 w-auto max-w-[140px] object-contain sm:h-20 sm:max-w-[180px]"
-                  }
-                  loading="lazy"
-                />
-              </div>
-            );
-          })}
+        <div className="lg:mt-[4.5rem] grid grid-cols-2 gap-x-8 gap-y-14 sm:grid-cols-3 md:grid-cols-5">
+          {INTEGRATIONS.map((p) => (
+            <div key={p.name} className="flex items-center justify-center ">
+              <img
+                src={p.src}
+                alt={p.name}
+                className="w-auto lg:max-w-[200px] sm:max-w-[130px] scale-[1.2] object-contain lg:px-5 my-2"
+                loading="lazy"
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>

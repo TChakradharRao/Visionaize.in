@@ -1,7 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable prettier/prettier */
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { FormEvent, useEffect, useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-field";
 import { getSeedContentItem } from "@/lib/seed-content";
 import { api } from "@/lib/api";
 
@@ -23,7 +27,7 @@ export const Route = createFileRoute("/industries/digital-twin-for-cement")({
       {
         property: "og:image",
         content:
-          "https://visionaize.com/wp-content/uploads/2023/11/iStock-1182152185.webp",
+          "/digital-twin-for-cement/iStock-1182152185.webp",
       },
     ],
   }),
@@ -33,79 +37,91 @@ export const Route = createFileRoute("/industries/digital-twin-for-cement")({
 const seedItem = getSeedContentItem("page", "digital-twin-for-cement");
 const seedSections = seedItem?.content_json?.sections ?? [];
 const heroSection = seedSections[0];
-const heroParagraphs = heroSection?.paragraphs?.length ? heroSection.paragraphs : ["Stabilize the kiln, lift OEE and accelerate decarbonization with cutting-edge 3D Digital Twin technology for cement plants."];
-const heroImage = seedSections.flatMap((section) => section.images ?? []).find((image) => !image.src.endsWith(".svg"))?.src ?? "https://visionaize.com/wp-content/uploads/2023/11/iStock-1182152185.webp";
+const heroParagraphs = heroSection?.paragraphs?.length ? heroSection.paragraphs : ["Optimize kiln performance, cut energy costs, and ensure clinker quality with AI-powered Digital Twin solutions for the cement industry."];
+const heroImage = seedSections.flatMap((section) => section.images ?? []).find((image) => !image.src.endsWith(".svg"))?.src ?? "/digital-twin-for-cement/Cementpic1.png";
 const introSection = seedSections.find((section) => section.heading?.toLowerCase() === "run a stabler kiln, with fewer surprises");
 const introParagraphs = introSection?.paragraphs?.length ? introSection.paragraphs : [
-  "Combine AI, AR and VR with 3D data visualization to give CCR operators, reliability engineers and plant leadership a single real-time view of the pyro-process, mills and packing lines.",
-  "Connect with a Digital Twin expert to learn how Visionaize is helping cement producers improve OEE, reduce energy intensity and hit decarbonization targets.",
+  "Transform your cement plant into an intelligent digital twin environment that connects mining, kiln, mills, and dispatch. Unlock higher efficiency, lower energy use, and consistent quality – all while reducing downtime and emissions.",
+  "See how your operations can achieve more by experiencing data in real time with AI and Digital Twin technologies.",
 ];
 
 const PILLARS = [
   {
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Vector-6.svg",
-    title: "Stabilize the Kiln",
-    body: "Predict upsets early and keep the kiln line running at design throughput",
+    icon: "/digital-twin-for-cement/Group-1171277037.svg",
+    title: "Optimize Kiln Performance",
+    body: "Reduce fuel consumption and stabilize operations with real-time AI-driven insights.",
   },
   {
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Group-3.svg",
-    title: "Lift OEE",
-    body: "Reduce unplanned downtime across crushers, mills, kilns and packing",
+    icon: "/digital-twin-for-cement/Group-1171277036.svg",
+    title: "Ensure Consistent Quality",
+    body: "Predict clinker and cement quality parameters instantly, minimizing off-spec production",
   },
   {
-    icon: "https://visionaize.com/wp-content/uploads/2022/07/Group.png",
-    title: "Cut CO2 &amp; Energy",
-    body: "Lower specific thermal and electrical energy and reduce scope 1 emissions",
+    icon: "/digital-twin-for-cement/Group-1171277038.svg",
+    title: "Cut Unplanned Downtime",
+    body: "Anticipate equipment issues early and keep production running without costly interruptions.",
   },
 ];
 
 const CASE_STUDIES = [
   {
     eyebrow: "CASE STUDY",
-    title: "Integrated Cement Plant: Stabilizing Kiln Operations with AI",
+    title: "AI-Driven Kiln Optimization for Cement Efficiency",
     tabs: {
       Challenge:
-        "A large integrated cement producer was experiencing recurring kiln upsets — coating, ring formation and free-lime excursions — that forced de-rates and stoppages, hurting clinker quality and increasing specific energy consumption.",
+        "A leading South Asian cement manufacturer struggled with kiln instability, fluctuating fuel quality, and high specific heat consumption (820 kcal/kg). Despite multiple process improvements, inconsistent burn-zone control and reduced refractory life impacted energy efficiency, production stability, and ESG compliance, prompting a shift toward AI-driven optimization.",
       Solution:
-        "Visionaize deployed a hybrid first-principles + AI model across the pyro-process, ingesting fuel, raw-meal, gas-analyzer and process data, and surfacing early warnings and prescriptive setpoints to the central control room.",
-      Results:
-        "Kiln stoppages dropped, clinker quality stabilized, and specific thermal energy consumption fell measurably within the first quarter of deployment.",
+        "Visionaize implemented an AI-based kiln optimization platform that integrated 250+ process variables from DCS and SCADA. Within months, operators received real-time AI recommendations for air-fuel ratios and fan adjustments. The system evolved into semi-autonomous control, ensuring precise, faster interventions and stable operations, even under variable process conditions.",
+      Results: [
+        "Reduced SHC to 740 kcal/kg",
+        "Cut kiln downtime by 60%",
+        "Extended refractory life by 50%",
+        "Saved USD $1.4M annually",
+        "Lowered CO₂ emissions by 8,000 tons",
+      ],
     },
-    img: "https://visionaize.com/wp-content/uploads/2023/11/iStock-1182152185.webp",
+    img: "/digital-twin-for-cement/case-study-1-cement-plant-AI-for-Klin-optimization.jpg",
   },
   {
     eyebrow: "CASE STUDY",
-    title: "Vertical Roller Mill: Predictive Maintenance & Throughput",
+    title: "Predictive Maintenance for Cement Plant Reliability",
     tabs: {
       Challenge:
-        "Frequent unplanned shutdowns on a raw-meal vertical roller mill were driving overtime maintenance and clinker shortfalls. Maintenance was largely reactive, with limited visibility into bearing, gearbox and hydraulic health.",
+        "A mid-sized Latin American cement manufacturer faced frequent equipment breakdowns across vertical roller mills, preheater fans, and gearboxes. Despite preventive maintenance efforts, unplanned downtime exceeded 40 hours per line each month, driving up labor costs and cutting into profitability. Leadership sought an AI-driven solution to enhance reliability and protect EBITDA margins.",
       Solution:
-        "Visionaize built a predictive maintenance digital twin combining vibration, lube oil and process data — flagging bearing and gearbox degradation weeks ahead of failure with prescriptive maintenance windows.",
-      Results:
-        "Unplanned downtime dropped sharply, throughput climbed back toward nameplate, and the plant moved most VRM maintenance into planned outages.",
+        "Visionaize deployed a Predictive Maintenance system integrating real-time vibration, temperature, and current data through edge devices. Machine learning models analyzed two years of fault logs to predict failures early. Linked with the CMMS, the system automatically generated maintenance work orders, transforming maintenance operations from reactive to predictive.",
+      Results: [
+        "Reduced unplanned downtime by 55%",
+        "Cut emergency gearbox failures by 80%",
+        "Lowered overtime labor costs by 45%",
+        "Boosted overall equipment reliability and uptime",
+      ],
     },
-    img: "https://visionaize.com/wp-content/uploads/2023/11/iStock-502120934.webp",
+    img: "/digital-twin-for-cement/case-study-2-cement-plant-predictive-maintenance.jpeg",
   },
   {
     eyebrow: "CASE STUDY",
-    title: "Cement Major: Decarbonization Roadmap with Digital Twin",
+    title: "AI-Driven ESG Optimization for Cement Sustainability",
     tabs: {
       Challenge:
-        "A global cement major needed a credible, measurable path to its net-zero commitments — including alternative fuels, clinker factor reduction and energy-efficiency programs across dozens of plants.",
+        "A reputed eco cement manufacturer faced growing regulatory pressure and investor scrutiny over carbon emissions. The clinker line emitted 850 kg of CO₂ per ton, with reporting delays of up to 90 days. Rising compliance costs and the lack of real-time visibility made ESG performance a strategic risk, threatening investor confidence and brand credibility.",
       Solution:
-        "Visionaize delivered DecarbAI on top of the V-Suite digital twin, baselining scope 1, 2 and 3 emissions per plant and modeling alt-fuel substitution, clinker-factor and waste-heat-recovery scenarios with real-time tracking.",
-      Results:
-        "Plants ran higher alternative-fuel rates safely, the group consolidated reporting in one place, and the decarbonization roadmap became operationally tracked, not just a slideware target.",
+        "Visionaize implemented an AI-driven ESG optimization system integrated with kiln and calciner operations. Real-time data on feed chemistry, fuel mix, and combustion were analyzed to forecast CO₂ emissions and simulate process adjustments. Interactive dashboards provided live visibility for plant teams and executives, enabling proactive emission control and informed decision-making.",
+      Results: [
+        "Reduced CO₂ intensity by 9%",
+        "Cut annual ETS costs by €200,000",
+        "Enabled real-time ESG reporting — boosting investor confidence and sustainability performance",
+      ],
     },
-    img: "https://visionaize.com/wp-content/uploads/2023/11/iStock-1202781474.webp",
+    img: "/digital-twin-for-cement/case-study-3-cement-plant-AI-for-ESG.jpg",
   },
 ];
 
 const FORM_TOPICS = [
-  "Stabilize kiln operations and clinker quality",
-  "Reduce unplanned downtime on mills and crushers",
-  "Cut specific energy consumption and CO2 emissions",
-  "Track decarbonization targets across every plant",
+  "Optimize kiln fuel mix and reduce energy consumption",
+  "Predict and prevent unplanned downtime across critical assets",
+  "Ensure clinker and cement quality with real-time AI insights",
+  "Monitor emissions and drive sustainability compliance across operations",
 ];
 
 function CementPage() {
@@ -117,9 +133,9 @@ function CementPage() {
       <Intro />
       <CaseStudyCarousel />
       <PlantReimagined />
+      <Testimonials />
       <TalkDigitalTwins />
       <Whitepaper />
-      <LetsConnect />
       <Footer />
     </div>
   );
@@ -128,28 +144,28 @@ function CementPage() {
 function Hero() {
   return (
     <section
-      className="relative flex min-h-[420px] w-full items-center bg-cover bg-center sm:min-h-[520px] md:min-h-[600px] lg:min-h-[640px]"
+      className="relative flex min-h-[460px] w-full items-center bg-cover bg-center py-10 sm:min-h-[560px] sm:py-14 lg:min-h-[640px] lg:py-0"
       style={{
         backgroundImage: `url('${heroImage}')`,
       }}
     >
       <div className="absolute inset-0 bg-black/25" />
-      <div className="relative mx-auto flex w-full max-w-[1280px] items-center px-4 py-10 sm:px-6 sm:py-14 md:py-0">
-        <div className="w-full max-w-full bg-white p-6 sm:max-w-[440px] sm:p-8 md:max-w-[500px] md:p-10 lg:max-w-[520px] lg:p-12">
+      <div className="relative mx-auto flex w-full max-w-[1280px] items-center px-4 sm:px-6">
+        <div className="w-full max-w-[600px] bg-white p-6 sm:p-9 lg:p-12">
           <h1
-            className="text-4xl font-light leading-[1.05] tracking-tight sm:text-5xl md:text-6xl lg:text-[68px]"
+            className="text-[34px] font-light leading-[1.1] tracking-tight sm:text-[42px] lg:text-[52px] lg:leading-[1.05]"
             style={{
               background:
-                "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
+                "linear-gradient(111.34deg, #94C11F 8.76%, #078ED1 84.29%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
             }}
           >
-            Cement
+            Cement Manufacturing, Redefined
           </h1>
           {heroParagraphs.map((paragraph, index) => (
-            <p key={index} className="mt-5 text-base leading-relaxed text-[#0F1B2D] sm:mt-6 sm:text-lg md:text-[19px]">
+            <p key={index} className="mt-4 text-[16px] leading-relaxed text-[#0F1B2D] sm:mt-5 sm:text-[18px]">
               {paragraph}
             </p>
           ))}
@@ -161,13 +177,13 @@ function Hero() {
 
 function Pillars() {
   return (
-    <section className="bg-[#0F1B2D] py-10 sm:py-12 md:py-16 lg:py-20">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-4 sm:px-6 md:grid-cols-3 md:gap-12">
+    <section className="bg-[#0F1B2D] py-12 sm:py-14 lg:py-16">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-4 sm:grid-cols-3 sm:gap-6 sm:px-6 lg:grid-cols-3 lg:gap-10">
         {PILLARS.map((p) => (
           <div key={p.title} className="flex flex-col items-center text-center">
-            <img src={p.icon} alt="" className="h-16 w-16 sm:h-20 sm:w-20" loading="lazy" />
-            <h3 className="mt-5 text-xl font-semibold text-white sm:mt-6 sm:text-2xl md:text-[26px]" dangerouslySetInnerHTML={{ __html: p.title }} />
-            <p className="mt-4 max-w-[280px] text-base leading-relaxed text-white/80 sm:text-[17px]">{p.body}</p>
+            <img src={p.icon} alt="" className="h-16 w-16 sm:h-[72px] sm:w-[72px]" loading="lazy" />
+            <h3 className="mt-4 text-[21px] font-semibold text-white sm:mt-5 sm:text-[24px]" dangerouslySetInnerHTML={{ __html: p.title }} />
+            <p className="mt-3 max-w-[280px] text-[16px] leading-relaxed text-white/80">{p.body}</p>
           </div>
         ))}
       </div>
@@ -177,35 +193,34 @@ function Pillars() {
 
 function Intro() {
   return (
-    <section className="bg-white py-10 sm:py-12 md:py-16 lg:py-20">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 px-4 sm:px-6 sm:gap-12 lg:grid-cols-2 lg:gap-16">
+    <section className="bg-white py-12 sm:py-16 lg:py-20">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14">
         <div>
-          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-[40px] lg:text-[46px]">
-            Run a stabler kiln, with fewer surprises
+          <h2 className="text-[30px] font-semibold leading-tight sm:text-[36px] lg:text-[44px]">
+            Cement Industry, Visionaized
           </h2>
           {introParagraphs.map((paragraph, index) => (
-            <p key={index} className="mt-5 text-base leading-relaxed text-[#3a4658] sm:mt-6 sm:text-lg sm:leading-[1.8]">
+            <p key={index} className="mt-4 text-[16px] leading-[1.75] text-[#3a4658] sm:mt-5 sm:text-[17px]">
               {paragraph}
             </p>
           ))}
-          <div className="mt-8 sm:mt-10">
-            <a
-              href="#talk-to-an-expert"
-              className="inline-flex items-center rounded-full px-6 py-3 text-base font-semibold text-white shadow-md transition hover:shadow-lg sm:px-7 sm:py-3.5"
+          <div className="mt-7 sm:mt-8">
+            <a href="#talk-to-an-expert"
+              className="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg sm:px-7 sm:text-base"
               style={{
                 background:
-                  "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
+                  "linear-gradient(90deg, #92C122 0%, #088FD1 100%)",
               }}
             >
-              Connect with an expert
+              Talk to an expert
             </a>
           </div>
         </div>
-        <div className="flex justify-center bg-[#E6F0F7] p-6 sm:p-8">
+        <div className="flex justify-center">
           <img
-            src="https://visionaize.com/wp-content/uploads/2022/07/Group-523-2.png"
+            src="/digital-twin-for-cement/Cementpic2.png"
             alt="Visionaize 3D Digital Twin for cement"
-            className="w-full max-w-[600px]"
+            className="h-auto w-full max-w-[600px]"
             loading="lazy"
           />
         </div>
@@ -217,7 +232,43 @@ function Intro() {
 function CaseStudyCarousel() {
   const [idx, setIdx] = useState(0);
   const [tab, setTab] = useState<"Challenge" | "Solution" | "Results">("Challenge");
+  const [isPaused, setIsPaused] = useState(false);
   const cs = CASE_STUDIES[idx];
+
+  // Auto-advance the carousel, pausing while the user is interacting with it
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setIdx((i) => (i + 1) % CASE_STUDIES.length);
+      setTab("Challenge");
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const renderCaseStudyContent = (content: string | string[]) => {
+    if (Array.isArray(content)) {
+      return (
+        <ul className="space-y-3 text-[16px] leading-[1.75] text-[#3a4658]">
+          {content.map((item, index) => (
+            <li key={index} className="flex items-start gap-3">
+              <span
+                className="mt-1 inline-flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-white"
+                style={{ background: "linear-gradient(135deg, #6FCB6F 0%, #1CB4E8 100%)" }}
+              >
+                <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                  <path d="M2 6L5 9L10 3" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      );
+    }
+
+    return <p className="text-[16px] leading-[1.75] text-[#3a4658]">{content}</p>;
+  };
+
   const next = () => {
     setIdx((i) => (i + 1) % CASE_STUDIES.length);
     setTab("Challenge");
@@ -227,38 +278,42 @@ function CaseStudyCarousel() {
     setTab("Challenge");
   };
   return (
-    <section className="bg-white pb-10 sm:pb-12 md:pb-16 lg:pb-20">
+    <section
+      className="bg-white py-12 sm:py-16 lg:py-20"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
       <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6">
         <button
           aria-label="Previous case study"
           onClick={prev}
-          className="absolute left-0 top-1/2 z-10 -translate-y-1/2 text-[#2E8DC5] hover:text-[#A6E04A]"
+          className="absolute left-0 top-6 z-10 text-[#2E8DC5] hover:text-[#A6E04A] sm:top-1/2 sm:-translate-y-1/2"
         >
-          <svg width="20" height="40" viewBox="0 0 28 56" fill="none" className="sm:h-[48px] sm:w-[24px] md:h-[56px] md:w-[28px]">
+          <svg width="20" height="40" viewBox="0 0 28 56" fill="none" className="sm:h-14 sm:w-7">
             <path d="M22 4L6 28L22 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
         <button
           aria-label="Next case study"
           onClick={next}
-          className="absolute right-0 top-1/2 z-10 -translate-y-1/2 text-[#2E8DC5] hover:text-[#A6E04A]"
+          className="absolute right-0 top-6 z-10 text-[#2E8DC5] hover:text-[#A6E04A] sm:top-1/2 sm:-translate-y-1/2"
         >
-          <svg width="20" height="40" viewBox="0 0 28 56" fill="none" className="sm:h-[48px] sm:w-[24px] md:h-[56px] md:w-[28px]">
+          <svg width="20" height="40" viewBox="0 0 28 56" fill="none" className="sm:h-14 sm:w-7">
             <path d="M6 4L22 28L6 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
 
-        <div className="grid grid-cols-1 items-center gap-8 px-7 sm:gap-10 sm:px-9 md:px-10 lg:grid-cols-2">
+        <div className="grid grid-cols-1 items-center gap-8 px-7 sm:px-10 lg:grid-cols-2 lg:gap-10">
           <div>
-            <p className="text-xs font-semibold tracking-[0.18em] text-[#A6E04A] sm:text-sm">{cs.eyebrow}</p>
-            <h3 className="mt-3 text-2xl font-semibold leading-tight sm:text-3xl md:text-[36px]">{cs.title}</h3>
+            <p className="text-xs font-semibold tracking-[0.18em] text-[#A6E04A]">{cs.eyebrow}</p>
+            <h3 className="mt-3 text-[25px] font-semibold leading-tight sm:text-[29px] lg:text-[35px]">{cs.title}</h3>
 
-            <div className="mt-6 flex gap-5 overflow-x-auto border-b border-[#E2E8F0] sm:mt-8 sm:gap-6">
+            <div className="mt-5 flex gap-4 overflow-x-auto border-b border-[#E2E8F0] sm:mt-6 sm:gap-6">
               {(["Challenge", "Solution", "Results"] as const).map((t) => (
                 <button
                   key={t}
                   onClick={() => setTab(t)}
-                  className={`whitespace-nowrap pb-3 text-sm font-semibold transition sm:text-base ${
+                  className={`shrink-0 pb-3 text-sm font-semibold transition ${
                     tab === t
                       ? "border-b-2 border-[#2E8DC5] text-[#2E8DC5]"
                       : "text-[#64748B] hover:text-[#0F1B2D]"
@@ -269,17 +324,17 @@ function CaseStudyCarousel() {
               ))}
             </div>
 
-            <div className="mt-6 rounded border border-[#E2E8F0] p-5 sm:p-6">
-              <p className="text-base leading-relaxed text-[#3a4658] sm:text-[17px] sm:leading-[1.8]">{cs.tabs[tab]}</p>
+            <div className="mt-5 rounded border border-[#E2E8F0] p-4 sm:p-6">
+              {renderCaseStudyContent(cs.tabs[tab])}
             </div>
           </div>
 
           <div className="flex justify-center">
-            <img src={cs.img} alt={cs.title} className="w-full max-w-[560px] rounded shadow-lg" loading="lazy" />
+            <img src={cs.img} alt={cs.title} className="h-auto w-full max-w-[560px] rounded shadow-lg" loading="lazy" />
           </div>
         </div>
 
-        <div className="mt-8 flex justify-center gap-2">
+        <div className="mt-6 flex justify-center gap-2">
           {CASE_STUDIES.map((_, i) => (
             <button
               key={i}
@@ -301,234 +356,91 @@ function CaseStudyCarousel() {
 
 function PlantReimagined() {
   return (
-    <section className="bg-white pb-10 pt-4 sm:pb-12 sm:pt-6 md:pb-16 md:pt-8 lg:pb-20 lg:pt-10">
-      <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
-        <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-[40px] lg:text-[46px]">
-          Cement plants, reimagined
-        </h2>
-        <div className="mt-6 max-w-[920px] space-y-5 text-base leading-relaxed text-[#3a4658] sm:mt-8 sm:space-y-6 sm:text-lg sm:leading-[1.8]">
-          <p>
-            From the quarry to the packing plant, the cement value chain runs
-            on a handful of high-energy, high-temperature processes. Visionaize
-            unifies them into a single 3D digital twin so plant managers,
-            control room operators and reliability engineers work off the same
-            real-time picture.
-          </p>
-          <p>
-            Advanced AI, AR and VR combine with supercharged remote operations
-            to stabilize the kiln, lift OEE across mills and crushers, and
-            unlock alternative-fuel and clinker-factor savings safely.
-          </p>
-          <p>
-            Connect with a Digital Twin expert to learn how Visionaize is
-            helping cement producers hit reliability, cost and sustainability
-            targets faster.
-          </p>
+    <section className="bg-white py-12 sm:py-16 lg:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+        <div className="grid grid-cols-1 items-center gap-8 lg:grid-cols-2 lg:gap-14">
+          <div className="space-y-4 text-[16px] leading-[1.75] text-[#3a4658] sm:space-y-5 sm:text-[17px]">
+            <h2 className="text-[30px] font-semibold leading-tight sm:text-[36px] lg:text-[44px]">
+              Smarter, More Sustainable Cement Operations
+            </h2>
+            <p>
+             Cement plants run on complex processes – from mining and raw mix preparation to kiln operations, grinding, and dispatch. Each stage involves thousands of interdependent variables that impact fuel use, equipment life, and clinker quality. Visionaize’s 3D Digital Twin solutions bring all of this together into a single intelligent platform, helping operators see the bigger picture and act with precision.
+            </p>
+            <p>
+              With advanced AI and predictive maintenance, plants can anticipate kiln instabilities, gear failures, and fan breakdowns before they occur. Real-time optimization stabilizes fuel mix, cuts power consumption in mills, and ensures consistent clinker quality. At the same time, emissions monitoring and sustainability analytics help plants stay compliant while lowering their carbon footprint.
+            </p>
+            <p>
+              Through immersive 3D environments and AR-enabled SOPs, teams gain contextualized insights at their fingertips – enabling faster learning, safer operations, and higher productivity across the plant.
+            </p>
+            <p>
+              Experience cement operations like never before, and take your plant towards higher efficiency, reliability, and sustainability.
+            </p>
+          </div>
+          <div className="flex items-center justify-center">
+            <img src="/digital-twin-for-cement/image-13.png" alt="Visionaize 3D Digital Twin for cement" className="h-auto w-full rounded shadow-lg" loading="lazy" />
+          </div>
         </div>
       </div>
     </section>
   );
 }
 
-/* ---------- Talk to an Expert form ---------- */
-
-type FormState = {
-  firstName: string;
-  lastName: string;
-  companyName: string;
-  businessEmail: string;
-  phoneNumber: string;
-  hearAboutUs: string;
-  message: string;
-};
-
-type FormErrors = Partial<Record<keyof FormState, string>>;
-
-const HEAR_ABOUT_US_OPTIONS = [
-  "Web Search",
-  "LinkedIn",
-  "Industry Event",
-  "Referral",
-  "Other",
-];
-
-const initialFormState: FormState = {
-  firstName: "",
-  lastName: "",
-  companyName: "",
-  businessEmail: "",
-  phoneNumber: "",
-  hearAboutUs: "",
-  message: "",
-};
-
-const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-// Exactly 10 digits — matches the backend's phone validation.
-const PHONE_REGEX = /^\d{10}$/;
-const MESSAGE_MAX_LENGTH = 1000;
-
-// Common free/personal email providers — rejected for a "Business Email" field.
-// Keep in sync with the FREE_EMAIL_DOMAINS set in routes/companyLeadForm.js.
-const FREE_EMAIL_DOMAINS = new Set([
-  "gmail.com",
-  "yahoo.com",
-  "hotmail.com",
-  "outlook.com",
-  "live.com",
-  "aol.com",
-  "icloud.com",
-  "me.com",
-  "mail.com",
-  "protonmail.com",
-  "proton.me",
-  "yandex.com",
-  "gmx.com",
-  "zoho.com",
-  "rediffmail.com",
-]);
-
-function isBusinessEmail(email: string): boolean {
-  const domain = email.split("@")[1]?.toLowerCase().trim();
-  return !!domain && !FREE_EMAIL_DOMAINS.has(domain);
-}
-
-function validateForm(form: FormState): FormErrors {
-  const errors: FormErrors = {};
-
-  const firstName = form.firstName.trim();
-  const lastName = form.lastName.trim();
-  const companyName = form.companyName.trim();
-  const businessEmail = form.businessEmail.trim();
-  const phoneDigits = form.phoneNumber.replace(/\D/g, "");
-  const message = form.message.trim();
-
-  if (!firstName) {
-    errors.firstName = "First name is required";
-  } else if (firstName.length > 100) {
-    errors.firstName = "First name is too long";
-  }
-
-  if (!lastName) {
-    errors.lastName = "Last name is required";
-  } else if (lastName.length > 100) {
-    errors.lastName = "Last name is too long";
-  }
-
-  if (!companyName) {
-    errors.companyName = "Company name is required";
-  } else if (companyName.length > 150) {
-    errors.companyName = "Company name is too long";
-  }
-
-  if (!businessEmail) {
-    errors.businessEmail = "Business email is required";
-  } else if (!EMAIL_REGEX.test(businessEmail)) {
-    errors.businessEmail = "Enter a valid email address";
-  } else if (!isBusinessEmail(businessEmail)) {
-    errors.businessEmail =
-      "Please use your business email address, not a personal one (e.g. Gmail, Yahoo)";
-  }
-
-  if (!form.phoneNumber.trim()) {
-    errors.phoneNumber = "Phone number is required";
-  } else if (!PHONE_REGEX.test(phoneDigits)) {
-    errors.phoneNumber = "Enter a valid 10-digit phone number";
-  }
-
-  // hearAboutUs and message are optional.
-  if (message.length > MESSAGE_MAX_LENGTH) {
-    errors.message = `Message must be ${MESSAGE_MAX_LENGTH} characters or fewer`;
-  }
-
-  return errors;
-}
-
-function fieldClass(hasError: boolean) {
-  return [
-    "w-full rounded border px-4 py-3 text-base text-[#3a4658] placeholder:text-[#94A3B8]",
-    "focus:outline-none focus:ring-1",
-    hasError
-      ? "border-red-400 focus:border-red-400 focus:ring-red-400"
-      : "border-[#CBD5E1] focus:border-[#2E8DC5] focus:ring-[#2E8DC5]",
-  ].join(" ");
-}
-
-function FieldError({ message }: { message: string }) {
-  return <p className="mt-1 text-sm text-red-600">{message}</p>;
-}
-
 function TalkDigitalTwins() {
-  const [form, setForm] = useState<FormState>(initialFormState);
-  const [errors, setErrors] = useState<FormErrors>({});
-  const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">(
-    "idle"
-  );
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [status, setStatus] = useState<"idle" | "sending" | "ok" | "err">("idle");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
 
-  const handleChange =
-    (field: keyof FormState) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-      const value = e.target.value;
-      setForm((prev) => ({ ...prev, [field]: value }));
-      setErrors((prev) => ({ ...prev, [field]: undefined }));
-    };
-
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const digitsOnly = e.target.value.replace(/\D/g, "").slice(0, 10);
-    setForm((prev) => ({ ...prev, phoneNumber: digitsOnly }));
-    setErrors((prev) => ({ ...prev, phoneNumber: undefined }));
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const formElement = e.currentTarget;
+    const form = new FormData(formElement);
+    const firstName = String(form.get("first_name") ?? "").trim();
+    const lastName = String(form.get("last_name") ?? "").trim();
+    const email = String(form.get("email") ?? "").trim();
+    const company = String(form.get("company") ?? "").trim();
+    const messageValue = String(form.get("message") ?? "").trim();
 
-    const validationErrors = validateForm(form);
-    if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors);
+    if (!firstName || !lastName || !email || !phone || !messageValue) {
+      setStatus("err");
+      setErrorMsg("Please complete all required fields.");
       return;
     }
 
-    setStatus("submitting");
-    setErrorMessage(null);
+    setStatus("sending");
+    setErrorMsg("");
 
     try {
-      await api.submitCompanyLeadForm({
-        first_name: form.firstName.trim(),
-        last_name: form.lastName.trim(),
-        company_name: form.companyName.trim(),
-        business_email: form.businessEmail.trim(),
-        phone_number: form.phoneNumber.replace(/\D/g, ""),
-        hear_about_us: form.hearAboutUs.trim() || undefined,
-        message: form.message.trim() || undefined,
-        source_page: "/industries/digital-twin-for-cement/",
+      await api.submitContact({
+        name: `${firstName} ${lastName}`.trim(),
+        email,
+        company: company || undefined,
+        phone,
+        message: messageValue,
+        source_page: "/industries/digital-twin-for-cement",
       });
-
-      setStatus("success");
-      setForm(initialFormState);
+      setStatus("ok");
+      setPhone("");
+      setMessage("");
+      formElement.reset();
     } catch (err) {
-      setStatus("error");
-      setErrorMessage(
-        err instanceof Error
-          ? err.message
-          : "Something went wrong sending your request. Please try again."
-      );
+      setStatus("err");
+      setErrorMsg(err instanceof Error ? err.message : "Unable to submit. Please try again.");
     }
   };
 
   return (
-    <section id="talk-to-an-expert" className="bg-[#F1F5F9] py-10 sm:py-12 md:py-16 lg:py-20">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-4 sm:px-6 sm:gap-12 lg:grid-cols-2">
+    <section id="talk-to-an-expert" className="scroll-mt-24 bg-[#F1F5F9] py-12 sm:py-16 lg:scroll-mt-28 lg:py-20">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-start gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14">
         <div>
-          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-[40px] lg:text-[46px]">Let's talk digital twins</h2>
-          <p className="mt-5 text-base leading-relaxed text-[#3a4658] sm:mt-6 sm:text-lg sm:leading-[1.8]">
-            V-Suite turns your cement plant into a connected digital metaverse.
-            Visualize operations through a real-time, up-to-date 3-D digital
-            twin. Connect with us to learn how it works.
+          <h2 className="text-[30px] font-semibold leading-tight sm:text-[36px] lg:text-[44px]">Let's talk digital twins</h2>
+          <p className="mt-4 text-[16px] leading-[1.75] text-[#3a4658] sm:mt-5 sm:text-[17px]">
+            Visionaize V-Plant transforms your cement plant into an intelligent digital twin environment – connecting mining, kiln, mills, and dispatch into one adaptive system. Experience real-time insights that help your teams run stable, efficient, and sustainable operations.
           </p>
-          <h3 className="mt-8 text-xl font-semibold sm:mt-10 sm:text-2xl">Visionaize a better world</h3>
-          <ul className="mt-5 space-y-3 sm:mt-6 sm:space-y-4">
+          <h3 className="mt-7 text-[19px] font-semibold sm:mt-8 sm:text-[21px]">Learn how Visionaize can:</h3>
+          <ul className="mt-4 space-y-3 sm:mt-5">
             {FORM_TOPICS.map((t) => (
-              <li key={t} className="flex items-start gap-3 text-base text-[#0F1B2D] sm:text-lg">
+              <li key={t} className="flex items-start gap-3 text-[16px] text-[#0F1B2D] sm:text-[17px]">
                 <span
                   className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white"
                   style={{ background: "linear-gradient(135deg, #A6E04A 0%, #2E8DC5 100%)" }}
@@ -543,126 +455,48 @@ function TalkDigitalTwins() {
           </ul>
         </div>
 
-        <div className="rounded-lg bg-white p-6 shadow-md sm:p-8">
-          <h3 className="text-xl font-semibold text-[#2E8DC5] sm:text-2xl md:text-[26px]">Talk to an expert</h3>
-          <form onSubmit={handleSubmit} noValidate className="mt-6 grid grid-cols-1 gap-4">
-            <div>
-              <input
-                type="text"
-                placeholder="First name*"
-                value={form.firstName}
-                onChange={handleChange("firstName")}
-                aria-invalid={!!errors.firstName}
-                maxLength={100}
-                className={fieldClass(!!errors.firstName)}
-              />
-              {errors.firstName && <FieldError message={errors.firstName} />}
-            </div>
-
-            <div>
-              <input
-                type="text"
-                placeholder="Last name*"
-                value={form.lastName}
-                onChange={handleChange("lastName")}
-                aria-invalid={!!errors.lastName}
-                maxLength={100}
-                className={fieldClass(!!errors.lastName)}
-              />
-              {errors.lastName && <FieldError message={errors.lastName} />}
-            </div>
-
-            <div>
-              <input
-                type="text"
-                placeholder="Company name*"
-                value={form.companyName}
-                onChange={handleChange("companyName")}
-                aria-invalid={!!errors.companyName}
-                maxLength={150}
-                className={fieldClass(!!errors.companyName)}
-              />
-              {errors.companyName && <FieldError message={errors.companyName} />}
-            </div>
-
-            <div>
-              <input
-                type="email"
-                placeholder="Business Email*"
-                value={form.businessEmail}
-                onChange={handleChange("businessEmail")}
-                aria-invalid={!!errors.businessEmail}
-                className={fieldClass(!!errors.businessEmail)}
-              />
-              {errors.businessEmail && <FieldError message={errors.businessEmail} />}
-            </div>
-
-            <div>
-              <input
-                type="tel"
-                placeholder="Phone number*"
-                value={form.phoneNumber}
-                onChange={handlePhoneChange}
-                aria-invalid={!!errors.phoneNumber}
-                inputMode="numeric"
-                maxLength={10}
-                className={fieldClass(!!errors.phoneNumber)}
-              />
-              {errors.phoneNumber && <FieldError message={errors.phoneNumber} />}
-            </div>
-
-            <select
-              value={form.hearAboutUs}
-              onChange={handleChange("hearAboutUs")}
-              className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-base text-[#3a4658] focus:border-[#2E8DC5] focus:outline-none"
-            >
-              <option value="">How did you first hear about us?</option>
-              {HEAR_ABOUT_US_OPTIONS.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
-              ))}
+        <div className="w-full max-w-full rounded-lg bg-white p-6 shadow-md sm:p-7 lg:max-w-md">
+          <h3 className="text-[22px] font-semibold text-[#2E8DC5] sm:text-[24px]">Talk to an expert</h3>
+          <form className="mt-5 grid grid-cols-1 gap-4" onSubmit={onSubmit}>
+            <FloatingInput name="first_name" label="First name*" required />
+            <FloatingInput name="last_name" label="Last name*" required />
+            <FloatingInput name="company" label="Company name*" />
+            <FloatingInput name="email" label="Business Email*" type="email" required />
+            <FloatingInput
+              name="phone"
+              label="Phone number*"
+              type="tel"
+              required
+              inputMode="numeric"
+              pattern="\d{10}"
+              maxLength={10}
+              value={phone}
+              onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
+            />
+            <select name="referral" className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-sm text-[#3a4658] focus:border-[#2E8DC5] focus:outline-none" defaultValue="">
+              <option value="" disabled>
+                How did you first hear about us?
+              </option>
+              <option>Web Search</option>
+              <option>LinkedIn</option>
+              <option>Industry Event</option>
+              <option>Referral</option>
+              <option>Other</option>
             </select>
-
-            <div>
-              <textarea
-                rows={4}
-                placeholder="Message"
-                value={form.message}
-                onChange={handleChange("message")}
-                aria-invalid={!!errors.message}
-                maxLength={MESSAGE_MAX_LENGTH}
-                className={fieldClass(!!errors.message)}
-              />
-              <div className="mt-1 flex items-center justify-between">
-                {errors.message ? <FieldError message={errors.message} /> : <span />}
-                <span className="text-sm text-[#64748B]">
-                  {form.message.length}/{MESSAGE_MAX_LENGTH}
-                </span>
-              </div>
-            </div>
-
+            <FloatingTextarea name="message" label="Message" rows={4} value={message} onChange={(e) => setMessage(e.target.value)} required />
             <button
               type="submit"
-              disabled={status === "submitting"}
-              className="mt-2 inline-flex items-center justify-center rounded-full px-7 py-3.5 text-base font-semibold text-white shadow-md transition hover:shadow-lg disabled:opacity-60"
+              disabled={status === "sending"}
+              className="mt-2 inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg disabled:opacity-60"
               style={{
                 background: "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
               }}
             >
-              {status === "submitting" ? "Sending…" : "Send request"}
+              {status === "sending" ? "Sending…" : "Send request"}
             </button>
-
-            {status === "success" && (
-              <p className="text-center text-base text-green-600">
-                Thanks! A Digital Twin expert will be in touch shortly.
-              </p>
-            )}
-            {status === "error" && errorMessage && (
-              <p className="text-center text-base text-red-600">{errorMessage}</p>
-            )}
-
-            <p className="text-center text-sm text-[#64748B]">We generally respond within 24 hours</p>
+            <p className="text-center text-xs text-[#64748B]">We generally respond within 24 hours</p>
+            {status === "ok" && <p className="text-center text-sm text-green-600">Thanks — we received your message and will respond shortly.</p>}
+            {status === "err" && <p className="text-center text-sm text-red-600">{errorMsg}</p>}
           </form>
         </div>
       </div>
@@ -670,31 +504,33 @@ function TalkDigitalTwins() {
   );
 }
 
+
+
 function Whitepaper() {
   return (
-    <section className="bg-white py-10 sm:py-12 md:py-16 lg:py-20">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 px-4 sm:px-6 sm:gap-12 lg:grid-cols-2 lg:gap-16">
-        <div className="flex justify-center">
+    <section className="bg-white py-12 sm:py-16 lg:py-20">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-14">
+        <div className="order-2 flex justify-center lg:order-1">
           <img
-            src="https://visionaize.com/wp-content/uploads/2022/07/Rectangle-425-6.png"
+            src="/digital-twin-for-cement/Group-1171277152-1.svg"
             alt="The Industrial Metaverse whitepaper"
-            className="w-full max-w-[380px] shadow-xl sm:max-w-[460px]"
+            className="h-auto w-full max-w-[300px] sm:max-w-[380px] lg:max-w-[460px]"
             loading="lazy"
           />
         </div>
-        <div>
-          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-[40px] lg:text-[46px]">
-            Experience data in The Industrial Metaverse
+        <div className="order-1 lg:order-2">
+          <h2 className="text-[30px] font-semibold leading-tight sm:text-[36px] lg:text-[44px]">
+              Reimagining Cement Manufacturing with AI
           </h2>
-          <p className="mt-5 text-base leading-relaxed text-[#3a4658] sm:mt-6 sm:text-lg sm:leading-[1.8]">
-            With the emergence of Industry 4.0 and IIoT sensors, data overload
-            is a common challenge. Explore how 3D digital twin technology can
-            turn the data deluge into a competitive advantage.
+          <p className="mt-4 text-[16px] leading-[1.75] text-[#3a4658] sm:mt-5 sm:text-[17px]">
+            Energy-intensive processes, variable kiln operations, and sustainability pressures make cement one of the most challenging industries to optimize. Explore how AI-powered digital twin technology is redefining plant performance and resilience.
           </p>
+          <h6 className="mt-4 text-[16px] font-medium sm:text-[17px]">Reimagining Cement Manufacturing: The Strategic Role of Artificial Intelligence</h6>
           <a
-            href="/theindustrialmetaverse"
-             rel="noopener noreferrer"
-            className="mt-7 inline-flex items-center rounded-full border border-[#0F1B2D] px-6 py-3 text-base font-semibold text-[#0F1B2D] transition hover:bg-[#0F1B2D] hover:text-white sm:mt-8 sm:px-7"
+            href="/cement-industry-whitepaper/"
+           
+            rel="noopener noreferrer"
+            className="mt-7 inline-flex items-center rounded-full border border-[#0F1B2D] px-7 py-3 text-sm font-semibold text-[#0F1B2D] transition hover:bg-[#0F1B2D] hover:text-white sm:mt-8"
           >
             Explore how
           </a>
@@ -703,39 +539,103 @@ function Whitepaper() {
     </section>
   );
 }
+function Testimonials() {
+  const TESTIMONIALS = [
+    {
+      quote:
+        "AI transformed our sustainability reporting from a compliance headache to a leadership tool. Instead of reacting to regulators, we now use data to engage investors with confidence.",
+      author: "Eco Cement Manufacturer - CFO",
+    },
+    {
+      quote:
+        "The AI system didn’t just reduce our fuel bill—it stabilized our entire production rhythm. It has changed how we run the plant.",
+      author: "South Asian Cement Manufacturer - Plant Director",
+    },
+    {
+      quote:
+        "AI helped us move from firefighting to foresight. We no longer wait for a failure—we see it coming and act smartly. That shift alone has changed how our teams view maintenance.",
+      author: "Latin American Cement Manufacturer - Maintenance Head",
+    },
+  ];
 
-function LetsConnect() {
+  const [current, setCurrent] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [isPaused]);
+
+  const next = () =>
+    setCurrent((prev) => (prev + 1) % TESTIMONIALS.length);
+
+  const prev = () =>
+    setCurrent((prev) => (prev - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
+
   return (
-    <section className="relative overflow-hidden bg-[#0F1B2D] py-10 sm:py-12 md:py-16 lg:py-20">
-      <svg
-        className="pointer-events-none absolute right-0 top-0 h-full w-2/3 opacity-50"
-        viewBox="0 0 800 400"
-        fill="none"
-        preserveAspectRatio="none"
-      >
-        <path d="M-100 400 C 200 100, 600 100, 900 400" stroke="url(#cmg)" strokeWidth="1.5" fill="none" />
-        <path d="M-100 380 C 250 120, 650 120, 900 380" stroke="url(#cmg)" strokeWidth="1.5" fill="none" />
-        <defs>
-          <linearGradient id="cmg" x1="0" y1="0" x2="800" y2="400">
-            <stop offset="0%" stopColor="#A6E04A" />
-            <stop offset="100%" stopColor="#2E8DC5" />
-          </linearGradient>
-        </defs>
-      </svg>
-      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6">
-        <h2 className="text-4xl font-semibold leading-[1.05] text-white sm:text-5xl md:text-6xl lg:text-[68px]">Let's Connect</h2>
-        <p className="mt-5 max-w-[520px] text-base leading-relaxed text-white/80 sm:mt-6 sm:text-lg md:text-xl">
-          Learn how Visionaize can stabilize the kiln and accelerate cement decarbonization
-        </p>
-        <Link
-          to="/contact"
-          className="mt-8 inline-flex items-center rounded-full px-7 py-3.5 text-base font-semibold text-white shadow-md transition hover:shadow-lg sm:mt-10 sm:px-8"
+    <section
+      className="relative overflow-hidden bg-[#1D2A39] py-12 sm:py-14 lg:py-16"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div className="relative mx-auto max-w-[1200px] px-4 sm:px-10">
+
+        <h2
+          className="mb-7 text-center text-[28px] font-normal sm:mb-9 sm:text-[36px] lg:text-[44px]"
           style={{
-            background: "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
+            background:
+              "linear-gradient(90deg,#72D26C 0%,#1CB4E8 100%)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
           }}
         >
-          Talk to an expert
-        </Link>
+          Client Testimonials
+        </h2>
+
+        <button
+          onClick={prev}
+          aria-label="Previous testimonial"
+          className="absolute left-1 top-1/2 -translate-y-1/2 text-white/70 transition hover:text-white sm:left-6"
+        >
+          <ChevronLeft size={24} className="sm:h-8 sm:w-8" />
+        </button>
+
+        <div className="mx-auto max-w-[920px] px-8 text-center sm:px-10">
+
+          <p
+            className="text-[18px] font-normal leading-[1.6] text-white sm:text-[21px] lg:text-[26px] lg:leading-[1.7]"
+            style={{
+              fontFamily: "Roboto, sans-serif",
+            }}
+          >
+            “{TESTIMONIALS[current].quote}”
+          </p>
+
+<h6
+  className="mt-4 text-[16px] sm:text-[18px]"
+  style={{
+    fontFamily: "Roboto",
+    background: "linear-gradient(90deg,#72D26C,#1CB4E8)",
+    WebkitBackgroundClip: "text",
+    WebkitTextFillColor: "transparent",
+    fontWeight: "300 !important",
+  }}
+>
+  {TESTIMONIALS[current].author}
+</h6>
+        </div>
+
+        <button
+          onClick={next}
+          aria-label="Next testimonial"
+          className="absolute right-1 top-1/2 -translate-y-1/2 text-white/70 transition hover:text-white sm:right-6"
+        >
+          <ChevronRight size={24} className="sm:h-8 sm:w-8" />
+        </button>
       </div>
     </section>
   );

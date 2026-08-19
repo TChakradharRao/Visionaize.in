@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput } from "@/components/ui/floating-field";
+
+import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/power-industry-whitepaper")({
   head: () => ({
@@ -96,7 +99,7 @@ function PowerHero() {
           <div className="mx-auto w-full max-w-4xl py-6 lg:relative lg:mx-0 lg:py-10">
             <div className="mx-auto w-[70%] -rotate-6 sm:w-[55%] lg:mr-auto lg:ml-0 lg:w-[51%]">
               <img
-                src="https://visionaize.in/wp-content/uploads/2026/05/Group-1171277152-1-768x758.png"
+                src="/white-paper/Group-1171277152-1-768x758.png"
                 alt="Power Industry Whitepaper — cover"
                 className="w-full rounded-md object-contain"
                 loading="eager"

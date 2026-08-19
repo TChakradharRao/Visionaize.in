@@ -6,6 +6,7 @@ import { Footer } from "@/components/site/Footer";
 import { getAllPosts, getResourceTags, filterPosts } from "@/lib/blogData";
 
 function optimized(url: string): string {
+  if (url.startsWith('/')) return url;
   return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=640&h=400&fit=cover&output=webp&q=80`;
 }
 

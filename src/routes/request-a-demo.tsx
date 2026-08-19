@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-field";
 import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/request-a-demo")({
@@ -94,7 +95,7 @@ function RequestDemoPage() {
 
   const handleChange =
     (field: keyof FormState) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       let value = e.target.value;
       if (field === "phone") value = value.replace(/\D/g, "").slice(0, 10);
 
@@ -178,65 +179,71 @@ function RequestDemoPage() {
               <h2 className="text-2xl font-semibold text-brand-navy">Request a demo</h2>
               <div className="mt-7 space-y-4">
                 <div>
-                  <Input
-                    placeholder="First name*"
+                  <FloatingInput
+                    name="firstName"
+                    label="First name*"
                     value={form.firstName}
                     onChange={handleChange("firstName")}
-                    hasError={!!errors.firstName}
+                    className={errors.firstName ? "border-red-400 focus:border-red-400" : ""}
                   />
                   {errors.firstName && <FieldError message={errors.firstName} />}
                 </div>
 
                 <div>
-                  <Input
-                    placeholder="Last name*"
+                  <FloatingInput
+                    name="lastName"
+                    label="Last name*"
                     value={form.lastName}
                     onChange={handleChange("lastName")}
-                    hasError={!!errors.lastName}
+                    className={errors.lastName ? "border-red-400 focus:border-red-400" : ""}
                   />
                   {errors.lastName && <FieldError message={errors.lastName} />}
                 </div>
 
                 <div>
-                  <Input
-                    placeholder="Company name*"
+                  <FloatingInput
+                    name="company"
+                    label="Company name*"
                     value={form.company}
                     onChange={handleChange("company")}
-                    hasError={!!errors.company}
+                    className={errors.company ? "border-red-400 focus:border-red-400" : ""}
                   />
                   {errors.company && <FieldError message={errors.company} />}
                 </div>
 
                 <div>
-                  <Input
-                    placeholder="Business Email*"
+                  <FloatingInput
+                    name="email"
+                    label="Business Email*"
                     type="email"
                     value={form.email}
                     onChange={handleChange("email")}
-                    hasError={!!errors.email}
+                    className={errors.email ? "border-red-400 focus:border-red-400" : ""}
                   />
                   {errors.email && <FieldError message={errors.email} />}
                 </div>
 
                 <div>
-                  <Input
-                    placeholder="Phone number*"
+                  <FloatingInput
+                    name="phone"
+                    label="Phone number*"
                     type="tel"
                     inputMode="numeric"
                     maxLength={10}
                     value={form.phone}
                     onChange={handleChange("phone")}
-                    hasError={!!errors.phone}
+                    className={errors.phone ? "border-red-400 focus:border-red-400" : ""}
                   />
                   {errors.phone && <FieldError message={errors.phone} />}
                 </div>
 
-                <textarea
-                  placeholder="Your specific areas of interest."
+                <FloatingTextarea
+                  name="interest"
+                  label="Your specific areas of interest"
                   rows={2}
                   value={form.interest}
                   onChange={handleChange("interest")}
-                  className="block w-full rounded-lg border border-gray-700 bg-white px-4 py-3 text-[14px] font-medium text-brand-navy placeholder:text-brand-navy focus:border-brand-blue focus:outline-none"
+                  className="resize-none"
                 />
               </div>
               <button

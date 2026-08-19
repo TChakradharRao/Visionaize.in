@@ -8,44 +8,44 @@ export const Route = createFileRoute('/solutions/')({
 
 const benefits = [
   {
-    icon: 'https://visionaize.in/wp-content/uploads/2022/05/Vector-6.svg',
+    icon: '/solutions/Vector-6.svg',
     label: 'Reduced downtime',
   },
   {
-    icon: 'https://visionaize.in/wp-content/uploads/2022/05/Group-3.svg',
+    icon: '/solutions/Group-3.svg',
     label: 'Increased productivity',
   },
   {
-    icon: 'https://visionaize.in/wp-content/uploads/2022/05/Group-4.svg',
+    icon: '/solutions/Group-4.svg',
     label: 'Improved worker safety',
   },
   {
-    icon: 'https://visionaize.in/wp-content/uploads/2022/05/Group-544.svg',
+    icon: '/solutions/Group-544.svg',
     label: 'A more sustainable future',
   },
 ]
 
 const features = [
   {
-    icon: 'https://visionaize.in/wp-content/uploads/2022/05/Group-2.svg',
+    icon: '/solutions/Group-2.svg',
     title: 'Intelligent Model Management',
     description:
       'The most advanced Model Management of Change (MMOC) and connectivity to maintain your twin 24/7/365.',
   },
   {
-    icon: 'https://visionaize.in/wp-content/uploads/2022/05/Vector-3.svg',
+    icon: '/solutions/Vector-3.svg',
     title: 'Advanced Work Packages',
     description:
       'Plan maintenance proactively with the most dynamic 3D knowledge views for planning, execution and analysis.',
   },
   {
-    icon: 'https://visionaize.in/wp-content/uploads/2022/05/Vector-4.svg',
+    icon: '/solutions/Vector-4.svg',
     title: 'Mobile, AR & VR',
     description:
       'Experience your infrastructure asset data when, where and how you want, through mobile apps and advanced AR & VR simulations.',
   },
   {
-    icon: 'https://visionaize.in/wp-content/uploads/2022/05/Vector-5.svg',
+    icon: '/solutions/Vector-5.svg',
     title: 'Efficient Work Collaboration',
     description:
       'Bring the facility to the fingertips of teams in a collaborative, dynamic and integrated digital 3D environment.',
@@ -54,7 +54,7 @@ const features = [
 
 const caseStudies = [
   {
-    image: 'https://visionaize.in/wp-content/uploads/2022/05/Group-598.png',
+    image: '/solutions/Group-598.png',
     title: 'Saudi Kayan – SABIC Affiliate',
     subtitle: 'Large Petrochemical Complex in Saudi Arabia',
     tags: [
@@ -79,7 +79,7 @@ const caseStudies = [
     imagePosition: 'left' as const,
   },
   {
-    image: 'https://visionaize.in/wp-content/uploads/2022/05/Group-598-2.png',
+    image: '/solutions/Group-598-2.png',
     title: 'CHS',
     subtitle: 'Approximately 100K bbd Refinery McPherson, KS',
     tags: [
@@ -119,10 +119,43 @@ function RouteComponent() {
       <main className="flex-1">
         {/* Hero */}
         <section className="w-full bg-white">
-          <div className="grid grid-cols-1 lg:grid-cols-[3fr_2fr] min-h-0 lg:min-h-[550px]">
+          {/* Mobile-only hero (below sm) — dedicated heading, image, copy, and CTA */}
+          <div className="sm:hidden flex flex-col items-center text-center px-4 py-8">
+            <h1 className="text-xl font-semibold leading-[1.2] text-gray-900 max-w-2xl">
+              3D digital twin solutions for enterprise asset management
+            </h1>
+
+            <div className="mt-6 w-full max-w-sm">
+              <img
+                src="/solutions/Group-583.png"
+                alt="3D digital twin solutions for enterprise asset management"
+                className="w-full h-auto object-contain"
+              />
+            </div>
+
+            <p className="mt-6 text-sm text-gray-600 max-w-xl leading-relaxed">
+              Reduce downtime and operational risk by leveraging data like never before
+            </p>
+
+            <div className="mt-6">
+              <Link
+                to="/contact"
+                className={primaryBtnClasses}
+                style={{
+                  background:
+                    'linear-gradient(90deg, #22c55e 0%, #0ea5e9 100%)',
+                }}
+              >
+                Learn how
+              </Link>
+            </div>
+          </div>
+
+          {/* Tablet & desktop hero (sm and up) */}
+          <div className="hidden sm:grid sm:grid-cols-1 lg:grid-cols-[3fr_2fr] min-h-0 lg:min-h-[480px] xl:min-h-[550px]">
             {/* Left: copy */}
-            <div className="flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-12 lg:py-0 order-2 lg:order-1">
-              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.2] text-gray-900 max-w-2xl">
+            <div className="flex flex-col justify-center px-4 sm:px-6 md:px-10 lg:px-12 xl:px-16 py-8 sm:py-12 lg:py-10 xl:py-0 order-2 lg:order-1">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-semibold leading-[1.2] text-gray-900 max-w-2xl">
                 Industrial AI and Digital Twin Technology of Tomorrow –{' '}
                 <span className="italic font-normal">Available Now</span>
               </h1>
@@ -150,9 +183,9 @@ function RouteComponent() {
             </div>
 
             {/* Right: image, scaled to match the content column's height/width */}
-            <div className="relative w-full h-[200px] xs:h-[240px] sm:h-[320px] md:h-[420px] lg:h-full lg:min-h-[560px] flex items-center justify-center p-2 lg:p-4 overflow-hidden order-1 lg:order-2">
+            <div className="relative w-full h-[200px] xs:h-[240px] sm:h-[320px] md:h-[420px] lg:h-full lg:min-h-[480px] xl:min-h-[560px] flex items-center justify-center p-2 lg:p-4 overflow-hidden order-1 lg:order-2">
               <img
-                src="https://visionaize.in/wp-content/uploads/2024/05/monitor2-copy.png"
+                src="/solutions/monitor2-copy.png"
                 alt="Visionaize digital twin monitoring interface showing an industrial piping model with step-by-step maintenance annotations"
                 className="w-full h-full object-contain"
               />
@@ -188,7 +221,7 @@ function RouteComponent() {
           className="w-full bg-gray-100 bg-cover bg-center bg-no-repeat"
           style={{
             backgroundImage:
-              "url('https://visionaize.in/wp-content/uploads/2022/05/solutions-hero2-desktop.png')",
+              "url('/solutions/solutions-hero2-desktop.png')",
           }}
         >
           <div className="max-w-4xl mx-auto px-4 sm:px-6 md:px-10 py-12 sm:py-16 md:py-28 text-center">
@@ -211,30 +244,16 @@ function RouteComponent() {
           </div>
         </section>
 
-        {/* Testimonial quote */}
-        <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-gray-100 overflow-visible">
-          <div
-            className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-12 sm:pt-16 md:pt-28 pb-16 sm:pb-24 md:pb-36 bg-none sm:bg-no-repeat sm:bg-right-bottom sm:bg-contain"
-            style={{
-              backgroundImage:
-                "url('https://visionaize.in/wp-content/uploads/2022/05/Group-516.png')",
-            }}
-          >
-            <blockquote className="max-w-3xl">
-              <p className="text-base sm:text-lg md:text-2xl lg:text-[2rem] leading-[1.4] text-gray-900">
-                The Digital Twin is a living learning model that allows you to
-                deliver business value by constantly making sure that Twin is
-                a replica of the asset so you can get insight into that asset
-                and take action…
-              </p>
+       {/* Testimonial quote */}
+        <section className="w-full  bg-no-repeat bg-right-bottom bg-cover" style={{ backgroundImage: "url('/solutions/Group-516.png')" }}>
+          <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16 py-20 sm:py-28 ">
+            <blockquote className="max-w-4xl">
+              <p className="text-lg sm:text-3xl md:text-4xl leading-[1.35] text-gray-900">“The Digital Twin is a living learning model that allows you to deliver business value by constantly making sure that Twin is a replica of the asset so you can get insight into that asset and take action...”</p>
 
-              <footer className="mt-4 sm:mt-6 md:mt-8 text-xs sm:text-sm md:text-base text-gray-700">
-                GE Digital, a Visionaize Partner
-              </footer>
+              <footer className="mt-8 text-base text-gray-700">GE Digital, a Visionaize Partner</footer>
             </blockquote>
           </div>
         </section>
-
         {/* Features */}
         <section className="w-full bg-[#132337]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-10 sm:py-14 md:py-20">
@@ -263,39 +282,42 @@ function RouteComponent() {
 
         {/* Case studies */}
         <section className="w-full bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-4 py-10 sm:py-14 md:py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-6 xl:px-4 py-10 sm:py-14 md:py-20">
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-gray-900 mb-8 sm:mb-10 md:mb-12 text-center">
               Case studies
             </h2>
 
-            <div className="flex flex-col gap-8 sm:gap-10 md:gap-14 lg:gap-6">
+            <div className="flex flex-col gap-8 sm:gap-10 md:gap-14 lg:gap-10 xl:gap-6">
               {caseStudies.map((study) => (
                 <div
                   key={study.title}
-                  className={`grid grid-cols-1 gap-6 sm:gap-8 lg:gap-8 items-start ${
+                  className={`grid grid-cols-1 gap-6 sm:gap-8 lg:gap-8 items-center ${
                     study.imagePosition === 'right'
-                      ? 'lg:grid-cols-[1fr_1.6fr]'
-                      : 'lg:grid-cols-[1.6fr_1fr]'
+                      ? 'lg:grid-cols-[1fr_1.5fr]'
+                      : 'lg:grid-cols-[1.5fr_1fr]'
                   }`}
                 >
-                  {/* Image */}
+                  {/* Image — aspect-ratio box + object-cover so it fills its
+                      box edge-to-edge at every size instead of letterboxing
+                      (object-contain) inside a bleed margin, which is what
+                      broke the layout specifically at the lg breakpoint. */}
                   <div
-                    className={`w-full h-[220px] xs:h-[260px] sm:h-[380px] md:h-[480px] lg:h-full lg:min-h-[520px] overflow-hidden flex items-center justify-center ${
+                    className={`relative w-full aspect-[4/3] sm:aspect-[16/10] lg:aspect-auto lg:h-[360px] xl:h-[440px] overflow-hidden rounded-xl lg:rounded-none ${
                       study.imagePosition === 'right'
-                        ? 'lg:order-2 -mr-4 sm:-mr-6 md:-mr-10 lg:-mr-16'
-                        : '-ml-4 sm:-ml-6 md:-ml-10 lg:-ml-16'
+                        ? 'lg:order-2 lg:-mr-4 xl:-mr-10 2xl:-mr-16'
+                        : 'lg:-ml-4 xl:-ml-10 2xl:-ml-16'
                     }`}
                   >
                     <img
                       src={study.image}
                       alt={study.title}
-                      className="w-full h-full object-contain"
+                      className="absolute inset-0 h-full w-full object-cover"
                     />
                   </div>
 
                   {/* Content */}
                   <div>
-                    <h3 className="text-lg sm:text-xl md:text-2xl lg:text-4xl font-bold text-gray-900">
+                    <h3 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gray-900">
                       {study.title}
                     </h3>
                     <p className="mt-1 text-xs sm:text-sm md:text-base text-gray-700 font-medium">
@@ -315,10 +337,10 @@ function RouteComponent() {
                     </div>
 
                     {/* Stats */}
-                    <div className="mt-4 sm:mt-5 flex flex-wrap gap-x-8 sm:gap-x-10 md:gap-x-12 gap-y-3 sm:gap-y-4">
+                    <div className="mt-4 sm:mt-5 flex flex-wrap gap-x-8 sm:gap-x-10 md:gap-x-12 lg:gap-x-8 xl:gap-x-12 gap-y-3 sm:gap-y-4">
                       {study.stats.map((stat) => (
                         <div key={stat.label}>
-                          <div className="text-xl sm:text-2xl md:text-4xl font-semibold text-emerald-500">
+                          <div className="text-xl sm:text-2xl md:text-4xl lg:text-3xl xl:text-4xl font-semibold text-emerald-500">
                             {stat.value}
                           </div>
                           <div className="mt-1 text-xs sm:text-sm text-gray-500">
@@ -370,22 +392,22 @@ function RouteComponent() {
         </section>
 
         {/* Testimonial quote */}
-        <section className="relative left-1/2 right-1/2 -mx-[50vw] w-screen bg-gray-100 overflow-visible">
-          <div
-            className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 pt-12 sm:pt-16 md:pt-28 pb-16 sm:pb-24 md:pb-36 bg-none sm:bg-no-repeat sm:bg-right-bottom sm:bg-contain"
-            style={{
-              backgroundImage:
-                "url('https://visionaize.in/wp-content/uploads/2022/05/Group-516.png')",
-            }}
-          >
-            <blockquote className="max-w-3xl">
-              <p className="text-base sm:text-lg md:text-3xl lg:text-[2rem] leading-[1.4] text-gray-900">
+        <section
+          className="w-full bg-no-repeat bg-right-bottom bg-cover"
+          style={{
+            backgroundImage:
+              "url('/solutions/Group-516.png')",
+          }}
+        >
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-14 sm:py-20 md:py-28">
+            <blockquote className="max-w-4xl">
+              <p className="text-base sm:text-lg md:text-3xl lg:text-4xl leading-[1.35] text-gray-900">
                 “Creating isometric drawings for inspections drove the initial
                 justification. Now, applying (V-Suite) to other areas creates
                 clear financial benefits.”
               </p>
 
-              <footer className="mt-4 sm:mt-6 md:mt-8 text-xs sm:text-sm md:text-base text-gray-700">
+              <footer className="mt-5 sm:mt-8 text-sm sm:text-base text-gray-700">
                 CHS Inc.
               </footer>
             </blockquote>
@@ -395,14 +417,14 @@ function RouteComponent() {
         {/* 3D digital twin experts */}
         <section className="w-full bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-10 lg:px-16 py-8 sm:py-10 md:py-12">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-6 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 lg:gap-10 xl:gap-6 items-center">
               {/* Left: copy */}
               <div>
-                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-semibold leading-[1.25] text-gray-900">
+                <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-3xl xl:text-4xl font-semibold leading-[1.25] text-gray-900">
                   3D digital twin experts with deep domain knowledge
                 </h2>
 
-                <p className="mt-4 sm:mt-5 md:mt-6 text-sm sm:text-lg md:text-2xl text-gray-900 leading-relaxed">
+                <p className="mt-4 sm:mt-5 md:mt-6 text-sm sm:text-lg md:text-2xl lg:text-xl xl:text-2xl text-gray-900 leading-relaxed">
                   Tap our rich experience in turning complex data sets into
                   competitive advantages
                 </p>
@@ -426,26 +448,14 @@ function RouteComponent() {
                   of change capability, provides the most complete and
                   interoperable asset management platform for your Digital Plant.
                 </p>
-
-                {/* <div className="mt-6 sm:mt-8">
-                  <Link
-                    to="/contact"
-                    className={primaryBtnClasses}
-                    style={{
-                      background: 'linear-gradient(90deg, #22c55e 0%, #0ea5e9 100%)',
-                    }}
-                  >
-                    Let’s Connect
-                  </Link>
-                </div> */}
               </div>
 
               {/* Right: image */}
               <div className="w-full flex items-center justify-center">
                 <img
-                  src="https://visionaize.in/wp-content/uploads/2022/05/Group-584-1.png"
+                  src="/solutions/Group-584-1.png"
                   alt="Mobile AR view of a digital twin showing an annotated industrial piping model"
-                  className="w-full max-w-[220px] sm:max-w-xs md:max-w-sm h-auto object-contain"
+                  className="w-full max-w-[220px] sm:max-w-xs md:max-w-sm lg:max-w-[280px] xl:max-w-sm h-auto object-contain"
                 />
               </div>
             </div>

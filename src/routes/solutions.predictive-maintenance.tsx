@@ -79,7 +79,7 @@ function RouteComponent() {
           {/* Right: image */}
           <div className="overflow-hidden rounded-lg shadow-xl">
             <img
-              src="https://visionaize.in/wp-content/uploads/2024/02/iStock-1421664619-2048x1365.jpg"
+              src="/predictive-maintenance/iStock-1421664619-2048x1365.jpg"
               alt="Facility technician using a tablet to monitor equipment for predictive maintenance"
               className="aspect-[4/3] h-auto w-full object-cover md:aspect-auto md:h-full"
             />
@@ -163,7 +163,7 @@ function RouteComponent() {
           {/* Left: image */}
           <div className="overflow-hidden rounded-lg shadow-xl">
             <img
-              src="https://visionaize.in/wp-content/uploads/2024/03/woman-hard-hat-sits-computer-factory-with-computer-screen-showing-model-blueprint_861143-193-1-1-1-3-2048x1620.jpg"
+              src="/predictive-maintenance/woman-hard-hat-sits-computer-factory-with-computer-screen-showing-model-blueprint_861143-193-1-1-1-3-2048x1620.jpg"
               alt="Technician monitoring equipment health and anomaly detection dashboards"
               className="aspect-[4/3] h-auto w-full object-cover md:aspect-auto md:h-full"
             />
@@ -256,7 +256,7 @@ function RouteComponent() {
           {/* Right: image */}
           <div className="overflow-hidden rounded-lg shadow-xl">
             <img
-              src="https://visionaize.com/wp-content/uploads/2024/03/the-area-of-the-equipment-to-cool-the-oil-product-equipment-for-primary-oil-refining-SBI-300930065-scaled.jpg"
+              src="/predictive-maintenance/the-area-of-the-equipment-to-cool-the-oil-product-equipment-for-primary-oil-refining-SBI-300930065-scaled.jpg"
               alt="Gas compression system pipework and valves at an industrial facility"
               className="aspect-[4/3] h-auto w-full object-cover md:aspect-auto md:h-full"
             />

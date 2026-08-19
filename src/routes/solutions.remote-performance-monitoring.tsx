@@ -23,11 +23,11 @@ export const Route = createFileRoute("/solutions/remote-performance-monitoring")
   component: RPMPage,
 });
 
-const HERO_IMG = "https://visionaize.com/wp-content/uploads/2024/03/image-47-1-1536x863.jpg";
+const HERO_IMG = "/Remote Performance Monitoring/image-47-1-1536x863.jpg";
 const DASHBOARD_IMG =
-  "https://visionaize.com/wp-content/uploads/2024/03/MacBook-Pro-14_-9-2-3-1.jpg";
+  "/Remote Performance Monitoring/MacBook-Pro-14_-9-2-3-1.jpg";
 const CASE_IMG =
-  "https://visionaize.com/wp-content/uploads/2024/03/image-47-1-1536x863.jpg";
+  "/Remote Performance Monitoring/image-47-1-1536x863.jpg";
 
 const PROBLEMS = [
   {
@@ -55,29 +55,62 @@ const BENEFITS = [
   "Reduced carbon emissions",
   "Increased people collaboration",
 ];
-
 const CASE_TABS = [
   {
     key: "Challenge",
-    paragraphs: [
-      "A large Petrochemical company with operations along the US Gulf Coast had been doing plant monitoring at the plant level with DCS. Although a lot of data was captured at DCS by historians and LIMS, this operator was lacking the tools to get insight from the massive amount of data and realize its value.",
-      "This presents a challenge in improving plant health and asset performance. The engineering team was leveraging an in-house developed tool using spreadsheets and downloading the data in batches. But these tools were static and had limited analytics capability and value add.",
+    type: "paragraph",
+    content: [
+      <>
+        A large Petrochemical company with operations along the US Gulf Coast
+        had been doing plant monitoring at the plant level with DCS. Although a
+        lot of data was captured at DCS by historians and LIMS, this operator
+        was lacking the tools to get insight from the massive amount of data and
+        realize its value.
+      </>,
+
+      <>
+        This presents a challenge in improving plant health and asset
+        performance. The engineering team was leveraging an in-house developed
+        tool using spreadsheets and downloading the data in batches. But these
+        tools were static and had limited analytics capability and value add.
+      </>,
     ],
   },
+
   {
     key: "Solution",
-    paragraphs: [
-      "Visionaize deployed its Remote Performance Monitoring solution, ingesting data from DCS, historians and LIMS into a unified analytics layer. Domain-specific KPIs, color-coded alerts and AI-driven recommendations were configured for the ethylene unit, enabling engineers to monitor and optimize the plant in real time from anywhere.",
+    type: "paragraph",
+    content: [
+      <>
+        Visionaize experts moved various data from historian, LIMS, ERP etc. to
+        the V-Suite platform in a contextualized way so that data analysis is
+        efficient and everything is easily accessible when there is a need. Then
+        experts created KPIs dashboards for overall plant, individual system and
+        equipment and also created an intelligent 2D Digital Twin of each
+        system.
+      </>,
+
+      <>
+        The solutions also provided alerts of plant/asset health issues or
+        operating parameters that are off-limits, allowing for performance
+        improvements through diagnosis, root cause assessment, using data
+        science, and actionable recommendations using GenAI.
+      </>,
     ],
   },
+
   {
     key: "Results",
-    paragraphs: [
-      "The operator saw faster issue diagnosis, reduced downtime, and measurable improvements in yield and energy consumption — replacing static spreadsheets with a live, collaborative performance monitoring environment.",
+    type: "list",
+    content: [
+      "$8M-$9M benefits per year",
+      "1-1.5% gain in production and yield",
+      "5-10% reduction in energy consumption",
+      "Decrease in carbon emissions and safety incidents",
+      "Collaboration among different departments, and quick decision making and problem resolution",
     ],
   },
 ];
-
 const FAQS = [
   {
     q: "What are the problems that Remote Performance Monitoring solves?",
@@ -239,44 +272,85 @@ function RPMPage() {
         </div>
       </section>
 
-      {/* CASE STUDY */}
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 sm:py-20">
-        <div className="text-xs font-bold tracking-widest text-[#A6E04A]">
-          CASE STUDY
-        </div>
-        <h2 className="mt-3 max-w-2xl text-2xl font-semibold text-slate-900 sm:text-3xl md:text-4xl">
-          Real-Time Monitoring and Improvement of Ethylene Plant
+    {/* CASE STUDY */}
+<section className="bg-white py-20 font-['Poppins',sans-serif]">
+  <div className="mx-auto max-w-[1440px] px-6 lg:px-10">
+    <p className="text-[16px] font-bold uppercase tracking-wide text-[#8DC63F]">
+      CASE STUDY
+    </p>
+
+    <div className="mt-4 grid items-start gap-10 lg:grid-cols-[1.5fr_1fr]">
+      {/* LEFT */}
+      <div>
+        <h2 className="max-w-3xl text-[42px] font-bold leading-[1.15] text-[#111]">
+          Real-Time Monitoring and
+          <br />
+          Improvement of Ethylene Plant
         </h2>
 
-        <div className="mt-8 grid gap-8 sm:mt-10 sm:gap-10 md:grid-cols-2">
-          <div>
-            <div className="flex gap-4 overflow-x-auto border-b border-slate-200 sm:gap-8">
-              {CASE_TABS.map((t, i) => (
-                <button
-                  key={t.key}
-                  onClick={() => setTab(i)}
-                  className={`whitespace-nowrap pb-3 text-base sm:text-lg ${
-                    tab === i
-                      ? "border-b-2 border-[#2BA8C7] font-semibold text-slate-900"
-                      : "text-slate-500"
-                  }`}
-                >
-                  {t.key}
-                </button>
-              ))}
-            </div>
-            <div className="mt-6 space-y-5 rounded-md border border-slate-200 p-4 text-base leading-7 text-slate-700 sm:p-6">
-              {CASE_TABS[tab].paragraphs.map((p, i) => (
-                <p key={i}>{p}</p>
-              ))}
-            </div>
-          </div>
-          <div className="aspect-[4/3] overflow-hidden rounded-md shadow-xl md:aspect-auto md:h-full">
-            <img src={CASE_IMG} alt="Ethylene plant" className="h-full w-full object-cover" />
-          </div>
+        {/* Tabs */}
+        <div className="mt-8 flex">
+          {CASE_TABS.map((item, i) => (
+            <button
+              key={item.key}
+              onClick={() => setTab(i)}
+              className={`relative -mb-px px-8 py-5 text-[19px] font-semibold transition-all ${
+                tab === i
+                  ? "z-10 border border-[#D8E2EC] border-b-white bg-white text-[#1DA1E5]"
+                  : "border border-transparent text-[#111] hover:text-[#1DA1E5]"
+              }`}
+            >
+              {item.key}
+            </button>
+          ))}
         </div>
-      </section>
 
+        {/* Content */}
+        <div className="border border-[#D8E2EC] bg-white px-8 py-9">
+          {CASE_TABS[tab].type === "paragraph" ? (
+            <div className="space-y-8">
+              {CASE_TABS[tab].content.map((item, index) => (
+                <p
+                  key={index}
+                  className="text-[18px] leading-[1.8] tracking-[0.01em] text-[#222]"
+                >
+                  {item}
+                </p>
+              ))}
+            </div>
+          ) : (
+            <ul className="space-y-5">
+              {CASE_TABS[tab].content.map((item, index) => (
+                <li key={index} className="flex items-start gap-3">
+                  <svg
+                    className="mt-1.5 h-4 w-4 flex-shrink-0 text-[#8DC63F]"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path d="M5 3l10 7-10 7V3z" />
+                  </svg>
+
+                  <span className="text-[18px] leading-8 text-[#222]">
+                    {item}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </div>
+
+      {/* RIGHT IMAGE */}
+      <div className="flex justify-end">
+        <img
+          src="/Remote Performance Monitoring/iStock-1473648140-scaled.jpg"
+          alt="Ethylene Plant"
+          className="h-[600px] w-[716px] rounded-[8px] object-cover shadow-[0_8px_20px_rgba(0,0,0,0.18)]"
+        />
+      </div>
+    </div>
+  </div>
+</section>
       {/* GREEN CTA BAND */}
       <section
         className="py-10 sm:py-14"
@@ -297,7 +371,7 @@ function RPMPage() {
 
       {/* FAQ */}
       <section className="mx-auto max-w-6xl px-4 py-14 sm:px-6 sm:py-20">
-        <h2 className="text-2xl font-semibold text-slate-900 sm:text-3xl md:text-4xl">
+        <h2 className="text-2xl  text-slate-900 sm:text-3xl md:text-4xl">
           Learn more about Remote Performance Monitoring (RPM)
         </h2>
         <div className="mt-8 divide-y divide-slate-200 border-t border-b border-slate-200 sm:mt-10">
@@ -309,9 +383,9 @@ function RPMPage() {
                   onClick={() => setOpen(isOpen ? null : i)}
                   className="flex w-full items-center justify-between py-4 text-left sm:py-5"
                 >
-                  <span className="flex items-start gap-3 text-base font-semibold text-slate-900 sm:items-center sm:text-lg">
+                  <span className="flex items-start gap-3 text-base text-slate-900 sm:items-center sm:text-lg">
                     <span
-                      className="mt-0.5 inline-flex h-6 w-6 flex-none items-center justify-center text-2xl leading-none text-[#A6E04A] sm:mt-0"
+                      className="mt-0.5 inline-flex h-6 w-6 flex-none items-center justify-center text-2xl leading-none sm:mt-0"
                       aria-hidden
                     >
                       {isOpen ? "−" : "+"}

@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { createFileRoute } from "@tanstack/react-router";
 import { SolutionPage } from "@/components/site/SolutionPage";
 import { getSeedContentItem } from "@/lib/seed-content";
@@ -12,26 +13,26 @@ const heroParagraphs = heroSection?.paragraphs?.length
       "Combining industry expertise with cutting edge AI and GenAI technologies, the Visionaize team has developed solutions to not only predict upsets early, and minimize production loss and shutdowns, but avoid them altogether.",
       "Connect with a solution specialist to learn more about how to cut out the downtime.",
     ];
-const heroImage = heroSection?.images[0]?.src ?? "https://visionaize.com/wp-content/uploads/2023/12/iStock-514620986-1536x1024.jpg";
+const heroImage = heroSection?.images[0]?.src ?? "/process-performance-prediction/iStock-690047808-scaled.jpg";
 const problems = [
   {
-    title: "Integrated",
-    body: seedSections.find((section) => section.heading?.toLowerCase() === "integrated")?.paragraphs[0] ?? "Insight, simulations, prescriptive actions rolled into a single solution",
-  },
-  {
-    title: "What-If Analysis",
-    body: seedSections.find((section) => section.heading?.toLowerCase() === "what-if analysis")?.paragraphs[0] ?? "Simulate varying conditions based on data science and industrial process expertise",
+    title: "Hybrid Modeling",
+    body: seedSections.find((section) => section.heading?.toLowerCase() === "hybrid modeling")?.paragraphs[0] ?? "Detect even the smallest anomalies with first principle and AI models",
   },
   {
     title: "Root Cause Analysis",
     body: seedSections.find((section) => section.heading?.toLowerCase() === "root cause analysis")?.paragraphs[0] ?? "Zero in on root causes and provide actionable recommendations with rule-based and Gen AI",
   },
   {
-    title: "Hybrid Modeling",
-    body: seedSections.find((section) => section.heading?.toLowerCase() === "hybrid modeling")?.paragraphs[0] ?? "Detect even the smallest anomalies with first principle and AI models",
+    title: "What-If Analysis",
+    body: seedSections.find((section) => section.heading?.toLowerCase() === "what-if analysis")?.paragraphs[0] ?? "Simulate varying conditions based on data science and industrial process expertise",
+  },
+  {
+    title: "Integrated",
+    body: seedSections.find((section) => section.heading?.toLowerCase() === "integrated")?.paragraphs[0] ?? "Insight, simulations, prescriptive actions rolled into a single solution",
   },
 ];
-const introParagraphs = seedSections.find((section) => section.heading?.toLowerCase() === "learn more about process performance prediction")?.paragraphs ?? [
+const introParagraphs = [
   "Process upset does not just prevent heater run length, catalyst remaining life, or product quality from being met. It often leads to shutdowns, which can have severe impacts on productivity.",
   "Process Performance Prediction combines unique industry expertise with innovative AI &GenAI to help facility owners minimize these impacts.",
 ];
@@ -49,7 +50,7 @@ function ProcessPerformancePredictionPage() {
       }}
       benefits={{
         heading: "Increase Your Productivity, by Avoiding Upsets & Shutdowns",
-        image: seedSections[2]?.images[0]?.src ?? "https://visionaize.com/wp-content/uploads/2024/03/iStock-1954891394-1-1536x810.jpg",
+        image: seedSections[2]?.images[0]?.src ?? "/process-performance-prediction/iStock-1954891394-1-1536x810.jpg",
         bullets: [
           "Avoid process trips, production loss and reduced yield",
           "Eliminate off-spec product issues",
@@ -59,7 +60,7 @@ function ProcessPerformancePredictionPage() {
       }}
       caseStudy={{
         title: "Ammonia Plant: Predicting CO2 Excursions",
-        image: heroImage,
+        image: "/process-performance-prediction/iStock-690047808-scaled.jpg",
         tabs: [
           {
             key: "Challenge",
@@ -70,13 +71,15 @@ function ProcessPerformancePredictionPage() {
           {
             key: "Solution",
             paragraphs: [
-              "Visionaize deployed a hybrid first-principle + AI model to monitor the CO2 absorber in real time, detect early signs of foaming, and alert operators with prescriptive recommendations — well before CO2 levels exceeded spec.",
+              "By applying Process Performance Prediction(PPP), Visionaize AI experts identified tags related to CO2 absorber issues, studying 2 years of data for parameters Correlations mapping. Deployed AI/ML for early anomaly detection, quantifying contributing factors, 6 hours prior of high CO2 ppm prediction, GenAI-based recommendations and AI-driven what-if analysis.",
             ],
           },
           {
             key: "Results",
             paragraphs: [
-              "Early detection eliminated unplanned methanator trips, protected catalyst life, and recovered significant lost production hours each quarter.",
+              "Total savings: $4M per incident",
+              "Production loss reduction",
+              "Catalyst and cleaning cost savings"
             ],
           },
         ],
@@ -86,24 +89,24 @@ function ProcessPerformancePredictionPage() {
         {
           q: "What are some of the key benefits of Process Performance Prediction?",
           a: [
-            "By leveraging AI, real-time analytics and remote monitoring capabilities, Process Performance Prediction is a solution that maximizes operational efficiencies at complex, industrial facilities. Now operations can be guided by data-informed recommendations, saving owners & operators of industrial facilities immense amount of time and energy.",
+            "By leveraging AI, real-time analytics and remote monitoring capabilities, Process Performance Prediction is a solution that maximizes operational efficiencies at complex, industrial facilities.  Now operations can be guided by data-informed recommendations, saving owners & operators of industrial facilities immense amount of time and energy.",
           ],
         },
         {
           q: "What are the problems that Process Performance Prediction solve?",
           a: [
-            "PPP addresses unpredictable process upsets — heater coking, catalyst degradation, absorber/column foaming and flooding, and off-spec product — which traditionally surface too late to prevent production loss or shutdowns.",
+            "A number of challenges surface in plants.  Cracking heater high coking rate, reactor lump format, degradations, product quality issues are just some examples of challenges that can occur very suddenly and quickly, leading to unplanned shutdowns.  The Process Performance Prediction solution from Visionaize enables owners & operators to proactively spot trouble, often well before a shutdown is required.  The result is a more continuous operation and greater output.",
           ],
         },
         {
           q: "What makes Process Performance Prediction unique?",
           a: [
-            "PPP fuses first-principle physics-based models with AI/GenAI and deep domain expertise to detect even the smallest anomalies and recommend prescriptive actions.",
+            "Some data tools are built by data scientists with no practical domain expertise in the industries being served. Visionaize’s Process Performance Prediction solution is different, in that it is designed by those who are rooted in data science and have decades of deep domain experience in heavy industries.  The development of the solutions’s proprietary, innovative KPIs and machine learning logic have been steered by this rich, practical experience.  ",
           ],
         },
         {
           q: "How can I learn more about Process Performance Prediction?",
-          a: ["Connect with a Visionaize solutions expert for a personalized walkthrough and demo."],
+          a: ["To learn more about Process Performance Prediction and its capabilities, please connect with a product expert."],
         },
       ]}
       faqCtaLabel="Request a demo"

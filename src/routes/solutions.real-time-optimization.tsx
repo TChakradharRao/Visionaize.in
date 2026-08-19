@@ -12,7 +12,7 @@ const heroParagraphs = heroSection?.paragraphs?.length
       "Visionaize's RTO solution is designed to maximize production/yield and minimize energy consumption, through a combination of “first principle” physics-based models and advanced AI algorithms.",
       "Connect with an expert to learn more.",
     ];
-const heroImage = heroSection?.images[0]?.src ?? "https://visionaize.com/wp-content/uploads/2024/03/iStock-6817332800.5x-1-1-1536x1024.png";
+const heroImage = heroSection?.images[0]?.src ?? "/real-time-optimization/iStock-6817332800.5x-1-1-1536x1024.png";
 const problems = [
   {
     title: "Plant Predictive Model",
@@ -47,7 +47,7 @@ function RealTimeOptimizationPage() {
       }}
       benefits={{
         heading: "Optimize Yield, while Staying within Safe & Stable Limits",
-        image: seedSections[1]?.images[0]?.src ?? "https://visionaize.com/wp-content/uploads/2024/03/iStock-1973069940-1536x810.jpg",
+        image: seedSections[1]?.images[0]?.src ?? "/real-time-optimization/iStock-1973069940-1536x810.jpg",
         bullets: [
           "Continuous production of optimal product mix",
           "Yield improvements of overall liquid products",
@@ -121,7 +121,7 @@ export const Route = createFileRoute("/solutions/real-time-optimization")({
   component: () => (
     <SolutionPage
       title="Real-Time Optimization (RTO)"
-      heroImage="https://visionaize.com/wp-content/uploads/2024/03/iStock-6817332800.5x-1-1-1536x1024.png"
+      heroImage="/real-time-optimization/iStock-6817332800.5x-1-1-1536x1024.png"
       heroParagraphs={[
         "Operating conditions, feedstock availability and plant dynamic behavior often stray from what was planned during the design & build phase, resulting in sub-optimal productivity.",
         "Visionaize's RTO solution is designed to maximize production/yield and minimize energy consumption, through a combination of \u201Cfirst principle\u201D physics-based models and advanced AI algorithms.",
@@ -141,7 +141,7 @@ export const Route = createFileRoute("/solutions/real-time-optimization")({
       }}
       benefits={{
         heading: "Optimize Yield, while Staying within Safe & Stable Limits",
-        image: "https://visionaize.com/wp-content/uploads/2024/03/iStock-1973069940-1536x810.jpg",
+        image: "/real-time-optimization/iStock-1973069940-1536x810.jpg",
         bullets: [
           "Continuous production of optimal product mix",
           "Yield improvements of overall liquid products",
@@ -151,7 +151,7 @@ export const Route = createFileRoute("/solutions/real-time-optimization")({
       }}
     caseStudy={{
     title: "Refinery Optimization: Fluid Catalytic Cracking",
-    image: "https://visionaize.com/wp-content/uploads/2023/12/iStock-514620986-scaled.jpg",
+    image: "/real-time-optimization/iStock-514620986-scaled.jpg",
     tabs: [
       {
         key: "Challenge",

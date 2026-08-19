@@ -19,9 +19,12 @@ const app = express();
 /* ---------- CORS ---------- */
 app.use(cors({
   origin: [
-    "http://localhost:8080",
-    "http://localhost:3000",
-    "http://localhost:5173",
+    
+    // "http://localhost:8080",
+    // "http://localhost:3000",
+    // "http://localhost:5173",
+    //  "http://20.193.129.103", 
+     "https://revamp.visionaize.in"
   ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
@@ -48,8 +51,8 @@ app.use("/api/admin/columns", columnsRoute);
 app.use("/api/admin/stats", statsRoute);
 app.use("/api/admin/whoami", whoamiRoute);
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 5000 ;
 
-app.listen(PORT, () => {
+app.listen(PORT, "127.0.0.1", () => {
   console.log(`Server running on port ${PORT}`);
 });

@@ -1,63 +1,69 @@
-import { createFileRoute, Link, notFound } from "@tanstack/react-router";
+/* eslint-disable prettier/prettier */
+import { createFileRoute } from "@tanstack/react-router";
+import { useSuspenseQuery } from "@tanstack/react-query";
+import { queryOptions } from "@tanstack/react-query";
+import { notFound } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { BlogPostLayout } from "@/components/site/BlogPostLayout";
-import { getPostBySlug } from "@/lib/blogData";
+import { getPostBySlug, type BlogPost } from "@/lib/blogData";
+
+function blogPostQuery(slug: string) {
+  return queryOptions({
+    queryKey: ["blog", "post", slug],
+    queryFn: async (): Promise<BlogPost> => {
+      const post = getPostBySlug(slug);
+      if (!post) throw notFound();
+      return post;
+    },
+    staleTime: 60_000,
+    retry: false,
+  });
+}
 
 export const Route = createFileRoute("/$slug")({
-  loader: ({ params }) => {
-    const post = getPostBySlug(params.slug);
-    if (!post) {
-      throw notFound();
-    }
-    return post;
-  },
-  head: ({ loaderData }) => {
-    if (!loaderData) return {};
-    return {
-      meta: [
-        { title: `${loaderData.title} — Visionaize` },
-        { name: "description", content: loaderData.excerpt },
-        { property: "og:title", content: loaderData.title },
-        { property: "og:description", content: loaderData.excerpt },
-        { property: "og:image", content: loaderData.cover_image },
-      ],
-    };
-  },
-  component: BlogPostPage,
-  notFoundComponent: BlogPostNotFound,
+  loader: ({ context, params }) =>
+    context.queryClient.ensureQueryData(blogPostQuery(params.slug)),
+  head: ({ loaderData }) =>
+    loaderData
+      ? {
+          meta: [
+            { title: loaderData.title },
+            { name: "description", content: loaderData.excerpt },
+            { property: "og:title", content: loaderData.title },
+            { property: "og:description", content: loaderData.excerpt },
+            { property: "og:type", content: "article" },
+            ...(loaderData.cover_image ? [{ property: "og:image", content: loaderData.cover_image }] : []),
+          ],
+        }
+      : {},
+  component: DynamicPage,
+  notFoundComponent: NotFoundPage,
 });
 
-function BlogPostPage() {
-  const post = Route.useLoaderData();
-
+function NotFoundPage() {
   return (
     <>
       <Header />
-      <main className="min-h-screen bg-white">
-        <BlogPostLayout post={post} />
+      <main className="flex min-h-[60vh] items-center justify-center bg-white">
+        <div className="px-6 text-center">
+          <p className="text-sm uppercase tracking-widest text-brand-blue">404</p>
+          <h1 className="mt-2 text-4xl font-bold text-brand-navy">Page not found</h1>
+          <p className="mt-3 text-brand-ink/70">This page is no longer available.</p>
+        </div>
       </main>
       <Footer />
     </>
   );
 }
 
-function BlogPostNotFound() {
+function DynamicPage() {
+  const { slug } = Route.useParams();
+  const { data } = useSuspenseQuery(blogPostQuery(slug));
   return (
     <>
       <Header />
-      <main className="mx-auto flex min-h-[60vh] max-w-3xl flex-col items-center justify-center px-6 text-center">
-        <h1 className="text-3xl font-bold text-brand-navy">404 — Page not found</h1>
-        <p className="mt-3 text-brand-ink/70">
-          The page you're looking for doesn't exist or may have been moved.
-        </p>
-        <Link
-          to="/"
-          className="mt-6 inline-flex items-center rounded-md bg-brand-blue px-6 py-2.5 text-sm font-medium text-white hover:bg-brand-navy transition-colors"
-        >
-          Back to Home
-        </Link>
-      </main>
+      <BlogPostLayout post={data} />
       <Footer />
     </>
   );

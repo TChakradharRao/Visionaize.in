@@ -1,8 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { type ReactNode, useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { type ReactNode, useEffect, useState } from "react";
 import { ChevronDown, Menu, X } from "lucide-react";
-import { api, type MenuItem } from "@/lib/api";
 
 type NavNode = { label: ReactNode; href: string; target?: string; children: NavNode[] };
 type NavColumn = { heading: string; items: NavNode[] };
@@ -63,7 +61,7 @@ const FALLBACK_NAV: NavNodeWithColumns[] = [
     <span className="inline-flex items-center gap-1.5">
       VIZI
       <img
-        src="https://visionaize.in/wp-content/uploads/2025/08/Visionaize_logo_without_text-bg.png"
+        src="/vizi-copilot-gen-ai/Visionaize_logo_without_text.png"
         alt=""
         className="h-4 w-auto object-contain"
       />
@@ -95,7 +93,7 @@ const FALLBACK_NAV: NavNodeWithColumns[] = [
   },
   {
     label: "Insights",
-    href: "/blog",
+    href: "/insights/insights-digital-twin-resource-center",
     target: "",
     children: [
       ...INSIGHT_CHILDREN,
@@ -155,34 +153,6 @@ function stripHtml(s: string): string {
   return s.replace(/<[^>]*>/g, "").trim();
 }
 
-function buildTree(items: MenuItem[]): NavNode[] {
-  const byId = new Map<number, NavNode & { _parent: number; _order: number }>();
-  items.forEach((it) => {
-    byId.set(it.id, {
-      label: stripHtml(it.title) || "—",
-      href: normalizeHref(it.url),
-      target: it.target,
-      children: [],
-      _parent: it.parent,
-      _order: it.order,
-    });
-  });
-  const roots: NavNode[] = [];
-  byId.forEach((node) => {
-    if (node._parent && byId.has(node._parent)) {
-      byId.get(node._parent)!.children.push(node);
-    } else {
-      roots.push(node);
-    }
-  });
-  const sort = (arr: NavNode[]) => {
-    arr.sort((a, b) => (a as any)._order - (b as any)._order);
-    arr.forEach((n) => sort(n.children));
-  };
-  sort(roots);
-  return roots.filter((n) => n.label && n.label !== "—");
-}
-
 function attachInsightsChildren(nodes: NavNodeWithColumns[]): NavNodeWithColumns[] {
   return nodes.map((node) => {
     if (node.label === "Insights" || node.href === "/blog" || node.href === "/insights") {
@@ -219,14 +189,6 @@ function attachSolutionsColumns(nodes: NavNodeWithColumns[]): NavNodeWithColumns
 }
 
 function useNav(): NavNodeWithColumns[] {
-  const { data } = useQuery({
-    queryKey: ["menus"],
-    queryFn: () => api.menus(),
-    staleTime: 5 * 60_000,
-    retry: false,
-  });
-  const primary = data?.menus?.["Primary menu"];
-  if (primary && primary.length > 0) return attachSolutionsColumns(attachInsightsChildren(buildTree(primary)));
   return attachSolutionsColumns(attachInsightsChildren(FALLBACK_NAV));
 }
 
@@ -234,38 +196,178 @@ function isInternal(href: string) {
   return href.startsWith("/") && href !== "#";
 }
 
-function NavLink({ href, target, children, className }: { href: string; target?: string; children: React.ReactNode; className?: string }) {
+function NavLink({
+  href,
+  target,
+  children,
+  className,
+  onClick,
+}: {
+  href: string;
+  target?: string;
+  children: React.ReactNode;
+  className?: string;
+  onClick?: () => void;
+}) {
   if (href === "#") return <span className={className}>{children}</span>;
   if (!isInternal(href)) {
     return (
-      <a href={href} target={target || undefined} rel={target === "_blank" ? "noopener noreferrer" : undefined} className={className}>
+      <a
+        href={href}
+        target={target || undefined}
+        rel={target === "_blank" ? "noopener noreferrer" : undefined}
+        className={className}
+        onClick={onClick}
+      >
         {children}
       </a>
     );
   }
+  // Handle internal links with hash fragments so they navigate to the route
+  // and then scroll to the element id denoted by the fragment.
+  const hasHash = href.includes("#");
+  if (hasHash) {
+    const [pathPart, hashPart] = href.split("#");
+    const path = pathPart || "/";
+    return (
+      <Link
+        to={path}
+        className={className}
+        onClick={() => {
+          onClick?.();
+          // allow the router to navigate first, then scroll
+          setTimeout(() => {
+            try {
+              const id = decodeURIComponent(hashPart);
+              const el = document.getElementById(id);
+              if (el) el.scrollIntoView({ behavior: "smooth" });
+              else window.location.hash = `#${hashPart}`;
+            } catch {
+              window.location.hash = `#${hashPart}`;
+            }
+          }, 80);
+        }}
+      >
+        {children}
+      </Link>
+    );
+  }
+
   return (
-    <Link to={href} className={className}>
+    <Link to={href} className={className} onClick={onClick}>
       {children}
     </Link>
   );
 }
 
+
+// Single top-level row in the mobile drawer: label navigates (and closes the
+// drawer), the chevron button on the right toggles the sub-list open/closed
+// as an accordion, independent of navigation.
+// `min-w-0 flex-1` on the label is what keeps the page name visible: as a
+// flex child, an anchor/Link can otherwise refuse to shrink below its
+// content width and get squeezed out of the row by the sibling chevron
+// button, especially for labels that contain an inline <img> (VIZI CoPilot).
+
+
+function MobileNavItem({
+  item,
+  onNavigate,
+}: {
+  item: NavNodeWithColumns;
+  onNavigate: () => void;
+}) {
+  const [expanded, setExpanded] = useState(false);
+
+  const childItems =
+    item.columns && item.columns.length > 0
+      ? item.columns.flatMap((col) => col.items)
+      : item.children;
+
+  const hasChildren = childItems.length > 0;
+
+  return (
+    <div>
+      <div className="flex items-center justify-between gap-3 py-4">
+        <NavLink
+          href={item.href}
+          target={item.target}
+          className="block min-w-0 flex-1 truncate text-lg font-medium text-brand-ink"
+          onClick={onNavigate}
+        >
+          {item.label}
+        </NavLink>
+
+        {hasChildren && (
+          <button
+            type="button"
+            onClick={() => setExpanded((e) => !e)}
+            aria-label={expanded ? "Collapse submenu" : "Expand submenu"}
+            aria-expanded={expanded}
+            className="flex h-8 w-9 shrink-0 items-center justify-center rounded-full border border-border text-brand-navy transition-colors hover:bg-secondary"
+          >
+            <ChevronDown
+              className={`h-4 w-4 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`}
+            />
+          </button>
+        )}
+      </div>
+
+      {hasChildren && expanded && (
+        <div className="pb-2">
+          {childItems.map((c) => (
+            <NavLink
+              key={c.href}
+              href={c.href}
+              target={c.target}
+              className="block border-b border-border/70 py-4 text-base text-brand-ink/80 hover:text-brand-blue"
+              onClick={onNavigate}
+            >
+              {c.label}
+            </NavLink>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function Header() {
   const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const nav = useNav();
+
+  useEffect(() => {
+    const originalOverflow = document.body.style.overflow;
+    if (open) {
+      document.body.style.overflow = "hidden";
+    }
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [open]);
+
+  const toggleSection = (key: string) => {
+    setExpanded((prev) => ({ ...prev, [key]: !prev[key] }));
+  };
+
+  const closeMenu = () => {
+    setOpen(false);
+    setExpanded({});
+  };
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-border bg-white/95 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center px-4 py-3.5 sm:px-6 sm:py-4 lg:px-8 lg:py-5 xl:px-10 xl:py-7">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3.5 sm:px-6 sm:py-4 lg:px-8 lg:py-5 xl:px-10 xl:py-7">
         <Link to="/" className="flex shrink-0 items-center" aria-label="Visionaize home">
           <img
-            src="https://visionaize.in/wp-content/uploads/2024/03/Group-1000007231-1-1-3.svg"
+            src="/head-footer/Group-1000007231-1-1-3.svg"
             alt="Visionaize"
             className="h-8 w-auto sm:h-9 md:h-10 lg:h-11 xl:h-12"
           />
         </Link>
 
-        <nav className="hidden items-center gap-4 lg:ml-8 lg:flex xl:ml-12 xl:gap-8">
+        <nav className="hidden lg:flex items-center gap-8">
           {nav.slice(0, 6).map((item) => (
             <div key={item.href} className="group relative">
               <NavLink
@@ -348,21 +450,21 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-3 md:gap-4">
+        <div className="flex shrink-0 items-center gap-4">
           <Link
-            to="/contact"
-            className="hidden whitespace-nowrap rounded-full bg-brand-navy px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-brand-blue sm:inline-flex sm:px-5 sm:py-2.5 sm:text-sm"
+            to="/Talk-to-an-expert"
+            className="hidden sm:inline-flex items-center rounded-full bg-brand-navy px-5 py-2.5 text-sm font-semibold text-white whitespace-nowrap"
           >
             Talk to an expert
           </Link>
           <img
-            src="https://visionaize.in/wp-content/uploads/2024/03/Official_logo_of_the_Confederation_of_Indian_Industry_CII.svg-1.svg"
+            src="/head-footer/Official_logo_of_the_Confederation_of_Indian_Industry_CII.svg-1.svg"
             alt="Confederation of Indian Industry"
             className="hidden h-8 w-auto shrink-0 md:block md:h-9 lg:h-10"
           />
           <button
-            className="text-brand-navy lg:hidden"
-            onClick={() => setOpen(!open)}
+            className="lg:hidden text-brand-navy"
+            onClick={() => setOpen((o) => !o)}
             aria-label="Toggle menu"
           >
             {open ? <X /> : <Menu />}
@@ -370,56 +472,133 @@ export function Header() {
         </div>
       </div>
 
-      {open && (
-        <div className="border-t border-border bg-white lg:hidden">
-          <nav className="mx-auto max-h-[75vh] max-w-7xl space-y-1 overflow-y-auto px-4 py-4 sm:px-6">
-            {nav.flatMap((item) => [
+      {/* Mobile drawer: a full-width, fully opaque overlay (not a partial
+          sliding panel) so nothing from the page behind it is ever visible
+          and there's exactly one close (X) control. Always mounted so the
+          slide transform actually animates; visibility + interactivity are
+          toggled via classes so it doesn't intercept clicks while closed. */}
+    {open && (
+  <div className="lg:hidden border-t border-border bg-white">
+    <nav className="mx-auto max-w-7xl px-6 py-4 space-y-1 max-h-[calc(100vh-5rem)] overflow-y-auto">
+      {nav.map((item) => {
+        const sectionKey = `section-${item.href}`;
+        const isExpanded = !!expanded[sectionKey];
+        return (
+          <div key={item.href} className="space-y-1">
+            <div className="flex items-center justify-between gap-3">
               <NavLink
-                key={item.href}
                 href={item.href}
                 target={item.target}
-                className="block rounded-md px-3 py-2 text-sm font-semibold text-brand-navy"
+                className="block flex-1 min-w-0 rounded-md px-3 py-3 text-left text-sm font-semibold text-brand-navy transition hover:text-brand-cyan"
+                onClick={closeMenu}
               >
                 {item.label}
-              </NavLink>,
-              ...item.children.flatMap((c) => [
-                <NavLink
-                  key={`${item.href}-${c.href}`}
-                  href={c.href}
-                  target={c.target}
-                  className="block rounded-md px-6 py-2 text-sm text-brand-ink hover:bg-secondary"
+              </NavLink>
+
+              {item.children.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => toggleSection(sectionKey)}
+                  aria-label={isExpanded ? "Collapse submenu" : "Expand submenu"}
+                  aria-expanded={isExpanded}
+                  className="flex h-8 w-9 shrink-0 items-center justify-center rounded-full border border-border text-brand-navy transition-colors hover:bg-secondary"
                 >
-                  {c.label}
-                </NavLink>,
-                ...c.children.map((gc) => (
-                  <NavLink
-                    key={`${c.href}-${gc.href}`}
-                    href={gc.href}
-                    target={gc.target}
-                    className="block rounded-md px-9 py-2 text-sm text-brand-ink hover:bg-secondary"
-                  >
-                    {gc.label}
-                  </NavLink>
-                )),
-              ]),
-            ])}
-            <div className="mt-3 flex items-center gap-3">
-              <Link
-                to="/contact"
-                className="flex-1 rounded-full bg-brand-navy px-5 py-2.5 text-center text-sm font-semibold text-white"
-                onClick={() => setOpen(false)}
-              >
-                Talk to an expert
-              </Link>
-              <img
-                src="https://visionaize.in/wp-content/uploads/2024/03/Official_logo_of_the_Confederation_of_Indian_Industry_CII.svg-1.svg"
-                alt="Confederation of Indian Industry"
-                className="h-9 w-auto shrink-0"
-              />
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform ${isExpanded ? "rotate-180" : ""}`}
+                  />
+                </button>
+              )}
             </div>
-          </nav>
-        </div>
-      )}
+
+            {item.children.length > 0 && isExpanded && (
+              <div className="space-y-1 pl-4">
+                {item.columns && item.columns.length > 0 ? (
+                  <div className="space-y-4">
+                    {item.columns.map((column) => (
+                      <div key={column.heading} className="space-y-3">
+                        <p className="text-sm font-semibold text-brand-navy">{column.heading}</p>
+                        <div className="space-y-1">
+                          {column.items.map((child) => (
+                            <NavLink
+                              key={`${item.label}-${column.heading}-${child.label}`}
+                              href={child.href}
+                              target={child.target}
+                              className="block rounded-md px-3 py-2 text-sm text-brand-ink transition hover:text-brand-cyan"
+                              onClick={closeMenu}
+                            >
+                              {child.label}
+                            </NavLink>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="space-y-1">
+                    {item.children.map((child) => (
+                      <div key={`${item.label}-${child.label}`} className="space-y-1">
+                        <div className="flex items-center justify-between gap-2">
+                          <NavLink
+                            href={child.href}
+                            target={child.target}
+                            className="block flex-1 min-w-0 rounded-md px-3 py-2 text-sm text-brand-ink transition hover:text-brand-cyan"
+                            onClick={closeMenu}
+                          >
+                            {child.label}
+                          </NavLink>
+                          {child.children.length > 0 && (
+                            <button
+                              type="button"
+                              onClick={() => toggleSection(`${sectionKey}-${child.href}`)}
+                              aria-label="Expand submenu"
+                              aria-expanded={!!expanded[`${sectionKey}-${child.href}`]}
+                              className="flex h-7 w-8 shrink-0 items-center justify-center rounded-full border border-border text-brand-navy transition-colors hover:bg-secondary"
+                            >
+                              <ChevronDown
+                                className={`h-3.5 w-3.5 transition-transform ${
+                                  expanded[`${sectionKey}-${child.href}`] ? "rotate-180" : ""
+                                }`}
+                              />
+                            </button>
+                          )}
+                        </div>
+                        {child.children.length > 0 && expanded[`${sectionKey}-${child.href}`] && (
+                          <div className="space-y-1 pl-4">
+                            {child.children.map((grandchild) => (
+                              <NavLink
+                                key={`${item.label}-${child.label}-${grandchild.label}`}
+                                href={grandchild.href}
+                                target={grandchild.target}
+                                className="block rounded-md px-3 py-2 text-sm text-brand-ink transition hover:text-brand-cyan"
+                                onClick={closeMenu}
+                              >
+                                {grandchild.label}
+                              </NavLink>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        );
+      })}
+
+      <div className="flex items-center gap-3 mt-3">
+        <Link
+          to="/Talk-to-an-expert"
+          className="max-w-xl rounded-full bg-brand-navy px-5 py-2.5 text-center text-sm font-semibold text-white"
+          onClick={closeMenu}
+        >
+          Talk to an expert
+        </Link>
+      </div>
+    </nav>
+  </div>
+)}
     </header>
   );
 }

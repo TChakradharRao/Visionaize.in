@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput } from "@/components/ui/floating-field";
 import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/vizi-copilot-gen-ai-demo-link")({
@@ -76,14 +77,14 @@ function ViziCopilotDemoPage() {
 
   const handleChange =
     (field: keyof FormState) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       const value = field === "contactMe" ? e.target.checked : e.target.value;
       setForm((prev) => ({ ...prev, [field]: value }));
       // Clear the field's error as soon as the person edits it.
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     };
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
     // Keep only digits, cap at 10.
     const digitsOnly = e.target.value.replace(/\D/g, "").slice(0, 10);
     setForm((prev) => ({ ...prev, phoneNumber: digitsOnly }));
@@ -151,49 +152,53 @@ function ViziCopilotDemoPage() {
 
               <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
                 <div>
-                  <input
+                  <FloatingInput
                     type="text"
-                    placeholder="First name*"
+                    name="firstName"
+                    label="First name*"
                     value={form.firstName}
                     onChange={handleChange("firstName")}
                     aria-invalid={!!errors.firstName}
-                    className={fieldClass(!!errors.firstName)}
+                    className={errors.firstName ? "border-red-400 focus:border-red-400 focus:ring-red-400" : ""}
                   />
                   {errors.firstName && <FieldError message={errors.firstName} />}
                 </div>
 
                 <div>
-                  <input
+                  <FloatingInput
                     type="text"
-                    placeholder="Last name*"
+                    name="lastName"
+                    label="Last name*"
                     value={form.lastName}
                     onChange={handleChange("lastName")}
                     aria-invalid={!!errors.lastName}
-                    className={fieldClass(!!errors.lastName)}
+                    className={errors.lastName ? "border-red-400 focus:border-red-400 focus:ring-red-400" : ""}
                   />
                   {errors.lastName && <FieldError message={errors.lastName} />}
                 </div>
 
                 <div>
-                  <input
+                  <FloatingInput
                     type="text"
-                    placeholder="Company name*"
+                    name="companyName"
+                    label="Company name*"
                     value={form.companyName}
                     onChange={handleChange("companyName")}
                     aria-invalid={!!errors.companyName}
-                    className={fieldClass(!!errors.companyName)}
+                    className={errors.companyName ? "border-red-400 focus:border-red-400 focus:ring-red-400" : ""}
                   />
                   {errors.companyName && <FieldError message={errors.companyName} />}
                 </div>
 
                 <div>
-                  <input
+                  <FloatingInput
                     type="email"
-                    placeholder="Business Email*"
+                    name="businessEmail"
+                    label="Business Email*"
                     value={form.businessEmail}
                     onChange={handleChange("businessEmail")}
                     aria-invalid={!!errors.businessEmail}
-                    className={fieldClass(!!errors.businessEmail)}
+                    className={errors.businessEmail ? "border-red-400 focus:border-red-400 focus:ring-red-400" : ""}
                   />
                   {errors.businessEmail && (
                     <FieldError message={errors.businessEmail} />
@@ -201,15 +206,16 @@ function ViziCopilotDemoPage() {
                 </div>
 
                 <div>
-                  <input
+                  <FloatingInput
                     type="tel"
+                    name="phoneNumber"
+                    label="Phone number* (10 digits)"
                     inputMode="numeric"
-                    placeholder="Phone number* (10 digits)"
                     value={form.phoneNumber}
                     onChange={handlePhoneChange}
                     maxLength={10}
                     aria-invalid={!!errors.phoneNumber}
-                    className={fieldClass(!!errors.phoneNumber)}
+                    className={errors.phoneNumber ? "border-red-400 focus:border-red-400 focus:ring-red-400" : ""}
                   />
                   {errors.phoneNumber && <FieldError message={errors.phoneNumber} />}
                 </div>

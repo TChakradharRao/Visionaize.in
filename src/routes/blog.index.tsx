@@ -4,9 +4,10 @@ import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { getAllPosts } from "@/lib/blogData";
 
-// Wraps an image URL with wsrv.nl to resize/re-encode on the fly (webp, 640px
-// wide) instead of downloading the full-size original — fixes slow loads.
+// Wraps an external image URL with wsrv.nl to resize/re-encode on the fly.
+// Local /blog-images/ files should be returned directly so they load from our own public folder.
 function optimized(url: string): string {
+  if (url.startsWith('/')) return url;
   return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=640&h=400&fit=cover&output=webp&q=80`;
 }
 

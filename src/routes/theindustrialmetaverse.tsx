@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput } from "@/components/ui/floating-field";
 import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/theindustrialmetaverse")({
@@ -85,7 +86,7 @@ function MetaverseHero() {
 
   const handleChange =
     (field: keyof Omit<FormState, "contactMe">) =>
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: ChangeEvent<HTMLInputElement>) => {
       const value = e.target.value;
       setForm((prev) => ({ ...prev, [field]: value }));
       setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -179,7 +180,7 @@ function MetaverseHero() {
           <div className="mx-auto w-full max-w-2xl py-6 lg:relative lg:py-10">
           <div className="mx-auto w-[78%] -rotate-6 sm:w-[60%] lg:mr-auto lg:ml-0 lg:w-[52%] lg:-translate-x-4">
               <img
-                src="https://visionaize.in/wp-content/uploads/2022/07/IndustrialMetaverse-Cover-Mockup-1-1.png"
+                src="/white-paper/IndustrialMetaverse-Cover-Mockup-1-1.png"
                 alt="The Industrial Metaverse — whitepaper cover"
                 className="w-full rounded-md object-contain "
                 loading="eager"
@@ -202,49 +203,53 @@ function MetaverseHero() {
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="First name*"
+                      name="first_name"
+                      label="First name*"
                       value={form.firstName}
                       onChange={handleChange("firstName")}
                       aria-invalid={!!errors.firstName}
-                      className={fieldClass(!!errors.firstName)}
+                      className={errors.firstName ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.firstName && <FieldError message={errors.firstName} />}
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="Last name*"
+                      name="last_name"
+                      label="Last name*"
                       value={form.lastName}
                       onChange={handleChange("lastName")}
                       aria-invalid={!!errors.lastName}
-                      className={fieldClass(!!errors.lastName)}
+                      className={errors.lastName ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.lastName && <FieldError message={errors.lastName} />}
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="Company name*"
+                      name="company"
+                      label="Company name*"
                       value={form.company}
                       onChange={handleChange("company")}
                       aria-invalid={!!errors.company}
-                      className={fieldClass(!!errors.company)}
+                      className={errors.company ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.company && <FieldError message={errors.company} />}
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="email"
-                      placeholder="Business Email*"
+                      name="email"
+                      label="Business Email*"
                       value={form.email}
                       onChange={handleChange("email")}
                       aria-invalid={!!errors.email}
-                      className={fieldClass(!!errors.email)}
+                      className={errors.email ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.email && <FieldError message={errors.email} />}
                   </div>

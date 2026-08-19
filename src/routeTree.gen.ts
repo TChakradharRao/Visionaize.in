@@ -24,6 +24,7 @@ import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as PowerIndustryWhitepaperRouteImport } from './routes/power-industry-whitepaper'
 import { Route as PowerIndustryCaseStudyRouteImport } from './routes/power-industry-case-study'
 import { Route as IntelligentDemandForecastRouteImport } from './routes/intelligent-demand-forecast'
+import { Route as GeVSuiteRouteImport } from './routes/ge-v-suite'
 import { Route as DigitalTwinFaqRouteImport } from './routes/digital-twin-faq'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as CompanyRouteImport } from './routes/company'
@@ -31,6 +32,7 @@ import { Route as CementIndustryWhitepaperRouteImport } from './routes/cement-in
 import { Route as BuildABusinessCaseRouteImport } from './routes/build-a-business-case'
 import { Route as AiInPharmaceuticalManufacturingRouteImport } from './routes/ai-in-pharmaceutical-manufacturing'
 import { Route as AboutUsRouteImport } from './routes/about-us'
+import { Route as TalkToAnExpertRouteImport } from './routes/Talk-to-an-expert'
 import { Route as SlugRouteImport } from './routes/$slug'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SolutionsIndexRouteImport } from './routes/solutions/index'
@@ -56,6 +58,7 @@ import { Route as IndustriesDigitalTwinForPowerAndEnergyRouteImport } from './ro
 import { Route as IndustriesDigitalTwinForOilAndGasRouteImport } from './routes/industries.digital-twin-for-oil-and-gas'
 import { Route as IndustriesDigitalTwinForManufacturingRouteImport } from './routes/industries.digital-twin-for-manufacturing'
 import { Route as IndustriesDigitalTwinForCementRouteImport } from './routes/industries.digital-twin-for-cement'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
 import { Route as AdminManageColumnsRouteImport } from './routes/admin.manage-columns'
 import { Route as AdminLoginRouteImport } from './routes/admin.login'
 import { Route as AdminFieldMappingRouteImport } from './routes/admin.field-mapping'
@@ -142,6 +145,11 @@ const IntelligentDemandForecastRoute =
     path: '/intelligent-demand-forecast',
     getParentRoute: () => rootRouteImport,
   } as any)
+const GeVSuiteRoute = GeVSuiteRouteImport.update({
+  id: '/ge-v-suite',
+  path: '/ge-v-suite',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DigitalTwinFaqRoute = DigitalTwinFaqRouteImport.update({
   id: '/digital-twin-faq',
   path: '/digital-twin-faq',
@@ -177,6 +185,11 @@ const AiInPharmaceuticalManufacturingRoute =
 const AboutUsRoute = AboutUsRouteImport.update({
   id: '/about-us',
   path: '/about-us',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TalkToAnExpertRoute = TalkToAnExpertRouteImport.update({
+  id: '/Talk-to-an-expert',
+  path: '/Talk-to-an-expert',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SlugRoute = SlugRouteImport.update({
@@ -320,6 +333,11 @@ const IndustriesDigitalTwinForCementRoute =
     path: '/industries/digital-twin-for-cement',
     getParentRoute: () => rootRouteImport,
   } as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/admin/users',
+  path: '/admin/users',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminManageColumnsRoute = AdminManageColumnsRouteImport.update({
   id: '/admin/manage-columns',
   path: '/admin/manage-columns',
@@ -355,6 +373,7 @@ const IndustriesOilAndGasBuildABusinessCaseRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
+  '/Talk-to-an-expert': typeof TalkToAnExpertRoute
   '/about-us': typeof AboutUsRoute
   '/ai-in-pharmaceutical-manufacturing': typeof AiInPharmaceuticalManufacturingRoute
   '/build-a-business-case': typeof BuildABusinessCaseRoute
@@ -362,6 +381,7 @@ export interface FileRoutesByFullPath {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
+  '/ge-v-suite': typeof GeVSuiteRoute
   '/intelligent-demand-forecast': typeof IntelligentDemandForecastRoute
   '/power-industry-case-study': typeof PowerIndustryCaseStudyRoute
   '/power-industry-whitepaper': typeof PowerIndustryWhitepaperRoute
@@ -382,6 +402,7 @@ export interface FileRoutesByFullPath {
   '/admin/field-mapping': typeof AdminFieldMappingRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/manage-columns': typeof AdminManageColumnsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
   '/industries/digital-twin-for-manufacturing': typeof IndustriesDigitalTwinForManufacturingRoute
   '/industries/digital-twin-for-oil-and-gas': typeof IndustriesDigitalTwinForOilAndGasRoute
@@ -410,6 +431,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
+  '/Talk-to-an-expert': typeof TalkToAnExpertRoute
   '/about-us': typeof AboutUsRoute
   '/ai-in-pharmaceutical-manufacturing': typeof AiInPharmaceuticalManufacturingRoute
   '/build-a-business-case': typeof BuildABusinessCaseRoute
@@ -417,6 +439,7 @@ export interface FileRoutesByTo {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
+  '/ge-v-suite': typeof GeVSuiteRoute
   '/intelligent-demand-forecast': typeof IntelligentDemandForecastRoute
   '/power-industry-case-study': typeof PowerIndustryCaseStudyRoute
   '/power-industry-whitepaper': typeof PowerIndustryWhitepaperRoute
@@ -436,6 +459,7 @@ export interface FileRoutesByTo {
   '/admin/field-mapping': typeof AdminFieldMappingRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/manage-columns': typeof AdminManageColumnsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
   '/industries/digital-twin-for-manufacturing': typeof IndustriesDigitalTwinForManufacturingRoute
   '/industries/digital-twin-for-oil-and-gas': typeof IndustriesDigitalTwinForOilAndGasRoute
@@ -465,6 +489,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
+  '/Talk-to-an-expert': typeof TalkToAnExpertRoute
   '/about-us': typeof AboutUsRoute
   '/ai-in-pharmaceutical-manufacturing': typeof AiInPharmaceuticalManufacturingRoute
   '/build-a-business-case': typeof BuildABusinessCaseRoute
@@ -472,6 +497,7 @@ export interface FileRoutesById {
   '/company': typeof CompanyRoute
   '/contact': typeof ContactRoute
   '/digital-twin-faq': typeof DigitalTwinFaqRoute
+  '/ge-v-suite': typeof GeVSuiteRoute
   '/intelligent-demand-forecast': typeof IntelligentDemandForecastRoute
   '/power-industry-case-study': typeof PowerIndustryCaseStudyRoute
   '/power-industry-whitepaper': typeof PowerIndustryWhitepaperRoute
@@ -492,6 +518,7 @@ export interface FileRoutesById {
   '/admin/field-mapping': typeof AdminFieldMappingRoute
   '/admin/login': typeof AdminLoginRoute
   '/admin/manage-columns': typeof AdminManageColumnsRoute
+  '/admin/users': typeof AdminUsersRoute
   '/industries/digital-twin-for-cement': typeof IndustriesDigitalTwinForCementRoute
   '/industries/digital-twin-for-manufacturing': typeof IndustriesDigitalTwinForManufacturingRoute
   '/industries/digital-twin-for-oil-and-gas': typeof IndustriesDigitalTwinForOilAndGasRoute
@@ -522,6 +549,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/$slug'
+    | '/Talk-to-an-expert'
     | '/about-us'
     | '/ai-in-pharmaceutical-manufacturing'
     | '/build-a-business-case'
@@ -529,6 +557,7 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
+    | '/ge-v-suite'
     | '/intelligent-demand-forecast'
     | '/power-industry-case-study'
     | '/power-industry-whitepaper'
@@ -549,6 +578,7 @@ export interface FileRouteTypes {
     | '/admin/field-mapping'
     | '/admin/login'
     | '/admin/manage-columns'
+    | '/admin/users'
     | '/industries/digital-twin-for-cement'
     | '/industries/digital-twin-for-manufacturing'
     | '/industries/digital-twin-for-oil-and-gas'
@@ -577,6 +607,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/$slug'
+    | '/Talk-to-an-expert'
     | '/about-us'
     | '/ai-in-pharmaceutical-manufacturing'
     | '/build-a-business-case'
@@ -584,6 +615,7 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
+    | '/ge-v-suite'
     | '/intelligent-demand-forecast'
     | '/power-industry-case-study'
     | '/power-industry-whitepaper'
@@ -603,6 +635,7 @@ export interface FileRouteTypes {
     | '/admin/field-mapping'
     | '/admin/login'
     | '/admin/manage-columns'
+    | '/admin/users'
     | '/industries/digital-twin-for-cement'
     | '/industries/digital-twin-for-manufacturing'
     | '/industries/digital-twin-for-oil-and-gas'
@@ -631,6 +664,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/$slug'
+    | '/Talk-to-an-expert'
     | '/about-us'
     | '/ai-in-pharmaceutical-manufacturing'
     | '/build-a-business-case'
@@ -638,6 +672,7 @@ export interface FileRouteTypes {
     | '/company'
     | '/contact'
     | '/digital-twin-faq'
+    | '/ge-v-suite'
     | '/intelligent-demand-forecast'
     | '/power-industry-case-study'
     | '/power-industry-whitepaper'
@@ -658,6 +693,7 @@ export interface FileRouteTypes {
     | '/admin/field-mapping'
     | '/admin/login'
     | '/admin/manage-columns'
+    | '/admin/users'
     | '/industries/digital-twin-for-cement'
     | '/industries/digital-twin-for-manufacturing'
     | '/industries/digital-twin-for-oil-and-gas'
@@ -687,6 +723,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   SlugRoute: typeof SlugRoute
+  TalkToAnExpertRoute: typeof TalkToAnExpertRoute
   AboutUsRoute: typeof AboutUsRoute
   AiInPharmaceuticalManufacturingRoute: typeof AiInPharmaceuticalManufacturingRoute
   BuildABusinessCaseRoute: typeof BuildABusinessCaseRoute
@@ -694,6 +731,7 @@ export interface RootRouteChildren {
   CompanyRoute: typeof CompanyRoute
   ContactRoute: typeof ContactRoute
   DigitalTwinFaqRoute: typeof DigitalTwinFaqRoute
+  GeVSuiteRoute: typeof GeVSuiteRoute
   IntelligentDemandForecastRoute: typeof IntelligentDemandForecastRoute
   PowerIndustryCaseStudyRoute: typeof PowerIndustryCaseStudyRoute
   PowerIndustryWhitepaperRoute: typeof PowerIndustryWhitepaperRoute
@@ -714,6 +752,7 @@ export interface RootRouteChildren {
   AdminFieldMappingRoute: typeof AdminFieldMappingRoute
   AdminLoginRoute: typeof AdminLoginRoute
   AdminManageColumnsRoute: typeof AdminManageColumnsRoute
+  AdminUsersRoute: typeof AdminUsersRoute
   IndustriesDigitalTwinForCementRoute: typeof IndustriesDigitalTwinForCementRoute
   IndustriesDigitalTwinForManufacturingRoute: typeof IndustriesDigitalTwinForManufacturingRoute
   IndustriesDigitalTwinForOilAndGasRoute: typeof IndustriesDigitalTwinForOilAndGasRoute
@@ -839,6 +878,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IntelligentDemandForecastRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ge-v-suite': {
+      id: '/ge-v-suite'
+      path: '/ge-v-suite'
+      fullPath: '/ge-v-suite'
+      preLoaderRoute: typeof GeVSuiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/digital-twin-faq': {
       id: '/digital-twin-faq'
       path: '/digital-twin-faq'
@@ -886,6 +932,13 @@ declare module '@tanstack/react-router' {
       path: '/about-us'
       fullPath: '/about-us'
       preLoaderRoute: typeof AboutUsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/Talk-to-an-expert': {
+      id: '/Talk-to-an-expert'
+      path: '/Talk-to-an-expert'
+      fullPath: '/Talk-to-an-expert'
+      preLoaderRoute: typeof TalkToAnExpertRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/$slug': {
@@ -1063,6 +1116,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndustriesDigitalTwinForCementRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/admin/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin/manage-columns': {
       id: '/admin/manage-columns'
       path: '/admin/manage-columns'
@@ -1140,6 +1200,7 @@ const SolutionsRouteWithChildren = SolutionsRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   SlugRoute: SlugRoute,
+  TalkToAnExpertRoute: TalkToAnExpertRoute,
   AboutUsRoute: AboutUsRoute,
   AiInPharmaceuticalManufacturingRoute: AiInPharmaceuticalManufacturingRoute,
   BuildABusinessCaseRoute: BuildABusinessCaseRoute,
@@ -1147,6 +1208,7 @@ const rootRouteChildren: RootRouteChildren = {
   CompanyRoute: CompanyRoute,
   ContactRoute: ContactRoute,
   DigitalTwinFaqRoute: DigitalTwinFaqRoute,
+  GeVSuiteRoute: GeVSuiteRoute,
   IntelligentDemandForecastRoute: IntelligentDemandForecastRoute,
   PowerIndustryCaseStudyRoute: PowerIndustryCaseStudyRoute,
   PowerIndustryWhitepaperRoute: PowerIndustryWhitepaperRoute,
@@ -1168,6 +1230,7 @@ const rootRouteChildren: RootRouteChildren = {
   AdminFieldMappingRoute: AdminFieldMappingRoute,
   AdminLoginRoute: AdminLoginRoute,
   AdminManageColumnsRoute: AdminManageColumnsRoute,
+  AdminUsersRoute: AdminUsersRoute,
   IndustriesDigitalTwinForCementRoute: IndustriesDigitalTwinForCementRoute,
   IndustriesDigitalTwinForManufacturingRoute:
     IndustriesDigitalTwinForManufacturingRoute,

@@ -1,16 +1,9 @@
-@import "tailwindcss" source(none);
+@import "tailwindcss" ;
 @source "../src";
 @import "tw-animate-css";
 
-
 @custom-variant dark (&:is(.dark *));
 
-/*
- * Visionaize design system — replicates visionaize.com palette/typography
- * Brand gradient: lime → emerald → teal → cyan → blue
- * Headings: bold uppercase tracking, deep navy on white
- * Body: clean sans-serif (Poppins), neutral grey-blue
- */
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);
@@ -49,8 +42,9 @@
   --color-brand-navy:    var(--brand-navy);
   --color-brand-ink:     var(--brand-ink);
 
-  --font-sans: "Poppins", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Poppins", system-ui, sans-serif;
+  --font-sans: "Source Sans 3", "Source Sans Pro", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fira Sans", "Source Sans 3", system-ui, sans-serif;
+  --font-alt: "Roboto", system-ui, sans-serif;
 }
 
 :root {
@@ -87,8 +81,8 @@
   --brand-teal:    #34A2A5;
   --brand-cyan:    #2D8DB4;
   --brand-blue:    #0A78B9;
-  --brand-navy:    #0F2740;
-  --brand-ink:     #1A2B4A;
+  --brand-navy:    #000000;
+  --brand-ink:     #000000;
 }
 
 .dark {
@@ -109,6 +103,7 @@
   --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.71 0.18 195);
+  --brand-navy: oklch(0% 0 0); /* Adjust for dark mode readability, using foreground color */
 }
 
 @utility brand-gradient {
@@ -138,6 +133,10 @@
   * {
     border-color: var(--color-border);
   }
+  html,
+  body {
+    overflow-x: hidden;
+  }
   html {
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
@@ -145,39 +144,888 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    /* visionaize.com body: Source Sans Pro 16px / 26.4px, weight 400 */
     font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.65;
+    font-weight: 400;
+    min-width: 320px;
   }
+  img,
+  video {
+    max-width: 100%;
+    height: auto;
+  }
+  /* Heading scale copied from visionaize.com (Fira Sans) */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
     color: var(--brand-navy);
-    letter-spacing: -0.01em;
+    letter-spacing: normal;
+  }
+  h1 {
+    font-size: 35px;
+    line-height: 60px;
+    font-weight: 400;
+  }
+  h2 {
+    font-size: 29px;
+    line-height: 42px;
+    font-weight: 400;
+  }
+  h3 {
+    font-size: 22px;
+    line-height: 34px;
+    font-weight: 400;
+  }
+  h4 {
+    font-size: 28px;
+    line-height: 40px;
+    font-weight: 300;
+  }
+  h5 {
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+  }
+  h6 {
+    font-size: 18px;
+    line-height: 27px;
+    font-weight: 500;
+  }
+  p, li, a, span, label, input, textarea, select, button {
+    font-family: var(--font-sans);
   }
 }
-@keyframes slideDownIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-100%);
-  }
 
-  60% {
-    opacity: 1;
-    transform: translateY(20%);
-  }
 
-  100% {
-    opacity: 1;
-    transform: translateY(0);
+.footer-rightside-menu div:last-child {
+  white-space: nowrap;
+}
+
+
+.animation-type-slide-down{
+    animation: elementor-headline-slide-down-out 5s infinite;
+    animation: elementor-headline-slide-down-in 5s infinite;
+}
+
+@keyframes elementor-headline-slide-down-in {
+    0% {
+        opacity: 0;
+        transform: translateY(-100%)
+    }
+
+    60% {
+        opacity: 1;
+        transform: translateY(20%)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0)
+    }
+}
+
+@keyframes elementor-headline-slide-down-out {
+    0% {
+        opacity: 1;
+        transform: translateY(0)
+    }
+
+    60% {
+        opacity: 0;
+        transform: translateY(120%)
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+}
+
+.gradient-cta a, .gradient-cta {
+  background: linear-gradient(96.56deg, #92C122 0%, #088FD1 100%) !important;
+  font-family: 'Fira Sans';
+  color: #fff;
+  padding: 20px 40px;
+	border-radius: 50px;
+	font-size:18px;
+	font-weight: 600;
+	border: 1px solid transparent;
+	transition:0.5s ease-in-out;
+}
+
+header a:hover{
+  background: linear-gradient(111.34deg, #94C11F 8.76%, #078ED1 84.29%);
+  background: -webkit-linear-gradient(111.34deg, #94C11F 8.76%, #078ED1 84.29%);
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  background-clip: text !important;
+  width: max-content;
+  -webkit-background-clip: text;
+}
+/* header div:last-child a:hover{background:black;color:white} */
+header nav div {
+  white-space: nowrap;
+}
+.home-page-section1{
+    text-align: start;
+    font-family: "Roboto", Sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+}
+.platform_cards{
+    position: relative;
+    padding-bottom: 20px;
+}
+.platform_cards h3{
+  background: linear-gradient(111.34deg, #94C11F 13.76%, #078ED1 50.29%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 600;
+  font-size: 22px;
+}
+.platform_cards .platform_cards_link{
+    background-color: #61CE7000;
+    font-family: "Source Sans Pro", Sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    fill: #099FDE;
+    color: #099FDE;
+    padding: 0px 0px 0px 0px;
+}
+.platform_cards::after, .articles::after{
+    content: '';
+    background: linear-gradient(96.56deg, #92C122 0%, #088FD1 100%);
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    bottom: 0;
+    left:0
+}
+.home section h2{
+  font-size:45px;
+}
+
+.partner-mobile.testimonial-heading-home::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    left: 0;
+    background-image: url(https://visionaize.com/wp-content/uploads/2022/04/Qbg-min.png);
+    top: 16%;
+    background-repeat: no-repeat;
+    background-position: right;
+    width: 100%;
+    height: 54%;
+    background-size: contain;
+}
+
+.testimonial-heading-home h2, .theme-multicolor-weight-400 {
+    background: linear-gradient(111.34deg, #94C11F 8.76%, #078ED1 84.29%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.testimonial-heading-home .h6 {
+    font-size: 18px;
+    background: linear-gradient(111.34deg, #94C11F 8.76%, #078ED1 84.29%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+.motion-effects-layer {
+    background-color: transparent;
+    background-image: linear-gradient(130deg, #94C11F 13%, #078ED1 87%);
+}
+.theme-multicolor-weight-900 {
+    background: linear-gradient(to right, #94C11F, #078ED1 55.29%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight:900;
+}
+
+nav[aria-label="Pagination"] button, nav[aria-label="Pagination"] span{cursor:pointer}
+
+footer a:hover{
+  background: linear-gradient(111.34deg, #94C11F 8.76%, #078ED1 84.29%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text !important;
+  color: transparent;
+}
+.cs-slide-next strong, 
+.cs-slide-next b,
+.case_study strong{
+  color:#088FD1;
+}
+
+.text-slate-900 strong{font-family: sans-serif;font-weight: 900;}
+
+#about-visionaize{
+  background: url("https://visionaize.com/wp-content/uploads/2022/05/Footer-BG-1.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.logos div:last-child img{
+  margin-bottom: 20px;
+}
+/* ============================================================
+   Responsive layer (<=1023px only — desktop is untouched)
+   Mirrors visionaize.com mobile behaviour: fluid type, tighter
+   section spacing, no horizontal scroll, touch-friendly targets.
+   ============================================================ */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  img,
+  video,
+  canvas,
+  svg,
+  iframe {
+    max-width: 100%;
   }
 }
 
-.animate-percentage {
-  display: inline-block;
-  opacity: 0;
-  animation: slideDownIn 0.6s ease forwards;
+@media (max-width: 1024px) {
+  html,
+  body {
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    max-width: 100%;
+    height: auto;
+    min-height: 100%;
+    -webkit-overflow-scrolling: touch;
+  }
+  /* nowrap rules are desktop-only; they force horizontal scroll on phones */
+  header nav div,
+  .footer-rightside-menu div:last-child {
+    white-space: normal;
+  }
+  header a:hover {
+    width: auto;
+  }
+
+  /* typography scale down (same faces/colors, smaller sizes) */
+  h1 {
+    font-size: 30px;
+    line-height: 40px;
+  }
+  h2 {
+    font-size: 26px;
+    line-height: 36px;
+  }
+  h3 {
+    font-size: 20px;
+    line-height: 30px;
+  }
+  h4 {
+    font-size: 22px;
+    line-height: 32px;
+  }
+  .home section h2 {
+    font-size: 28px;
+    line-height: 38px;
+  }
+
+  /* tame oversized desktop utility type */
+  .text-7xl { font-size: 40px; line-height: 1.15; }
+  .text-6xl { font-size: 36px; line-height: 1.15; }
+  .text-5xl { font-size: 32px; line-height: 1.2; }
+  .text-4xl { font-size: 28px; line-height: 1.25; }
+
+  /* section rhythm */
+  section {
+    padding-left: max(16px, env(safe-area-inset-left));
+    padding-right: max(16px, env(safe-area-inset-right));
+  }
+  .py-24 { padding-top: 48px; padding-bottom: 48px; }
+  .py-20 { padding-top: 44px; padding-bottom: 44px; }
+  .py-16 { padding-top: 40px; padding-bottom: 40px; }
+
+  /* touch-friendly CTAs */
+  .gradient-cta a,
+  .gradient-cta {
+    padding: 14px 26px;
+    font-size: 16px;
+    display: inline-block;
+  }
+  a,
+  button {
+    touch-action: manipulation;
+  }
+  /* keep wide content scrollable inside its own box, not the page */
+  table,
+  pre {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .partner-mobile.testimonial-heading-home::after{
+    top:45%;
+    height:40%
+  }
+  .visionaize-footer::after{
+    height: 77% !important;
+    opacity: 0.4;
+    background-size: cover !important;
+    background-position: left bottom !important;
+    left: 20px;
+  }
 }
 
-*{
-  font-family:"Fira Sans";
-  font-weight:bold;
+@media (max-width: 767px) {
+  h1 { font-size: 26px; line-height: 34px; }
+  h2 { font-size: 22px; line-height: 31px; }
+  .home section h2 { font-size: 24px; line-height: 33px; }
+  .text-7xl { font-size: 32px; }
+  .text-6xl { font-size: 30px; }
+  .text-5xl { font-size: 27px; }
+  .py-24 { padding-top: 36px; padding-bottom: 36px; }
+  .py-20 { padding-top: 34px; padding-bottom: 34px; }
+  .py-16 { padding-top: 32px; padding-bottom: 32px; }
+ .partner-mobile.testimonial-heading-home::after{
+    top:45%;
+    height:30%
+  }
+}
 
+@media (max-width: 479px) {
+  body { font-size: 15px; }
+  h1 { font-size: 23px; line-height: 31px; }
+  h2 { font-size: 20px; line-height: 29px; }
+  .home section h2 { font-size: 21px; line-height: 30px; }
+  .gradient-cta a,
+  .gradient-cta { padding: 12px 20px; font-size: 15px; width: auto; }
+}
+
+@media (max-width: 360px) {
+  section { padding-left: 12px; padding-right: 12px; }
+  h1 { font-size: 21px; line-height: 29px; }
+}
+
+/* smoother scroll / GPU-friendly animations on touch devices */
+@media (hover: none) {
+  .animation-type-slide-down { will-change: transform, opacity; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Hero ribbon: desktop keeps its fixed 950px band; on tablet/mobile it
+   shrinks to the viewport so the headline stays fully readable. */
+@media (max-width: 1024px) {
+  .hero-ribbon {
+    min-width: 0 !important;
+    max-width: 100%;
+    width: 100%;
+    font-size: 20px;
+    line-height: 1.25;
+    padding: 16px 40px 16px 24px;
+    flex-wrap: wrap;
+    clip-path: polygon(0 0, 96% 0, 100% 100%, 0% 100%);
+  }
+  .hero-ribbon .animate-typewriter {
+    white-space: normal;
+  }
+}
+@media (max-width: 479px) {
+  .hero-ribbon {
+    font-size: 16px;
+    padding: 12px 28px 12px 18px;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Hero: show the FULL video frame (16:9) instead of a cropped tall band,
+     matching visionaize.com's mobile hero strip. */
+  section.bg-black > video {
+    position: absolute;
+    inset: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  .min-h-\[85vh\] {
+    min-height: 0;
+    height: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    align-content: end;
+  }
+  section.bg-black > .min-h-\[85vh\] {
+    min-height: 0;
+    aspect-ratio: 16 / 9;
+    padding-bottom: 12px;
+  }
+  .hero-ribbon {
+    top: 0 !important;
+  }
+  /* product pill icons are not shown on mobile/tablet on the reference site */
+  /* section.bg-black .absolute.right-4.top-24 {
+    display: none !important;
+  } */
+  /* keep the fluid container from being wider than the screen */
+  .max-w-auto {
+    max-width: 100%;
+  }
+  /* percentage-wide desktop overrides must not exceed the viewport */
+  [class*="w-\[1"][class*="%\]"],
+  [class*="md\:w-\[1"][class*="%\]"] {
+    width: 100%;
+  }
+
+  /* Buttons/pills are oversized on small screens — scale them down */
+  main a[class*="rounded-full"],
+  main button[class*="rounded-full"],
+  section a[class*="rounded-full"],
+  section button[class*="rounded-full"] {
+    font-size: 15px !important;
+    line-height: 1.3 !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+}
+
+@media (max-width: 767px) {
+  /* negative desktop offsets push content off-canvas on phones */
+  /* keep the hero ribbon flush to the viewport edge like the reference */
+  .-ml-6 { margin-left: -24px; }
+  .-ml-2 { margin-left: 0; }
+  .hero-ribbon { padding-left: 24px; }
+
+  main a[class*="rounded-full"],
+  main button[class*="rounded-full"],
+  section a[class*="rounded-full"],
+  section button[class*="rounded-full"] {
+    font-size: 14px !important;
+    padding-top: 9px !important;
+    padding-bottom: 9px !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+}
+
+
+
+/* Intro + stats band: stack and centre like visionaize.com on <=1023px */
+@media (max-width: 1024px) {
+  .home-page-section1 > div {
+    grid-template-columns: 1fr !important;
+    gap: 24px;
+    text-align: center;
+  }
+  .home-page-section1 h2 {
+    text-align: center;
+  }
+  .home-page-section1 ul {
+    text-align: left;
+    margin-top: 24px;
+  }
+  /* the source artwork has wide transparent padding — scale it up so the
+     laptop reads at the same size as the reference site */
+  .home-page-section1 > div > div:first-child {
+    overflow: hidden;
+  }
+  .home-page-section1 img {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+  }
+  .home-page-section1 li {
+    flex-wrap: nowrap;
+    align-items: baseline;
+  }
+  .home-page-section1 li > span {
+    white-space: nowrap;
+  }
+  .home-page-section1 li > span:last-child {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* Elementor wraps every section container below 1024px */
+  section > div,
+  section > div > div {
+    flex-wrap: wrap;
+  }
+  /* container padding parity */
+  section {
+    padding-left: max(10px, env(safe-area-inset-left));
+    padding-right: max(10px, env(safe-area-inset-right));
+  }
+  /* widgets never exceed their container */
+  /* section img, */
+  section video,
+  section iframe {
+    max-width: 100%;
+    height: auto;
+  }
+  #talk-to-an-expert div div:last-child{
+    width:55%;margin:auto;
+  }
+}
+
+@media (max-width: 767px) {
+  /* mobile: every flex/grid child becomes full width, gap 20px */
+  section > div,
+  section > div > div {
+    --gap: 20px;
+  }
+  [class*="grid-cols-2"] {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+  [class*="flex-row"]:not(header *):not(footer *) {
+    flex-direction: column;
+  }
+  [class*="w-1/2"],
+  [class*="w-1/3"],
+  [class*="w-2/3"],
+  [class*="w-1/4"],
+  [class*="w-3/4"] {
+    width: 100%;
+  }
+   #talk-to-an-expert div div:last-child{
+    width:90%;margin:auto;
+  }
+}
+
+@media (max-width: 1024px) {
+
+  [class*="grid-cols-"] > * {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    order: 0 !important;
+  }
+
+
+  /* --- 2. Side-by-side flex bands stack, image first --- */
+  section [class*="lg:flex-row"],
+  section [class*="md:flex-row"],
+  section [class*="sm:flex-row"] {
+    flex-direction: column;
+    align-items: center;
+  }
+  section [class*="lg:flex-row"] > *:not(a):not(button),
+  section [class*="md:flex-row"] > *:not(a):not(button),
+  section [class*="sm:flex-row"] > *:not(a):not(button) {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  /* inline CTAs never stretch edge-to-edge */
+  section [class*="flex-row"] > a,
+  section [class*="flex-row"] > button {
+    width: auto;
+    max-width: 100%;
+  }
+
+  [class*="w-1/2"],
+  [class*="w-1/3"],
+  [class*="w-2/3"],
+  [class*="w-1/4"],
+  [class*="w-3/4"] {
+    width: 100%;
+  }
+
+  /* --- 3. Images: complete image, correct ratio, centred --- */
+  /* section img, */
+  section video,
+  section svg,
+  main > div img {
+    max-width: 100% !important;
+    height: auto;
+    /* margin-inline: auto; */
+  }
+  section img {
+    display: block;
+    object-fit: contain !important;
+    object-position: center center;
+  }
+  /* no desktop zoom / offset / clipping on small screens */
+  section [class*="scale-"] {
+    scale: 1 !important;
+    transform: none !important;
+    translate: none !important;
+  }
+  [class*="md:left-["],
+  [class*="md:right-["],
+  [class*="left-["],
+  [class*="right-["] {
+    left: auto !important;
+    right: auto !important;
+  }
+  /* fixed / aspect-locked media boxes grow with their image */
+  section [class*="h-\["],
+  section [class*="max-h-\["] {
+    height: auto;
+    max-height: none;
+  }
+  section [class*="aspect-"] {
+    aspect-ratio: auto !important;
+  }
+  section [class*="aspect-"] > img,
+  section [class*="aspect-"] > div > img {
+    position: relative !important;
+    inset: auto !important;
+    width: 100%;
+    height: auto;
+  }
+
+  /* --- 4. Cards: full width, one per row, consistent rhythm --- */
+  .platform_cards,
+  .articles,
+  .case_study {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    height: auto;
+    overflow: visible;
+    margin-inline: auto;
+  }
+
+   section [class*="grid-cols-"] ul,
+  section [class*="flex-row"] ul {
+    text-align: left;
+    display: inline-block;
+  }
+ 
+  /* card interiors keep natural left alignment */
+  .platform_cards h1, .platform_cards h2, .platform_cards h3, .platform_cards p,
+  .articles h1, .articles h2, .articles h3, .articles p,
+  .case_study h1, .case_study h2, .case_study h3, .case_study p {
+    text-align: left;
+  }
+
+  /* --- 6. Section spacing parity with the reference --- */
+  section [class*="py-3"],
+  section [class*="py-4"] {
+    padding-block: 3rem !important;
+  }
+  [class*="gap-"] {
+    row-gap: 1.2rem;
+  }
+}
+
+@media (max-width: 767px) {
+  /* below 768px: single column everywhere */
+  [class*="grid-cols-"] {
+    grid-template-columns: repeat(1, minmax(0, 1fr)) !important;
+  }
+  section {
+    padding-block: 2.5rem;
+  }
+}
+
+/* Sections that carry artwork as a CSS background: never let copy overlap it */
+@media (max-width: 1024px) {
+  main section [style*="background-image"] {
+    background-size: 200% auto !important;
+    background-repeat: no-repeat !important;
+    background-position: top left !important;
+    padding-top: 0 !important;
+  }
+  main section [style*="background-image"] > div:first-child {
+    min-height: 70vw;
+  }
+  main section [style*="background-image"] > div:last-child {
+    background: #fff;
+    padding: 1.25rem;
+  }
+}
+
+/* V-Plant tier artwork: show the whole asset, scaled down, never cropped. */
+@media (max-width: 1024px) {
+  [id^="tier-detail-"] > div:first-child > div {
+    overflow: visible;
+    aspect-ratio: auto;
+    width: 100%;
+    height: auto !important;
+    position: relative !important;
+    inset: auto !important;
+  }
+  [id^="tier-detail-"] > div:first-child img {
+    position: relative !important;
+    inset: auto !important;
+    width: 92% !important;
+    max-width: 92% !important;
+    height: auto !important;
+    scale: 1 !important;
+    transform: none !important;
+    object-fit: contain !important;
+    margin-inline: auto !important;
+  }
+  [id^="tier-detail-"] {
+    gap: 1.5rem !important;
+    margin-block: 2.5rem;
+  }
+  [id^="tier-detail-"] > div:last-child {
+    padding-block: 0 !important;
+  }
+}
+
+/* Global mobile image fit: complete image, centred, comfortably sized */
+@media (max-width: 1024px) {
+  /* main section img, */
+  /* main section svg, */
+  main section video,
+  main section picture {
+    width: auto;
+    max-width: 88% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    margin-inline: auto !important;
+  }
+  /* card media stays full-bleed inside its card */
+  .platform_cards img,
+  .articles img,
+  .case_study img {
+    max-width: 100% !important;
+    width: 100%;
+    object-fit: cover !important;
+  }
+}
+
+@media (max-width: 767px) {
+  /* main section img, */
+  /* main section svg, */
+  main section video,
+  main section picture {
+    max-width: 84% !important;
+  }
+  [id^="tier-detail-"] > div:first-child img {
+    width: 88% !important;
+    max-width: 88% !important;
+  }
+}
+
+
+/* ---- Mobile/tablet: guarantee vertical scrolling + centred media ---- */
+@media (max-width: 1024px) {
+  html,
+  body,
+  #root {
+    position: static !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+    touch-action: pan-y !important;
+    overscroll-behavior-y: auto !important;
+  }
+  html,
+  body {
+    overflow-y: auto !important;
+  }
+  #root {
+    overflow-x: clip;
+  }
+  /* full-viewport locks break scrolling on short screens */
+  main [class*="h-screen"],
+  main [class*="min-h-screen"],
+  section[class*="h-screen"],
+  section[class*="min-h-screen"] {
+    height: auto !important;
+    min-height: 0 !important;
+    max-height: none !important;
+  }
+  /* sticky/fixed decorative layers must not trap touch */
+  main [class*="fixed"]:not([role="dialog"]):not([data-radix-popper-content-wrapper]) {
+    position: relative !important;
+  }
+
+  main section video,
+  main section picture {
+    display: block;
+    margin-inline: auto;
+  }
+}
+
+/* ---- Partner logo strip stays a compact row on tablet/mobile ---- */
+@media (max-width: 1024px) {
+  .logos {
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem 1.75rem !important;
+  }
+  .logos > div {
+    width: auto !important;
+    max-width: none !important;
+    flex: 0 0 auto !important;
+  }
+  .logos img {
+    width: auto !important;
+    max-width: 200px !important;
+    height: 90px !important;
+    object-fit: contain !important;
+  }
+}
+@media (max-width: 767px) {
+  .logos img {
+    max-width: 150px !important;
+    height: 80px !important;
+  }
+  .logos {
+    gap: 0.9rem 1.2rem !important;
+  }
+}
+
+/* ---- Mobile: keep icons, inline glyphs and absolutely-placed media sane ---- */
+@media (max-width: 1024px) {
+  /* inline brand glyphs (e.g. VIZI mark inside headings/paragraphs) */
+  section img.inline-block,
+  section img[class*="align-"] {
+    display: inline-block !important;
+    width: auto !important;
+    height: 0.85em !important;
+    max-width: none !important;
+    margin-inline: 0.2em !important;
+    vertical-align: -0.12em !important;
+  }
+
+  /* absolutely positioned media flows inline on small screens, never overlaps copy */
+  section img.absolute,
+  section img[class~="inset-0"] {
+    position: relative !important;
+    inset: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    object-fit: contain !important;
+    margin-inline: auto !important;
+  }
+  section div:has(> img.absolute),
+  section div:has(> img[class~="inset-0"]) {
+    height: auto !important;
+    min-height: 0 !important;
+  }
+}
+
+@media (max-width: 1024px) {
+  /* pages without a <main> wrapper still need contained, non-stretched media */
+
+  section img[class*="h-["]:not([class~="inline-block"]) {
+    height: auto !important;
+  }
+}
+
+.martin-image img{
+  max-width:200px !important;
 }

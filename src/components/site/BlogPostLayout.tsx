@@ -7,6 +7,7 @@ export type { ContentBlock };
 export type StaticBlogPost = BlogPost;
 
 function optimized(url: string): string {
+  if (url.startsWith('/')) return url;
   return `https://wsrv.nl/?url=${encodeURIComponent(url)}&w=1200&output=webp&q=85`;
 }
 

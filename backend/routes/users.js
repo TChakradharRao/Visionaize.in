@@ -14,9 +14,16 @@ function requireAdmin(req, res, next) {
   next();
 }
 
+const VALID_ROLES = ['admin', 'editor', 'viewer'];
+
+// Returns the normalized role, or null if the input isn't one of the
+// allowed roles. Callers should treat null as a validation error rather
+// than silently falling back to a default — silently coercing an
+// invalid/unexpected role (e.g. the previous version dropped 'partner' to
+// 'editor') masks bad data instead of surfacing it.
 function normalizeRole(role) {
   const safeRole = String(role || "").trim().toLowerCase();
-  return ['admin', 'editor', 'viewer'].includes(safeRole) ? safeRole : 'editor';
+  return VALID_ROLES.includes(safeRole) ? safeRole : null;
 }
 
 router.use(requireAuth, requireAdmin);
@@ -42,8 +49,12 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ error: "Email and password are required" });
     }
 
-    const passwordHash = await bcrypt.hash(password, 12);
     const safeRole = normalizeRole(role);
+    if (!safeRole) {
+      return res.status(400).json({ error: `Invalid role. Must be one of: ${VALID_ROLES.join(", ")}` });
+    }
+
+    const passwordHash = await bcrypt.hash(password, 12);
     const { rows } = await pool.query(
       `INSERT INTO users (email, password_hash, role, display_name)
        VALUES ($1, $2, $3, $4)
@@ -69,8 +80,12 @@ router.put("/:id", async (req, res) => {
       values.push(hashed);
     }
     if (req.body?.role !== undefined) {
+      const safeRole = normalizeRole(req.body.role);
+      if (!safeRole) {
+        return res.status(400).json({ error: `Invalid role. Must be one of: ${VALID_ROLES.join(", ")}` });
+      }
       updates.push(`role = $${values.length + 1}`);
-      values.push(normalizeRole(req.body.role));
+      values.push(safeRole);
     }
     if (req.body?.displayName !== undefined) {
       updates.push(`display_name = $${values.length + 1}`);

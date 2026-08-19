@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { Check } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-field";
 import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/signal-miner-contact")({
@@ -108,7 +109,7 @@ function SignalMinerContactPage() {
 
   const handleChange =
     (field: keyof Omit<FormState, "seekingSolutions">) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       let value = e.target.value;
 
       // Restrict phone number field to digits only, capped at 10.
@@ -217,75 +218,81 @@ function SignalMinerContactPage() {
 
                 <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="First name*"
+                      name="firstName"
+                      label="First name*"
                       value={form.firstName}
                       onChange={handleChange("firstName")}
                       aria-invalid={!!errors.firstName}
-                      className={fieldClass(!!errors.firstName)}
+                      className={errors.firstName ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.firstName && <FieldError message={errors.firstName} />}
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="Last name*"
+                      name="lastName"
+                      label="Last name*"
                       value={form.lastName}
                       onChange={handleChange("lastName")}
                       aria-invalid={!!errors.lastName}
-                      className={fieldClass(!!errors.lastName)}
+                      className={errors.lastName ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.lastName && <FieldError message={errors.lastName} />}
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="Company*"
+                      name="company"
+                      label="Company*"
                       value={form.company}
                       onChange={handleChange("company")}
                       aria-invalid={!!errors.company}
-                      className={fieldClass(!!errors.company)}
+                      className={errors.company ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.company && <FieldError message={errors.company} />}
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="Title*"
+                      name="title"
+                      label="Title*"
                       value={form.title}
                       onChange={handleChange("title")}
                       aria-invalid={!!errors.title}
-                      className={fieldClass(!!errors.title)}
+                      className={errors.title ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.title && <FieldError message={errors.title} />}
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="tel"
+                      name="phoneNumber"
+                      label="Phone number*"
                       inputMode="numeric"
-                      placeholder="Phone number*"
                       value={form.phoneNumber}
                       onChange={handleChange("phoneNumber")}
                       aria-invalid={!!errors.phoneNumber}
-                      className={fieldClass(!!errors.phoneNumber)}
                       maxLength={10}
+                      className={errors.phoneNumber ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.phoneNumber && <FieldError message={errors.phoneNumber} />}
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="email"
-                      placeholder="Email*"
+                      name="email"
+                      label="Email*"
                       value={form.email}
                       onChange={handleChange("email")}
                       aria-invalid={!!errors.email}
-                      className={fieldClass(!!errors.email)}
+                      className={errors.email ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.email && <FieldError message={errors.email} />}
                   </div>
@@ -312,12 +319,14 @@ function SignalMinerContactPage() {
                     </div>
                   </fieldset>
 
-                  <textarea
-                    placeholder="Comments"
+                  <FloatingTextarea
+                    name="comments"
+                    label="Comments"
                     value={form.comments}
                     onChange={handleChange("comments")}
                     rows={3}
-                    className={`${fieldClass(false)} resize-none`}
+                    aria-invalid={false}
+                    className={form.comments ? "" : ""}
                   />
 
                   <button

@@ -23,6 +23,11 @@ type InsightPageProps = {
   eyebrow?: string;
   intro: string;
   heroImage?: string;
+  /**
+   * "default" — original dark navy hero with image card / stats (used by most insight pages).
+   * "centered" — full-width gradient banner, centered title + intro, no image card (used e.g. by the FAQ page).
+   */
+  heroVariant?: "default" | "centered";
   stats?: Array<{ label: string; value: string }>;
   sections?: InsightSection[];
   cards?: InsightCard[];
@@ -35,6 +40,7 @@ export function InsightPage({
   eyebrow = "Insights",
   intro,
   heroImage,
+  heroVariant = "default",
   stats,
   sections = [],
   cards = [],
@@ -45,24 +51,26 @@ export function InsightPage({
     <>
       <Header />
       <main className="bg-white text-brand-ink">
-        <section className="relative overflow-hidden bg-gradient-to-br from-brand-navy via-[#163b56] to-brand-blue text-white">
-          <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[1.2fr_0.8fr] lg:py-28">
-            <div>
-              <p className="text-sm uppercase tracking-[0.3em] text-brand-lime">{eyebrow}</p>
-              <h1 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl text-white">{title}</h1>
-              <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80">{intro}</p>
+        {heroVariant === "centered" ? (
+          <section
+            className="relative overflow-hidden text-slate-900"
+            style={{ background: "linear-gradient(90deg,#A6E04A 0%,#5BAE7E 45%,#2BA8C7 100%)" }}
+          >
+            <div className="mx-auto max-w-5xl px-6 py-16 text-center md:py-20">
+              <h1 className="text-4xl font-semibold leading-tight text-slate-900 md:text-5xl">{title}</h1>
+              <p className="mt-5 text-base leading-relaxed text-slate-900/80 md:text-lg">{intro}</p>
               {cta && (
-                <div className="mt-8 flex flex-wrap gap-4">
+                <div className="mt-8 flex flex-wrap justify-center gap-4">
                   <Link
                     to={cta.href}
-                    className="inline-flex items-center rounded-full bg-white px-7 py-3 text-sm font-semibold text-brand-navy transition hover:bg-white/90"
+                    className="inline-flex items-center rounded-full bg-white px-7 py-3 text-sm font-semibold text-slate-900 shadow-md transition hover:bg-white/90"
                   >
                     {cta.label}
                   </Link>
                   {cta.secondaryLabel && cta.secondaryHref && (
                     <Link
                       to={cta.secondaryHref}
-                      className="inline-flex items-center rounded-full border border-white/40 px-7 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                      className="inline-flex items-center rounded-full border border-slate-900/30 px-7 py-3 text-sm font-semibold text-slate-900 transition hover:bg-black/5"
                     >
                       {cta.secondaryLabel}
                     </Link>
@@ -70,27 +78,55 @@ export function InsightPage({
                 </div>
               )}
             </div>
-            <div className="rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur">
-              {heroImage ? (
-                <img src={heroImage} alt={title} className="h-64 w-full rounded-2xl object-cover" loading="eager" />
-              ) : (
-                <div className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-white/30 bg-white/5 text-center text-sm text-white/80">
-                  A modern industrial experience built around digital twins and AI.
-                </div>
-              )}
-              {stats && (
-                <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                  {stats.map((stat) => (
-                    <div key={stat.label} className="rounded-2xl border border-white/20 bg-black/10 p-4">
-                      <p className="text-2xl font-semibold">{stat.value}</p>
-                      <p className="mt-1 text-sm text-white/70">{stat.label}</p>
-                    </div>
-                  ))}
-                </div>
-              )}
+          </section>
+        ) : (
+          <section className="relative overflow-hidden bg-gradient-to-br from-brand-navy via-[#163b56] to-brand-blue text-white">
+            <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-[1.2fr_0.8fr] lg:py-28">
+              <div>
+                <p className="text-sm uppercase tracking-[0.3em] text-brand-lime">{eyebrow}</p>
+                <h1 className="mt-4 text-4xl font-semibold leading-tight md:text-5xl text-white">{title}</h1>
+                <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80">{intro}</p>
+                {cta && (
+                  <div className="mt-8 flex flex-wrap gap-4">
+                    <Link
+                      to={cta.href}
+                      className="inline-flex items-center rounded-full bg-white px-7 py-3 text-sm font-semibold text-brand-navy transition hover:bg-white/90"
+                    >
+                      {cta.label}
+                    </Link>
+                    {cta.secondaryLabel && cta.secondaryHref && (
+                      <Link
+                        to={cta.secondaryHref}
+                        className="inline-flex items-center rounded-full border border-white/40 px-7 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+                      >
+                        {cta.secondaryLabel}
+                      </Link>
+                    )}
+                  </div>
+                )}
+              </div>
+              <div className="rounded-3xl border border-white/20 bg-white/10 p-6 shadow-2xl backdrop-blur">
+                {heroImage ? (
+                  <img src={heroImage} alt={title} className="h-64 w-full rounded-2xl object-cover" loading="eager" />
+                ) : (
+                  <div className="flex h-64 items-center justify-center rounded-2xl border border-dashed border-white/30 bg-white/5 text-center text-sm text-white/80">
+                    A modern industrial experience built around digital twins and AI.
+                  </div>
+                )}
+                {stats && (
+                  <div className="mt-6 grid gap-4 sm:grid-cols-2">
+                    {stats.map((stat) => (
+                      <div key={stat.label} className="rounded-2xl border border-white/20 bg-black/10 p-4">
+                        <p className="text-2xl font-semibold">{stat.value}</p>
+                        <p className="mt-1 text-sm text-white/70">{stat.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {children}
 

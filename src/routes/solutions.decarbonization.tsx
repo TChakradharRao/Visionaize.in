@@ -11,7 +11,7 @@ const heroParagraphs = heroSection?.paragraphs?.length
       "Companies lack real-time quantification and monitoring of carbon emissions and the ability to identify large emission sources, due to evolving regulations, lack of sensors and the dynamic nature of emissions.",
       "Many plant operators struggle with managing carbon emissions and energy consumption due to process upsets, unscheduled flaring events and inefficient operations. Visionaize DecarbAI meets these challenges head on. Connect with us to see how it works.",
     ];
-const heroImage = heroSection?.images[0]?.src ?? "https://visionaize.com/wp-content/uploads/2024/03/oil-1685981_1920.jpg";
+const heroImage = heroSection?.images[0]?.src ?? "/decarbonization/oil-1685981_1920.jpg";
 const problems = [
   {
     title: "Quantify",
@@ -65,7 +65,7 @@ function DecarbonizationPage() {
         ),
         image:
           seedSections.find((section) => section.heading?.toLowerCase() === "strategize")?.images[0]?.src ??
-          "https://visionaize.com/wp-content/uploads/2024/04/iStock-1954891394-1-min-1-1536x810.png",
+          "/decarbonization/iStock-1954891394-1-min-1-1536x810.png",
         bullets: [
           "Identification of high emission sources (units/equipment).",
           "Real-time emissions monitoring, enabling effective and timely actions to reduce net emissions.",

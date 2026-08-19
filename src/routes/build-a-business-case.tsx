@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-field";
 import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/build-a-business-case")({
@@ -99,20 +100,36 @@ function BuildBusinessCasePage() {
             >
               <h2 className="text-2xl font-semibold text-brand-navy">Build a Business Case</h2>
               <div className="mt-7 space-y-4">
-                <Input name="first_name" placeholder="First name*" required />
-                <Input name="last_name" placeholder="Last name*" required />
-                <Input name="company" placeholder="Company name*" required />
-                <Input
+                <FloatingInput
+                  name="first_name"
+                  label="First name*"
+                  required
+                  className="border-gray-700"
+                />
+                <FloatingInput
+                  name="last_name"
+                  label="Last name*"
+                  required
+                  className="border-gray-700"
+                />
+                <FloatingInput
+                  name="company"
+                  label="Company name*"
+                  required
+                  className="border-gray-700"
+                />
+                <FloatingInput
                   name="email"
-                  placeholder="Business Email*"
+                  label="Business Email*"
                   type="email"
                   required
                   pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
                   title="Please enter a valid email address containing @"
+                  className="border-gray-700"
                 />
-                <Input
+                <FloatingInput
                   name="phone"
-                  placeholder="Phone Number*"
+                  label="Phone number*"
                   type="tel"
                   required
                   inputMode="numeric"
@@ -121,22 +138,21 @@ function BuildBusinessCasePage() {
                   title="Please enter exactly 10 digits"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value.replace(/\D/g, "").slice(0, 10))}
+                  className="border-gray-700"
                 />
-                <div>
-                  <textarea
-                    name="use_case"
-                    placeholder="Describe Use Case Here - e.g. industry, site(s), teams involved*"
-                    rows={3}
-                    required
-                    maxLength={USE_CASE_MAX_LEN}
-                    value={useCase}
-                    onChange={(e) => setUseCase(e.target.value)}
-                    className="block w-full rounded-lg border border-gray-700 bg-white px-4 py-3 text-[14px] font-medium text-brand-navy placeholder:text-brand-navy focus:border-brand-blue focus:outline-none"
-                  />
-                  <p className="mt-1 text-right text-xs text-brand-navy/50">
-                    {useCase.length}/{USE_CASE_MAX_LEN}
-                  </p>
-                </div>
+                <FloatingTextarea
+                  name="use_case"
+                  label="Describe use case*"
+                  rows={3}
+                  required
+                  maxLength={USE_CASE_MAX_LEN}
+                  value={useCase}
+                  onChange={(e) => setUseCase(e.target.value)}
+                  className="border-gray-700"
+                />
+                <p className="mt-1 text-right text-xs text-brand-navy/50">
+                  {useCase.length}/{USE_CASE_MAX_LEN}
+                </p>
               </div>
               <button
                 type="submit"

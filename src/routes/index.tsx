@@ -30,20 +30,20 @@ const HERO_LINES = [
   "INDUSTRIAL SAFETY",
   "OPERATIONAL PRODUCTIVITY",
   "INDUSTRIAL SUSTAINABILITY",
-  " REMOTE MONITORING ",
+  "REMOTE MONITORING",
 ];
 
 const PRODUCT_PILLS = [
   { label: "V-Smart DocX", href: "/platform/v-smart-docx", color: "#A6E04A",
-    icon: "https://visionaize.com/wp-content/uploads/2024/10/280fe858-3ffb-429f-9f1e-3dd6210ad7b2.png" },
+    icon: "/homepage/visionai-dox-icon.png" },
   { label: "V-Plant", href: "/platform/v-plant", color: "#5BAE7E",
-    icon: "https://visionaize.com/wp-content/uploads/2024/10/99769f4d-7c7c-42fc-8bd3-4bad12e2e352.png" },
+    icon: "/homepage/v-plant-icon.png" },
   { label: "Smart Apps", href: "/solutions", color: "#3EA0A8",
-    icon: "https://visionaize.com/wp-content/uploads/2024/10/e2154971-0d06-4b27-be8c-991075b14a8e.png" },
+    icon: "/homepage/smatapp-icon.png" },
   { label: "VIZI CoPilot", href: "/platform/vizi-copilot-gen-ai", color: "#2E8DC5",
-    icon: "https://visionaize.com/wp-content/uploads/2024/10/6696e1dcd0d97179d019c6c79f2a95e0.png" },
+    icon: "/homepage/vizi-icon.png" },
   { label: "Signal Miner", href: "/platform/signal-miner", color: "#0A7BC2",
-    icon: "https://visionaize.com/wp-content/uploads/2024/10/b473a13b-7db2-4ded-9e38-8be0d52bba9f.png" },
+    icon: "/homepage/signalminar-icon.png" },
 ];
 
 const STATS = [
@@ -62,7 +62,7 @@ const PLATFORM_CARDS = [
     link: "Discover V-Smart DocX",
     href: "/platform/v-smart-docx",
     color: "#A6E04A",
-    img: "https://visionaize.com/wp-content/uploads/2024/10/0adbb9bd43275b4ea5872e02f4c47edc.png",
+    img: "/homepage/remote-section-document.png",
   },
   {
     title: "3D Digital Twin Foundation",
@@ -70,7 +70,7 @@ const PLATFORM_CARDS = [
     link: "Discover V-Plant Explorer",
     href: "/platform/v-plant",
     color: "#5BAE7E",
-    img: "https://visionaize.com/wp-content/uploads/2024/10/20927d682ec966a258f7c28439693ac7.png",
+    img: "/homepage/remote-sect-3dfoundation.png",
   },
   {
     title: "3D Digital Twin Modeling",
@@ -78,7 +78,7 @@ const PLATFORM_CARDS = [
     link: "Discover V-Plant Pro",
     href: "/platform/v-plant",
     color: "#3EA0A8",
-    img: "https://visionaize.com/wp-content/uploads/2024/10/702a5d2454e9013fcb5dbee03497c9bf-1.png",
+    img: "/homepage/remote-sect-3dmodeling.png",
   },
   {
     title: "AI Smart Apps",
@@ -86,7 +86,7 @@ const PLATFORM_CARDS = [
     link: "Discover V-Smart Apps",
     href: "/solutions",
     color: "#2E8DC5",
-    img: "https://visionaize.com/wp-content/uploads/2024/06/RPM-1.jpeg",
+    img: "/homepage/remote-sect-aismart.jpeg",
   },
   {
     title: "Gen-AI Integration",
@@ -94,7 +94,7 @@ const PLATFORM_CARDS = [
     link: "Discover VIZI CoPilot",
     href: "/platform/vizi-copilot-gen-ai",
     color: "#0A7BC2",
-    img: "https://visionaize.in/wp-content/uploads/2024/10/Vizi-Copilot-Chat-Image-1-1-768x484.png",
+    img: "/homepage/remote-sect-genai.png",
   },
   {
     title: "Signal Miner",
@@ -102,45 +102,53 @@ const PLATFORM_CARDS = [
     link: "Discover Signal Miner",
     href: "/platform/signal-miner",
     color: "#A6E04A",
-    img: "https://visionaize.com/wp-content/uploads/2023/11/iStock-1182152185-e1699026887686-1024x541.jpg",
+    img: "/homepage/remote-sect-signalminar.jpg",
   },
 ];
 
 const CASE_STUDIES = [
   {
+    title: "Refinery Precision: Quick Returns Through Operational Efficiency",
+    image: "/homepage/case-refenary.png",
+    tabs: {
+        Challenge:
+          "In the complex world of a petroleum refinery, the company grappled with significant challenges like <b>elevating the plant-wide Mechanical Integrity (MI) program</b>, implementing Risk-Based Inspection (RBI), and overcoming the limitations of legacy systems emerged as formidable hurdles.",
+        Solution:
+          "In overcoming these challenges, the company partnered with Visionaize. Leveraging Visionaize V-Suite software, MI & RBI solutions were successfully implemented, deploying PCMS at the site. The <b>integration of the V-Suite 3DBI Active Model with visual inspection software</b> became a game changer, ensuring effective management and resolution.",
+      Results: [
+        "Realized an impressive IRR of 132%",
+        "Achieved a swift 13-month payback period",
+        "Substantial reduction in carbon emissions",
+      ],
+    },
+  },
+  {
     title: "Optimizing OEE with Predictive Maintenance and AI Solutions",
-    image: "https://visionaize.com/wp-content/uploads/2023/11/steel-service-platform-and-stairs-equipment-refinery-SBI-300930077-scaled-1.jpg",
+    image: "/homepage/case-optimiz.jpg",
     tabs: {
       Challenge:
-        "One of the world's largest oil producers was plagued with a data silo issue with data from 15 different enterprise applications sealed off from one another. Besides the data not being integrated into the same system, the teams managing these different applications were not collaborating to the extent that they should have been.",
+        "One of the world's largest oil producer's in the world was <b>plagued with a data silo issue with data from 15 different enterprise applications</b> sealed off from one another. Besides the data not being integrated into the same system, the teams managing these different applications were not collaborating to the extent that they should have been.",
       Solution:
-        "Visionaize built an integrated 3D digital twin layer on top of all 15 systems, unifying inspection, maintenance, and operations workflows with a single contextual view of the asset.",
-      Results:
-        "Within six months the customer eliminated duplicate inspections, cut planned-shutdown costs by over 10%, and made every cross-team decision traceable back to the digital twin.",
+        "Visionaize developed integrated, role-based 3D applications for Operations, Turnaround, Inspection, Maintenance and Safety teams. This allows workers to zero in on what matters most to them, while still being able to all experience the same data in the same system, overall. This spurred <b>more opportunities to collaborate and develop more cross-team cohesion</b>.",
+      Results: [
+        "Broke down silos across 6 functional teams",
+        "Efficiencies drove 5-year savings of $15.3MM",
+      ],
     },
   },
   {
-    title: "Reducing Corrosion Discovery Time from Weeks to Days",
-    image: "https://visionaize.com/wp-content/uploads/2023/11/oil-refinery-equipment-for-primary-oil-refining-SBI-300925954-1.jpg",
+    title: "Transforming Operations: Lessons from a Petrochemical Journey",
+    image: "/homepage/case-trasform.jpg",
     tabs: {
       Challenge:
-        "A major refinery's inspection team needed to investigate suspected corrosion across thousands of feet of piping with limited access and shrinking turnaround windows.",
+        "In the vast landscape of a Large Petrochemical complex, the company encountered a significant hurdle in <b>developing a cost-effective Risk-Based Inspection (RBI) program</b>, focused on corrosion. Balancing rising inspection costs while needing to mitigate risks proved challenging, and configuring operational data added to the complexity.",
       Solution:
-        "V-Plant overlaid inspection data on the 3D digital twin, letting engineers triage hotspots remotely and dispatch crews only where needed.",
-      Results:
-        "Corrosion problems that previously took two weeks to localize were solved in two days, freeing teams for higher-value work.",
-    },
-  },
-  {
-    title: "Cutting Inspection Backlogs with Risk-Based Prioritization",
-    image: "https://visionaize.com/wp-content/uploads/2023/11/iStock-469895003-copy@0.5x-1.png",
-    tabs: {
-      Challenge:
-        "A global petrochemical operator faced a growing inspection backlog driven by aging assets and limited field inspector availability.",
-      Solution:
-        "Visionaize Smart Apps prioritized inspections using risk scores derived from real-time process data and historical failures.",
-      Results:
-        "The backlog dropped by 40% in one year while critical-asset coverage improved, with no added headcount.",
+        "In addressing the challenges, the company successfully deployed Visionaize's V-Suite software. This solution facilitated the <b>creation of 3D ISOs and efficient placement of TMLs, streamlined inspection management for 79,000 TMLs, and seamlessly loaded asset information into systems of record</b>. Visionaize's expertise proved instrumental in resolving the complexities faced by the company.",
+      Results: [
+        "Reduced downtime and improved worker safety",
+        "Achieved an outstanding 287% IRR",
+        "Rapid payback period of just 4 months",
+      ],
     },
   },
 ];
@@ -151,52 +159,55 @@ const TESTIMONIALS = [
       "It is astounding how this platform is able to integrate data from complex systems like SCADA, AMI Meter, and GIS Systems to provide accurate 3D visualizations",
     name: "Bill Andrew",
     role: "President, Delaware Electric Cooperative",
+    tag: "Leading US Electric Cooperative,",
   },
   {
     quote:
-      "During the early stages of implementation, V-Plant helped the inspection team find and solve a corrosion problem in 2 days. A similar exercise required 2 weeks using a competitor's product.",
+      "An hour in V-Plant is like 8 hours in the field",
     name: "Inspection Lead",
     role: "CHS, Inc.",
+    tag: "Top 5 Global Oil & Gas Company,",
   },
   {
     quote:
       "Visionaize's digital twin completely changed how our engineers collaborate across sites. Decisions that used to take days now happen in hours.",
     name: "Operations Director",
     role: "Global Energy Operator",
+    tag: "Fortune 500 Energy Operator,",
   },
 ];
 
-const NAVY_PARTNERS = [
-  { name: "ExxonMobil", logo: "https://visionaize.com/wp-content/uploads/2024/02/exxonmobil-white.png" },
-  { name: "Shell", logo: "https://visionaize.com/wp-content/uploads/2024/02/shell-white.png" },
-  { name: "GE Digital", logo: "https://visionaize.com/wp-content/uploads/2024/02/ge-digital-white.png" },
-  { name: "Bayer", logo: "https://visionaize.com/wp-content/uploads/2024/02/bayer-white.png" },
-  { name: "Saudi Aramco", logo: "https://visionaize.com/wp-content/uploads/2024/02/saudi-aramco-white.png" },
-];
+// const NAVY_PARTNERS = [
+//   { name: "ExxonMobil", logo: "https://visionaize.com/wp-content/uploads/2024/02/exxonmobil-white.png" },
+//   { name: "Shell", logo: "https://visionaize.com/wp-content/uploads/2024/02/shell-white.png" },
+//   { name: "GE Digital", logo: "https://visionaize.com/wp-content/uploads/2024/02/ge-digital-white.png" },
+//   { name: "Bayer", logo: "https://visionaize.com/wp-content/uploads/2024/02/bayer-white.png" },
+//   { name: "Saudi Aramco", logo: "https://visionaize.com/wp-content/uploads/2024/02/saudi-aramco-white.png" },
+// ];
 
 const LIGHT_PARTNERS = [
-  { name: "Microsoft", logo: "https://visionaize.com/wp-content/uploads/2024/08/Microsoft-Logo.wine_-1024x219.png" },
-  { name: "GE Vernova", logo: "https://visionaize.com/wp-content/uploads/2024/04/GE_Vernova_logo-1024x226.png" },
-  { name: "Visionaize Corporation", logo: "https://visionaize.com/wp-content/uploads/2022/11/visionaizecorporation.svg" },
-  { name: "Snowflake", logo: "https://visionaize.com/wp-content/uploads/2026/06/Snowflake_Logo.svg-1024x245.png" },
-  { name: "NVMS", logo: "https://visionaize.com/wp-content/uploads/2022/05/NVMS-logo-1.png" },
+  { name: "Microsoft", logo: "/homepage/company-img1.png", url: "https://marketplace.microsoft.com/en-us/product/visionaize.vplant?tab=Overview." },
+  { name: "GE Vernova", logo: "/homepage/company-img2.png", url: "/ge-v-suite" },
+  { name: "Visionaize Corporation", logo: "/homepage/company-img3.svg", url: "https://www.chiyodacorp.com/en/" },
+  { name: "Wipro", logo: "/homepage/company-img4.png", url: "https://www.wipro.com/" },
+  { name: "L&T", logo: "/homepage/company-img5.png", url: "https://www.ltts.com/" },
 ];
 
 const IMPROVE_STEPS = [
   {
     title: "Meet with an Expert",
     body: "Meet with one of our experts to explore our solutions and receive a live demo of our platforms.",
-    icon: "https://visionaize.in/wp-content/uploads/2024/10/8795c753-cb33-4970-8480-54fc5cdab0ee-300x239.png",
+    icon: "/homepage/imporve-meeticon.png",
   },
   {
     title: "Discover Use Cases",
     body: "Allow our experts to understand your unique use cases and provide recommendations for quick wins.",
-    icon: "https://visionaize.in/wp-content/uploads/2024/10/04e53ef6-cf2b-4556-b8b5-dfd74f1e285e-300x158.png",
+    icon: "/homepage/improve-discovericon.png",
   },
   {
     title: "Improve Operations",
     body: "Start leveraging data and technology to enhance operations and advance digital maturity.",
-    icon: "https://visionaize.in/wp-content/uploads/2024/10/5b90fcc2-cde5-41ee-8373-715689b46b32-300x273.png",
+    icon: "/homepage/imporve-improveicon.png",
   },
 ];
 
@@ -205,21 +216,21 @@ const BLOG_POSTS = [
     title: "The Role of AI in Oil and Gas: Transforming Operations with Intelligence",
     excerpt:
       "The oil and gas industry is undergoing a significant digital transformation, driven by the integration of artificial intelligence and advanced analytics.",
-    img: "https://visionaize.com/wp-content/uploads/2024/10/image-1-9-2048x1155.png",
+    img: "/homepage/explore-img1.png",
     href: "/blog/role-of-ai-in-oil-and-gas",
   },
   {
     title: "How 3D Digital Twins and Generative AI Accelerate Industrial Decarbonization",
     excerpt:
       "In an era where sustainability is a competitive advantage, industrial decarbonization has become a strategic imperative for heavy industry leaders.",
-    img: "https://visionaize.com/wp-content/uploads/2024/09/image-1-8-1024x433.png",
+    img: "/homepage/explore-img2.png",
     href: "/blog/3d-twins-decarbonization",
   },
   {
     title: "Artificial Intelligence in Oil and Gas: Transforming Industry Operations with AI",
     excerpt:
       "The oil and gas industry is undergoing a significant transformation, driven by the integration of artificial intelligence and machine learning.",
-    img: "https://visionaize.com/wp-content/uploads/2024/09/37242334722.png",
+    img: "/homepage/explore-img3.png",
     href: "/blog/ai-transforming-industry-operations",
   },
 ];
@@ -227,11 +238,11 @@ const BLOG_POSTS = [
 const CERTIFICATIONS = [
   {
     title: "ISO/IEC 27001:2022 — Information Security Management",
-    img: "https://visionaize.in/wp-content/uploads/2026/04/VISIONAIZE-TECHNOLOGIES-PRIVATE-LIMITED-27001-1-01-scaled.png",
+    img: "/homepage/certificate-1.png",
   },
   {
     title: "ISO 9001:2015 — Quality Management System",
-    img: "https://visionaize.in/wp-content/uploads/2026/04/VISIONAIZE-TECHNOLOGIES-PRIVATE-LIMITED-qms-01-1447x2048.png",
+    img: "/homepage/certificate-2.png",
   },
 ];
 
@@ -259,20 +270,53 @@ function Home() {
 }
 
 /* ---------- Hero ---------- */
+/* ---------- Hero ---------- */
 function Hero() {
-  const [i, setI] = useState(0);
+   const [lineIndex, setLineIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+ 
   useEffect(() => {
-    const t = setInterval(() => setI((x) => (x + 1) % HERO_LINES.length), 2600);
-    return () => clearInterval(t);
-  }, []);
-
+    const currentLine = HERO_LINES[lineIndex];
+    let delay = 90;
+ 
+    if (!isDeleting && charIndex === currentLine.length) {
+      delay = 1200;
+    } else if (isDeleting && charIndex === 0) {
+      delay = 200;
+    } else if (isDeleting) {
+      delay = 30;
+    }
+ 
+    const timeout = window.setTimeout(() => {
+      if (!isDeleting) {
+        if (charIndex < currentLine.length) {
+          setCharIndex((x) => x + 1);
+        } else {
+          setIsDeleting(true);
+        }
+      } else {
+        if (charIndex > 0) {
+          setCharIndex((x) => x - 1);
+        } else {
+          setIsDeleting(false);
+          setLineIndex((x) => (x + 1) % HERO_LINES.length);
+        }
+      }
+    }, delay);
+ 
+    return () => window.clearTimeout(timeout);
+  }, [charIndex, isDeleting, lineIndex]);
+ 
+  const currentText = HERO_LINES[lineIndex].slice(0, charIndex);
+ 
+ 
   return (
-    <section className="relative overflow-hidden bg-black min-h-[420px] sm:min-h-[520px] md:min-h-[600px] lg:min-h-[640px]">
-      {/* Background video: object-cover keeps it filling the section edge-to-edge
-          at every breakpoint, cropping the sides/top rather than letterboxing */}
+    <section className="relative overflow-hidden bg-black">
+      {/* Background video */}
       <video
         className="absolute inset-0 h-full w-full object-cover"
-        src="https://visionaize.com/wp-content/uploads/2024/12/iStock-1219920849-2-1-1-1-1-1.mp4"
+        src="/homepage/homepage-backgroundvideo.mp4"
         autoPlay
         muted
         loop
@@ -280,65 +324,40 @@ function Hero() {
         preload="auto"
         aria-hidden
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" aria-hidden />
-
-      <div className="relative mx-auto flex min-h-[420px] max-w-7xl flex-col justify-end px-4 pb-8 sm:min-h-[520px] sm:px-6 sm:pb-14 md:min-h-[600px] md:grid md:grid-cols-12 md:items-end md:pb-16 lg:min-h-[640px]">
+      <div className="relative mx-auto grid max-w-auto gap-10 px-6 py-24 md:grid-cols-12 md:pt-28 min-h-[85vh]">
         <div className="md:col-span-9">
-          {/* Rotating keyword band, flush to viewport left edge on the design.
-              Sizing steps down through the breakpoints instead of using a
-              fixed 640px min-width, so it no longer forces horizontal scroll
-              on small phones. */}
-          <div className="relative -ml-4 translate-y-6 sm:-ml-6 sm:translate-y-10 md:-ml-12 md:translate-y-14">
+          {/* Rotating keyword band, flush to viewport left edge on the design */}
+          <div className="relative -ml-6 md:-ml-12">
             <div
-              className="relative inline-flex max-w-[92vw] items-center pl-4 pr-10 py-2.5 text-sm font-bold tracking-wide text-white shadow-xl sm:pl-8 sm:pr-16 sm:py-3.5 sm:text-lg md:max-w-none md:pl-16 md:pr-20 md:py-5 md:text-2xl lg:py-6 lg:text-3xl"
+              className="relative inline-flex items-center pl-8 md:pl-16 md:pr-20 py-6 text-white md:text-2xl lg:text-[2.5vw] text-xs min-w-[400px] font-bold tracking-wide sm:min-w-[320px] shadow-xl lg:top-75 md:min-w-[750px] lg:min-w-[1080px] sm:text-lg xs:text-md sm:min-w-[550px] xs:min-w-[400px]"
               style={{
                 background:
-                  "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 35%, #3EA0A8 70%, #6FC7E0 100%)",
-                clipPath: "polygon(0 0, 100% 0, calc(100% - 32px) 100%, 0 100%)",
+                  "linear-gradient(90deg, #8cd33aa8 0%, #2acbeeb5 100%)",
+                clipPath: "polygon(0 0, 90% 0, 100% 100%, 0% 100%)",
               }}
             >
-              <span className="mr-2 whitespace-nowrap opacity-90 sm:mr-3">THE FUTURE OF</span>
-              <span
-                key={i}
-                className="animate-fade-in whitespace-nowrap border-l-2 border-white/80 pl-2 sm:pl-3"
-              >
-                {HERO_LINES[i]}
+              <span className="opacity-90 mr-3">THE FUTURE OF</span>
+              <span className="animate-typewriter border-r-2 border-black pr-3 inline-block whitespace-nowrap" style={{ minWidth: '10px' }}>
+                {currentText}
               </span>
             </div>
           </div>
-
-          {/* Product pills: below md, hover-to-expand doesn't work on touch,
-              so this renders as a plain horizontal row of icon links instead
-              of the absolutely-positioned expanding column used on desktop. */}
-          <div className="mt-5 flex flex-wrap gap-2.5 sm:mt-7 sm:gap-3 md:hidden">
-            {PRODUCT_PILLS.map((p) => (
-              <Link
-                key={p.label}
-                to={p.href}
-                aria-label={p.label}
-                className="flex h-10 w-10 items-center justify-center rounded-full shadow-lg sm:h-12 sm:w-12"
-                style={{ background: p.color }}
-              >
-                <img src={p.icon} alt="" className="h-5 w-5 object-contain sm:h-6 sm:w-6" />
-              </Link>
-            ))}
-          </div>
         </div>
 
-        {/* Right rail product pills — desktop only (md and up) */}
-        <div className="absolute right-4 top-20 z-20 hidden flex-col gap-4 md:right-6 md:top-24 md:flex lg:right-8 lg:top-28 lg:gap-5">
+        {/* Right rail product pills */}
+        <div className="absolute top-4 right-2 lg:top-24 z-20 hidden flex-col lg:gap-5 lg:right-10 md:top-18 md:flex">
           {PRODUCT_PILLS.map((p) => (
             <Link
               key={p.label}
               to={p.href}
-              className="group relative flex h-14 w-14 self-end items-center overflow-hidden rounded-full transition-all duration-500 ease-in-out hover:w-[230px] lg:h-16 lg:w-16 lg:hover:w-[250px]"
+              className="group relative flex h-14 w-14 lg:h-18 lg:w-18 self-end items-center overflow-hidden items-center justify-center rounded-full transition-all duration-500 ease-in-out hover:w-[200px]"
               style={{ background: p.color }}
             >
-              <div className="absolute left-0 top-0 flex h-14 w-14 items-center justify-center rounded-full lg:h-16 lg:w-16">
-                <img src={p.icon} alt={p.label} className="h-7 w-7 object-contain lg:h-8 lg:w-8" />
+              <div className="absolute lg:left-1 lg:top-1 flex h-10 w-10 lg:h-16 lg:w-16 items-center justify-center rounded-full">
+                <img src={p.icon} alt={p.label} className="h-7 w-7 lg:h-10 lg:w-10 object-contain" />
               </div>
 
-              <span className="ml-[72px] whitespace-nowrap text-base font-semibold text-white opacity-0 transition-all duration-300 group-hover:opacity-100 lg:ml-20 lg:text-lg">
+              <span className="ml-18 whitespace-nowrap text-lg font-semibold text-white opacity-0 transition-all duration-300 group-hover:opacity-100">
                 {p.label}
               </span>
             </Link>
@@ -350,58 +369,130 @@ function Hero() {
         @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
         .animate-fade-in { animation: fadeIn .55s ease-out both; }
       `}</style>
+          
+
+      <style>{`
+        @keyframes blink {
+          0%, 49% { border-right-color: rgba(0, 0, 0, 0.9); }
+          50%, 100% { border-right-color: transparent; }
+        }
+        .animate-typewriter {
+          animation: blink 0.7s infinite 0.1s;
+          overflow: hidden;
+          white-space: nowrap;
+          display: inline-block;
+          min-width: 10px;
+          border-right-color: rgba(0, 0, 0, 0.9);
+        }
+      `}</style>
     </section>
   );
 }
 
-/* ---------- Intro + stats ---------- */
+
+/* ---------- Animated stat number (slow count-up + gentle continuous float) ---------- */
+function AnimatedStat({
+  value,
+  className,
+  style,
+  delay = 0,
+}: {
+  value: string;
+  className?: string;
+  style?: React.CSSProperties;
+  delay?: number;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [started, setStarted] = useState(false);
+  const [display, setDisplay] = useState("0");
+
+  // numeric target + trailing unit (e.g. "%") pulled apart so we can
+  // animate the number while keeping the suffix static
+  const match = value.match(/^([\d.]+)(.*)$/);
+  const target = match ? parseFloat(match[1]) : 0;
+  const suffix = match ? match[2] : "";
+  const decimals = match && match[1].includes(".") ? match[1].split(".")[1].length : 0;
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStarted(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!started) return;
+    const duration = 2200; // slow, deliberate count-up
+    let raf: number;
+    let startTime: number | null = null;
+
+    const tick = (ts: number) => {
+      if (startTime === null) startTime = ts;
+      const progress = Math.min((ts - startTime) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      const current = target * eased;
+      setDisplay(current.toFixed(decimals));
+      if (progress < 1) raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [started, target, decimals]);
+
+  return (
+    <span
+      ref={ref}
+      className={`inline-block animate-stat-float ${className ?? ""}`}
+      style={{ ...style, animationDelay: `${delay}s` }}
+    >
+      {display}
+      {suffix}
+    </span>
+  );
+}
+
 function IntroAndStats() {
   return (
-    <section className="bg-white pb-10 pt-8 sm:pb-12 sm:pt-10 md:pb-0 md:pt-0">
-      <div className="mx-auto grid max-w-7xl items-center gap-6 px-4 sm:gap-10 sm:px-6 md:grid-cols-[1.2fr_1fr] md:gap-12 lg:gap-16">
-        {/* Image column: overflow-hidden contains the intentional "bleed"
-            width used at md/lg so it can't cause horizontal scrolling */}
-        <div className="flex justify-center overflow-hidden md:justify-start">
-          <img
-            src="https://visionaize.com/wp-content/uploads/2024/11/Group-1000007065.png"
-            alt="Visionaize 3D Digital Twin & Smart Apps"
-            className="h-[220px] w-full max-w-none object-contain sm:h-[340px] md:h-[460px] md:w-[150%] lg:h-[600px] lg:w-[190%]"
-          />
-        </div>
+    <section className="bg-white py-10 home-page-section1">
+      <div className="mx-auto grid md:grid-cols-1 max-w-auto gap-2 px-6 lg:grid-cols-2 md:items-center">
+        <div className="mx-auto w-full lg:w-[160%] md:w-[90%] flex justify-center items-center">
+          <picture>
+            <source
+              media="(max-width: 1023px)"
+              srcSet="/homepage/Visionaize's-3D--smallscreen.png"
+            />
+            <img
+               src="/homepage/Visionaize's-3D-largescreen.png"
+              alt="Visionaize 3D Digital Twin & Smart Apps"
+              className="w-full h-auto object-contain mx-auto"
+              loading="lazy"
+            />
+          </picture>
 
-        {/* Text column */}
-        <div className="px-2 sm:px-0">
-          <h2 className="text-xl font-semibold leading-snug text-brand-navy sm:text-2xl md:text-[28px] lg:text-[32px]">
-            Visionaize's 3D Digital Twin &amp; Smart Apps Enable Real-Time Monitoring,
+        </div>
+        <div className="lg:pr-14 ">
+          <h2 className="text-2xl md:text-[32px] font-semibold leading-snug text-brand-navy">
+            Visionaize’s 3D Digital Twin &amp; Smart Apps Enable Real-Time Monitoring,
             Optimization, and Prediction for Heavy Industry
           </h2>
-
-          <ul className="mt-5 space-y-3 sm:mt-8 sm:space-y-4">
-            {STATS.map((s, index) => (
-              <li
-                key={s.label}
-                className="flex flex-wrap items-baseline gap-2 text-brand-ink/90"
-              >
+          <ul className="mt-8 space-y-4">
+            {STATS.map((s) => (
+              <li key={s.label} className="flex items-baseline gap-2 f-12 text-black/90">
                 <span
                   className="mt-1 inline-block h-2 w-2 flex-none rounded-full"
-                  style={{ background: s.color }}
+                  style={{ background:"black" }}
                 />
-
-                {s.prefix && (
-                  <span className="text-xs text-brand-ink/70 sm:text-sm">{s.prefix}</span>
-                )}
-
-                <span
-                  className="animate-percentage text-base font-bold sm:text-lg md:text-xl"
-                  style={{
-                    color: s.color,
-                    animationDelay: `${index * 0.2}s`,
-                  }}
-                >
-                  {s.value}
-                </span>
-
-                <span className="text-sm text-brand-ink/85 sm:text-base">{s.label}</span>
+                {s.prefix && <span className="text-sm text-black/70">{s.prefix}</span>}
+                <span className="text-xl font-bold animation-type-slide-down" style={{ color: '#92C122' }}>{s.value}</span>
+                <span className="text-base text-black/85">{s.label}</span>
               </li>
             ))}
           </ul>
@@ -434,7 +525,7 @@ function RemotePlantAccess() {
                     className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                     onError={(e) =>
                       ((e.target as HTMLImageElement).src =
-                        "https://visionaize.com/wp-content/uploads/2024/02/image_27-removebg-preview.png")
+                        "/homepage/image_27-removebg-preview.png")
                     }
                     loading="lazy"
                   />
@@ -479,10 +570,11 @@ function RemotePlantAccess() {
   );
 }
 
-/* ---------- Case Study Carousel ---------- */
 function CaseStudyCarousel() {
   const [idx, setIdx] = useState(0);
-  const [tab, setTab] = useState<"Challenge" | "Solution" | "Results">("Challenge");
+  const [tab, setTab] = useState<"Challenge" | "Solution" | "Results">(
+    "Challenge"
+  );
   const [direction, setDirection] = useState<1 | -1>(1);
 
   const AUTO_SLIDE_MS = 6000;
@@ -492,110 +584,194 @@ function CaseStudyCarousel() {
     setIdx((x) => (x + 1) % CASE_STUDIES.length);
     setTab("Challenge");
   };
+
   const prev = () => {
     setDirection(-1);
     setIdx((x) => (x - 1 + CASE_STUDIES.length) % CASE_STUDIES.length);
     setTab("Challenge");
   };
 
-  // re-runs every time idx changes (manual click or auto-advance),
-  // so the 6s countdown always restarts from a fresh interaction
   useEffect(() => {
     const timer = setInterval(() => {
       setDirection(1);
       setIdx((x) => (x + 1) % CASE_STUDIES.length);
       setTab("Challenge");
     }, AUTO_SLIDE_MS);
+
     return () => clearInterval(timer);
   }, [idx]);
 
   const cs = CASE_STUDIES[idx];
 
   return (
-    <section className="bg-white py-12 sm:py-16 md:py-20 lg:py-24">
+    <section className="bg-white py-10 sm:py-12 md:py-16">
       <style>{`
         @keyframes csSlideInRight {
-          from { transform: translateX(48px); opacity: 0; }
-          to   { transform: translateX(0);     opacity: 1; }
+          from {
+            opacity: 0;
+            transform: translateX(60px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
         }
+
         @keyframes csSlideInLeft {
-          from { transform: translateX(-48px); opacity: 0; }
-          to   { transform: translateX(0);      opacity: 1; }
+          from {
+            opacity: 0;
+            transform: translateX(-60px);
+          }
+          to {
+            opacity: 1;
+            transform: translateX(0);
+          }
         }
-        .cs-slide-right { animation: csSlideInRight 0.45s cubic-bezier(0.22, 1, 0.36, 1); }
-        .cs-slide-left  { animation: csSlideInLeft  0.45s cubic-bezier(0.22, 1, 0.36, 1); }
+
+        .cs-slide-right {
+          animation: csSlideInRight .45s ease;
+        }
+
+        .cs-slide-left {
+          animation: csSlideInLeft .45s ease;
+        }
       `}</style>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <h2 className="text-center text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
+      <div className="mx-auto max-w-[1500px] px-4 sm:px-6">
+        {/* Heading */}
+        <h2 className="text-center text-3xl font-bold leading-tight text-[#0F2237] sm:text-4xl md:text-5xl">
           Demonstrated Success in Oil &amp; Gas, Manufacturing, and Power Industries
         </h2>
 
-        <div className="relative mt-8 sm:mt-12 md:mt-14">
+        <div className="relative mt-10 flex items-center px-8 sm:mt-12 sm:px-10 md:mt-16 md:px-14 lg:px-16">
+
+          {/* Left Arrow */}
           <button
             onClick={prev}
             aria-label="Previous case study"
-            className="absolute left-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-1.5 text-brand-navy shadow-md ring-1 ring-brand-ink/10 hover:bg-secondary sm:-left-2 sm:p-2 md:-left-4"
+            className="absolute left-0 top-1/2 z-20 -translate-y-1/2 rounded-full border border-gray-200 bg-white p-1 shadow-sm"
           >
-            <ChevronLeft className="h-5 w-5 sm:h-6 sm:w-6" />
+            <ChevronLeft
+              className="h-6 w-6 text-[#0F2237] sm:h-7 sm:w-7 md:h-8 md:w-8"
+              strokeWidth={1.8}
+            />
           </button>
+
+          {/* Right Arrow */}
           <button
             onClick={next}
             aria-label="Next case study"
-            className="absolute right-0 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white p-1.5 text-brand-navy shadow-md ring-1 ring-brand-ink/10 hover:bg-secondary sm:-right-2 sm:p-2 md:-right-4"
+            className="absolute right-0 top-1/2 z-20 -translate-y-1/2 rounded-full border border-gray-200 bg-white p-1 shadow-sm"
           >
-            <ChevronRight className="h-5 w-5 sm:h-6 sm:w-6" />
+            <ChevronRight
+              className="h-6 w-6 text-[#0F2237] sm:h-7 sm:w-7 md:h-8 md:w-8"
+              strokeWidth={1.8}
+            />
           </button>
 
-          <div className="overflow-hidden">
-            <div
-              key={idx}
-              className={`grid items-start gap-6 px-8 sm:gap-10 sm:px-10 md:grid-cols-2 md:gap-8 md:px-6 lg:gap-10 ${
-                direction === 1 ? "cs-slide-right" : "cs-slide-left"
+          <div
+            key={idx}
+            className={`grid w-full grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-[1.4fr_1fr] lg:gap-14
+              ${
+                direction === 1
+                  ? "cs-slide-right"
+                  : "cs-slide-left"
               }`}
-            >
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand-lime">
-                  CASE STUDY
-                </p>
-                <h3 className="mt-3 text-lg font-bold text-brand-navy sm:text-2xl md:text-[28px]">
-                  {cs.title}
-                </h3>
+          >
+            {/* LEFT */}
+            <div>
+              <p className="text-sm font-bold uppercase tracking-widest text-[#8BC53F]">
+                CASE STUDY
+              </p>
 
-                <div className="mt-5 flex gap-4 overflow-x-auto border-b border-brand-ink/10 sm:mt-8 sm:gap-6">
+              <h3 className="mt-3 text-3xl font-bold leading-[1.15] text-black sm:text-4xl">
+                {cs.title}
+              </h3>
+
+              {/* Tabs */}
+              <div className="mt-6">
+                <div className="flex border-b border-gray-200">
                   {(["Challenge", "Solution", "Results"] as const).map((t) => (
                     <button
                       key={t}
                       onClick={() => setTab(t)}
-                      className={`relative -mb-px whitespace-nowrap pb-3 text-sm font-semibold transition sm:text-base ${
-                        tab === t ? "text-brand-blue" : "text-brand-ink/55 hover:text-brand-ink"
-                      }`}
+                      className={`relative -mb-px px-1 py-3 mr-8 text-base font-medium transition-colors
+                        ${
+                          tab === t
+                            ? "border-b-2 border-[#0088D2] text-[#0088D2]"
+                            : "border-b-2 border-transparent text-gray-500 hover:text-[#0088D2]"
+                        }
+                      `}
                     >
                       {t}
-                      {tab === t && (
-                        <span className="absolute inset-x-0 -bottom-px h-0.5 bg-brand-blue" />
-                      )}
                     </button>
                   ))}
                 </div>
 
-                <div className="mt-5 rounded-md border border-brand-ink/10 bg-white p-4 text-sm leading-relaxed text-brand-ink/85 sm:mt-6 sm:p-6 sm:text-base sm:leading-7 lg:leading-8">
-                  {cs.tabs[tab]}
+                {/* Content */}
+                <div className="mt-6 rounded-md border border-gray-200 bg-white p-6">
+                  {tab === "Results" ? (
+                    <ul className="space-y-4">
+                      {cs.tabs.Results.map((item, i) => (
+                        <li
+                          key={i}
+                          className="flex items-center gap-3 text-xl leading-9 text-gray-600"
+                        >
+                          <span
+                            className="flex h-7 w-7 flex-none items-center justify-center rounded-full shadow-sm"
+                            style={{
+                              background: "linear-gradient(135deg, #5BAE7E 0%, #2E8DC5 100%)",
+                            }}
+                          >
+                            <svg
+                              viewBox="0 0 16 16"
+                              fill="none"
+                              className="h-3.5 w-3.5"
+                              aria-hidden
+                            >
+                              <path
+                                d="M3 8.5L6.2 11.5L13 4.5"
+                                stroke="white"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                              />
+                            </svg>
+                          </span>
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <div
+                      className="
+                        text-xl
+                        leading-9
+                        text-gray-600
+                        [&_b]:font-semibold
+                        [&_b]:text-[#0088D2]
+                      "
+                      dangerouslySetInnerHTML={{
+                        __html: cs.tabs[tab] as string,
+                      }}
+                    />
+                  )}
                 </div>
               </div>
+            </div>
 
-              <div className="aspect-[4/3] overflow-hidden rounded-lg bg-gradient-to-br from-[#E6F4FB] to-[#CDE7F3] shadow-lg">
-                <img
-                  src={cs.image}
-                  alt={cs.title}
-                  className="h-full w-full object-cover"
-                  onError={(e) =>
-                    ((e.target as HTMLImageElement).src =
-                      "https://visionaize.com/wp-content/uploads/2024/02/image_27-removebg-preview.png")
-                  }
-                  loading="lazy"
-                />
-              </div>
+            {/* RIGHT IMAGE */}
+            <div className="overflow-hidden rounded-2xl shadow-xl">
+              <img
+                src={cs.image}
+                alt={cs.title}
+                className="h-[260px] w-full object-cover sm:h-[380px] md:h-[420px]"
+                loading="lazy"
+                onError={(e) =>
+                  ((e.target as HTMLImageElement).src =
+                    "/homepage/image_27-removebg-preview.png")
+                }
+              />
             </div>
           </div>
         </div>
@@ -615,92 +791,100 @@ function TestimonialSlider() {
 
   const t = TESTIMONIALS[i];
   return (
-    <section className="relative overflow-hidden bg-[#0F2237] pb-6 pt-12 text-white sm:pb-8 sm:pt-20 md:pt-24">
-      {/* decorative arcs */}
-      <svg
-        className="pointer-events-none absolute -bottom-32 -right-32 h-[280px] w-[280px] opacity-70 sm:h-[380px] sm:w-[380px] md:h-[460px] md:w-[460px] lg:h-[520px] lg:w-[520px]"
-        viewBox="0 0 500 500"
-        fill="none"
-      >
-        <circle cx="250" cy="250" r="240" stroke="#A6E04A" strokeWidth="1.5" />
-        <circle cx="250" cy="250" r="200" stroke="#3EA0A8" strokeWidth="1.5" />
-        <circle cx="250" cy="250" r="160" stroke="#2E8DC5" strokeWidth="1.5" />
-      </svg>
+    <section className="relative overflow-hidden bg-[#0F2237] pb-6 pt-10 text-white sm:pb-8 sm:pt-14 md:pt-16 lg:pt-20">
+      {/* Content block: heading, quote, tag. The arc graphic is scoped to
+          THIS wrapper (not the whole section), so it ends right above the
+          logos row instead of stretching down behind it — matching the
+          reference where the arc sits mid-section, not full-bleed. */}
+      <div className="relative overflow-hidden pb-8 sm:pb-10 md:pb-12 lg:pb-14">
+        <img
+          src="/homepage/trust-background.png"
+          alt=""
+          aria-hidden
+          className="pointer-events-none absolute -bottom-2 right-0 h-[180px] w-auto translate-x-4 opacity-80 sm:h-[150px] sm:translate-x-6 md:h-[130px] lg:h-[110px] xl:h-[130px] 2xl:h-[150px]"
+        />
 
-      <div className="relative mx-auto max-w-5xl px-4 pb-20 text-center sm:px-6 sm:pb-28 md:pb-32">
-        <h2
-          className="mb-8 bg-gradient-to-r from-[#A6E04A] via-[#3EA0A8] to-[#2E8DC5] bg-clip-text text-center text-2xl font-bold text-transparent drop-shadow-sm sm:mb-12 sm:text-3xl md:text-4xl"
-        >
-          Trusted by Global Industry Leaders
-        </h2>
+        <div className="relative mx-auto max-w-5xl px-4 text-center sm:px-6 lg:max-w-6xl lg:px-8">
+          <h2 className="mb-6 bg-gradient-to-r from-[#A6E04A] via-[#3EA0A8] to-[#2E8DC5] bg-clip-text text-center text-2xl font-bold text-transparent drop-shadow-sm sm:mb-10 sm:text-3xl md:text-4xl lg:mb-12 lg:text-[42px]">
+            Trusted by Global Industry Leaders
+          </h2>
 
-        <div className="flex items-center gap-2 sm:gap-6">
-          <button
-            onClick={prev}
-            aria-label="Previous"
-            className="flex-none rounded-full p-1.5 text-white/60 hover:bg-white/10 hover:text-white sm:p-2"
-          >
-            <ChevronLeft className="h-5 w-5 sm:h-7 sm:w-7" />
-          </button>
-          <div className="flex-1">
-            <p className="text-balance text-sm font-medium leading-relaxed text-white sm:text-xl md:text-2xl">
-              &ldquo;{t.quote}&rdquo;
-            </p>
+          <div className="flex items-center gap-2 sm:gap-6 lg:gap-8">
+            <button
+              onClick={prev}
+              aria-label="Previous"
+              className="flex-none rounded-full p-1.5 text-white/60 hover:bg-white/10 hover:text-white sm:p-2"
+            >
+              <ChevronLeft className="h-5 w-5 sm:h-7 sm:w-7" />
+            </button>
+            <div className="flex-1">
+              <p className="text-balance text-sm font-medium leading-relaxed text-white sm:text-xl md:text-2xl lg:text-2xl lg:leading-relaxed">
+                &ldquo;{t.quote}&rdquo;
+              </p>
+            </div>
+            <button
+              onClick={next}
+              aria-label="Next"
+              className="flex-none rounded-full p-1.5 text-white/60 hover:bg-white/10 hover:text-white sm:p-2"
+            >
+              <ChevronRight className="h-5 w-5 sm:h-7 sm:w-7" />
+            </button>
           </div>
-          <button
-            onClick={next}
-            aria-label="Next"
-            className="flex-none rounded-full p-1.5 text-white/60 hover:bg-white/10 hover:text-white sm:p-2"
-          >
-            <ChevronRight className="h-5 w-5 sm:h-7 sm:w-7" />
-          </button>
+
+          {t.tag && (
+            <p className="mt-6 bg-gradient-to-r from-[#A6E04A] to-[#2E8DC5] bg-clip-text text-lg font-semibold text-transparent sm:mt-8 sm:text-2xl lg:mt-10">
+              {t.tag}
+            </p>
+          )}
         </div>
       </div>
 
-      {/* logo image pinned to the very bottom of the section */}
-      <div className="absolute inset-x-0 bottom-0 z-10">
+      {/* Partner logos + gradient line — using the pre-built flattened
+          image asset (already matches the reference pixel-for-pixel)
+          instead of reconstructing it from individual logos. object-contain
+          keeps it crisp and correctly scaled at every screen width. */}
+      <div className="relative mx-auto mt-2 w-full max-w-6xl px-4 sm:mt-4 sm:px-6 lg:px-8">
         <img
-          src="https://visionaize.in/wp-content/uploads/2022/05/Logos-mini-desktop.png"
-          alt={`${t.name}, ${t.role}`}
-          className="mx-auto h-auto w-full max-w-5xl object-contain px-4 sm:px-6"
+          src="/homepage/trust-bottomallicons.png"
+          alt="ExxonMobil, Shell, GE Digital, Bayer, Saudi Aramco"
+          className="mx-auto h-auto w-full max-w-[700px] object-contain sm:max-w-3xl md:max-w-4xl lg:max-w-6xl"
           loading="lazy"
         />
       </div>
     </section>
   );
 }
-
 /* ---------- Navy partner band ---------- */
-function NavyPartners() {
-  return (
-    <section className="relative bg-[#0F2237] pb-16 pt-4">
-      <div className="mx-auto grid max-w-7xl grid-cols-2 items-center gap-8 px-4 sm:px-6 md:grid-cols-5">
-        {NAVY_PARTNERS.map((p) => (
-          <div key={p.name} className="flex items-center justify-center">
-            <img
-              src={p.logo}
-              alt={p.name}
-              className="h-10 max-w-[180px] object-contain opacity-90 md:h-12"
-              onError={(e) => {
-                const img = e.target as HTMLImageElement;
-                img.outerHTML = `<span class="text-white/80 text-lg font-semibold tracking-wide">${p.name}</span>`;
-              }}
-              loading="lazy"
-            />
-          </div>
-        ))}
-      </div>
-      {/* bottom gradient line */}
-      <div
-        className="absolute inset-x-0 bottom-0 h-1"
-        style={{
-          background:
-            "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 35%, #3EA0A8 70%, #2E8DC5 100%)",
-        }}
-      />
-    </section>
-  );
-}
+// function NavyPartners() {
+//   return (
+//     <section className="relative bg-[#0F2237] pb-16 pt-4">
+//       <div className="mx-auto grid max-w-7xl grid-cols-2 items-center gap-8 px-4 sm:px-6 md:grid-cols-5">
+//         {NAVY_PARTNERS.map((p) => (
+//           <div key={p.name} className="flex items-center justify-center">
+//             <img
+//               src={p.logo}
+//               alt={p.name}
+//               className="h-10 max-w-[180px] object-contain opacity-90 md:h-12"
+//               onError={(e) => {
+//                 const img = e.target as HTMLImageElement;
+//                 img.outerHTML = `<span class="text-white/80 text-lg font-semibold tracking-wide">${p.name}</span>`;
+//               }}
+//               loading="lazy"
+//             />
+//           </div>
+//         ))}
+//       </div>
+//       {/* bottom gradient line */}
+//       <div
+//         className="absolute inset-x-0 bottom-0 h-1"
+//         style={{
+//           background:
+//             "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 35%, #3EA0A8 70%, #2E8DC5 100%)",
+//         }}
+//       />
+//     </section>
+//   );
+// }
 
 /* ---------- Improve Operations with icons ---------- */
 function ImproveOps() {
@@ -710,7 +894,7 @@ function ImproveOps() {
         <h2 className="text-2xl font-semibold text-brand-navy sm:text-3xl md:text-4xl">
           Improve Your Operations Today
         </h2>
-        <div className="mt-8 grid gap-8 sm:mt-12 sm:grid-cols-2 sm:gap-10 lg:grid-cols-3">
+        <div className="mt-8 grid gap-6 sm:mt-12 sm:grid-cols-3 sm:gap-6 lg:gap-10">
           {IMPROVE_STEPS.map((s) => (
             <div key={s.title} className="flex flex-col items-center">
               <img
@@ -751,11 +935,15 @@ function ReactiveToPredictive() {
             player never gets cropped or stretched on small screens */}
         <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-brand-navy shadow-xl">
           <video
-            src="https://visionaize.com/wp-content/uploads/2024/10/1714666253230.mp4"
+            src="/homepage/home-trasforsection-video.mp4"
             className="h-full w-full object-cover"
+            style={{ filter: "none" }}
+            autoPlay
+            muted
+            loop
             controls
             playsInline
-            preload="metadata"
+            preload="auto"
           />
         </div>
         <div>
@@ -796,8 +984,7 @@ function InnovatingTogether() {
               significantly reduce downtime.
             </p>
             <a
-              href="https://visionaize.com/re-inventing-turnarounds-in-the-metaverse/"
-              target="_blank"
+              href="/re-inventing-turnarounds-in-the-metaverse/"
               rel="noopener noreferrer"
               className="mt-6 inline-flex items-center gap-2 rounded-full px-6 py-2.5 text-sm font-semibold text-white shadow-md transition hover:shadow-lg sm:mt-8 sm:px-8 sm:py-3.5"
               style={{
@@ -809,34 +996,41 @@ function InnovatingTogether() {
           </div>
           <div className="flex justify-center">
             <img
-              src="https://visionaize.com/wp-content/uploads/2024/10/caa1b2e0de661dece3de9db3994b2f91.png"
+              src="/homepage/inovat-section.png"
               alt="Reinventing Turnarounds in the Metaverse whitepaper"
               className="w-full max-w-xs sm:max-w-md"
               onError={(e) =>
                 ((e.target as HTMLImageElement).src =
-                  "https://visionaize.com/wp-content/uploads/2024/02/image_27-removebg-preview.png")
+                  "/homepage/image_27-removebg-preview.png")
               }
               loading="lazy"
             />
           </div>
         </div>
-
-        <div className="mt-10 grid grid-cols-2 items-center gap-6 sm:mt-16 sm:gap-10 md:grid-cols-5">
-          {LIGHT_PARTNERS.map((p) => (
-            <div key={p.name} className="flex items-center justify-center">
-              <img
-                src={p.logo}
-                alt={p.name}
-                className="h-9 max-w-[150px] sm:h-10 sm:max-w-[180px] md:h-12"
-                onError={(e) => {
-                  const img = e.target as HTMLImageElement;
-                  img.outerHTML = `<span class="text-brand-ink/50 text-lg font-semibold tracking-wide">${p.name}</span>`;
-                }}
-                loading="lazy"
-              />
-            </div>
-          ))}
-        </div>
+<div className="mt-10 grid grid-cols-2 items-center gap-6 sm:grid-cols-3 sm:mt-16 sm:gap-8 lg:grid-cols-5 lg:gap-10">
+  {LIGHT_PARTNERS.map((p) => (
+    <div key={p.name} className="flex items-center justify-center">
+      
+       <a href={p.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={p.name}
+        className="flex items-center justify-center"
+      >
+        <img
+          src={p.logo}
+          alt={p.name}
+          className="h-10 max-w-[120px] object-contain sm:h-14 sm:max-w-[140px] md:h-16 md:max-w-[180px] lg:h-18"
+          onError={(e) => {
+            const img = e.target as HTMLImageElement;
+            img.outerHTML = `<span class="text-brand-ink/50 text-lg font-semibold tracking-wide">${p.name}</span>`;
+          }}
+          loading="lazy"
+        />
+      </a>
+    </div>
+  ))}
+</div>
       </div>
     </section>
   );
@@ -851,7 +1045,7 @@ function BlogSection() {
           Explore Our Latest Articles
         </h2>
 
-        <div className="mt-8 grid gap-6 sm:mt-12 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+        <div className="mt-8 grid gap-5 sm:mt-12 sm:grid-cols-3 sm:gap-5 lg:gap-8">
           {BLOG_POSTS.map((p) => (
             <article key={p.title} className="group flex flex-col pb-5">
               <div className="aspect-[16/10] overflow-hidden rounded">
@@ -861,7 +1055,7 @@ function BlogSection() {
                   className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
                   onError={(e) =>
                     ((e.target as HTMLImageElement).src =
-                      "https://visionaize.com/wp-content/uploads/2024/02/image_27-removebg-preview.png")
+                      "/homepage/image_27-removebg-preview.png")
                   }
                   loading="lazy"
                 />
@@ -902,13 +1096,13 @@ function Certifications() {
           Our Certifications &amp; Compliance
         </h2>
 
-        <div className="mt-8 grid gap-6 sm:mt-12 sm:grid-cols-2 sm:gap-10 md:place-items-center">
+        <div className="mt-8 grid grid-cols-1 gap-6 sm:mt-12 sm:grid-cols-2 sm:gap-8 lg:grid-cols-2 lg:gap-10 xl:gap-12 justify-items-center">
           {CERTIFICATIONS.map((c) => (
             <img
               key={c.title}
               src={c.img}
               alt={c.title}
-              className="h-auto w-full max-w-[260px] object-contain shadow-md sm:max-w-sm"
+              className="h-auto w-full max-w-[300px] object-contain shadow-md sm:max-w-[320px] md:max-w-[380px] lg:max-w-[420px] xl:max-w-[480px]"
               loading="lazy"
               onError={(e) => ((e.target as HTMLImageElement).style.display = "none")}
             />

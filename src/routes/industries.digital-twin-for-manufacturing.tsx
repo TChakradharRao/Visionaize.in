@@ -1,7 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-field";
 import { getSeedContentItem } from "@/lib/seed-content";
 import { api } from "@/lib/api";
 
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/industries/digital-twin-for-manufacturing
       {
         property: "og:image",
         content:
-          "https://visionaize.com/wp-content/uploads/2022/07/istockphoto-846859964-1024x1024-1-2.png",
+          "/manufacturing/istockphoto-846859964-1024x1024-1-2.png",
       },
     ],
   }),
@@ -42,7 +43,7 @@ const heroParagraphs = heroSection?.paragraphs?.length
     ];
 
 const FALLBACK_HERO_IMAGE =
-  "https://visionaize.in/wp-content/uploads/2026/05/ChatGPT-Image-May-14-2026-manufacturing.png"; // placeholder — replace with your actual fallback if you have one
+  ""; // placeholder — replace with your actual fallback if you have one
 
 const heroImage =
   seedSections
@@ -67,60 +68,135 @@ const introParagraphs = introSection?.paragraphs?.length
 
 const PILLARS = [
   {
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Vector-6.svg",
+    icon: "/manufacturing/Vector-6.svg",
     title: "Extend Asset Lifetime",
     body: "Better planning and data access extend your plant's life expectancy",
   },
   {
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Group-3.svg",
+    icon: "/manufacturing/Group-3.svg",
     title: "Increase OEE",
     body: "Sustain operations with better foresight into overall equipment effectiveness",
   },
   {
-    icon: "https://visionaize.com/wp-content/uploads/2022/07/Group.png",
+    icon: "/manufacturing/Group.png",
     title: "Reduce Consumption",
     body: "Run more energy-efficient operations that also consume less time and money",
   },
 ];
-
 const CASE_STUDIES = [
   {
     eyebrow: "CASE STUDY (01 of 03)",
     title: "Optimizing Steel Manufacturing with Digital Twins and IIoT",
-    img: "https://visionaize.com/wp-content/uploads/2023/11/iStock-502120934.webp",
+    img: "/manufacturing/iStock-502120934.webp",
     tabs: {
-      Challenge:
-        "Steel manufacturers face fluctuating yields, unplanned equipment downtime, and fragmented visibility across rolling, casting, and finishing lines, making it hard to pinpoint the root cause of quality and throughput issues.",
-      Solution:
-        "Visionaize deployed an IIoT-connected digital twin across the plant floor, unifying sensor data from casters, rolling mills, and furnaces into a single real-time 3D view with AI-driven anomaly detection.",
-      Results:
-        "The plant gained faster root-cause diagnosis, improved yield consistency, and reduced unplanned downtime across critical steel production lines.",
+      Challenge: (
+        <>
+          A leading steel manufacturer struggled with{" "}
+          <span className="font-semibold text-[#2E8DC5]">
+            poor visibility into production, equipment downtime, and process
+            inefficiencies
+          </span>
+          . These challenges resulted in inconsistent product quality,
+          production bottlenecks, and higher operating costs.
+        </>
+      ),
+      Solution: (
+        <>
+          Visionaize deployed an{" "}
+          <span className="font-semibold text-[#2E8DC5]">
+            IIoT-enabled Digital Twin platform
+          </span>{" "}
+          that unified plant data, enabled real-time operational monitoring,
+          AI-powered anomaly detection, predictive maintenance, and
+          sustainability KPI tracking.
+        </>
+      ),
+      Results: (
+        <>
+          The implementation delivered{" "}
+          <span className="font-semibold text-[#2E8DC5]">
+            reduced downtime, improved production efficiency, lower energy
+            consumption, and significant annual cost savings
+          </span>
+          .
+        </>
+      ),
     },
   },
+
   {
     eyebrow: "CASE STUDY (02 of 03)",
     title: "Optimizing OEE with Predictive Maintenance and AI Solutions",
-    img: "https://visionaize.com/wp-content/uploads/2023/11/iStock-1182152185.webp",
+    img: "/manufacturing/iStock-1182152185.webp",
     tabs: {
-      Challenge:
-        "Manual inspection schedules and reactive maintenance were driving down Overall Equipment Effectiveness (OEE), with unplanned stoppages disrupting production targets across the facility.",
-      Solution:
-        "An AI-based predictive maintenance model was layered onto existing plant sensors, continuously scoring equipment health and flagging early degradation before failures occurred.",
-      Results:
-        "The facility saw measurable OEE improvement, fewer unplanned stoppages, and maintenance teams shifted from reactive to planned, condition-based servicing.",
+      Challenge: (
+        <>
+          A leading food manufacturer experienced{" "}
+          <span className="font-semibold text-[#2E8DC5]">
+            unplanned downtime and lack of operational visibility
+          </span>
+          , impacting Overall Equipment Effectiveness (OEE) and production
+          performance.
+        </>
+      ),
+      Solution: (
+        <>
+          An{" "}
+          <span className="font-semibold text-[#2E8DC5]">
+            AI-powered predictive maintenance solution
+          </span>{" "}
+          continuously monitored machine health, identified early equipment
+          degradation, and enabled proactive maintenance planning.
+        </>
+      ),
+      Results: (
+        <>
+          The manufacturer achieved{" "}
+          <span className="font-semibold text-[#2E8DC5]">
+            higher OEE, fewer unexpected stoppages, and improved maintenance
+            efficiency
+          </span>{" "}
+          through condition-based servicing.
+        </>
+      ),
     },
   },
+
   {
     eyebrow: "CASE STUDY (03 of 03)",
-    title: "Metal Manufacturer leans on Digital Twin tech to increase productivity",
-    img: "https://visionaize.com/wp-content/uploads/2023/11/iStock-1202781474.webp",
+    title: "Metal Manufacturer Leans on Digital Twin Tech to Increase Productivity",
+    img: "/manufacturing/iStock-1202781474.webp",
     tabs: {
-      Challenge:
-        "A metal manufacturer struggled with siloed data across production lines, making it difficult for operators and engineers to get a unified view of plant performance and bottlenecks.",
-      Solution:
-        "Visionaize built a 3D digital twin of the facility that contextualizes production, quality, and asset data in one immersive environment, giving teams a shared operational picture.",
-      Results:
-        "The manufacturer achieved increased overall productivity, faster bottleneck identification, and better cross-team coordination between operations and engineering.",
+      Challenge: (
+        <>
+          A metal manufacturer struggled with{" "}
+          <span className="font-semibold text-[#2E8DC5]">
+            poor machine performance, unclear operating procedures, and
+            production bottlenecks
+          </span>
+          , limiting throughput and equipment utilization.
+        </>
+      ),
+      Solution: (
+        <>
+          Visionaize implemented a{" "}
+          <span className="font-semibold text-[#2E8DC5]">
+            Digital Twin pilot with machine health analytics
+          </span>{" "}
+          to optimize operations, improve visibility, and evaluate maintenance
+          strategies across multiple production scenarios.
+        </>
+      ),
+      Results: (
+        <>
+          The project resulted in{" "}
+          <span className="font-semibold text-[#2E8DC5]">
+            improved productivity, better equipment utilization, faster
+            bottleneck identification, and enhanced operational visibility
+          </span>
+          .
+        </>
+      ),
     },
   },
 ];
@@ -131,6 +207,8 @@ const FORM_TOPICS = [
   "Improve inspections on the factory floor",
   "Reduce downtime and improve productivity",
 ];
+
+const CASE_STUDY_AUTOPLAY_MS = 6000;
 
 /* ---------------- component ---------------- */
 
@@ -159,17 +237,17 @@ function Hero() {
       className="relative flex min-h-[420px] w-full items-center bg-cover bg-center py-10 sm:min-h-[500px] md:h-[640px] md:py-0"
       style={{
         backgroundImage:
-          "url('https://visionaize.com/wp-content/uploads/2022/07/istockphoto-846859964-1024x1024-1-2.png')",
+          "url('/manufacturing/istockphoto-846859964-1024x1024-1-2.png')",
       }}
     >
       <div className="absolute inset-0 bg-black/10" />
       <div className="relative mx-auto flex w-full max-w-[1280px] items-center px-4 sm:px-6">
-        <div className="w-full max-w-[640px] bg-white p-6 sm:p-10 md:p-14">
+        <div className="w-full max-w-[640px] bg-white p-5 sm:p-10 md:p-14">
           <h1
-            className="text-[36px] font-light leading-[1.05] tracking-tight sm:text-[44px] md:text-[56px]"
+            className="text-[34px] font-small leading-[1.1] tracking-tight xs:text-[38px] sm:text-[48px] md:text-[60px]"
             style={{
               background:
-                "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
+                "linear-gradient(90deg, #A6E04A 0%, #46d2c6 50%, #2E8DC5 100%)",
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
               backgroundClip: "text",
@@ -178,7 +256,10 @@ function Hero() {
             Manufacturing
           </h1>
           {heroParagraphs.map((paragraph, index) => (
-            <p key={index} className="mt-4 text-sm leading-relaxed text-[#0F1B2D] sm:mt-6 sm:text-base md:text-[18px]">
+            <p
+              key={index}
+              className="mt-3 text-base leading-relaxed text-[#0F1B2D] sm:mt-6 sm:text-lg md:text-[20px]"
+            >
               {paragraph}
             </p>
           ))}
@@ -187,15 +268,18 @@ function Hero() {
     </section>
   );
 }
+
 function Pillars() {
   return (
-    <section className="bg-[#0F1B2D] py-14 md:py-20">
+    <section className="bg-[#0F1B2D] py-12 sm:py-14 md:py-20">
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-4 sm:px-6 sm:grid-cols-2 sm:gap-12 md:grid-cols-3">
         {PILLARS.map((p) => (
           <div key={p.title} className="flex flex-col items-center text-center">
-            <img src={p.icon} alt="" className="h-16 w-16 sm:h-20 sm:w-20" loading="lazy" />
-            <h3 className="mt-6 text-xl font-semibold text-white sm:text-[24px]">{p.title}</h3>
-            <p className="mt-4 max-w-[280px] text-sm leading-relaxed text-white/80 sm:text-[15px]">
+            <img src={p.icon} alt="" className="h-14 w-14 sm:h-20 sm:w-20" loading="lazy" />
+            <h3 className="mt-5 text-xl font-semibold text-white sm:mt-6 sm:text-[26px]">
+              {p.title}
+            </h3>
+            <p className="mt-3 max-w-[280px] text-base leading-relaxed text-white/80 sm:mt-4 sm:text-[16px]">
               {p.body}
             </p>
           </div>
@@ -207,21 +291,21 @@ function Pillars() {
 
 function Intro() {
   return (
-    <section className="bg-white py-14 md:py-24">
-      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 px-4 sm:px-6 md:gap-16 lg:grid-cols-2">
+    <section className="bg-white py-12 sm:py-14 md:py-24">
+      <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-8 px-4 sm:px-6 sm:gap-10 md:gap-16 lg:grid-cols-2">
         <div>
-          <h2 className="text-2xl font-semibold leading-tight sm:text-3xl md:text-[40px]">
+          <h2 className="text-2xl font-semibold leading-tight sm:text-[34px] md:text-[42px]">
             {introHeading}
           </h2>
           {introParagraphs.map((paragraph, index) => (
-            <p key={index} className="mt-5 text-sm leading-[1.8] text-[#3a4658] sm:mt-6 sm:text-[16px]">
+            <p key={index} className="mt-4 text-base leading-[1.8] text-[#3a4658] sm:mt-6 sm:text-[17px]">
               {paragraph}
             </p>
           ))}
-          <div className="mt-8 sm:mt-10">
+          <div className="mt-7 sm:mt-10">
             
-            <a  href="#talk-to-an-expert"
-              className="inline-flex items-center rounded-full px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg"
+           <a   href="#talk-to-an-expert"
+              className="inline-flex items-center rounded-full px-6 py-2.5 text-base font-semibold text-white shadow-md transition hover:shadow-lg sm:px-7 sm:py-3"
               style={{
                 background:
                   "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
@@ -231,9 +315,9 @@ function Intro() {
             </a>
           </div>
         </div>
-        <div className="flex justify-center bg-[#E6F0F7] p-6 sm:p-8">
+        <div className="flex justify-center p-2 sm:p-8">
           <img
-            src="https://visionaize.com/wp-content/uploads/2022/07/Group-523-2.png"
+            src="/manufacturing/Group-523-2.png"
             alt="Visionaize 3D Digital Twin for manufacturing"
             className="w-full max-w-[600px]"
             loading="lazy"
@@ -249,11 +333,15 @@ function CaseStudyCarousel() {
   const [tab, setTab] = useState<"Challenge" | "Solution" | "Results">("Challenge");
   const [direction, setDirection] = useState<"left" | "right">("right");
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
 
-  const cs = CASE_STUDIES[idx];
+  const isAnimatingRef = useRef(isAnimating);
+  useEffect(() => {
+    isAnimatingRef.current = isAnimating;
+  }, [isAnimating]);
 
   const goTo = (newIdx: number, dir: "left" | "right") => {
-    if (isAnimating) return;
+    if (isAnimatingRef.current) return;
     setDirection(dir);
     setIsAnimating(true);
     setTimeout(() => {
@@ -263,33 +351,68 @@ function CaseStudyCarousel() {
     }, 250);
   };
 
-  const next = () => goTo((idx + 1) % CASE_STUDIES.length, "right");
-  const prev = () =>
+  const next = () =>
+    setIdx((current) => {
+      goTo((current + 1) % CASE_STUDIES.length, "right");
+      return current;
+    });
+
+  const prev = () => {
     goTo((idx - 1 + CASE_STUDIES.length) % CASE_STUDIES.length, "left");
+  };
+
+  // Auto-advance right-to-left every few seconds. Only depends on isPaused,
+  // so the timer isn't torn down/recreated on every slide change.
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setIdx((current) => {
+        goTo((current + 1) % CASE_STUDIES.length, "right");
+        return current;
+      });
+    }, CASE_STUDY_AUTOPLAY_MS);
+    return () => clearInterval(timer);
+  }, [isPaused]);
+
+  const handleManualNav = (
+    fn: () => void,
+    e: React.MouseEvent<HTMLButtonElement>
+  ) => {
+    fn();
+    // Prevent the clicked button from retaining focus, which would
+    // otherwise keep the carousel permanently paused.
+    e.currentTarget.blur();
+  };
+
+  const cs = CASE_STUDIES[idx];
 
   return (
-    <section className="bg-white pb-14 md:pb-20">
-      <div className="relative mx-auto max-w-[1280px] px-4 sm:px-6">
+    <section
+      className="bg-white pb-14 md:pb-20"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+    >
+      <div className="relative mx-auto max-w-[1280px] px-2 sm:px-6">
         <button
           aria-label="Previous case study"
-          onClick={prev}
-          className="absolute left-0 top-1/2 z-10 -translate-y-1/2 text-[#2E8DC5] hover:text-[#A6E04A]"
+          onClick={(e) => handleManualNav(prev, e)}
+          className="absolute left-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center text-[#2E8DC5] hover:text-[#A6E04A] sm:h-12 sm:w-12"
         >
-          <svg width="20" height="40" viewBox="0 0 28 56" fill="none" className="sm:h-[56px] sm:w-[28px]">
+          <svg width="16" height="32" viewBox="0 0 28 56" fill="none" className="sm:h-[44px] sm:w-[22px]">
             <path d="M22 4L6 28L22 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
         <button
           aria-label="Next case study"
-          onClick={next}
-          className="absolute right-0 top-1/2 z-10 -translate-y-1/2 text-[#2E8DC5] hover:text-[#A6E04A]"
+          onClick={(e) => handleManualNav(next, e)}
+          className="absolute right-0 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center text-[#2E8DC5] hover:text-[#A6E04A] sm:h-12 sm:w-12"
         >
-          <svg width="20" height="40" viewBox="0 0 28 56" fill="none" className="sm:h-[56px] sm:w-[28px]">
+          <svg width="16" height="32" viewBox="0 0 28 56" fill="none" className="sm:h-[44px] sm:w-[22px]">
             <path d="M6 4L22 28L6 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
           </svg>
         </button>
 
-        <div className="overflow-hidden px-7 sm:px-10">
+        <div className="overflow-hidden px-9 sm:px-12">
           <div
             className="grid grid-cols-1 items-center gap-8 transition-all duration-250 ease-out lg:grid-cols-2 lg:gap-10"
             style={{
@@ -300,19 +423,22 @@ function CaseStudyCarousel() {
             }}
           >
             <div>
-              <p className="text-xs font-semibold tracking-[0.18em] text-[#A6E04A]">
+              <p className="text-sm font-semibold tracking-[0.18em] text-[#A6E04A]">
                 {cs.eyebrow}
               </p>
-              <h3 className="mt-3 text-xl font-semibold leading-tight sm:text-2xl md:text-[34px]">
+              <h3 className="mt-3 text-xl font-semibold leading-tight sm:text-[28px] md:text-[36px]">
                 {cs.title}
               </h3>
 
-              <div className="mt-6 flex gap-4 overflow-x-auto border-b border-[#E2E8F0] sm:mt-8 sm:gap-6">
+              <div className="mt-5 flex gap-4 overflow-x-auto border-b border-[#E2E8F0] sm:mt-8 sm:gap-6">
                 {(["Challenge", "Solution", "Results"] as const).map((t) => (
                   <button
                     key={t}
-                    onClick={() => setTab(t)}
-                    className={`shrink-0 pb-3 text-sm font-semibold transition ${
+                    onClick={(e) => {
+                      setTab(t);
+                      e.currentTarget.blur();
+                    }}
+                    className={`shrink-0 pb-3 text-base font-semibold transition ${
                       tab === t
                         ? "border-b-2 border-[#2E8DC5] text-[#2E8DC5]"
                         : "text-[#64748B] hover:text-[#0F1B2D]"
@@ -323,8 +449,8 @@ function CaseStudyCarousel() {
                 ))}
               </div>
 
-              <div className="mt-6 rounded border border-[#E2E8F0] p-5 sm:p-6">
-                <p className="text-sm leading-[1.8] text-[#3a4658] sm:text-[15px]">{cs.tabs[tab]}</p>
+              <div className="mt-5 rounded border border-[#E2E8F0] p-4 sm:mt-6 sm:p-6">
+                <p className="text-base leading-[1.8] text-[#3a4658] sm:text-[16px]">{cs.tabs[tab]}</p>
               </div>
             </div>
 
@@ -339,12 +465,14 @@ function CaseStudyCarousel() {
           </div>
         </div>
 
-        <div className="mt-8 flex justify-center gap-2">
+        <div className="mt-7 flex justify-center gap-2 sm:mt-8">
           {CASE_STUDIES.map((_, i) => (
             <button
               key={i}
               aria-label={`Go to slide ${i + 1}`}
-              onClick={() => goTo(i, i > idx ? "right" : "left")}
+              onClick={(e) =>
+                handleManualNav(() => goTo(i, i > idx ? "right" : "left"), e)
+              }
               className={`h-2 rounded-full transition-all ${
                 i === idx ? "w-8 bg-[#2E8DC5]" : "w-2 bg-[#CBD5E1]"
               }`}
@@ -360,12 +488,12 @@ function FactoryReimagined() {
   return (
     <section className="bg-white pb-14 pt-2 md:pb-20">
       <div className="mx-auto max-w-[1290px] px-4 sm:px-6">
-        <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+        <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-semibold leading-tight sm:text-3xl md:text-[40px]">
+            <h2 className="text-2xl font-semibold leading-tight sm:text-[34px] md:text-[42px]">
               Factory operations reimagined
             </h2>
-            <div className="mt-6 space-y-5 text-sm leading-[1.8] text-[#3a4658] sm:mt-8 sm:space-y-6 sm:text-[16px]">
+            <div className="mt-5 space-y-4 text-base leading-[1.8] text-[#3a4658] sm:mt-8 sm:space-y-6 sm:text-[17px]">
               <p>
                 Imagine your factory manager, your shift supervisors, and your
                 maintenance engineers being able to visualize rich,
@@ -392,9 +520,9 @@ function FactoryReimagined() {
 
           <div className="flex justify-center">
             <img
-              src="https://visionaize.in/wp-content/uploads/2022/07/Rectangle-425-6.png"
+              src="/manufacturing/Rectangle-425-6.png"
               alt="Factory operations reimagined with 3D digital twin visualization"
-              className="h-auto w-full max-w-[500px] rounded-lg object-cover shadow-lg sm:h-[380px] md:h-[490px]"
+              className="h-[260px] w-full max-w-[500px] rounded-lg object-cover shadow-lg sm:h-[380px] md:h-[490px]"
               loading="lazy"
             />
           </div>
@@ -519,7 +647,7 @@ function validateForm(form: FormState): FormErrors {
 
 function fieldClass(hasError: boolean) {
   return [
-    "w-full rounded border px-4 py-3 text-sm text-[#3a4658] placeholder:text-[#94A3B8]",
+    "w-full rounded border px-4 py-3 text-base text-[#3a4658] placeholder:text-[#94A3B8]",
     "focus:outline-none focus:ring-1",
     hasError
       ? "border-red-400 focus:border-red-400 focus:ring-red-400"
@@ -528,7 +656,7 @@ function fieldClass(hasError: boolean) {
 }
 
 function FieldError({ message }: { message: string }) {
-  return <p className="mt-1 text-xs text-red-600">{message}</p>;
+  return <p className="mt-1 text-sm text-red-600">{message}</p>;
 }
 
 function TalkDigitalTwins() {
@@ -590,21 +718,21 @@ function TalkDigitalTwins() {
   };
 
   return (
-    <section id="talk-to-an-expert" className="bg-[#F1F5F9] py-14 md:py-20">
+    <section id="talk-to-an-expert" className="bg-[#F1F5F9] py-12 sm:py-14 md:py-20">
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 gap-10 px-4 sm:px-6 md:gap-12 lg:grid-cols-2">
         <div>
-          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-[44px]">
+          <h2 className="text-3xl font-semibold leading-tight sm:text-[42px] md:text-[48px]">
             Let&rsquo;s talk digital twins
           </h2>
-          <p className="mt-5 text-base leading-[1.8] text-[#3a4658] sm:mt-6 sm:text-[18px]">
+          <p className="mt-4 text-base leading-[1.8] text-[#3a4658] sm:mt-6 sm:text-[19px]">
             V-Suite turns your factory into your digital metaverse. Visualize
             your manufacturing operations through a real-time, up-to-date 3-D
             digital twin. Connect with us to learn how it works.
           </p>
-          <h3 className="mt-8 text-lg font-semibold sm:mt-10 sm:text-[22px]">Visionaize a better world</h3>
-          <ul className="mt-6 space-y-4">
+          <h3 className="mt-7 text-lg font-semibold sm:mt-10 sm:text-[24px]">Visionaize a better world</h3>
+          <ul className="mt-5 space-y-3 sm:mt-6 sm:space-y-4">
             {FORM_TOPICS.map((t) => (
-              <li key={t} className="flex items-start gap-3 text-sm text-[#0F1B2D] sm:text-[16px]">
+              <li key={t} className="flex items-start gap-3 text-base text-[#0F1B2D] sm:text-[17px]">
                 <span
                   className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white"
                   style={{
@@ -622,27 +750,25 @@ function TalkDigitalTwins() {
           </ul>
         </div>
 
-        <div className="mx-auto flex w-full max-w-[420px] justify-center rounded-lg bg-white p-5 shadow-md sm:p-8">
+        <div className="mx-auto flex w-full max-w-[420px] justify-center rounded-lg bg-white p-4 shadow-md sm:p-8">
           <div className="w-full max-w-[360px]">
-            <h3 className="text-xl font-semibold text-[#2E8DC5] sm:text-[24px]">Talk to an expert</h3>
-            <form onSubmit={handleSubmit} noValidate className="mt-6 grid grid-cols-1 gap-4">
-              <div>
-                <input
-                  type="text"
-                  placeholder="First name*"
-                  value={form.firstName}
-                  onChange={handleChange("firstName")}
-                  aria-invalid={!!errors.firstName}
-                  maxLength={100}
-                  className={fieldClass(!!errors.firstName)}
-                />
-                {errors.firstName && <FieldError message={errors.firstName} />}
-              </div>
+            <h3 className="text-xl font-semibold text-[#2E8DC5] sm:text-[26px]">Talk to an expert</h3>
+            <form onSubmit={handleSubmit} noValidate className="mt-5 grid grid-cols-1 gap-4 sm:mt-6">
+                <div>
+                  <FloatingInput
+                    label="First name*"
+                    value={form.firstName}
+                    onChange={handleChange("firstName")}
+                    aria-invalid={!!errors.firstName}
+                    maxLength={100}
+                    className={fieldClass(!!errors.firstName)}
+                  />
+                  {errors.firstName && <FieldError message={errors.firstName} />}
+                </div>
 
               <div>
-                <input
-                  type="text"
-                  placeholder="Last name*"
+                <FloatingInput
+                  label="Last name*"
                   value={form.lastName}
                   onChange={handleChange("lastName")}
                   aria-invalid={!!errors.lastName}
@@ -653,9 +779,8 @@ function TalkDigitalTwins() {
               </div>
 
               <div>
-                <input
-                  type="text"
-                  placeholder="Company name*"
+                <FloatingInput
+                  label="Company name*"
                   value={form.companyName}
                   onChange={handleChange("companyName")}
                   aria-invalid={!!errors.companyName}
@@ -666,9 +791,9 @@ function TalkDigitalTwins() {
               </div>
 
               <div>
-                <input
+                <FloatingInput
+                  label="Business Email*"
                   type="email"
-                  placeholder="Business Email*"
                   value={form.businessEmail}
                   onChange={handleChange("businessEmail")}
                   aria-invalid={!!errors.businessEmail}
@@ -678,9 +803,9 @@ function TalkDigitalTwins() {
               </div>
 
               <div>
-                <input
+                <FloatingInput
+                  label="Phone number*"
                   type="tel"
-                  placeholder="Phone number*"
                   value={form.phoneNumber}
                   onChange={handlePhoneChange}
                   aria-invalid={!!errors.phoneNumber}
@@ -694,7 +819,7 @@ function TalkDigitalTwins() {
               <select
                 value={form.hearAboutUs}
                 onChange={handleChange("hearAboutUs")}
-                className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-sm text-[#3a4658] focus:border-[#2E8DC5] focus:outline-none"
+                className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-base text-[#3a4658] focus:border-[#2E8DC5] focus:outline-none"
               >
                 <option value="">How did you first hear about us?</option>
                 {HEAR_ABOUT_US_OPTIONS.map((option) => (
@@ -705,9 +830,9 @@ function TalkDigitalTwins() {
               </select>
 
               <div>
-                <textarea
+                <FloatingTextarea
+                  label="Message"
                   rows={4}
-                  placeholder="Message"
                   value={form.message}
                   onChange={handleChange("message")}
                   aria-invalid={!!errors.message}
@@ -716,7 +841,7 @@ function TalkDigitalTwins() {
                 />
                 <div className="mt-1 flex items-center justify-between">
                   {errors.message ? <FieldError message={errors.message} /> : <span />}
-                  <span className="text-xs text-[#64748B]">
+                  <span className="text-sm text-[#64748B]">
                     {form.message.length}/{MESSAGE_MAX_LENGTH}
                   </span>
                 </div>
@@ -725,7 +850,7 @@ function TalkDigitalTwins() {
               <button
                 type="submit"
                 disabled={status === "submitting"}
-                className="mt-2 inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-semibold text-white shadow-md transition hover:shadow-lg disabled:opacity-60"
+                className="mt-2 inline-flex items-center justify-center rounded-full px-7 py-3 text-base font-semibold text-white shadow-md transition hover:shadow-lg disabled:opacity-60"
                 style={{
                   background:
                     "linear-gradient(90deg, #A6E04A 0%, #5BAE7E 50%, #2E8DC5 100%)",
@@ -735,15 +860,15 @@ function TalkDigitalTwins() {
               </button>
 
               {status === "success" && (
-                <p className="text-center text-sm text-green-600">
+                <p className="text-center text-base text-green-600">
                   Thanks! A Digital Twin expert will be in touch shortly.
                 </p>
               )}
               {status === "error" && errorMessage && (
-                <p className="text-center text-sm text-red-600">{errorMessage}</p>
+                <p className="text-center text-base text-red-600">{errorMessage}</p>
               )}
 
-              <p className="text-center text-xs text-[#64748B]">
+              <p className="text-center text-sm text-[#64748B]">
                 We generally respond within 24 hours
               </p>
             </form>
@@ -760,25 +885,26 @@ function Whitepaper() {
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-8 px-4 sm:px-6 md:gap-10 lg:grid-cols-2">
         <div className="flex justify-center">
           <img
-            src="https://visionaize.in/wp-content/uploads/2026/05/Group-1171277152-1.png"
+            src="/manufacturing/Group-1171277152-1.png"
             alt="The Industrial Metaverse whitepaper"
-            className="w-full max-w-[460px] "
+            className="w-full max-w-[460px]"
             loading="lazy"
           />
         </div>
         <div>
-          <h2 className="text-3xl font-semibold leading-tight sm:text-4xl md:text-[44px]">
+          <h2 className="text-3xl font-semibold leading-tight sm:text-[42px] md:text-[48px]">
             Experience data in The Industrial Metaverse
           </h2>
-          <p className="mt-5 text-base leading-[1.8] text-[#3a4658] sm:mt-6 sm:text-[18px]">
+          <p className="mt-4 text-base leading-[1.8] text-[#3a4658] sm:mt-6 sm:text-[19px]">
             With the emergence of Industry 4.0 and IIoT sensors, data overload
             is a common challenge. Explore how 3D digital twin technology can
             turn the data deluge into a competitive advantage.
           </p>
 
-           <a href="/theindustrialmetaverse/"
-              rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center rounded-full border border-[#0F1B2D] px-7 py-3 text-sm font-semibold text-[#0F1B2D] transition hover:bg-[#0F1B2D] hover:text-white"
+          
+          <a  href="/theindustrialmetaverse/"
+            rel="noopener noreferrer"
+            className="mt-6 inline-flex items-center rounded-full border border-[#0F1B2D] px-6 py-2.5 text-base font-semibold text-[#0F1B2D] transition hover:bg-[#0F1B2D] hover:text-white sm:mt-8 sm:px-7 sm:py-3"
           >
             Explore how
           </a>

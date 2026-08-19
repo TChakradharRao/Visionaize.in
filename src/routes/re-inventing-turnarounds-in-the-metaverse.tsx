@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput } from "@/components/ui/floating-field";
 import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/re-inventing-turnarounds-in-the-metaverse")({
@@ -77,6 +78,26 @@ function validate(form: FormState): FormErrors {
   return errors;
 }
 
+// Smooth-scrolls to the content section below the hero.
+function scrollToContentSection(e: React.MouseEvent<HTMLButtonElement>) {
+  e.preventDefault();
+  const target = document.getElementById("content-section");
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
+// Smooth-scrolls to the whitepaper form section, regardless of whether the
+// browser's default hash-anchor behavior is intercepted elsewhere (e.g. by
+// router click handling) or produces an abrupt jump instead of a smooth one.
+function scrollToWhitepaperForm(e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) {
+  e.preventDefault();
+  const target = document.getElementById("whitepaper-form");
+  if (target) {
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+}
+
 function WhitepaperHero() {
   const [form, setForm] = useState<FormState>(initialState);
   const [errors, setErrors] = useState<FormErrors>({});
@@ -133,10 +154,14 @@ function WhitepaperHero() {
               The modern approach to Turnarounds that reduce costs by more than 10%
             </h1>
 
-            <p className="mt-5 sm:mt-6 text-sm font-semibold italic text-brand-ink/80">
-              In Collaboration with{" "}
-              <span className="not-italic font-bold text-brand-navy">pwc</span>
-            </p>
+           <p className="mt-5 sm:mt-6 flex flex-wrap items-end gap-2 text-lg sm:text-xl font-bold italic text-brand-ink/100">
+  <span>In Collaboration with</span>
+  <img
+    src="/white-paper/PricewaterhouseCoopers_Logo.svg-1.png"
+    alt="PwC"
+    className="h-10 sm:h-12 w-auto block"
+  />
+</p>
 
             <p className="mt-5 sm:mt-6 max-w-xl text-[15px] sm:text-base leading-relaxed text-brand-ink/70">
               The Industrial Metaverse is in the infancy of adoption, but already has the
@@ -147,8 +172,9 @@ function WhitepaperHero() {
               bottom line.
             </p>
 
-            <a
-              href="#whitepaper-form"
+            <button
+              type="button"
+              onClick={scrollToContentSection}
               className="mt-8 inline-flex items-center gap-3 group"
             >
               <span className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-full bg-white shadow-md transition group-hover:shadow-lg">
@@ -169,7 +195,7 @@ function WhitepaperHero() {
               <span className="bg-gradient-to-r from-brand-lime to-brand-blue bg-clip-text text-xl sm:text-2xl font-semibold text-transparent">
                 Dive in!
               </span>
-            </a>
+            </button>
           </div>
 
           {/* Right: whitepaper mockup + form.
@@ -181,7 +207,7 @@ function WhitepaperHero() {
           <div className="mx-auto w-full max-w-md py-2 lg:relative lg:mx-0 lg:max-w-2xl lg:py-10">
             <div className="mx-auto w-[78%] overflow-hidden rounded-md sm:w-[58%] lg:mr-auto lg:ml-0 lg:w-[52%] lg:-translate-x-4 lg:-rotate-6">
               <img
-                src="https://visionaize.in/wp-content/uploads/2023/12/Reinventing-Mockup-768x768.png"
+                src="/white-paper/Reinventing-Mockup-768x768.png"
                 alt="Reinventing Turnarounds in the Metaverse — whitepaper cover"
                 className="aspect-[3/4] w-full object-cover"
                 loading="eager"
@@ -190,7 +216,7 @@ function WhitepaperHero() {
 
             <div
               id="whitepaper-form"
-              className="relative z-10 mx-auto -mt-8 w-[92%] rounded-2xl bg-white p-5 shadow-2xl sm:-mt-10 sm:w-[85%] sm:p-8 lg:absolute lg:right-0 lg:top-1/2 lg:mt-0 lg:w-[58%] lg:-translate-y-1/2"
+              className="relative z-10 mx-auto -mt-8 w-[92%] scroll-mt-24 rounded-2xl bg-white p-5 shadow-2xl sm:-mt-10 sm:w-[85%] sm:p-8 lg:absolute lg:right-0 lg:top-1/2 lg:mt-0 lg:w-[58%] lg:-translate-y-1/2"
             >
               <h2 className="text-lg sm:text-xl md:text-2xl font-bold text-brand-navy">
                 Access the whitepaper
@@ -204,9 +230,10 @@ function WhitepaperHero() {
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="mt-6 space-y-4">
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="First name*"
+                      name="first_name"
+                      label="First name*"
                       value={form.firstName}
                       onChange={handleChange("firstName")}
                       aria-invalid={!!errors.firstName}
@@ -216,9 +243,10 @@ function WhitepaperHero() {
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="Last name*"
+                      name="last_name"
+                      label="Last name*"
                       value={form.lastName}
                       onChange={handleChange("lastName")}
                       aria-invalid={!!errors.lastName}
@@ -228,9 +256,10 @@ function WhitepaperHero() {
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="Company name*"
+                      name="company"
+                      label="Company name*"
                       value={form.company}
                       onChange={handleChange("company")}
                       aria-invalid={!!errors.company}
@@ -240,9 +269,10 @@ function WhitepaperHero() {
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="email"
-                      placeholder="Business Email*"
+                      name="email"
+                      label="Business Email*"
                       value={form.email}
                       onChange={handleChange("email")}
                       aria-invalid={!!errors.email}
@@ -298,7 +328,7 @@ function FieldError({ message }: { message: string }) {
 
 function ContentSection() {
   return (
-    <section className="bg-[#f3f5f7]">
+    <section id="content-section" className="scroll-mt-24 bg-[#f3f5f7]">
       <div className="mx-auto max-w-5xl px-4 sm:px-6 pt-4 pb-10 md:pt-4 md:pb-14">
         <div className="space-y-5 sm:space-y-6 text-[15px] sm:text-base leading-relaxed text-brand-ink/80 md:text-lg">
           <p>
@@ -329,10 +359,35 @@ function ContentSection() {
 
         <a
           href="#whitepaper-form"
+          onClick={scrollToWhitepaperForm}
           className="mt-8 inline-block text-[15px] sm:text-base font-bold text-brand-blue hover:underline"
         >
           Access the full Whitepaper &gt;&gt;
         </a>
+      </div>
+    </section>
+  );
+}
+
+function WhitepaperCtaBand() {
+  return (
+    <section
+      className="relative overflow-hidden"
+      style={{ background: "linear-gradient(90deg,#A6E04A 0%,#5BAE7E 45%,#2BA8C7 100%)" }}
+    >
+      <div className="mx-auto max-w-4xl px-4 sm:px-6 py-16 text-center md:py-20">
+        <h2 className="text-2xl font-semibold leading-tight text-white sm:text-3xl md:text-4xl">
+          A Metaverse-driven Turnaround: What is it and how does it drive value?
+        </h2>
+        <div className="mt-8 flex justify-center">
+          <a
+            href="#whitepaper-form"
+            onClick={scrollToWhitepaperForm}
+            className="inline-flex items-center rounded-full bg-white px-8 py-3.5 text-sm font-bold text-slate-900 shadow-md transition hover:bg-white/90 sm:text-base"
+          >
+            Download the white paper
+          </a>
+        </div>
       </div>
     </section>
   );
@@ -343,6 +398,7 @@ function TurnaroundsPage() {
     <HeaderFooterWrapper>
       <WhitepaperHero />
       <ContentSection />
+      <WhitepaperCtaBand />
     </HeaderFooterWrapper>
   );
 }

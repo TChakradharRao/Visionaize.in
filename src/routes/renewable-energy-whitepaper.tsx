@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput } from "@/components/ui/floating-field";
 import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/renewable-energy-whitepaper")({
@@ -116,7 +117,7 @@ function RenewableHero() {
           <div className="relative mx-auto w-full max-w-xl lg:max-w-5xl">
             <div className="mx-auto w-[70%] max-w-xs sm:w-[55%] sm:max-w-sm lg:absolute lg:left-0 lg:top-1/2 lg:mx-0 lg:w-[62%] lg:max-w-none lg:-translate-y-1/2 lg:-rotate-6">
               <img
-                src="https://visionaize.in/wp-content/uploads/2026/05/Group-1171277152-1-768x758.png"
+                src="/white-paper/Group-1171277152-1-768x758.png"
                 alt="Renewable Energy Whitepaper — cover"
                 className="w-full rounded-md object-contain shadow-lg lg:shadow-none"
                 loading="eager"
@@ -142,42 +143,42 @@ function RenewableHero() {
               ) : (
                 <form onSubmit={handleSubmit} noValidate className="mt-4 space-y-3">
                   <div className="grid gap-3">
-                    <input
+                    <FloatingInput
                       type="text"
-                      required
-                      placeholder="First name*"
+                      name="first_name"
+                      label="First name*"
                       autoComplete="given-name"
                       value={form.firstName}
                       onChange={(e) => setForm((f) => ({ ...f, firstName: e.target.value }))}
-                      className="w-full rounded-md border border-brand-navy/20 px-4 py-2.5 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
+                      className="border-brand-navy/20 focus:border-brand-blue"
                     />
-                    <input
+                    <FloatingInput
                       type="text"
-                      required
-                      placeholder="Last name*"
+                      name="last_name"
+                      label="Last name*"
                       autoComplete="family-name"
                       value={form.lastName}
                       onChange={(e) => setForm((f) => ({ ...f, lastName: e.target.value }))}
-                      className="w-full rounded-md border border-brand-navy/20 px-4 py-2.5 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
+                      className="border-brand-navy/20 focus:border-brand-blue"
                     />
                   </div>
-                  <input
+                  <FloatingInput
                     type="text"
-                    required
-                    placeholder="Company name*"
+                    name="company"
+                    label="Company name*"
                     autoComplete="organization"
                     value={form.company}
                     onChange={(e) => setForm((f) => ({ ...f, company: e.target.value }))}
-                    className="w-full rounded-md border border-brand-navy/20 px-4 py-2.5 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
+                    className="border-brand-navy/20 focus:border-brand-blue"
                   />
-                  <input
+                  <FloatingInput
                     type="email"
-                    required
-                    placeholder="Business Email*"
+                    name="email"
+                    label="Business Email*"
                     autoComplete="email"
                     value={form.email}
                     onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                    className="w-full rounded-md border border-brand-navy/20 px-4 py-2.5 text-brand-ink placeholder:text-brand-ink/50 focus:border-brand-blue focus:outline-none focus:ring-1 focus:ring-brand-blue"
+                    className="border-brand-navy/20 focus:border-brand-blue"
                   />
 
                   <label className="flex items-start gap-3 text-sm text-brand-ink/70">

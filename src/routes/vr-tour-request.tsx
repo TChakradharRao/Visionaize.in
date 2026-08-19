@@ -1,7 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-field";
 import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/vr-tour-request")({
@@ -128,13 +129,13 @@ function VrTourRequestPage() {
 
   const handleChange =
     (field: keyof FormState) =>
-    (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
       const value = e.target.value;
       setForm((prev) => ({ ...prev, [field]: value }));
       setErrors((prev) => ({ ...prev, [field]: undefined }));
     };
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handlePhoneChange = (e: ChangeEvent<HTMLInputElement>) => {
     const digitsOnly = e.target.value.replace(/\D/g, "").slice(0, 10);
     setForm((prev) => ({ ...prev, phoneNumber: digitsOnly }));
     setErrors((prev) => ({ ...prev, phoneNumber: undefined }));
@@ -157,6 +158,7 @@ function VrTourRequestPage() {
         first_name: form.firstName.trim(),
         last_name: form.lastName.trim(),
         company_name: form.companyName.trim(),
+        email: form.businessEmail.trim(),
         business_email: form.businessEmail.trim(),
         phone_number: form.phoneNumber.replace(/\D/g, ""),
         message: form.message.trim() || undefined,
@@ -194,7 +196,7 @@ function VrTourRequestPage() {
                 </h1>
 
                 <img
-                  src="https://visionaize.in/wp-content/uploads/2023/01/New-Project-1.png"
+                  src="/white-paper/vr-tour.png"
                   alt="Tablet showing a 3D industrial digital twin next to a VR headset"
                   className="mt-6 sm:mt-8 md:mt-10 w-full max-w-lg"
                 />
@@ -213,40 +215,43 @@ function VrTourRequestPage() {
 
                 <form onSubmit={handleSubmit} noValidate className="mt-4 sm:mt-6 space-y-3 sm:space-y-4">
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="First name*"
+                      name="first_name"
+                      label="First name*"
                       value={form.firstName}
                       onChange={handleChange("firstName")}
                       aria-invalid={!!errors.firstName}
                       maxLength={100}
-                      className={fieldClass(!!errors.firstName)}
+                      className={errors.firstName ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.firstName && <FieldError message={errors.firstName} />}
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="Last name*"
+                      name="last_name"
+                      label="Last name*"
                       value={form.lastName}
                       onChange={handleChange("lastName")}
                       aria-invalid={!!errors.lastName}
                       maxLength={100}
-                      className={fieldClass(!!errors.lastName)}
+                      className={errors.lastName ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.lastName && <FieldError message={errors.lastName} />}
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="text"
-                      placeholder="Company name*"
+                      name="company_name"
+                      label="Company name*"
                       value={form.companyName}
                       onChange={handleChange("companyName")}
                       aria-invalid={!!errors.companyName}
                       maxLength={150}
-                      className={fieldClass(!!errors.companyName)}
+                      className={errors.companyName ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.companyName && (
                       <FieldError message={errors.companyName} />
@@ -254,13 +259,14 @@ function VrTourRequestPage() {
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="email"
-                      placeholder="Business Email*"
+                      name="business_email"
+                      label="Business Email*"
                       value={form.businessEmail}
                       onChange={handleChange("businessEmail")}
                       aria-invalid={!!errors.businessEmail}
-                      className={fieldClass(!!errors.businessEmail)}
+                      className={errors.businessEmail ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.businessEmail && (
                       <FieldError message={errors.businessEmail} />
@@ -268,15 +274,16 @@ function VrTourRequestPage() {
                   </div>
 
                   <div>
-                    <input
+                    <FloatingInput
                       type="tel"
-                      placeholder="Phone number*"
+                      name="phone_number"
+                      label="Phone number*"
                       value={form.phoneNumber}
                       onChange={handlePhoneChange}
                       aria-invalid={!!errors.phoneNumber}
                       inputMode="numeric"
                       maxLength={10}
-                      className={fieldClass(!!errors.phoneNumber)}
+                      className={errors.phoneNumber ? "border-red-400 focus:border-red-400" : ""}
                     />
                     {errors.phoneNumber && (
                       <FieldError message={errors.phoneNumber} />
@@ -284,14 +291,15 @@ function VrTourRequestPage() {
                   </div>
 
                   <div>
-                    <textarea
-                      placeholder="Message"
+                    <FloatingTextarea
+                      name="message"
+                      label="Message"
                       value={form.message}
                       onChange={handleChange("message")}
                       rows={3}
                       aria-invalid={!!errors.message}
                       maxLength={MESSAGE_MAX_LENGTH}
-                      className={`${fieldClass(!!errors.message)} resize-none`}
+                      className={errors.message ? "border-red-400 focus:border-red-400" : ""}
                     />
                     <div className="mt-1 flex items-center justify-between">
                       {errors.message ? (

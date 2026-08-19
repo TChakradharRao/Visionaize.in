@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { api } from "@/lib/api";
 
 export const Route = createFileRoute("/admin/login")({
   head: () => ({ meta: [{ title: "Admin Login" }] }),
@@ -14,15 +15,14 @@ function AdminLogin() {
   const [pass, setPass] = useState("");
   const [error, setError] = useState("");
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // simple static check for now; replace with server auth later
-    if (user === "admin" && pass === "password") {
-      localStorage.setItem("adminAuth", "true");
-      // redirect to enquiries
+    setError("");
+    try {
+      await api.login(user, pass);
       window.location.href = "/admin/enquiries";
-    } else {
-      setError("Invalid credentials");
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Invalid credentials");
     }
   }
 
@@ -47,7 +47,7 @@ function AdminLogin() {
           {error && <div className="text-sm text-red-600">{error}</div>}
 
           <div className="flex items-center gap-3">
-            <button className="px-4 py-2 bg-brand-navy text-white rounded">Sign in</button>
+            <button className="px-4 py-2 bg-brand-navy text-white rounded cursor-pointer">Sign in</button>
             {/* <Link to="/" className="text-sm text-blue-600">Back to site</Link> */}
           </div>
         </form>

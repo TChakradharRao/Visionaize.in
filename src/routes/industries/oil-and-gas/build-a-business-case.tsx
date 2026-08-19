@@ -2,6 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput } from "@/components/ui/floating-field";
 import { api } from "@/lib/api";
 
 export const Route = createFileRoute(
@@ -253,34 +254,34 @@ function BuildBusinessCasePage() {
 
                 <SectionLabel>Your Information</SectionLabel>
                 <div className="mt-2 space-y-2">
-                  <Input
+                  <FloatingInput
                     name="first_name"
-                    placeholder="First Name"
+                    label="First Name*"
                     value={firstName}
                     onChange={(e) => setFirstName(e.target.value)}
-                    error={errors.first_name}
+                    className={errors.first_name ? "border-red-400 focus:border-red-400" : ""}
                   />
-                  <Input
+                  <FloatingInput
                     name="last_name"
-                    placeholder="Last Name"
+                    label="Last Name*"
                     value={lastName}
                     onChange={(e) => setLastName(e.target.value)}
-                    error={errors.last_name}
+                    className={errors.last_name ? "border-red-400 focus:border-red-400" : ""}
                   />
-                  <Input
+                  <FloatingInput
                     name="company"
-                    placeholder="Company Name"
+                    label="Company Name*"
                     value={company}
                     onChange={(e) => setCompany(e.target.value)}
-                    error={errors.company}
+                    className={errors.company ? "border-red-400 focus:border-red-400" : ""}
                   />
-                  <Input
+                  <FloatingInput
                     name="email"
-                    placeholder="Business Email Address"
+                    label="Business Email Address*"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    error={errors.email}
+                    className={errors.email ? "border-red-400 focus:border-red-400" : ""}
                   />
                 </div>
 
@@ -288,23 +289,23 @@ function BuildBusinessCasePage() {
                   Your Downstream Oil &amp; Gas Target Facility Capacity
                   (Barrels/Day)*
                 </FieldLabel>
-                <Input
+                <FloatingInput
                   name="target_capacity"
-                  placeholder="e.g. 250,000"
+                  label="Target Capacity (Barrels/Day)*"
                   inputMode="numeric"
                   value={targetCapacity}
                   onChange={(e) => setTargetCapacity(e.target.value)}
-                  error={errors.target_capacity}
+                  className={errors.target_capacity ? "border-red-400 focus:border-red-400" : ""}
                 />
 
                 <FieldLabel>Actual Output (Barrels/Day)*</FieldLabel>
-                <Input
+                <FloatingInput
                   name="actual_output"
-                  placeholder="e.g. 250,000"
+                  label="Actual Output (Barrels/Day)*"
                   inputMode="numeric"
                   value={actualOutput}
                   onChange={(e) => setActualOutput(e.target.value)}
-                  error={errors.actual_output}
+                  className={errors.actual_output ? "border-red-400 focus:border-red-400" : ""}
                 />
 
                 <FieldLabel>Location*</FieldLabel>
@@ -326,23 +327,31 @@ function BuildBusinessCasePage() {
                 </Select>
 
                 <SectionLabel>Operating Parameters</SectionLabel>
-                <FieldLabel>Planned Downtime/yearly*</FieldLabel>
-                <Input
+                <FloatingInput
                   name="planned_downtime"
-                  placeholder="e.g. 10 days"
+                  label="Planned Downtime / yearly*"
                   value={plannedDowntime}
                   onChange={(e) => setPlannedDowntime(e.target.value)}
-                  error={errors.planned_downtime}
+                  className={errors.planned_downtime ? "border-red-400 focus:border-red-400" : ""}
                 />
+                {errors.planned_downtime && (
+                  <p className="mt-1 text-xs text-red-500">
+                    {errors.planned_downtime}
+                  </p>
+                )}
 
-                <FieldLabel>Unplanned Downtime/yearly*</FieldLabel>
-                <Input
+                <FloatingInput
                   name="unplanned_downtime"
-                  placeholder="e.g. 10 days"
+                  label="Unplanned Downtime / yearly*"
                   value={unplannedDowntime}
                   onChange={(e) => setUnplannedDowntime(e.target.value)}
-                  error={errors.unplanned_downtime}
+                  className={errors.unplanned_downtime ? "border-red-400 focus:border-red-400" : ""}
                 />
+                {errors.unplanned_downtime && (
+                  <p className="mt-1 text-xs text-red-500">
+                    {errors.unplanned_downtime}
+                  </p>
+                )}
 
                 <SectionLabel>Timing</SectionLabel>
                 <FieldLabel>Implementation Schedule*</FieldLabel>
@@ -410,9 +419,9 @@ function BuildBusinessCasePage() {
                 )}
 
                 <FieldLabel>Other use cases (please describe)</FieldLabel>
-                <Input
+                <FloatingInput
                   name="other_use_cases"
-                  placeholder="(optional)"
+                  label="Other use cases (optional)"
                   maxLength={OTHER_USE_CASES_MAX_LEN}
                   value={otherUseCases}
                   onChange={(e) => setOtherUseCases(e.target.value)}
@@ -449,7 +458,7 @@ function BuildBusinessCasePage() {
             <div className="mx-auto max-w-7xl px-6">
               <div className="max-w-2xl">
                 <img
-                  src="https://visionaize.in/wp-content/uploads/2023/08/download-2048x1132.jpg"
+                  src="/white-paper/business-oil-gas-text.jpg"
                   alt="3D Digital Twin of an oil and gas facility"
                   className="w-full  object-cover shadow-md"
                 />

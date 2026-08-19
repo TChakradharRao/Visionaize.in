@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { api } from "@/lib/api";
-
+import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-field";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
@@ -99,20 +99,20 @@ function ContactPage() {
             >
               <h2 className="text-2xl font-semibold text-brand-navy">Connect with us</h2>
               <div className="mt-7 space-y-4">
-                <Input name="first_name" placeholder="First name*" required />
-                <Input name="last_name" placeholder="Last name*" required />
-                <Input name="company" placeholder="Company name*" required />
-                <Input
+                <FloatingInput name="first_name" label="First name*" required />
+                <FloatingInput name="last_name" label="Last name*" required />
+                <FloatingInput name="company" label="Company name*" required />
+                <FloatingInput
                   name="email"
-                  placeholder="Business Email*"
+                  label="Business Email*"
                   type="email"
                   required
                   pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
                   title="Please enter a valid email address containing @"
                 />
-                <Input
+                <FloatingInput
                   name="phone"
-                  placeholder="Phone number*"
+                  label="Phone number*"
                   type="tel"
                   required
                   inputMode="numeric"
@@ -136,15 +136,16 @@ function ContactPage() {
                   <option>Other</option>
                 </select>
                 <div>
-                <textarea
-  name="message"
-  placeholder="Message"
-  rows={2}
-  maxLength={MESSAGE_MAX_LEN}
-  value={message}
-  onChange={(e) => setMessage(e.target.value)}
-  className="block w-full rounded-lg border border-gray-700 bg-white px-4 py-3 text-[14px] font-medium text-brand-navy placeholder:text-brand-navy focus:border-brand-blue focus:outline-none"
-/>
+                  <textarea
+                    name="message"
+                    placeholder="Message"
+                    rows={2}
+                    maxLength={MESSAGE_MAX_LEN}
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
+                    style={{ color: "#0B2545", WebkitTextFillColor: "#0B2545", opacity: 1 }}
+                    className="block w-full resize-none rounded-lg border border-gray-700 bg-white px-4 py-3 text-[14px] font-medium placeholder:text-gray-500 focus:border-brand-blue focus:outline-none"
+                  />
                   <p className="mt-1 text-right text-xs text-brand-navy/50">
                     {message.length}/{MESSAGE_MAX_LEN}
                   </p>

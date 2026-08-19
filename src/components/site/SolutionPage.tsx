@@ -29,25 +29,30 @@ export interface SolutionPageProps {
   faqCtaLabel?: string;
 }
 
-function ArrowIcon() {
+function CheckIcon() {
   return (
-    <svg
-      width="16"
-      height="16"
-      viewBox="0 0 24 24"
-      className="mt-1 shrink-0"
+    <span
       aria-hidden
+      className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full"
+      style={{ background: "linear-gradient(135deg, #7ED957 0%, #2E8DC5 100%)" }}
     >
-      <path
-        d="M6 3.5 C6 2.3 7.3 1.6 8.3 2.2 L20 9.7 C21 10.3 21 11.7 20 12.3 L8.3 19.8 C7.3 20.4 6 19.7 6 18.5 Z"
-        fill="#94C11F"
-      />
-    </svg>
+      <svg
+        viewBox="0 0 16 16"
+        className="h-3.5 w-3.5 text-white"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M3 8.5l3 3 7-7" />
+      </svg>
+    </span>
   );
 }
 
 // Renders a single case-study paragraph. If it starts with "▶ " it gets the
-// green arrow icon plus any "   • ..." lines turned into a real nested list.
+// gradient checkmark icon plus any "   • ..." lines turned into a real nested list.
 // Plain paragraphs (Challenge / Solution tabs) render as before.
 function CaseStudyParagraph({ text }: { text: string }) {
   const isArrowItem = text.startsWith("▶ ");
@@ -64,8 +69,8 @@ function CaseStudyParagraph({ text }: { text: string }) {
     .map((line) => line.replace(/^•\s*/, ""));
 
   return (
-    <div className="flex items-start gap-2.5">
-      <ArrowIcon />
+    <div className="flex items-start gap-3">
+      <CheckIcon />
       <div>
         <div>{mainLine}</div>
         {bulletLines.length > 0 && (
@@ -202,30 +207,37 @@ export function SolutionPage(props: SolutionPageProps) {
           <h2 className="mt-3 max-w-2xl text-2xl sm:text-3xl md:text-4xl font-semibold text-slate-900">
             {props.caseStudy.title}
           </h2>
-          <div className="mt-8 sm:mt-10 grid gap-8 sm:gap-10 md:grid-cols-2">
-            <div className="order-2 md:order-1">
-              <div className="flex gap-4 sm:gap-8 overflow-x-auto">
+
+          {/* Single column through tablet — the tab bar + content panel need
+              real width to breathe, so they only sit side-by-side with the
+              image once there's room for both at lg. */}
+          <div className="mt-8 sm:mt-10 grid gap-8 sm:gap-10 lg:grid-cols-2">
+            <div className="order-2 min-w-0 lg:order-1">
+              <div className="flex gap-5 overflow-x-auto border-b border-slate-200 sm:gap-8">
                 {props.caseStudy.tabs.map((t, i) => (
                   <button
                     key={t.key}
                     onClick={() => setTab(i)}
-                    className={`relative shrink-0 rounded-t-md px-4 sm:px-5 py-2.5 sm:py-3 text-sm sm:text-base md:text-lg transition-colors ${
+                    className={`relative -mb-px shrink-0 whitespace-nowrap pb-3 text-sm font-semibold transition-colors sm:text-base md:text-lg ${
                       tab === i
-                        ? "-mb-px border border-b-black border-slate-400 font-semibold text-[#2BA8C7]"
-                        : "border border-transparent text-slate-500 hover:text-slate-700"
+                        ? "text-[#2BA8C7]"
+                        : "text-slate-500 hover:text-slate-700"
                     }`}
                   >
                     {t.key}
+                    {tab === i && (
+                      <span className="absolute inset-x-0 -bottom-px h-0.5 bg-[#2BA8C7]" />
+                    )}
                   </button>
                 ))}
               </div>
-              <div className="relative z-0 space-y-4 sm:space-y-5 rounded-md rounded-tl-none border border-slate-200 p-4 sm:p-6 text-[14px] sm:text-[15px] md:text-[16px] leading-6 sm:leading-7 text-slate-700">
+              <div className="relative z-0 space-y-4 rounded-md border border-slate-200 p-4 text-[14px] leading-6 text-slate-700 sm:space-y-5 sm:p-6 sm:text-[15px] sm:leading-7 md:text-[16px]">
                 {props.caseStudy.tabs[tab].paragraphs.map((p, i) => (
                   <CaseStudyParagraph key={i} text={p} />
                 ))}
               </div>
             </div>
-            <div className="order-1 md:order-2 overflow-hidden rounded-md shadow-xl">
+            <div className="order-1 aspect-[4/3] w-full overflow-hidden rounded-md shadow-xl lg:order-2 lg:h-full lg:aspect-auto">
               <img
                 src={props.caseStudy.image}
                 alt=""

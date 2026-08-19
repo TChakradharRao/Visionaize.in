@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
+import { FloatingInput, FloatingTextarea } from "@/components/ui/floating-field";
 import { getSeedContentItem } from "@/lib/seed-content";
 import { api } from "@/lib/api";
 
@@ -23,7 +24,7 @@ export const Route = createFileRoute("/industries/digital-twin-for-oil-and-gas")
       {
         property: "og:image",
         content:
-          "https://visionaize.com/wp-content/uploads/2022/07/offshore-oil-platform-iStock-636032898-1.png",
+          "/oil-and-gas/offshore-oil-platform-iStock-636032898-1.png",
       },
     ],
   }),
@@ -36,7 +37,7 @@ const seedItem = getSeedContentItem("page", "digital-twin-for-oil-and-gas");
 const seedSections = seedItem?.content_json?.sections ?? [];
 
 const FALLBACK_HERO_IMAGE =
-  "https://visionaize.com/wp-content/uploads/2022/07/offshore-oil-platform-iStock-636032898-1.png";
+  "/oil-and-gas/offshore-oil-platform-iStock-636032898-1.png";
 
 // Hero section — matches the actual banner heading ("Oil & Gas")
 const heroSection = seedSections.find(
@@ -64,17 +65,17 @@ const introParagraphs = introSection?.paragraphs?.length
     ];
 const PILLARS = [
   {
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Vector-6.svg",
+    icon: "/oil-and-gas/Vector-6.svg",
     title: "Reduce downtime",
     body: "Be more productive by minimizing planned and unplanned downtime",
   },
   {
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Group-3.svg",
+    icon: "/oil-and-gas/Group-3.svg",
     title: "Boost productivity",
     body: "Train and learn faster, plan better, work more efficiently",
   },
   {
-    icon: "https://visionaize.com/wp-content/uploads/2022/05/Group-4.svg",
+    icon: "/oil-and-gas/Group-4.svg",
     title: "Plan more clearly",
     body: "Enables teams to contextualize rich data, anytime, from anywhere",
   },
@@ -104,7 +105,7 @@ const CASE_STUDIES = [
         "Substantial reduction in carbon emissions",
       ],
     },
-    img: "https://visionaize.com/wp-content/uploads/2023/11/iStock-469895003-copy@0.5x-1.png",
+    img: "/oil-and-gas/iStock-469895003-copy@0.5x-1.png",
   },
   {
     eyebrow: "CASE STUDY",
@@ -125,7 +126,7 @@ const CASE_STUDIES = [
         "Efficiencies drove 5-year savings of $15.3MM",
       ],
     },
-    img: "https://visionaize.com/wp-content/uploads/2023/11/steel-service-platform-and-stairs-equipment-refinery-SBI-300930077-scaled-1.jpg",
+    img: "/oil-and-gas/steel-service-platform-and-stairs-equipment-refinery-SBI-300930077-scaled-1.jpg",
   },
   {
     eyebrow: "CASE STUDY",
@@ -147,7 +148,7 @@ const CASE_STUDIES = [
         "Rapid payback period of just 4 months",
       ],
     },
-    img: "https://visionaize.com/wp-content/uploads/2023/11/oil-refinery-equipment-for-primary-oil-refining-SBI-300925954-1.jpg",
+    img: "/oil-and-gas/oil-refinery-equipment-for-primary-oil-refining-SBI-300925954-1.jpg",
   },
 ];
 
@@ -247,8 +248,8 @@ function Intro() {
               {index === 1 ? (
                 <>
                   {paragraph.split("RoI exploration")[0]}
-                  
-                   <a href="#talk-to-an-expert"
+                  <a
+                    href="#talk-to-an-expert"
                     className="font-semibold text-[#2E8DC5] underline-offset-4 hover:underline"
                   >
                     RoI exploration
@@ -261,8 +262,8 @@ function Intro() {
             </p>
           ))}
           <div className="mt-8 flex flex-wrap items-center gap-3 sm:mt-10 sm:gap-4">
-            
-             <a href="#talk-to-an-expert"
+            <a
+              href="#talk-to-an-expert"
               className="inline-flex items-center rounded-full px-6 py-3 text-base font-semibold text-white shadow-md transition hover:shadow-lg sm:px-7 sm:py-3.5"
               style={{
                 background:
@@ -281,7 +282,7 @@ function Intro() {
         </div>
         <div className="flex justify-center bg-[#E6F0F7] p-6 sm:p-8">
           <img
-            src="https://visionaize.com/wp-content/uploads/2022/07/Group-523.png"
+            src="/oil-and-gas/Group-523.png"
             alt="Visionaize 3D Digital Twin on laptop and tablet"
             className="w-full max-w-[600px]"
             loading="lazy"
@@ -315,27 +316,42 @@ function HighlightedText({
   );
 }
 
-// Renders the Results tab as a bulleted list with the green arrow marker.
+// Renders the Results tab as a vertically auto-scrolling checklist,
+// using the same gradient-checkmark marker as the "topics" list below.
 function ResultsList({ items }: { items: string[] }) {
+  const duplicated = [...items, ...items];
+
   return (
-    <ul className="space-y-3">
-      {items.map((item, i) => (
-        <li key={i} className="flex items-start gap-3">
-          <svg
-            width="10"
-            height="10"
-            viewBox="0 0 10 10"
-            className="mt-2 shrink-0"
-            aria-hidden="true"
-          >
-            <path d="M1 0 L9 5 L1 10 Z" fill="#A6E04A" />
-          </svg>
-          <span className="text-base leading-relaxed text-[#3a4658] sm:text-[17px] sm:leading-[1.8]">
-            {item}
-          </span>
-        </li>
-      ))}
-    </ul>
+    <div className="relative h-[168px] overflow-hidden [mask-image:linear-gradient(to_bottom,transparent,black_12%,black_88%,transparent)]">
+      <ul
+        className="results-auto-scroll space-y-4"
+        style={{ animationDuration: `${items.length * 4}s` }}
+      >
+        {duplicated.map((item, i) => (
+          <li key={i} className="flex items-start gap-3">
+            <span
+              className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-white"
+              style={{
+                background: "linear-gradient(135deg, #A6E04A 0%, #2E8DC5 100%)",
+              }}
+            >
+              <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path
+                  d="M2 6L5 9L10 3"
+                  stroke="white"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            </span>
+            <span className="text-base leading-relaxed text-[#3a4658] sm:text-[17px] sm:leading-[1.8]">
+              {item}
+            </span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }
 
@@ -399,6 +415,19 @@ function CaseStudyCarousel() {
         }
         .cs-slide-next { animation: slideFromRight 0.4s ease forwards; }
         .cs-slide-prev { animation: slideFromLeft 0.4s ease forwards; }
+
+        @keyframes resultsScroll {
+          from { transform: translateY(0); }
+          to { transform: translateY(-50%); }
+        }
+        .results-auto-scroll {
+          animation-name: resultsScroll;
+          animation-timing-function: linear;
+          animation-iteration-count: infinite;
+        }
+        .results-auto-scroll:hover {
+          animation-play-state: paused;
+        }
       `}</style>
 
       <div className="relative mx-auto max-w-[1280px] overflow-hidden px-4 sm:px-6">
@@ -523,7 +552,7 @@ function Wellhead() {
 
         <div className="relative h-[220px] self-center sm:h-[300px] lg:h-[460px]">
           <img
-            src="https://visionaize.in/wp-content/uploads/2022/07/Rectangle-425-3.png"
+            src="/oil-and-gas/Rectangle-425-3.png"
             alt="3D digital twin of a refinery"
             className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
@@ -541,7 +570,7 @@ function Quote() {
         <div className="relative">
           {/* Background image in place of the decorative curve lines */}
           <img
-            src="https://visionaize.in/wp-content/uploads/2022/05/home-quote-min.png"
+            src="/oil-and-gas/home-quote-min.png"
             alt=""
             aria-hidden="true"
             className="pointer-events-none absolute -right-4 top-1/2 hidden w-[420px] -translate-y-1/2 lg:block lg:w-[480px] xl:w-[520px]"
@@ -651,18 +680,18 @@ function TalkDigitalTwins() {
       // The server route behind this call (/api/public/contact) is what's
       // actually responsible for sending the admin-notification and
       // user-facing "thanks" emails — that logic lives outside this file.
-    await api.submitOilAndGasContact({
-  first_name: formData.firstName.trim(),
-  last_name: formData.lastName.trim(),
-  company_name: formData.companyName.trim(),
-  business_email: formData.email.trim(),
-  phone_number: formData.phone.trim(),
-  hear_about_us: formData.source,
-  message: formData.message.trim() || undefined,
-  source_page: "/industries/digital-twin-for-oil-and-gas",
-  company: formData.companyName.trim(),   // add this
-  email: formData.email.trim(),           // add this
-});
+      await api.submitOilAndGasContact({
+        first_name: formData.firstName.trim(),
+        last_name: formData.lastName.trim(),
+        company_name: formData.companyName.trim(),
+        business_email: formData.email.trim(),
+        phone_number: formData.phone.trim(),
+        hear_about_us: formData.source,
+        message: formData.message.trim() || undefined,
+        source_page: "/industries/digital-twin-for-oil-and-gas",
+        company: formData.companyName.trim(), // add this
+        email: formData.email.trim(), // add this
+      });
       setStatus("success");
       setFormData({
         firstName: "",
@@ -749,12 +778,13 @@ function TalkDigitalTwins() {
           >
             {/* First Name */}
             <div>
-              <Input
+              <FloatingInput
                 name="firstName"
-                placeholder="First name*"
+                label="First name*"
                 value={formData.firstName}
                 onChange={handleChange}
                 required
+                className="w-full"
               />
 
               {errors.firstName && (
@@ -766,12 +796,13 @@ function TalkDigitalTwins() {
 
             {/* Last Name */}
             <div>
-              <Input
+              <FloatingInput
                 name="lastName"
-                placeholder="Last name*"
+                label="Last name*"
                 value={formData.lastName}
                 onChange={handleChange}
                 required
+                className="w-full"
               />
 
               {errors.lastName && (
@@ -783,12 +814,13 @@ function TalkDigitalTwins() {
 
             {/* Company Name */}
             <div>
-              <Input
+              <FloatingInput
                 name="companyName"
-                placeholder="Company name*"
+                label="Company name*"
                 value={formData.companyName}
                 onChange={handleChange}
                 required
+                className="w-full"
               />
 
               {errors.companyName && (
@@ -800,13 +832,14 @@ function TalkDigitalTwins() {
 
             {/* Email */}
             <div>
-              <Input
+              <FloatingInput
                 name="email"
-                placeholder="Business Email*"
+                label="Business Email*"
                 type="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
+                className="w-full"
               />
 
               {errors.email && (
@@ -818,13 +851,14 @@ function TalkDigitalTwins() {
 
             {/* Phone */}
             <div>
-              <Input
+              <FloatingInput
                 name="phone"
-                placeholder="Phone number*"
+                label="Phone number*"
                 type="tel"
                 value={formData.phone}
                 onChange={handleChange}
                 required
+                className="w-full"
               />
 
               {errors.phone && (
@@ -865,13 +899,13 @@ function TalkDigitalTwins() {
             </div>
 
             {/* Message - Optional */}
-            <textarea
+            <FloatingTextarea
               name="message"
               rows={3}
-              placeholder="Message (Optional)"
+              label="Message (Optional)"
               value={formData.message}
               onChange={handleChange}
-              className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-base text-[#3a4658] placeholder:text-[#94A3B8] focus:border-[#2E8DC5] focus:outline-none"
+              className="w-full"
             />
 
             <button
@@ -907,16 +941,7 @@ function TalkDigitalTwins() {
   );
 }
 
-function Input(
-  props: React.InputHTMLAttributes<HTMLInputElement>
-) {
-  return (
-    <input
-      {...props}
-      className="w-full rounded border border-[#CBD5E1] px-4 py-3 text-base text-[#3a4658] placeholder:text-[#94A3B8] focus:border-[#2E8DC5] focus:outline-none"
-    />
-  );
-}
+// Using shared FloatingInput component instead of local Input
 
 function Whitepaper() {
   return (
@@ -924,7 +949,7 @@ function Whitepaper() {
       <div className="mx-auto grid max-w-[1280px] grid-cols-1 items-center gap-10 px-4 sm:px-6 sm:gap-12 lg:grid-cols-2 lg:gap-16">
         <div className="flex justify-center">
           <img
-            src="https://visionaize.com/wp-content/uploads/2024/10/caa1b2e0de661dece3de9db3994b2f91.png"
+            src="/oil-and-gas/caa1b2e0de661dece3de9db3994b2f91.png"
             alt="Reinventing Turnarounds in the Metaverse whitepaper"
             className="w-full max-w-[380px] shadow-xl sm:max-w-[460px]"
             loading="lazy"
@@ -944,7 +969,6 @@ function Whitepaper() {
           </p>
           <a
             href="/re-inventing-turnarounds-in-the-metaverse/"
-            
             rel="noopener noreferrer"
             className="mt-7 inline-flex items-center rounded-full border border-[#0F1B2D] px-6 py-3 text-base font-semibold text-[#0F1B2D] transition hover:bg-[#0F1B2D] hover:text-white sm:mt-8 sm:px-7"
           >

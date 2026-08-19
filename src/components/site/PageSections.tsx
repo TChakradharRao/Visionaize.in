@@ -86,7 +86,7 @@ export function PageHero({ item, eyebrow }: { item: ContentItem; eyebrow?: strin
             </p>
           )}
           <div className="mt-8 flex flex-wrap gap-3">
-            <CTAButton label="Talk to an expert" href="/contact" />
+            <CTAButton label="Talk to an expert" href="/Talk-to-an-expert" />
             <CTAButton label="Explore platform" href="/products" variant="ghost" />
           </div>
         </div>

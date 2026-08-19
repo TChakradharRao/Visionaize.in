@@ -5,6 +5,7 @@ import { Header } from '../components/site/Header'
 import { Footer } from '../components/site/Footer'
 import { useEffect, useState, type ChangeEvent, type FormEvent } from 'react'
 import { api } from '../lib/api'
+import { FloatingInput, FloatingTextarea } from '../components/ui/floating-field'
 
 export const Route = createFileRoute('/company')({
   component: RouteComponent,
@@ -53,7 +54,7 @@ function RouteComponent() {
             </p>
 
             <Link
-              to="/contact"
+              to="/Talk-to-an-expert"
               className="mt-6 sm:mt-9 inline-flex items-center rounded-full bg-gradient-to-r from-[#6FCF57] to-[#2E8EEB] px-6 sm:px-8 py-3 sm:py-4 text-sm sm:text-base font-semibold text-white shadow-sm transition-transform duration-200 hover:scale-[1.03] hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#2E8EEB]"
             >
               Talk to an expert
@@ -63,7 +64,7 @@ function RouteComponent() {
           {/* Right: hero image */}
           <div className="order-1 md:order-2">
             <img
-              src="https://visionaize.in/wp-content/uploads/2022/07/Group-633.png"
+              src="/company/Group-633.png"
               alt="Field technician in a hard hat and hi-vis jacket inspecting industrial piping while holding a tablet"
               className="h-full w-full rounded-2xl object-cover"
             />
@@ -75,7 +76,7 @@ function RouteComponent() {
   className="relative mx-auto max-w-7xl bg-no-repeat bg-right bg-contain px-4 sm:px-6 pt-10 pb-20 sm:pt-14 sm:pb-28 md:pt-20 md:pb-32 lg:px-10 lg:pt-24 lg:pb-36"
   style={{
     backgroundImage:
-      "url('https://visionaize.in/wp-content/uploads/2022/05/Footer-BG-1.png')",
+      "url('/company/Footer-BG-1.png')",
     backgroundSize: '90% auto', // increased from 60% — bump higher for even wider
   }}
 
@@ -162,7 +163,7 @@ function RouteComponent() {
               aria-label="Play video: The future of Industrial AI is here"
             >
               <img
-                src="https://visionaize.in/wp-content/uploads/2024/05/AI-powered-3D-visualization-solutions-2048x1113.png"
+                src="/company/AI-powered-3D-visualization-solutions-2048x1113.png"
                 alt="Digital twin 3D visualization of an industrial plant with piping and equipment"
                 className="h-full w-full object-cover"
               />
@@ -197,7 +198,7 @@ function RouteComponent() {
 
               <div className="overflow-hidden rounded-xl bg-black shadow-2xl">
                 <video
-                  src="https://visionaize.com/wp-content/uploads/2024/05/Visionaize-April-2024.mp4"
+                  src="/company/Visionaize-April-2024.mp4"
                   controls
                   autoPlay
                   className="h-full w-full"
@@ -256,12 +257,12 @@ function RouteComponent() {
             {/* Certificate images */}
             <div className="mt-8 sm:mt-12 grid grid-cols-1 gap-6 sm:gap-8 sm:grid-cols-2">
               <img
-                src="https://visionaize.in/wp-content/uploads/2026/04/VISIONAIZE-TECHNOLOGIES-PRIVATE-LIMITED-qms-01-1085x1536.png"
+                src="/company/VISIONAIZE-TECHNOLOGIES-PRIVATE-LIMITED-qms-01-1085x1536.png"
                 alt="ISO 9001:2015 Quality Management System certificate for Visionaize Technologies Private Limited"
                 className="mx-auto w-full max-w-[260px] sm:max-w-sm rounded-lg shadow-md"
               />
               <img
-                src="https://visionaize.in/wp-content/uploads/2026/04/VISIONAIZE-TECHNOLOGIES-PRIVATE-LIMITED-27001-1-01-1085x1536.png"
+                src="/company/VISIONAIZE-TECHNOLOGIES-PRIVATE-LIMITED-27001-1-01-1085x1536.png"
                 alt="ISO/IEC 27001:2022 Information Security Management System certificate for Visionaize Technologies Private Limited"
                 className="mx-auto w-full max-w-[260px] sm:max-w-sm rounded-lg shadow-md"
               />
@@ -282,56 +283,56 @@ function RouteComponent() {
           name: 'Vikas Agrawal',
           role: 'CEO',
           image:
-            'https://visionaize.in/wp-content/uploads/2022/05/image-44-2.png',
+            '/company/image-44-2.png',
           linkedin: 'https://www.linkedin.com/in/vikasagraw/',
         },
         {
           name: 'Subhash Sachdeva',
           role: 'CFO',
           image:
-            'https://visionaize.in/wp-content/uploads/2026/01/Subhash.png',
+            '/company/Subhash.png',
           linkedin: 'https://www.linkedin.com/in/subhash07/',
         },
         {
           name: 'Sumanta Basu',
           role: 'Head of Industrial Innovation',
           image:
-            'https://visionaize.in/wp-content/uploads/2024/04/image-11.png',
+            '/company/image-11.png',
           linkedin: 'https://www.linkedin.com/in/sumanta-basu-1413035b/',
         },
         {
           name: 'Ramon Kirpalaney',
           role: 'Director',
           image:
-            'https://visionaize.in/wp-content/uploads/2024/10/image-1-10.png',
+            '/company/image-1-10.png',
           linkedin: 'http://www.linkedin.com/in/ramon-kirpalaney-b81296a/',
         },
         {
           name: 'Smita Choudhary',
           role: 'Associate Director - Business Development',
           image:
-            'https://visionaize.in/wp-content/uploads/2026/01/profile-image.jpg',
+            '/company/profile-image.jpg',
           linkedin: 'https://www.linkedin.com/authwall?trk=bf&trkInfo=AQEOPsb2b5p_EAAAAZuYGWYAjGF5FGHMPjmtbhUeEKbWxH56EQuDQr2GR9vV8Xe5cbtpLPjwzhuVvLQsQuhFDLyqpWqoZ8OO-mnc99wKmH7ocoZCzQJWLhOECaA1kc6IfoQiJNE=&original_referer=&sessionRedirect=https%3A%2F%2Fwww.linkedin.com%2Fin%2Fsmita-choudhary%3Flipi%3Durn%253Ali%253Apage%253Ad_flagship3_profile_view_base_contact_details%253ByZS2u0P7QCungK4X5SW4aQ%253D%253D',
         },
         {
           name: 'Jit Senmazumdar',
           role: 'Advisor',
           image:
-            'https://visionaize.in/wp-content/uploads/2023/08/judha2.jpg',
+            '/company/judha2.jpg',
           linkedin: 'https://www.linkedin.com/in/jit-senmazumdar-8694245/',
         },
         {
           name: 'Raghu Yabaluri',
           role: 'Advisor and Strategy',
           image:
-            'https://visionaize.in/wp-content/uploads/2025/02/20944621799-1.png',
+            '/company/20944621799-1.png',
           linkedin: 'https://www.linkedin.com/in/yabaluri?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app&original_referer=',
         },
         {
           name: 'Partha Dasgupta',
           role: 'Advisor',
           image:
-            'https://visionaize.in/wp-content/uploads/2024/10/image-2-1.png',
+            '/company/image-2-1.png',
           linkedin: 'http://www.linkedin.com/in/partha-dasgupta-68088720/',
         },
       ].map((member) => (
@@ -602,10 +603,9 @@ function ContactForm() {
   return (
     <form onSubmit={handleSubmit} noValidate className="mt-6 sm:mt-8 space-y-3 sm:space-y-4">
       <div>
-        <input
-          type="text"
+        <FloatingInput
+          label="First name*"
           name="firstName"
-          placeholder="First name*"
           value={formData.firstName}
           onChange={handleChange}
           className={fieldClass('firstName')}
@@ -616,10 +616,9 @@ function ContactForm() {
       </div>
 
       <div>
-        <input
-          type="text"
+        <FloatingInput
+          label="Last name*"
           name="lastName"
-          placeholder="Last name*"
           value={formData.lastName}
           onChange={handleChange}
           className={fieldClass('lastName')}
@@ -630,10 +629,9 @@ function ContactForm() {
       </div>
 
       <div>
-        <input
-          type="text"
+        <FloatingInput
+          label="Company name*"
           name="companyName"
-          placeholder="Company name*"
           value={formData.companyName}
           onChange={handleChange}
           className={fieldClass('companyName')}
@@ -644,10 +642,10 @@ function ContactForm() {
       </div>
 
       <div>
-        <input
+        <FloatingInput
+          label="Business Email*"
           type="email"
           name="email"
-          placeholder="Business Email*"
           value={formData.email}
           onChange={handleChange}
           className={fieldClass('email')}
@@ -658,10 +656,10 @@ function ContactForm() {
       </div>
 
       <div>
-        <input
+        <FloatingInput
+          label="Phone number*"
           type="tel"
           name="phone"
-          placeholder="Phone number*"
           inputMode="numeric"
           maxLength={10}
           value={formData.phone}
@@ -687,9 +685,9 @@ function ContactForm() {
         <option value="other">Other</option>
       </select>
 
-      <textarea
+      <FloatingTextarea
+        label="Message"
         name="message"
-        placeholder="Message"
         rows={4}
         value={formData.message}
         onChange={handleChange}
